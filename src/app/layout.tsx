@@ -15,9 +15,10 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://srujanchidarla.com"),
   title: "Srujan Chidarla | New Grad Full-Stack Engineer · Aug 2026",
   description:
-    "New grad MS CS (4.0 GPA, Aug 2026) who shipped CampfireChai, JobHuntOS & Neocortex. Production foundation from Cognizant. Seeking first full-time role with mentorship and growth.",
+    "New grad MS CS (4.0 GPA, Aug 2026). Full-stack engineer with production exposure at 2M+ req/day. Shipped CampfireChai, JobHuntOS & Neocortex. Seeking first full-time role.",
   keywords: [
     "Srujan Chidarla",
     "new grad software engineer",
@@ -27,13 +28,30 @@ export const metadata: Metadata = {
     "JobHuntOS",
     "Neocortex",
     "United States",
+    "STEM OPT",
   ],
   openGraph: {
-    title: "Srujan Chidarla — New Grad Full-Stack Engineer",
+    title: "Srujan Chidarla — Full-Stack Engineer · 2M+ req/day exposure",
     description:
-      "4.0 GPA · Aug 2026 · Shipped CampfireChai & JobHuntOS · Seeking first full-time role",
+      "New grad · 4.0 GPA · Aug 2026 · Shipped CampfireChai & JobHuntOS · Live GitHub activity · Seeking first full-time role",
     type: "website",
     url: "https://srujanchidarla.com",
+    siteName: "Srujan Chidarla",
+    images: [
+      {
+        url: "/images/hero.jpg",
+        width: 1200,
+        height: 1300,
+        alt: "Srujan Chidarla — new grad full-stack engineer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Srujan Chidarla — Full-Stack Engineer · 2M+ req/day exposure",
+    description:
+      "New grad · 4.0 GPA · Aug 2026 · Shipped CampfireChai & JobHuntOS · Seeking first full-time role",
+    images: ["/images/hero.jpg"],
   },
 };
 

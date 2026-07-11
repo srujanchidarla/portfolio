@@ -37,6 +37,9 @@ export default function Footer() {
           <a href={SITE.github} target="_blank" rel="noopener noreferrer">
             GitHub
           </a>
+          <a href={SITE.localGuide} target="_blank" rel="noopener noreferrer">
+            Local Guide
+          </a>
           <a href={`mailto:${SITE.email}`}>Email</a>
           <a href="#hire">New grad hiring</a>
           <a href="#github">GitHub activity</a>

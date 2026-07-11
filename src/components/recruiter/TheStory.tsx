@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { SITE_IMAGES } from "@/lib/site";
+import { LOCAL_GUIDE, SITE, SITE_IMAGES } from "@/lib/site";
 import { SPORTS, STORY_BEATS } from "@/lib/recruiter-home";
 
 export default function TheStory() {
@@ -29,42 +29,6 @@ export default function TheStory() {
           </p>
         </motion.header>
 
-        <motion.div
-          className="rh-story__photos"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.5 }}
-        >
-          <figure className="rh-story__photo rh-story__photo--main">
-            <Image
-              src={SITE_IMAGES.story}
-              alt="Srujan Chidarla smiling outdoors — athlete and builder"
-              width={640}
-              height={960}
-              className="rh-story__photo-img"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-            <figcaption className="rh-story__photo-caption">
-              Athlete energy off the field — same discipline I bring to sprint planning.
-            </figcaption>
-          </figure>
-
-          <figure className="rh-story__photo rh-story__photo--secondary">
-            <Image
-              src={SITE_IMAGES.coding}
-              alt="Srujan Chidarla coding on a MacBook at a café"
-              width={480}
-              height={640}
-              className="rh-story__photo-img"
-              sizes="(max-width: 768px) 100vw, 40vw"
-            />
-            <figcaption className="rh-story__photo-caption">
-              Side projects don&apos;t stop when class ends.
-            </figcaption>
-          </figure>
-        </motion.div>
-
         <div className="rh-story__timeline">
           {STORY_BEATS.map((beat, i) => (
             <button
@@ -88,6 +52,51 @@ export default function TheStory() {
           <p className="rh-story__highlight">{STORY_BEATS[active].highlight}</p>
           <p className="rh-story__text">{STORY_BEATS[active].text}</p>
         </motion.div>
+
+        <a
+          href={SITE.localGuide}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rh-story__local-guide"
+          aria-label="View Srujan's Google Local Guide Level 9 profile on Google Maps"
+        >
+          <div className="rh-story__local-guide-media">
+            <Image
+              src={SITE_IMAGES.localGuide}
+              alt="Google Local Guide Level 9 — Srujan Chidarla · 10k+ contributions, 52k+ points, 58M+ views"
+              width={720}
+              height={900}
+              className="rh-story__local-guide-img"
+              sizes="(max-width: 768px) 100vw, 280px"
+            />
+          </div>
+          <div className="rh-story__local-guide-body">
+            <p className="rh-story__local-guide-eyebrow">Google Maps</p>
+            <h3>Local Guide Level {LOCAL_GUIDE.level}</h3>
+            <p>
+              I document places as I explore — the same curiosity and attention to detail I bring
+              to product UX and shipping.
+            </p>
+            <div className="rh-story__local-guide-stats">
+              <div>
+                <strong>{LOCAL_GUIDE.contributions}</strong>
+                <span>contributions</span>
+              </div>
+              <div>
+                <strong>{LOCAL_GUIDE.points}</strong>
+                <span>points</span>
+              </div>
+              <div>
+                <strong>{LOCAL_GUIDE.views}</strong>
+                <span>views</span>
+              </div>
+            </div>
+            <span className="rh-story__link">
+              See what I&apos;ve posted to Google Maps
+              <ArrowUpRight size={14} aria-hidden="true" />
+            </span>
+          </div>
+        </a>
 
         <div className="rh-story__grid">
           <div className="rh-story__card">

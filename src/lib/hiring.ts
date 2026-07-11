@@ -1,14 +1,14 @@
-import { SITE } from "./site";
+import { ROLE_RESUMES, SITE } from "./site";
 
 export const LOOKING_FOR = [
   {
     id: "role",
     title: "What I'm looking for",
     items: [
-      "New grad / entry-level software engineer",
-      "Full-stack or backend with mentorship",
-      "Team collaboration & learning culture",
-      "Opportunity to ship code and grow fast",
+      "Backend Engineer — distributed systems & scale",
+      "AI Engineer — LLM integration & multi-model systems",
+      "Full-Stack Engineer — startup shipping speed",
+      "New grad / entry-level with mentorship",
     ],
   },
   {
@@ -26,39 +26,175 @@ export const LOOKING_FOR = [
     title: "Logistics",
     items: [
       `Graduating ${SITE.gradDate} · available to start after`,
-      "United States (based)",
+      "United States · STEM OPT (36 months)",
+      "No immediate sponsorship required",
       "Remote or on-site — open to relocating",
-      "Eager to contribute from day one",
     ],
   },
 ] as const;
 
-export const VALUE_PROPS = [
+export const ROLE_STRATEGY = [
   {
-    id: "ship",
-    icon: "🚀",
-    title: "I ship while learning",
-    description:
-      "CampfireChai live, JobHuntOS on the Chrome Store, Neocortex in progress — all while completing my Master's with a 4.0 GPA.",
-    example: "Not just coursework — real products",
+    id: "backend" as const,
+    rank: 1,
+    medal: "1",
+    expertLabel: "Scale Expert",
+    title: "Backend Engineer",
+    subtitle: "Distributed Systems",
+    focus: "Building scalable microservices at massive scale",
+    advantage: "2M+ daily requests at 99.9% uptime — proven production exposure",
+    stack: ["Java / Spring Boot", "Microservices", "AWS", "Kubernetes"],
+    companies: ["Stripe", "PayPal", "Plaid", "Ramp", "Adyen"],
+    salary: "$142K–$175K",
+    salaryNote: "Target negotiate $155–170K",
+    demand: "High demand",
+    demandDetail: "Fintech, cloud, AI infrastructure",
+    demandTrend: "High",
+    resumeHref: ROLE_RESUMES.backend.href,
   },
   {
-    id: "foundation",
-    icon: "🏗️",
-    title: "Production foundation",
-    description:
-      "Pre-grad experience at Cognizant (2M+ req/day) and WalletGyde taught me what reliable systems look like — ready to learn more on a team.",
-    example: "Humble about seniority, confident about ability",
+    id: "ai" as const,
+    rank: 2,
+    medal: "2",
+    expertLabel: "LLM Expert",
+    title: "AI Engineer",
+    subtitle: "LLM Integration",
+    focus: "Production AI systems with multi-model orchestration",
+    advantage:
+      "JobHuntOS on the Chrome Web Store — multi-LLM routing with intelligent failover across 100+ job board formats",
+    stack: ["Claude API", "Gemini API", "Groq API", "Prompt Eng", "RAG"],
+    companies: ["Google", "OpenAI", "Anthropic", "Apple", "TikTok"],
+    salary: "$170K–$225K",
+    salaryNote: "AI premium ~15–25% above base",
+    demand: "Explosive growth",
+    demandDetail: "163–414% YoY · 3.4 open roles per candidate",
+    demandTrend: "163–414% YoY",
+    resumeHref: ROLE_RESUMES.ai.href,
   },
   {
-    id: "growth",
-    icon: "📈",
-    title: "Growth mindset",
-    description:
-      "Athlete discipline + constant curiosity (AI/ML, networking, new stacks). I want a team that invests in my growth as much as I invest in theirs.",
-    example: "AWS cert, 18+ courses, always building",
+    id: "fullstack" as const,
+    rank: 3,
+    medal: "3",
+    expertLabel: "Shipping Expert",
+    title: "Full-Stack Engineer",
+    subtitle: "Startup-Focused",
+    focus: "Ship complete products end-to-end — concept to production",
+    advantage:
+      "5 shipped applications: CampfireChai (live), JobHuntOS (Chrome Store), StudyGlobal (2000+ users), Neocortex (in progress)",
+    stack: ["React 19", "Next.js", "Node.js", "MongoDB", "Realtime"],
+    companies: ["Series A/B", "Figma", "Ramp"],
+    salary: "$120K–$175K",
+    salaryNote: "Plus equity",
+    demand: "Stable demand",
+    demandDetail: "Startups value shipping speed",
+    demandTrend: "Stable",
+    resumeHref: ROLE_RESUMES.fullstack.href,
   },
 ] as const;
+
+export type RoleStrategyId = (typeof ROLE_STRATEGY)[number]["id"];
+
+export const ROLE_STRATEGY_WHY =
+  "These roles match where the market is hiring, align with my strongest skills — scale, AI, and shipping — and offer the highest compensation and growth potential.";
+
+export const ROLE_WHY_HIRE = [
+  {
+    id: "backend" as const,
+    title: "Backend Engineer",
+    bullets: [
+      "I've operated at 2M+ requests daily. Most engineers haven't. That's rare.",
+      "I understand the full stack of reliability: microservices design, database optimization, circuit breakers, monitoring, deployment automation.",
+      "I teach system design — deep understanding, not surface level.",
+    ],
+  },
+  {
+    id: "ai" as const,
+    title: "AI Engineer",
+    bullets: [
+      "I didn't just use LLMs. I shipped JobHuntOS to the Chrome Web Store handling real user workloads.",
+      "I've integrated Claude, Gemini, and Groq — understanding trade-offs between providers, cost optimization, and intelligent routing.",
+      "My system handles multi-model failures gracefully — production reliability, not demo code.",
+    ],
+  },
+  {
+    id: "fullstack" as const,
+    title: "Full-Stack Engineer",
+    bullets: [
+      "I ship products. Not components. Not boilerplate. End-to-end: from architecture to deployment.",
+      "5 production applications deployed and live. CampfireChai has real-time coordination. StudyGlobal serves 2000+ users.",
+      "I understand the full stack deeply: frontend responsiveness, backend optimization, database design, deployment automation.",
+    ],
+  },
+] as const;
+
+export const ROLE_FIT = [
+  {
+    id: "backend" as const,
+    title: "Backend Engineer",
+    heading: "Why I'm your fit",
+    experience: "2M+ req/day at 99.9% uptime for 500+ enterprise users",
+    proof: "Spring Boot microservices at Cognizant, system design teaching",
+    know: "Scaling databases, distributed cache, microservices patterns, CI/CD",
+    example:
+      "At Cognizant, I optimized a bottleneck query reducing P99 latency from 250ms to 50ms affecting 2M daily users.",
+  },
+  {
+    id: "ai" as const,
+    title: "AI Engineer",
+    heading: "Why I'm your fit",
+    experience: "JobHuntOS deployed to Chrome Web Store with multi-LLM orchestration",
+    proof: "Claude / Gemini / Groq integration, prompt engineering, streaming APIs",
+    know: "LLM routing, fallback logic, cost optimization, handling provider failures",
+    example:
+      "JobHuntOS intelligently routes requests between Claude (reasoning), Gemini (analysis), and Groq (speed) with automatic failover if one provider fails.",
+  },
+  {
+    id: "fullstack" as const,
+    title: "Full-Stack Engineer",
+    heading: "Why I'm your fit",
+    experience: "5 production applications from concept to deployment",
+    proof: "CampfireChai (live), JobHuntOS (Chrome Web Store), StudyGlobal (2000+ users)",
+    know: "Rapid prototyping, database design, real-time systems, deployment automation",
+    example:
+      "I built CampfireChai full-stack in 2 months: React 19 frontend, Node.js backend, Socket.io real-time, deployed on Vercel.",
+  },
+] as const;
+
+export const MARKET_POSITION = {
+  reality: [
+    {
+      id: "backend",
+      label: "Backend roles",
+      detail: "High demand · $142–175K baseline",
+    },
+    {
+      id: "ai",
+      label: "AI roles",
+      detail: "Explosive (3.4 roles per qualified candidate) · $170–225K + AI premium",
+    },
+    {
+      id: "fullstack",
+      label: "Full-Stack",
+      detail: "Moderate · $120–175K · startups add equity",
+    },
+  ],
+  competitive: [
+    "Production scale experience (2M+ req/day) — most new grads don't have this",
+    "AI/LLM expertise with a shipped product — rare at this experience level",
+    "System design teaching — signals deep understanding + communication skills",
+    "4.0 MS GPA — consistency + discipline",
+    "Full-stack depth — can architect and implement across the entire stack",
+  ],
+} as const;
+
+/** Kept for OpenToWork / legacy — now role-aligned */
+export const VALUE_PROPS = ROLE_WHY_HIRE.map((role) => ({
+  id: role.id,
+  icon: role.id === "backend" ? "⚙️" : role.id === "ai" ? "✦" : "◈",
+  title: role.title,
+  description: role.bullets[0],
+  example: role.bullets[1],
+}));
 
 export const RECRUITER_LINKS = [
   { id: "resume", label: "Resume", sublabel: "Download PDF", href: SITE.resumeUrl, icon: "📄", external: true },

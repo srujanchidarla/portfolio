@@ -9,6 +9,7 @@ import TheStory from "@/components/recruiter/TheStory";
 import AthleteLife from "@/components/recruiter/AthleteLife";
 import GitHubActivity from "@/components/GitHubActivity";
 import HiringSignal from "@/components/recruiter/HiringSignal";
+import RoleStrategy from "@/components/recruiter/RoleStrategy";
 import RecruiterCTA from "@/components/recruiter/RecruiterCTA";
 import Footer from "@/components/Footer";
 import { ContactProvider } from "@/components/ContactProvider";
@@ -28,6 +29,7 @@ export default function HomePage() {
         <AthleteLife />
         <GitHubActivity />
         <HiringSignal />
+        <RoleStrategy />
         <RecruiterCTA />
       </main>
       <Footer />

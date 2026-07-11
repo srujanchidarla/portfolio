@@ -1,13 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, MessageCircle } from "lucide-react";
-import { SITE } from "@/lib/site";
+import { ArrowRight, Calendar, Download, MessageCircle } from "lucide-react";
+import { getScheduleHref, SITE } from "@/lib/site";
 import { RECRUITER_CONTACT } from "@/lib/recruiter-home";
 import { useContact } from "@/components/ContactProvider";
 
 export default function RecruiterCTA() {
   const { openContact } = useContact();
+  const scheduleHref = getScheduleHref();
 
   return (
     <section id="contact" className="rh-cta">
@@ -27,10 +28,20 @@ export default function RecruiterCTA() {
             grads. I respond quickly.
           </p>
 
-          <a href={`mailto:${RECRUITER_CONTACT.email}`} className="btn-primary rh-cta__email">
-            {RECRUITER_CONTACT.email}
-            <ArrowRight size={18} aria-hidden="true" />
-          </a>
+          <div className="rh-cta__actions">
+            <a href={`mailto:${RECRUITER_CONTACT.email}`} className="btn-primary">
+              {RECRUITER_CONTACT.email}
+              <ArrowRight size={16} aria-hidden="true" />
+            </a>
+            <a href={SITE.resumeUrl} download className="btn-secondary rh-cta__resume-btn">
+              <Download size={16} aria-hidden="true" />
+              Download Resume (PDF)
+            </a>
+            <a href={scheduleHref} className="btn-secondary">
+              <Calendar size={16} aria-hidden="true" />
+              Schedule 15-min call
+            </a>
+          </div>
 
           <div className="rh-cta__grid">
             <a
@@ -42,10 +53,10 @@ export default function RecruiterCTA() {
               <strong>LinkedIn</strong>
               <span>linkedin.com/in/srujan-chidarla</span>
             </a>
-            <button type="button" className="rh-cta__card" onClick={openContact}>
+            <a href={scheduleHref} className="rh-cta__card">
               <strong>Schedule a call</strong>
-              <span>Book a quick intro</span>
-            </button>
+              <span>Free 15-min intro · email request</span>
+            </a>
             <a
               href={RECRUITER_CONTACT.github}
               target="_blank"
@@ -55,7 +66,7 @@ export default function RecruiterCTA() {
               <strong>GitHub</strong>
               <span>github.com/srujanchidarla</span>
             </a>
-            <a href={RECRUITER_CONTACT.resume} download className="rh-cta__card">
+            <a href={SITE.resumeUrl} download className="rh-cta__card">
               <strong>Resume</strong>
               <span>Download PDF</span>
             </a>
@@ -70,10 +81,14 @@ export default function RecruiterCTA() {
               <strong>Ask my AI avatar</strong>
               <span>Questions about my work & availability</span>
             </button>
+            <button type="button" className="rh-cta__card" onClick={openContact}>
+              <strong>Message me</strong>
+              <span>Open contact form</span>
+            </button>
           </div>
 
           <p className="rh-cta__updated">
-            Last updated <time dateTime="2026-07-06">{SITE.lastUpdated}</time>
+            Last updated <time dateTime="2026-07-10">{SITE.lastUpdated}</time>
           </p>
         </motion.div>
       </div>

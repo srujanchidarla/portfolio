@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { Download, Menu, Moon, Sun, X } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { useContact } from "@/components/ContactProvider";
 import { useTheme } from "@/components/ThemeProvider";
@@ -44,6 +44,16 @@ export default function Navbar() {
         </nav>
 
         <div className="navbar__actions">
+          <a
+            href={SITE.resumeUrl}
+            download
+            className="navbar__resume"
+            aria-label="Download resume PDF"
+          >
+            <Download size={15} aria-hidden="true" />
+            <span>Resume</span>
+          </a>
+
           <button
             type="button"
             className="theme-toggle"
@@ -56,7 +66,7 @@ export default function Navbar() {
 
           <button type="button" className="navbar__badge" onClick={openContact}>
             <span className="navbar__badge-dot" aria-hidden="true" />
-            🎓 Seeking first full-time role
+            Available · Full-Stack
           </button>
 
           <button
@@ -83,6 +93,15 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+          <a
+            href={SITE.resumeUrl}
+            download
+            className="navbar__resume navbar__resume--mobile"
+            onClick={() => setMenuOpen(false)}
+          >
+            <Download size={15} aria-hidden="true" />
+            Download Resume (PDF)
+          </a>
           <button
             type="button"
             className="theme-toggle theme-toggle--mobile"
@@ -94,7 +113,7 @@ export default function Navbar() {
             {theme === "dark" ? "Light mode" : "Dark mode"}
           </button>
           <button type="button" className="navbar__badge navbar__badge--mobile" onClick={openContact}>
-            🎓 Seeking first full-time role
+            Available · Backend / AI / Full-Stack
           </button>
         </nav>
       )}

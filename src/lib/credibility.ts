@@ -44,7 +44,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     icon: "community",
     title: "Google Local Guide Level 9",
     organization: "Google Maps Community",
-    highlight: "51,000+ points · 6,100+ photos · 41M+ views",
+    highlight: "10k+ contributions · 52k+ points · 58M+ views",
     period: "Level 9 · Trusted by Google",
     color: "#34d399",
     link: SITE.localGuide,

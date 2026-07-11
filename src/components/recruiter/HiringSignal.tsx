@@ -1,12 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Calendar, GraduationCap, MapPin } from "lucide-react";
+import { Calendar, Download, GraduationCap, MapPin } from "lucide-react";
 import { HIRING_ROLES } from "@/lib/recruiter-home";
 import { LOOKING_FOR } from "@/lib/hiring";
-import { SITE } from "@/lib/site";
+import { getScheduleHref, ROLE_RESUMES, SITE, WORK_AUTH } from "@/lib/site";
 
 export default function HiringSignal() {
+  const scheduleHref = getScheduleHref();
+
   return (
     <section id="hire" className="rh-hire">
       <div className="wrap rh-hire__inner">
@@ -18,19 +20,68 @@ export default function HiringSignal() {
         >
           <p className="section-eyebrow">New grad hiring</p>
           <h2 className="section-title">
-            {SITE.status.replace("🎓 ", "")}
+            Open to <span className="gradient-text">work</span>
           </h2>
+          <p className="rh-hire__cta-line">
+            <span>1 · Backend Engineer (Scale Expert)</span>
+            <span className="rh-hire__cta-sep" aria-hidden="true">
+              |
+            </span>
+            <span>2 · AI Engineer (LLM Expert)</span>
+            <span className="rh-hire__cta-sep" aria-hidden="true">
+              |
+            </span>
+            <span>3 · Full-Stack (Shipping Expert)</span>
+          </p>
           <p className="section-subtitle">
-            Recent graduate ready for growth. I&apos;m looking for mentorship, a learning culture, and
-            a team where I can ship code, learn production systems, and grow as an engineer.
+            I&apos;m pursuing these 3 roles strategically. Pick one below to learn why I&apos;m your
+            best candidate for that specific role.
           </p>
         </motion.header>
 
+        <div className="rh-hire__quick">
+          <a href="#role-strategy" className="btn-primary">
+            Explore role fit
+          </a>
+          <a href={scheduleHref} className="btn-secondary">
+            <Calendar size={16} aria-hidden="true" />
+            Schedule 15-min call
+          </a>
+          <a href="#contact" className="btn-secondary">
+            Quick apply · Contact
+          </a>
+        </div>
+
+        <div className="rh-hire__resume-row">
+          <span className="rh-hire__resume-label">Download my</span>
+          <a href={ROLE_RESUMES.backend.href} download className="rh-hire__resume-link">
+            <Download size={13} aria-hidden="true" />
+            Backend Engineer
+          </a>
+          <span className="rh-hire__cta-sep" aria-hidden="true">
+            |
+          </span>
+          <a href={ROLE_RESUMES.ai.href} download className="rh-hire__resume-link">
+            <Download size={13} aria-hidden="true" />
+            AI Engineer
+          </a>
+          <span className="rh-hire__cta-sep" aria-hidden="true">
+            |
+          </span>
+          <a href={ROLE_RESUMES.fullstack.href} download className="rh-hire__resume-link">
+            <Download size={13} aria-hidden="true" />
+            Full-Stack Engineer
+          </a>
+          <span className="rh-hire__resume-label">resume</span>
+        </div>
+
+        <p className="rh-hire__work-auth">{WORK_AUTH.line}</p>
+
         <div className="rh-hire__roles">
           {HIRING_ROLES.map((role) => (
-            <span key={role} className="rh-hire__role-chip">
+            <a key={role} href="#role-strategy" className="rh-hire__role-chip">
               {role}
-            </span>
+            </a>
           ))}
         </div>
 

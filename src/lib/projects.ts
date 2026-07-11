@@ -120,7 +120,7 @@ export const PROJECTS: Project[] = [
       },
       {
         label: "Live Site",
-        href: "https://job-hunt-backend-production-6ae1.up.railway.app",
+        href: "https://job-hunt-os-eosin.vercel.app/",
       },
     ],
     status: "Live on Chrome Web Store",
@@ -161,7 +161,12 @@ export const PROJECTS: Project[] = [
       "Built for students and university international services offices",
     ],
     tags: ["Next.js", "Full-Stack", "API Integration", "EdTech"],
-    links: [],
+    links: [
+      {
+        label: "Live Site",
+        href: "https://studyglobalscholar.netlify.app/",
+      },
+    ],
     gradient: ["#3b82f6", "#1e3a5f"],
   },
   {

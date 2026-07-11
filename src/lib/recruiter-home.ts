@@ -35,8 +35,8 @@ export const PROOF_CARDS = [
     headline: "Athlete · learner · builder",
     subline: "Discipline + curiosity + community",
     detail:
-      "State-level athletics taught me discipline and teamwork. I'm constantly exploring AI/ML and new stacks through projects like Neocortex. Google Local Guide Level 9 — same curiosity I bring to codebases.",
-    metrics: ["State medals", "AI/ML curious", "51K+ Guide pts", "Team player"],
+      "State-level athletics taught me discipline and teamwork. I'm constantly exploring AI/ML and new stacks through projects like Neocortex. Google Local Guide Level 9 (58M+ views) — same curiosity I bring to codebases.",
+    metrics: ["State medals", "AI/ML curious", "Local Guide L9", "Team player"],
     color: "#e8c547",
     icon: "person",
   },
@@ -84,6 +84,7 @@ export const IMPACT_PROJECTS = [
     id: "jobhuntos",
     title: "JobHuntOS",
     tag: "AI · Chrome Extension",
+    previewImage: "/project-previews/jobhuntos.jpg",
     journey: "First product in the Chrome Web Store",
     problem:
       "Job applications take hours — tailoring resumes, fighting ATS forms, hunting recruiters.",
@@ -96,12 +97,13 @@ export const IMPACT_PROJECTS = [
     stack: ["Chrome MV3", "Node.js", "SSE", "LLM Router"],
     color: "#6366f1",
     href: "https://chromewebstore.google.com/detail/jobhuntos/cmdfelnbelngbjahjeglfkaoeclcnjec",
-    liveHref: "https://job-hunt-backend-production-6ae1.up.railway.app",
+    liveHref: "https://job-hunt-os-eosin.vercel.app/",
   },
   {
     id: "studyglobal",
     title: "StudyGlobal",
     tag: "EdTech · Full-Stack",
+    previewImage: "/project-previews/studyglobal.jpg",
     journey: "Learning product thinking for a real audience",
     problem:
       "International students struggle with fragmented visa, housing, and relocation tools.",
@@ -113,6 +115,7 @@ export const IMPACT_PROJECTS = [
     resultDetail: "One place for the full journey — from research to in-country support.",
     stack: ["Next.js", "TypeScript", "API Integration", "PostgreSQL"],
     color: "#3b82f6",
+    liveHref: "https://studyglobalscholar.netlify.app/",
   },
   {
     id: "fitconnect",
@@ -212,10 +215,9 @@ export const SPORTS = [
 ] as const;
 
 export const HIRING_ROLES = [
-  "New Grad Software Engineer",
-  "Full-Stack Engineer (Entry)",
-  "Backend Engineer (New Grad)",
-  "Rotational / Growth programs",
+  "Backend Engineer (Scale Expert)",
+  "AI Engineer (LLM Expert)",
+  "Full-Stack (Shipping Expert)",
 ] as const;
 
 export const RECRUITER_CONTACT = {

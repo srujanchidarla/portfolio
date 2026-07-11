@@ -212,7 +212,7 @@ export default function ImpactProjects() {
                   rel="noopener noreferrer"
                   className="rh-projects__repo-link rh-projects__repo-link--live"
                 >
-                  {project.id === "jobhuntos" ? "Live site" : "Live app"}
+                  {project.id === "jobhuntos" ? "Live demo" : "Live demo"}
                   <ArrowUpRight size={14} aria-hidden="true" />
                 </a>
               )}
@@ -227,6 +227,17 @@ export default function ImpactProjects() {
                   <ArrowUpRight size={14} aria-hidden="true" />
                 </a>
               )}
+              {"demoVideo" in project && project.demoVideo ? (
+                <a
+                  href={project.demoVideo as string}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rh-projects__repo-link rh-projects__repo-link--video"
+                >
+                  Demo video
+                  <ArrowUpRight size={14} aria-hidden="true" />
+                </a>
+              ) : null}
             </div>
           </div>
         </motion.article>
