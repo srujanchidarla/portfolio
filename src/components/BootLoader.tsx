@@ -13,8 +13,9 @@ const BOOT_FRAMES = [
   { emoji: "🚀", label: "Ready to ship" },
 ] as const;
 
-const MIN_MS = 3000;
-const FRAME_MS = 320;
+const BOOT_SEEN_KEY = "portfolio-boot-seen";
+const MIN_MS = 1200;
+const FRAME_MS = 280;
 
 export default function BootLoader() {
   const { markBootReady } = useBoot();
@@ -28,6 +29,16 @@ export default function BootLoader() {
       setShow(false);
       markBootReady();
       return;
+    }
+
+    try {
+      if (sessionStorage.getItem(BOOT_SEEN_KEY)) {
+        setShow(false);
+        markBootReady();
+        return;
+      }
+    } catch {
+      /* private browsing */
     }
 
     let cancelled = false;
@@ -57,6 +68,11 @@ export default function BootLoader() {
         setLeaving(true);
         window.setTimeout(() => {
           if (cancelled) return;
+          try {
+            sessionStorage.setItem(BOOT_SEEN_KEY, "1");
+          } catch {
+            /* ignore */
+          }
           setShow(false);
           markBootReady();
         }, 420);

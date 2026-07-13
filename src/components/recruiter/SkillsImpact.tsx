@@ -83,11 +83,6 @@ export default function SkillsImpact() {
               </div>
             ))}
           </motion.div>
-
-          <p className="rh-skills__footer-note">
-            Ready to deepen expertise in a production environment — especially AWS, distributed
-            systems, and AI/ML workflows.
-          </p>
         </div>
       </div>
     </section>

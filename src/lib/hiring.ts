@@ -44,9 +44,7 @@ export const ROLE_STRATEGY = [
     focus: "Building scalable microservices at massive scale",
     advantage: "2M+ daily requests at 99.9% uptime — proven production exposure",
     stack: ["Java / Spring Boot", "Microservices", "AWS", "Kubernetes"],
-    companies: ["Stripe", "PayPal", "Plaid", "Ramp", "Adyen"],
-    salary: "$142K–$175K",
-    salaryNote: "Target negotiate $155–170K",
+    companyTypes: ["Payments infra", "Fintech platforms", "Cloud & API companies"],
     demand: "High demand",
     demandDetail: "Fintech, cloud, AI infrastructure",
     demandTrend: "High",
@@ -63,9 +61,7 @@ export const ROLE_STRATEGY = [
     advantage:
       "JobHuntOS on the Chrome Web Store — multi-LLM routing with intelligent failover across 100+ job board formats",
     stack: ["Claude API", "Gemini API", "Groq API", "Prompt Eng", "RAG"],
-    companies: ["Google", "OpenAI", "Anthropic", "Apple", "TikTok"],
-    salary: "$170K–$225K",
-    salaryNote: "AI premium ~15–25% above base",
+    companyTypes: ["LLM platforms", "AI product teams", "ML infrastructure"],
     demand: "Explosive growth",
     demandDetail: "163–414% YoY · 3.4 open roles per candidate",
     demandTrend: "163–414% YoY",
@@ -80,11 +76,9 @@ export const ROLE_STRATEGY = [
     subtitle: "Startup-Focused",
     focus: "Ship complete products end-to-end — concept to production",
     advantage:
-      "5 shipped applications: CampfireChai (live), JobHuntOS (Chrome Store), StudyGlobal (2000+ users), Neocortex (in progress)",
+      "5 shipped applications: CampfireChai (live), JobHuntOS (Chrome Store), StudyGlobal (beta), Neocortex (in progress)",
     stack: ["React 19", "Next.js", "Node.js", "MongoDB", "Realtime"],
-    companies: ["Series A/B", "Figma", "Ramp"],
-    salary: "$120K–$175K",
-    salaryNote: "Plus equity",
+    companyTypes: ["Series A/B startups", "Product-led SaaS", "0→1 product teams"],
     demand: "Stable demand",
     demandDetail: "Startups value shipping speed",
     demandTrend: "Stable",
@@ -95,7 +89,7 @@ export const ROLE_STRATEGY = [
 export type RoleStrategyId = (typeof ROLE_STRATEGY)[number]["id"];
 
 export const ROLE_STRATEGY_WHY =
-  "These roles match where the market is hiring, align with my strongest skills — scale, AI, and shipping — and offer the highest compensation and growth potential.";
+  "These roles match where the market is hiring and align with my strongest proof — scale, AI systems, and shipping products end-to-end.";
 
 export const ROLE_WHY_HIRE = [
   {
@@ -121,7 +115,7 @@ export const ROLE_WHY_HIRE = [
     title: "Full-Stack Engineer",
     bullets: [
       "I ship products. Not components. Not boilerplate. End-to-end: from architecture to deployment.",
-      "5 production applications deployed and live. CampfireChai has real-time coordination. StudyGlobal serves 2000+ users.",
+      "5 production applications deployed and live. CampfireChai has real-time coordination. StudyGlobal is a live beta for international students.",
       "I understand the full stack deeply: frontend responsiveness, backend optimization, database design, deployment automation.",
     ],
   },
@@ -153,7 +147,7 @@ export const ROLE_FIT = [
     title: "Full-Stack Engineer",
     heading: "Why I'm your fit",
     experience: "5 production applications from concept to deployment",
-    proof: "CampfireChai (live), JobHuntOS (Chrome Web Store), StudyGlobal (2000+ users)",
+    proof: "CampfireChai (live), JobHuntOS (Chrome Web Store), StudyGlobal (live beta)",
     know: "Rapid prototyping, database design, real-time systems, deployment automation",
     example:
       "I built CampfireChai full-stack in 2 months: React 19 frontend, Node.js backend, Socket.io real-time, deployed on Vercel.",
@@ -165,17 +159,17 @@ export const MARKET_POSITION = {
     {
       id: "backend",
       label: "Backend roles",
-      detail: "High demand · $142–175K baseline",
+      detail: "High demand across fintech, cloud, and API infrastructure",
     },
     {
       id: "ai",
       label: "AI roles",
-      detail: "Explosive (3.4 roles per qualified candidate) · $170–225K + AI premium",
+      detail: "Explosive growth — 3.4 open roles per qualified candidate",
     },
     {
       id: "fullstack",
       label: "Full-Stack",
-      detail: "Moderate · $120–175K · startups add equity",
+      detail: "Stable demand — startups value shipping speed and ownership",
     },
   ],
   competitive: [

@@ -5,14 +5,13 @@ import Experience from "@/components/Experience";
 import SkillsImpact from "@/components/recruiter/SkillsImpact";
 import ImpactProjects from "@/components/recruiter/ImpactProjects";
 import WritingSection from "@/components/recruiter/WritingSection";
-import TheStory from "@/components/recruiter/TheStory";
-import AthleteLife from "@/components/recruiter/AthleteLife";
 import GitHubActivity from "@/components/GitHubActivity";
 import HiringSignal from "@/components/recruiter/HiringSignal";
-import RoleStrategy from "@/components/recruiter/RoleStrategy";
 import RecruiterCTA from "@/components/recruiter/RecruiterCTA";
+import StickyMobileCTA from "@/components/StickyMobileCTA";
 import Footer from "@/components/Footer";
 import { ContactProvider } from "@/components/ContactProvider";
+import { HOMEPAGE_PROJECT_LIMIT } from "@/lib/recruiter-home";
 
 export default function HomePage() {
   return (
@@ -22,16 +21,14 @@ export default function HomePage() {
         <HeroRecruiter />
         <ProofSection />
         <Experience />
-        <ImpactProjects />
+        <ImpactProjects limit={HOMEPAGE_PROJECT_LIMIT} />
         <SkillsImpact />
         <WritingSection />
-        <TheStory />
-        <AthleteLife />
         <GitHubActivity />
         <HiringSignal />
-        <RoleStrategy />
         <RecruiterCTA />
       </main>
+      <StickyMobileCTA />
       <Footer />
     </ContactProvider>
   );

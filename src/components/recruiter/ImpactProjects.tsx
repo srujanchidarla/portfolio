@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { IMPACT_PROJECTS } from "@/lib/recruiter-home";
@@ -99,9 +99,18 @@ function ProjectPreview({
   );
 }
 
-export default function ImpactProjects() {
-  const [active, setActive] = useState(1);
-  const project = IMPACT_PROJECTS[active];
+export default function ImpactProjects({ limit = IMPACT_PROJECTS.length }: { limit?: number }) {
+  const hasMore = IMPACT_PROJECTS.length > limit;
+  const [showAll, setShowAll] = useState(!hasMore);
+  const visibleProjects = showAll ? IMPACT_PROJECTS : IMPACT_PROJECTS.slice(0, limit);
+  const [active, setActive] = useState(Math.min(1, visibleProjects.length - 1));
+  const project = visibleProjects[active] ?? visibleProjects[0];
+
+  useEffect(() => {
+    if (active >= visibleProjects.length) {
+      setActive(0);
+    }
+  }, [active, visibleProjects.length]);
   const href = "href" in project ? project.href : undefined;
   const liveHref = "liveHref" in project ? project.liveHref : undefined;
   const previewImage = getPreviewUrl(project);
@@ -127,7 +136,7 @@ export default function ImpactProjects() {
         </motion.header>
 
         <div className="rh-projects__nav" role="tablist" aria-label="Projects">
-          {IMPACT_PROJECTS.map((p, i) => (
+          {visibleProjects.map((p, i) => (
             <button
               key={p.id}
               type="button"
@@ -241,6 +250,21 @@ export default function ImpactProjects() {
             </div>
           </div>
         </motion.article>
+
+        {hasMore && !showAll ? (
+          <div className="rh-projects__more-wrap">
+            <button
+              type="button"
+              className="btn-secondary rh-projects__more-btn"
+              onClick={() => {
+                setShowAll(true);
+                setActive(limit);
+              }}
+            >
+              View {IMPACT_PROJECTS.length - limit} more projects
+            </button>
+          </div>
+        ) : null}
       </div>
     </section>
   );

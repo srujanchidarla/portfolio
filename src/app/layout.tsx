@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Inter, Space_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { BootProvider } from "@/components/BootProvider";
 import CustomCursor from "@/components/CustomCursor";
 import BootLoader from "@/components/BootLoader";
+import { PRIMARY_ROLE, SITE } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,14 +20,13 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://srujanchidarla.com"),
-  title: "Srujan Chidarla | New Grad Full-Stack Engineer · Aug 2026",
-  description:
-    "New grad MS CS (4.0 GPA, Aug 2026). Full-stack engineer with production exposure at 2M+ req/day. Shipped CampfireChai, JobHuntOS & Neocortex. Seeking first full-time role.",
+  metadataBase: new URL(SITE.website),
+  title: `${SITE.name} | ${PRIMARY_ROLE.title} · Aug 2026`,
+  description: PRIMARY_ROLE.headline,
   keywords: [
     "Srujan Chidarla",
-    "new grad software engineer",
-    "entry level full-stack",
+    "new grad backend engineer",
+    "entry level software engineer",
     "2026 graduate",
     "CampfireChai",
     "JobHuntOS",
@@ -34,27 +35,16 @@ export const metadata: Metadata = {
     "STEM OPT",
   ],
   openGraph: {
-    title: "Srujan Chidarla — Full-Stack Engineer · 2M+ req/day exposure",
-    description:
-      "New grad · 4.0 GPA · Aug 2026 · Shipped CampfireChai & JobHuntOS · Live GitHub activity · Seeking first full-time role",
+    title: `${SITE.name} — ${PRIMARY_ROLE.title} · 2M+ req/day`,
+    description: PRIMARY_ROLE.headline,
     type: "website",
-    url: "https://srujanchidarla.com",
-    siteName: "Srujan Chidarla",
-    images: [
-      {
-        url: "/images/hero.jpg",
-        width: 1200,
-        height: 1300,
-        alt: "Srujan Chidarla — new grad full-stack engineer",
-      },
-    ],
+    url: SITE.website,
+    siteName: SITE.name,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Srujan Chidarla — Full-Stack Engineer · 2M+ req/day exposure",
-    description:
-      "New grad · 4.0 GPA · Aug 2026 · Shipped CampfireChai & JobHuntOS · Seeking first full-time role",
-    images: ["/images/hero.jpg"],
+    title: `${SITE.name} — ${PRIMARY_ROLE.title}`,
+    description: PRIMARY_ROLE.headline,
   },
 };
 
@@ -92,6 +82,7 @@ export default function RootLayout({
             <BootLoader />
             <CustomCursor />
             {children}
+            <Analytics />
           </BootProvider>
         </ThemeProvider>
       </body>

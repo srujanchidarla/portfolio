@@ -53,10 +53,6 @@ export default function RecruiterCTA() {
               <strong>LinkedIn</strong>
               <span>linkedin.com/in/srujan-chidarla</span>
             </a>
-            <a href={scheduleHref} className="rh-cta__card">
-              <strong>Schedule a call</strong>
-              <span>Free 15-min intro · email request</span>
-            </a>
             <a
               href={RECRUITER_CONTACT.github}
               target="_blank"
@@ -65,10 +61,6 @@ export default function RecruiterCTA() {
             >
               <strong>GitHub</strong>
               <span>github.com/srujanchidarla</span>
-            </a>
-            <a href={SITE.resumeUrl} download className="rh-cta__card">
-              <strong>Resume</strong>
-              <span>Download PDF</span>
             </a>
             <button
               type="button"

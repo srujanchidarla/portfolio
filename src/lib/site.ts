@@ -1,7 +1,17 @@
+/** Primary lane for hero, navbar, and OG — adjacent roles live in Role Strategy */
+export const PRIMARY_ROLE = {
+  title: "Backend Engineer",
+  short: "Backend",
+  tagline: "New Grad · Backend Engineer · 2M+ req/day production experience",
+  headline:
+    "MS CS new grad (Aug 2026) with 2+ years in production at 2M+ req/day — also shipping AI and full-stack products users install today.",
+} as const;
+
 export const SITE = {
   name: "Srujan Chidarla",
-  role: "New Grad · Full-Stack Engineer",
-  tagline: "MS CS Aug 2026 · 4.0 GPA · Shipped CampfireChai & JobHuntOS · Seeking first full-time role",
+  role: PRIMARY_ROLE.tagline,
+  tagline:
+    "MS CS Aug 2026 · Backend Engineer · 2M+ req/day · Shipped CampfireChai & JobHuntOS",
   location: "United States",
   status: "🎓 Seeking my first full-time role",
   gradDate: "August 2026",
@@ -16,6 +26,12 @@ export const SITE = {
   resumeUrl: "/resume.pdf",
   lastUpdated: "July 10, 2026",
 } as const;
+
+/**
+ * Set true after adding files to /public/resumes/ (see README.txt).
+ * While false, role-specific download buttons are hidden to avoid 404s.
+ */
+export const ROLE_RESUMES_AVAILABLE = false;
 
 /** Role-tailored resumes — drop matching files in /public/resumes/ */
 export const ROLE_RESUMES = {
@@ -37,11 +53,11 @@ export const ROLE_RESUMES = {
 } as const;
 
 /**
- * Free scheduling — no paid Calendly required.
- * Leave empty to use a mailto 15-min call request.
- * Or set a free Cal.com / Google Calendar appointment URL, e.g. "https://cal.com/you/15min"
+ * Free scheduling — set NEXT_PUBLIC_SCHEDULE_URL in .env.local
+ * e.g. "https://cal.com/yourname/15min" or a Google Appointment Schedule link.
+ * Falls back to mailto when empty.
  */
-export const SCHEDULE_URL = "";
+export const SCHEDULE_URL = process.env.NEXT_PUBLIC_SCHEDULE_URL ?? "";
 
 /** Prefills a free email request for a 15-minute intro call (or uses SCHEDULE_URL) */
 export function getScheduleHref(): string {

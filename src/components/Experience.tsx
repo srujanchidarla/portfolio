@@ -46,16 +46,6 @@ export default function Experience() {
             </motion.div>
           ))}
         </div>
-
-        <motion.p
-          className="experience-footer-note"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          Ready to learn and grow in my first full-time role — eager for mentorship, team
-          collaboration, and shipping real code.
-        </motion.p>
       </div>
     </section>
   );

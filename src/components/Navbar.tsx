@@ -2,15 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { Download, Menu, Moon, Sun, X } from "lucide-react";
-import { SITE } from "@/lib/site";
+import { SITE, PRIMARY_ROLE } from "@/lib/site";
 import { useContact } from "@/components/ContactProvider";
 import { useTheme } from "@/components/ThemeProvider";
 
 const NAV_LINKS = [
   { href: "/#experience", label: "Experience" },
   { href: "/#projects", label: "Projects" },
-  { href: "/#writing", label: "Writing" },
-  { href: "/#story", label: "Story" },
+  { href: "/#hire", label: "Hiring" },
   { href: "/#contact", label: "Contact" },
 ];
 
@@ -66,7 +65,7 @@ export default function Navbar() {
 
           <button type="button" className="navbar__badge" onClick={openContact}>
             <span className="navbar__badge-dot" aria-hidden="true" />
-            Available · Full-Stack
+            Available · {PRIMARY_ROLE.short}
           </button>
 
           <button
@@ -113,7 +112,7 @@ export default function Navbar() {
             {theme === "dark" ? "Light mode" : "Dark mode"}
           </button>
           <button type="button" className="navbar__badge navbar__badge--mobile" onClick={openContact}>
-            Available · Backend / AI / Full-Stack
+            Available · {PRIMARY_ROLE.title}
           </button>
         </nav>
       )}

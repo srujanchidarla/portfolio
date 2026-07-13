@@ -5,7 +5,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { LOCAL_GUIDE, SITE, SITE_IMAGES } from "@/lib/site";
-import { SPORTS, STORY_BEATS } from "@/lib/recruiter-home";
+import { STORY_BEATS } from "@/lib/recruiter-home";
 
 export default function TheStory() {
   const [active, setActive] = useState(STORY_BEATS.length - 1);
@@ -106,14 +106,7 @@ export default function TheStory() {
               cricket, football, and more. State-level medals taught me discipline, multitasking,
               and team mentality. Same energy I bring to sprint planning and shipping deadlines.
             </p>
-            <div className="rh-story__sports">
-              {SPORTS.map((sport) => (
-                <span key={sport} className="rh-story__sport-pill">
-                  {sport}
-                </span>
-              ))}
-            </div>
-            <a href="#athlete" className="rh-story__link">
+            <a href="/about#athlete" className="rh-story__link">
               See athlete gallery
               <ArrowUpRight size={14} aria-hidden="true" />
             </a>
