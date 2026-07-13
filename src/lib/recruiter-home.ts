@@ -6,9 +6,6 @@ export const HERO_METRICS = {
   dailyRequests: 2_000_000,
 } as const;
 
-/** Featured on homepage — full list available via more links */
-export const HOMEPAGE_PROJECT_LIMIT = 3;
-
 export const PROOF_CARDS = [
   {
     id: "graduate",

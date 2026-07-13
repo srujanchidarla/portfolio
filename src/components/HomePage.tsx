@@ -11,7 +11,6 @@ import RecruiterCTA from "@/components/recruiter/RecruiterCTA";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 import Footer from "@/components/Footer";
 import { ContactProvider } from "@/components/ContactProvider";
-import { HOMEPAGE_PROJECT_LIMIT } from "@/lib/recruiter-home";
 
 export default function HomePage() {
   return (
@@ -21,7 +20,7 @@ export default function HomePage() {
         <HeroRecruiter />
         <ProofSection />
         <Experience />
-        <ImpactProjects limit={HOMEPAGE_PROJECT_LIMIT} />
+        <ImpactProjects />
         <SkillsImpact />
         <WritingSection />
         <GitHubActivity />
