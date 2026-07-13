@@ -20,18 +20,18 @@ function applyTheme(theme: Theme) {
   root.style.colorScheme = theme;
 }
 
-function getInitialTheme(): Theme {
-  if (typeof window === "undefined") return "dark";
-  const stored = window.localStorage.getItem(STORAGE_KEY);
-  if (stored === "dark" || stored === "light") return stored;
-  return window.matchMedia?.("(prefers-color-scheme: light)")?.matches ? "light" : "dark";
+function readDomTheme(): Theme {
+  const attr = document.documentElement.getAttribute("data-theme");
+  if (attr === "dark" || attr === "light") return attr;
+  return "dark";
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(() => "dark");
+  // Start dark to match SSR; sync from the blocking script on mount
+  const [theme, setThemeState] = useState<Theme>("dark");
 
   useEffect(() => {
-    const t = getInitialTheme();
+    const t = readDomTheme();
     setThemeState(t);
     applyTheme(t);
   }, []);
@@ -40,7 +40,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setThemeState(t);
     try {
       window.localStorage.setItem(STORAGE_KEY, t);
-    } catch {}
+    } catch {
+      /* ignore quota / private mode */
+    }
     applyTheme(t);
   };
 
@@ -61,4 +63,3 @@ export function useTheme() {
   if (!ctx) throw new Error("useTheme must be used within ThemeProvider");
   return ctx;
 }
-

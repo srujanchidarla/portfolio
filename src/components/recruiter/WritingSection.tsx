@@ -1,31 +1,77 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Newspaper } from "lucide-react";
+import { ArrowUpRight, BookOpen, Newspaper } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { WRITING_POSTS, formatWritingDate } from "@/lib/writing";
+import { SYSTEM_DESIGN_ESSAY } from "@/lib/system-design";
+import SystemDesignModal from "@/components/writing/SystemDesignModal";
 
 const FEATURED = WRITING_POSTS.slice(0, 3);
 
 export default function WritingSection() {
+  const [essayOpen, setEssayOpen] = useState(false);
+
   return (
     <section id="writing" className="rh-writing">
       <div className="wrap">
-        <motion.header
-          className="rh-section-header"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-        >
+        <header className="rh-section-header">
           <p className="section-eyebrow">Tech notes</p>
           <h2 className="section-title">
             Writing that <span className="gradient-text">keeps me sharp</span>
           </h2>
           <p className="section-subtitle">
-            Short takes on major tech news and what I&apos;m learning while shipping — also posted on
-            LinkedIn a couple times a week.
+            Short LinkedIn takes plus a longer essay on system design in the AI era — how architecture
+            evolved, and why it still matters when I ship.
           </p>
-        </motion.header>
+        </header>
+
+        <div className="rh-writing__featured">
+          <div className="rh-writing__featured-copy">
+            <p className="rh-writing__featured-eyebrow">
+              <BookOpen size={14} aria-hidden="true" />
+              Featured essay
+            </p>
+            <h3 className="rh-writing__featured-title">{SYSTEM_DESIGN_ESSAY.title}</h3>
+            <p className="rh-writing__featured-summary">{SYSTEM_DESIGN_ESSAY.summary}</p>
+            <div className="rh-writing__featured-meta">
+              <time dateTime={SYSTEM_DESIGN_ESSAY.date}>
+                {formatWritingDate(SYSTEM_DESIGN_ESSAY.date)}
+              </time>
+              <span>{SYSTEM_DESIGN_ESSAY.readingMinutes} min read</span>
+            </div>
+            <div className="rh-writing__featured-actions">
+              <button
+                type="button"
+                className="btn-primary"
+                onClick={() => setEssayOpen(true)}
+              >
+                Quick read (popup)
+              </button>
+              <Link href={SYSTEM_DESIGN_ESSAY.href} className="btn-secondary">
+                Open full article
+                <ArrowUpRight size={14} aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+
+          <Link
+            href={SYSTEM_DESIGN_ESSAY.href}
+            className="rh-writing__featured-visual"
+            aria-label="Open system design essay"
+          >
+            <span className="rh-writing__mini-arch" aria-hidden="true">
+              <span>👥 → ⚖️ → 🔌</span>
+              <span>↓</span>
+              <span>🤖 → ⚡ → 🗄️</span>
+              <span>↓</span>
+              <span>📡 → 🚨</span>
+            </span>
+            <span className="rh-writing__featured-hint">Interactive architecture inside →</span>
+          </Link>
+        </div>
 
         <div className="rh-writing__grid">
           {FEATURED.map((post, i) => (
@@ -37,7 +83,7 @@ export default function WritingSection() {
               className="rh-writing__card"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
+              viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.35, delay: i * 0.06 }}
             >
               <div className="rh-writing__meta">
@@ -71,6 +117,8 @@ export default function WritingSection() {
           </a>
         </div>
       </div>
+
+      <SystemDesignModal isOpen={essayOpen} onClose={() => setEssayOpen(false)} />
     </section>
   );
 }

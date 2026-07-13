@@ -7,11 +7,11 @@ import { useContact } from "@/components/ContactProvider";
 import { useTheme } from "@/components/ThemeProvider";
 
 const NAV_LINKS = [
-  { href: "#experience", label: "Experience" },
-  { href: "#projects", label: "Projects" },
-  { href: "#writing", label: "Writing" },
-  { href: "#story", label: "Story" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#experience", label: "Experience" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#writing", label: "Writing" },
+  { href: "/#story", label: "Story" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export default function Navbar() {

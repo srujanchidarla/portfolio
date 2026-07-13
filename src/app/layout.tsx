@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter, Space_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { BootProvider } from "@/components/BootProvider";
+import CustomCursor from "@/components/CustomCursor";
+import BootLoader from "@/components/BootLoader";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -75,10 +78,22 @@ export default function RootLayout({
   `;
 
   return (
-    <html lang="en" className={`${inter.variable} ${spaceMono.variable} h-full`}>
-      <body className={`${inter.className} min-h-full flex flex-col antialiased`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${spaceMono.variable} h-full`}
+      suppressHydrationWarning
+    >
+      <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-        <ThemeProvider>{children}</ThemeProvider>
+      </head>
+      <body className={`${inter.className} min-h-full flex flex-col antialiased`}>
+        <ThemeProvider>
+          <BootProvider>
+            <BootLoader />
+            <CustomCursor />
+            {children}
+          </BootProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
