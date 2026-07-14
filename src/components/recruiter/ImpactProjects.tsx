@@ -30,6 +30,7 @@ function ProjectPreview({
   accent,
   href,
   previewImage,
+  tag,
   result,
   resultDetail,
 }: {
@@ -37,11 +38,13 @@ function ProjectPreview({
   accent: string;
   href?: string;
   previewImage?: string;
+  tag?: string;
   result?: string;
   resultDetail?: string;
 }) {
   const [hasImage, setHasImage] = useState(true);
   const domain = useMemo(() => getDomain(href), [href]);
+  const showImage = Boolean(previewImage) && hasImage;
 
   return (
     <a
@@ -58,16 +61,19 @@ function ProjectPreview({
           <span />
           <span />
         </span>
-        <span className="rh-projects__preview-domain">{domain ?? "Preview"}</span>
+        <span className="rh-projects__preview-domain">{domain ?? title.toLowerCase()}</span>
         <span className="rh-projects__preview-icon">
           <ExternalLink size={14} aria-hidden="true" />
         </span>
       </div>
 
-      <div className="rh-projects__preview-viewport" style={{ position: "relative" }}>
-        {previewImage && hasImage ? (
+      <div
+        className={`rh-projects__preview-viewport${showImage ? "" : " is-placeholder"}`}
+        style={{ position: "relative" }}
+      >
+        {showImage ? (
           <Image
-            src={previewImage}
+            src={previewImage as string}
             alt={`${title} homepage preview`}
             fill
             className="rh-projects__preview-img"
@@ -75,15 +81,14 @@ function ProjectPreview({
             onError={() => setHasImage(false)}
           />
         ) : (
-          <div className="rh-projects__preview-fallback">
-            <p className="rh-projects__preview-title">{title}</p>
-            <p className="rh-projects__preview-sub">
-              Add a screenshot in <code>/public/project-previews/</code>
-            </p>
+          <div className="rh-projects__preview-fallback" aria-hidden="true">
+            <span className="rh-projects__preview-monogram">{title.charAt(0)}</span>
+            <span className="rh-projects__preview-fallback-name">{title}</span>
+            {tag ? <span className="rh-projects__preview-fallback-tag">{tag}</span> : null}
           </div>
         )}
 
-        {previewImage && hasImage ? (
+        {showImage ? (
           <div className="rh-projects__preview-overlay" aria-hidden="true">
             <div className="rh-projects__preview-overlay-title">{title}</div>
             {result ? (
@@ -142,17 +147,12 @@ export default function ImpactProjects({ limit = IMPACT_PROJECTS.length }: { lim
               type="button"
               role="tab"
               aria-selected={active === i}
-              className={`rh-projects__nav-btn${active === i ? " is-active" : ""}`}
+              className={`rh-projects__tab${active === i ? " is-active" : ""}`}
               onClick={() => setActive(i)}
               style={{ "--proj-color": p.color } as React.CSSProperties}
             >
-              <span className="rh-projects__nav-name">
-                {p.title}
-                {"subtitle" in p && p.subtitle ? (
-                  <span className="rh-projects__nav-sub"> · {p.subtitle}</span>
-                ) : null}
-              </span>
-              <span className="rh-projects__nav-result">{p.journey}</span>
+              <span className="rh-projects__tab-dot" aria-hidden="true" />
+              <span className="rh-projects__tab-name">{p.title}</span>
             </button>
           ))}
         </div>
@@ -167,7 +167,7 @@ export default function ImpactProjects({ limit = IMPACT_PROJECTS.length }: { lim
           transition={{ duration: 0.35 }}
         >
           <div className="rh-projects__card-header">
-            <div>
+            <div className="rh-projects__card-heading">
               <span className="rh-projects__tag">{project.tag}</span>
               <h3>
                 {project.title}
@@ -175,11 +175,10 @@ export default function ImpactProjects({ limit = IMPACT_PROJECTS.length }: { lim
                   <span className="rh-projects__subtitle"> — {project.subtitle}</span>
                 ) : null}
               </h3>
+              <p className="rh-projects__journey">{project.journey}</p>
             </div>
             <div className="rh-projects__result-badge">{project.result}</div>
           </div>
-
-          <p className="rh-projects__journey">{project.journey}</p>
 
           <div className="rh-projects__preview-wrap">
             <ProjectPreview
@@ -187,6 +186,7 @@ export default function ImpactProjects({ limit = IMPACT_PROJECTS.length }: { lim
               accent={project.color}
               href={bestLink}
               previewImage={previewImage}
+              tag={project.tag}
               result={project.result}
               resultDetail={project.resultDetail}
             />

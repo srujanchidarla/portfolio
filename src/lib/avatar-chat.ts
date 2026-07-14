@@ -66,7 +66,7 @@ Key facts:
 
 Portfolio sections (link with markdown when helpful):
 - #experience — Master's + WalletGyde internship + Cognizant pre-grad experience
-- #projects — Neocortex, CampfireChai (live), JobHuntOS, StudyGlobal, FitConnect
+- #projects — Neocortex, CampfireChai (live), JobHuntOS, AlgoChronicle (live), StudyGlobal, FitConnect
 - #skills — honest skill levels (Strong vs Comfortable)
 - #github — live GitHub activity
 - #story — athletics, learning mindset, why he's excited

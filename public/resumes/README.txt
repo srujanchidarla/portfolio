@@ -1,10 +1,14 @@
-﻿Drop role-specific resumes here (filenames must match site.ts):
+Drop role-specific resumes here (filenames must match site.ts).
+Set `available: true` on each role in src/lib/site.ts when the file is added.
 
-- Srujan-Chidarla-Backend.docx
-- Srujan-Chidarla-AI.docx
-- Srujan-Chidarla-FullStack.docx
+Live (Markdown):
+- Srujan-Chidarla-Backend.md
+- Srujan-Chidarla-AI.md
+- Srujan-Chidarla-FullStack.md
 
-Optional PDF mirrors:
+Optional PDF mirrors (export from Markdown):
 - Srujan-Chidarla-Backend.pdf
 - Srujan-Chidarla-AI.pdf
 - Srujan-Chidarla-FullStack.pdf
+
+Site-wide PDF (navbar / footer): public/resume.pdf

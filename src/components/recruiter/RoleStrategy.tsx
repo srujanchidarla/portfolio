@@ -11,7 +11,14 @@ import {
   ROLE_WHY_HIRE,
   type RoleStrategyId,
 } from "@/lib/hiring";
-import { PRIMARY_ROLE, ROLE_RESUMES, ROLE_RESUMES_AVAILABLE, SITE } from "@/lib/site";
+import {
+  PRIMARY_ROLE,
+  ROLE_RESUMES,
+  ROLE_RESUMES_AVAILABLE,
+  SITE,
+  getRoleResumeDownload,
+  type RoleResumeKey,
+} from "@/lib/site";
 
 interface RoleStrategyProps {
   /** Render inside Hiring section (no duplicate section shell/header) */
@@ -25,7 +32,10 @@ export default function RoleStrategy({ embedded = false }: RoleStrategyProps) {
   const activeFit = ROLE_FIT.find((r) => r.id === activeRole) ?? ROLE_FIT[0];
   const activeWhy = ROLE_WHY_HIRE.find((r) => r.id === activeRole) ?? ROLE_WHY_HIRE[0];
   const activeStrategy = ROLE_STRATEGY.find((r) => r.id === activeRole) ?? ROLE_STRATEGY[0];
-  const activeResume = ROLE_RESUMES[activeRole];
+  const activeResumeDownload = getRoleResumeDownload(activeRole);
+  const availableRoleResumes = (Object.keys(ROLE_RESUMES) as RoleResumeKey[]).filter(
+    (key) => ROLE_RESUMES[key].available
+  );
 
   const content = (
     <>
@@ -159,7 +169,7 @@ export default function RoleStrategy({ embedded = false }: RoleStrategyProps) {
         <div className="rh-roles__resumes">
           <p className="rh-roles__resumes-label">Download my role-specific resume</p>
           <div className="rh-roles__resumes-row">
-            {(Object.keys(ROLE_RESUMES) as Array<keyof typeof ROLE_RESUMES>).map((key) => {
+            {availableRoleResumes.map((key) => {
               const resume = ROLE_RESUMES[key];
               return (
                 <a
@@ -271,12 +281,12 @@ export default function RoleStrategy({ embedded = false }: RoleStrategyProps) {
 
                     {ROLE_RESUMES_AVAILABLE ? (
                       <a
-                        href={activeResume.href}
+                        href={activeResumeDownload.href}
                         download
                         className="btn-primary rh-roles__fit-resume"
                       >
                         <Download size={16} aria-hidden="true" />
-                        Download {activeResume.label} resume
+                        Download {activeResumeDownload.label} resume
                       </a>
                     ) : (
                       <a href={SITE.resumeUrl} download className="btn-primary rh-roles__fit-resume">

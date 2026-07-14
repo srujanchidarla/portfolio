@@ -1,4 +1,4 @@
-import { ROLE_RESUMES, SITE } from "./site";
+import { SITE, getRoleResumeDownload } from "./site";
 
 export const LOOKING_FOR = [
   {
@@ -48,7 +48,7 @@ export const ROLE_STRATEGY = [
     demand: "High demand",
     demandDetail: "Fintech, cloud, AI infrastructure",
     demandTrend: "High",
-    resumeHref: ROLE_RESUMES.backend.href,
+    resumeHref: getRoleResumeDownload("backend").href,
   },
   {
     id: "ai" as const,
@@ -65,7 +65,7 @@ export const ROLE_STRATEGY = [
     demand: "Explosive growth",
     demandDetail: "163–414% YoY · 3.4 open roles per candidate",
     demandTrend: "163–414% YoY",
-    resumeHref: ROLE_RESUMES.ai.href,
+    resumeHref: getRoleResumeDownload("ai").href,
   },
   {
     id: "fullstack" as const,
@@ -76,13 +76,13 @@ export const ROLE_STRATEGY = [
     subtitle: "Startup-Focused",
     focus: "Ship complete products end-to-end — concept to production",
     advantage:
-      "5 shipped applications: CampfireChai (live), JobHuntOS (Chrome Store), StudyGlobal (beta), Neocortex (in progress)",
+      "6 shipped applications: CampfireChai (live), JobHuntOS (Chrome Store), AlgoChronicle (live), StudyGlobal (beta), Neocortex (in progress)",
     stack: ["React 19", "Next.js", "Node.js", "MongoDB", "Realtime"],
     companyTypes: ["Series A/B startups", "Product-led SaaS", "0→1 product teams"],
     demand: "Stable demand",
     demandDetail: "Startups value shipping speed",
     demandTrend: "Stable",
-    resumeHref: ROLE_RESUMES.fullstack.href,
+    resumeHref: getRoleResumeDownload("fullstack").href,
   },
 ] as const;
 
@@ -147,7 +147,7 @@ export const ROLE_FIT = [
     title: "Full-Stack Engineer",
     heading: "Why I'm your fit",
     experience: "5 production applications from concept to deployment",
-    proof: "CampfireChai (live), JobHuntOS (Chrome Web Store), StudyGlobal (live beta)",
+    proof: "CampfireChai (live), JobHuntOS (Chrome Web Store), AlgoChronicle (live), StudyGlobal (live beta)",
     know: "Rapid prototyping, database design, real-time systems, deployment automation",
     example:
       "I built CampfireChai full-stack in 2 months: React 19 frontend, Node.js backend, Socket.io real-time, deployed on Vercel.",

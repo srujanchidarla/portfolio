@@ -27,30 +27,52 @@ export const SITE = {
   lastUpdated: "July 10, 2026",
 } as const;
 
-/**
- * Set true after adding files to /public/resumes/ (see README.txt).
- * While false, role-specific download buttons are hidden to avoid 404s.
- */
-export const ROLE_RESUMES_AVAILABLE = false;
+export type RoleResumeKey = "backend" | "ai" | "fullstack";
 
-/** Role-tailored resumes — drop matching files in /public/resumes/ */
-export const ROLE_RESUMES = {
+/** Role-tailored resumes — set `available: true` when the file exists in /public/resumes/ */
+export const ROLE_RESUMES: Record<
+  RoleResumeKey,
+  { label: string; href: string; shortLabel: string; available: boolean }
+> = {
   backend: {
     label: "Backend Engineer",
-    href: "/resumes/Srujan-Chidarla-Backend.docx",
+    href: "/resumes/Srujan-Chidarla-Backend.md",
     shortLabel: "Backend",
+    available: true,
   },
   ai: {
     label: "AI Engineer",
-    href: "/resumes/Srujan-Chidarla-AI.docx",
+    href: "/resumes/Srujan-Chidarla-AI.md",
     shortLabel: "AI",
+    available: true,
   },
   fullstack: {
     label: "Full-Stack Engineer",
-    href: "/resumes/Srujan-Chidarla-FullStack.docx",
+    href: "/resumes/Srujan-Chidarla-FullStack.md",
     shortLabel: "Full-Stack",
+    available: true,
   },
-} as const;
+};
+
+/** True when at least one role-specific resume file is available */
+export const ROLE_RESUMES_AVAILABLE = (
+  Object.keys(ROLE_RESUMES) as RoleResumeKey[]
+).some((key) => ROLE_RESUMES[key].available);
+
+/** Best download link for a role — falls back to backend resume, then site PDF */
+export function getRoleResumeDownload(role: RoleResumeKey): {
+  href: string;
+  label: string;
+} {
+  const preferred = ROLE_RESUMES[role];
+  if (preferred.available) {
+    return { href: preferred.href, label: preferred.label };
+  }
+  if (ROLE_RESUMES.backend.available) {
+    return { href: ROLE_RESUMES.backend.href, label: ROLE_RESUMES.backend.label };
+  }
+  return { href: SITE.resumeUrl, label: "Resume (PDF)" };
+}
 
 /**
  * Free scheduling — set NEXT_PUBLIC_SCHEDULE_URL in .env.local

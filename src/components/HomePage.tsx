@@ -4,6 +4,7 @@ import ProofSection from "@/components/recruiter/ProofSection";
 import Experience from "@/components/Experience";
 import SkillsImpact from "@/components/recruiter/SkillsImpact";
 import ImpactProjects from "@/components/recruiter/ImpactProjects";
+import DailyDSA from "@/components/recruiter/DailyDSA";
 import WritingSection from "@/components/recruiter/WritingSection";
 import GitHubActivity from "@/components/GitHubActivity";
 import HiringSignal from "@/components/recruiter/HiringSignal";
@@ -21,6 +22,7 @@ export default function HomePage() {
         <ProofSection />
         <Experience />
         <ImpactProjects />
+        <DailyDSA />
         <SkillsImpact />
         <WritingSection />
         <GitHubActivity />

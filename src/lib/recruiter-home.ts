@@ -100,6 +100,26 @@ export const IMPACT_PROJECTS = [
     liveHref: "https://job-hunt-os-eosin.vercel.app/",
   },
   {
+    id: "algochronicle",
+    title: "AlgoChronicle",
+    tag: "DSA · Automation · Live",
+    journey: "Turning GitHub commits into a self-updating coding journal",
+    problem:
+      "DSA practice is easy to start and hard to sustain — manual logging breaks streaks and progress gets lost across platforms.",
+    solution:
+      "Automated DSA tracker: push a `dayXXX_*` folder to dsa-problems, GitHub Actions syncs to Firestore, and AlgoChronicle updates with streaks, stats, and revision views.",
+    learned:
+      "CI/CD automation end-to-end, parsing structured READMEs in Actions, Firebase admin on Vercel, and building a product I'd actually use daily for interview prep.",
+    result: "Live on Vercel",
+    resultDetail:
+      "40-day schedule, streak tracking, platform/complexity stats, spaced-revision views, and zero manual logging after push.",
+    stack: ["Next.js", "TypeScript", "Firebase", "GitHub Actions", "Tailwind"],
+    color: "#22c55e",
+    href: "https://github.com/srujanchidarla/algochronicle",
+    liveHref: "https://algochronicle.vercel.app/",
+    dsaRepoHref: "https://github.com/srujanchidarla/dsa-problems",
+  },
+  {
     id: "studyglobal",
     title: "StudyGlobal",
     tag: "EdTech · Full-Stack",
