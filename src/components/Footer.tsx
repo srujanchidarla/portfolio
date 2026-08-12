@@ -41,6 +41,7 @@ export default function Footer() {
           <a href={`mailto:${SITE.email}`}>Email</a>
           <a href="/about">About</a>
           <a href="/#writing">Writing</a>
+          <a href="/research">Research</a>
           <a href="/#github">GitHub activity</a>
           <a href="/#contact">Contact</a>
         </div>

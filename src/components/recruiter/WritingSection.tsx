@@ -105,6 +105,11 @@ export default function WritingSection() {
         </div>
 
         <div className="rh-writing__footer">
+          <Link href="/research" className="rh-writing__all">
+            <BookOpen size={16} aria-hidden="true" />
+            Research &amp; ideas
+            <ArrowUpRight size={14} aria-hidden="true" />
+          </Link>
           <a
             href={SITE.linkedin}
             target="_blank"

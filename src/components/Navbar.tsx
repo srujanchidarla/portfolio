@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { href: "/#skills", label: "Skills" },
   { href: "/about", label: "About" },
   { href: "/#writing", label: "Writing" },
+  { href: "/research", label: "Research" },
   { href: "/#contact", label: "Contact" },
 ];
 
