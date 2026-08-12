@@ -160,7 +160,7 @@ export const ATHLETE_MEDIA = [
   {
     id: "hybrid",
     type: "video" as const,
-    src: "/media/hybridathlete.mp4",
+    src: "/media/hybridathlete-web.mp4",
     alt: "Srujan hybrid athlete training — track and gym",
     label: "Hybrid",
     caption: "Sprints, strength, and the same daily discipline.",
