@@ -12,20 +12,49 @@ interface ContactModalProps {
 
 export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
+  const previouslyFocused = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (!isOpen) return;
 
+    previouslyFocused.current = document.activeElement as HTMLElement | null;
+
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab" || !dialogRef.current) return;
+
+      const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
 
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKeyDown);
 
+    requestAnimationFrame(() => {
+      const closeBtn = dialogRef.current?.querySelector<HTMLElement>('button[aria-label="Close contact modal"]');
+      closeBtn?.focus();
+    });
+
     return () => {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKeyDown);
+      previouslyFocused.current?.focus?.();
     };
   }, [isOpen, onClose]);
 
@@ -54,48 +83,24 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             onClick={(e) => e.stopPropagation()}
           >
             <button
+              type="button"
               onClick={onClose}
               aria-label="Close contact modal"
-              style={{
-                position: "absolute",
-                top: 16,
-                right: 16,
-                background: "none",
-                border: "none",
-                color: "var(--c-muted)",
-                padding: 8,
-                borderRadius: 8,
-                transition: "color 0.2s",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--c-text)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--c-muted)")}
+              className="modal-close"
             >
               <X size={20} />
             </button>
 
-            <h2
-              id="contact-title"
-              style={{
-                fontFamily: "var(--font-space-mono), monospace",
-                fontSize: 24,
-                fontWeight: 700,
-                marginBottom: 8,
-              }}
-            >
+            <h2 id="contact-title" className="modal-title font-mono">
               Let&apos;s <span className="gradient-text">Talk</span>
             </h2>
-            <p style={{ color: "var(--c-muted)", fontSize: 15, marginBottom: 32, lineHeight: 1.6 }}>
-              I&apos;m actively seeking a full-time role to build and scale distributed
-              systems. Reach out — I&apos;d love to connect.
+            <p className="modal-lead">
+              Questions about the work, a collaboration, or just want to say hi — I read everything.
             </p>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              <a
-                href={`mailto:${SITE.email}`}
-                className="btn-primary"
-                style={{ width: "100%", justifyContent: "flex-start" }}
-              >
-                <Mail size={18} />
+            <div className="modal-actions">
+              <a href={`mailto:${SITE.email}`} className="btn-primary modal-actions__btn">
+                <Mail size={18} aria-hidden="true" />
                 {SITE.email}
               </a>
 
@@ -103,10 +108,9 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 href={SITE.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-secondary"
-                style={{ width: "100%", justifyContent: "flex-start" }}
+                className="btn-secondary modal-actions__btn"
               >
-                <ExternalLink size={18} />
+                <ExternalLink size={18} aria-hidden="true" />
                 LinkedIn Profile
               </a>
 
@@ -114,30 +118,20 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 href={SITE.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-secondary"
-                style={{ width: "100%", justifyContent: "flex-start" }}
+                className="btn-secondary modal-actions__btn"
               >
-                <Code2 size={18} />
+                <Code2 size={18} aria-hidden="true" />
                 GitHub Profile
+              </a>
+
+              <a href={SITE.resumeUrl} className="btn-secondary modal-actions__btn">
+                View Resume
               </a>
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
-                marginTop: 24,
-                padding: "12px 16px",
-                borderRadius: 12,
-                background: "var(--c-surface2)",
-                border: "1px solid var(--c-border)",
-                fontSize: 13,
-                color: "var(--c-muted)",
-              }}
-            >
-              <MapPin size={16} style={{ color: "var(--c-primary)", flexShrink: 0 }} />
-              {SITE.location} · Willing to relocate
+            <div className="modal-location">
+              <MapPin size={16} aria-hidden="true" />
+              {SITE.location}
             </div>
           </motion.div>
         </motion.div>

@@ -5,10 +5,10 @@ export const LOOKING_FOR = [
     id: "role",
     title: "What I'm looking for",
     items: [
-      "Backend Engineer — distributed systems & scale",
-      "AI Engineer — LLM integration & multi-model systems",
-      "Full-Stack Engineer — startup shipping speed",
-      "New grad / entry-level with mentorship",
+      "Software Engineer — new grad / entry-level",
+      "Teams that ship APIs, products, and LLM features",
+      "Mentorship and a culture of asking questions",
+      "Ownership of real problems, not busywork",
     ],
   },
   {
@@ -37,13 +37,13 @@ export const ROLE_STRATEGY = [
   {
     id: "backend" as const,
     rank: 1,
-    medal: "1",
-    expertLabel: "Scale Expert",
+    medal: "Scale",
+    expertLabel: "Reliability · APIs",
     title: "Backend Engineer",
     subtitle: "Distributed Systems",
-    focus: "Building scalable microservices at massive scale",
+    focus: "Building scalable microservices and operating them under load",
     advantage: "2M+ daily requests at 99.9% uptime — proven production exposure",
-    stack: ["Java / Spring Boot", "Microservices", "AWS", "Kubernetes"],
+    stack: ["Java / Spring Boot", "Microservices", "AWS", "Docker"],
     companyTypes: ["Payments infra", "Fintech platforms", "Cloud & API companies"],
     demand: "High demand",
     demandDetail: "Fintech, cloud, AI infrastructure",
@@ -53,25 +53,25 @@ export const ROLE_STRATEGY = [
   {
     id: "ai" as const,
     rank: 2,
-    medal: "2",
-    expertLabel: "LLM Expert",
+    medal: "LLM",
+    expertLabel: "Orchestration · Streaming",
     title: "AI Engineer",
     subtitle: "LLM Integration",
     focus: "Production AI systems with multi-model orchestration",
     advantage:
       "JobHuntOS on the Chrome Web Store — multi-LLM routing with intelligent failover across 100+ job board formats",
-    stack: ["Claude API", "Gemini API", "Groq API", "Prompt Eng", "RAG"],
+    stack: ["Claude API", "Gemini API", "Groq API", "Prompt Eng", "SSE"],
     companyTypes: ["LLM platforms", "AI product teams", "ML infrastructure"],
-    demand: "Explosive growth",
-    demandDetail: "163–414% YoY · 3.4 open roles per candidate",
-    demandTrend: "163–414% YoY",
+    demand: "High growth",
+    demandDetail: "Strong demand for shipping AI in product",
+    demandTrend: "Rising",
     resumeHref: getRoleResumeDownload("ai").href,
   },
   {
     id: "fullstack" as const,
     rank: 3,
-    medal: "3",
-    expertLabel: "Shipping Expert",
+    medal: "Ship",
+    expertLabel: "End-to-end · Product",
     title: "Full-Stack Engineer",
     subtitle: "Startup-Focused",
     focus: "Ship complete products end-to-end — concept to production",
@@ -89,34 +89,34 @@ export const ROLE_STRATEGY = [
 export type RoleStrategyId = (typeof ROLE_STRATEGY)[number]["id"];
 
 export const ROLE_STRATEGY_WHY =
-  "These roles match where the market is hiring and align with my strongest proof — scale, AI systems, and shipping products end-to-end.";
+  "One engineer, three depths — scale, AI systems, and end-to-end shipping. Same proof set; pick the resume that matches your open role.";
 
 export const ROLE_WHY_HIRE = [
   {
     id: "backend" as const,
     title: "Backend Engineer",
     bullets: [
-      "I've operated at 2M+ requests daily. Most engineers haven't. That's rare.",
-      "I understand the full stack of reliability: microservices design, database optimization, circuit breakers, monitoring, deployment automation.",
-      "I teach system design — deep understanding, not surface level.",
+      "I've contributed on production systems serving 2M+ requests/day at 99.9% uptime — real load, not demo traffic.",
+      "I care about reliability fundamentals: API design, database optimization, monitoring, and deploy discipline.",
+      "I combine that foundation with modern Node/Python backends I ship myself on personal products.",
     ],
   },
   {
     id: "ai" as const,
     title: "AI Engineer",
     bullets: [
-      "I didn't just use LLMs. I shipped JobHuntOS to the Chrome Web Store handling real user workloads.",
-      "I've integrated Claude, Gemini, and Groq — understanding trade-offs between providers, cost optimization, and intelligent routing.",
-      "My system handles multi-model failures gracefully — production reliability, not demo code.",
+      "I didn't just use LLMs — I shipped JobHuntOS to the Chrome Web Store with multi-provider routing.",
+      "I've integrated Claude, Gemini, and Groq — provider trade-offs, cost awareness, and failover.",
+      "My systems degrade gracefully when a provider fails — production reliability, not demo code.",
     ],
   },
   {
     id: "fullstack" as const,
     title: "Full-Stack Engineer",
     bullets: [
-      "I ship products. Not components. Not boilerplate. End-to-end: from architecture to deployment.",
-      "5 production applications deployed and live. CampfireChai has real-time coordination. StudyGlobal is a live beta for international students.",
-      "I understand the full stack deeply: frontend responsiveness, backend optimization, database design, deployment automation.",
+      "I ship products end-to-end: UI, API, data model, and deploy — not just components.",
+      "Featured live products: CampfireChai, JobHuntOS, AlgoChronicle, StudyGlobal — plus Neocortex in progress.",
+      "Recent internship impact at WalletGyde: 35% engagement ↑ and 40% faster transactions.",
     ],
   },
 ] as const;
@@ -126,31 +126,31 @@ export const ROLE_FIT = [
     id: "backend" as const,
     title: "Backend Engineer",
     heading: "Why I'm your fit",
-    experience: "2M+ req/day at 99.9% uptime for 500+ enterprise users",
-    proof: "Spring Boot microservices at Cognizant, system design teaching",
-    know: "Scaling databases, distributed cache, microservices patterns, CI/CD",
+    experience: "Contributed on Spring Boot microservices at 2M+ req/day · 99.9% uptime",
+    proof: "Cognizant production APIs · AlgoChronicle CI/CD pipeline · Node/FastAPI backends",
+    know: "REST design, indexing, Docker/CI, caching concepts, reliability habits",
     example:
-      "At Cognizant, I optimized a bottleneck query reducing P99 latency from 250ms to 50ms affecting 2M daily users.",
+      "On a Cognizant service path I helped optimize a bottleneck query, improving P99 latency from ~250ms to ~50ms under high traffic.",
   },
   {
     id: "ai" as const,
     title: "AI Engineer",
     heading: "Why I'm your fit",
-    experience: "JobHuntOS deployed to Chrome Web Store with multi-LLM orchestration",
-    proof: "Claude / Gemini / Groq integration, prompt engineering, streaming APIs",
-    know: "LLM routing, fallback logic, cost optimization, handling provider failures",
+    experience: "JobHuntOS on the Chrome Web Store with multi-LLM orchestration",
+    proof: "Claude / Gemini / Groq routing · SSE streaming · Neocortex multi-agent work",
+    know: "LLM routing, fallback logic, cost-aware provider choice, provider failure handling",
     example:
-      "JobHuntOS intelligently routes requests between Claude (reasoning), Gemini (analysis), and Groq (speed) with automatic failover if one provider fails.",
+      "JobHuntOS routes between Claude (reasoning), Gemini (analysis), and Groq (speed) with automatic failover if a provider fails.",
   },
   {
     id: "fullstack" as const,
     title: "Full-Stack Engineer",
     heading: "Why I'm your fit",
-    experience: "5 production applications from concept to deployment",
-    proof: "CampfireChai (live), JobHuntOS (Chrome Web Store), AlgoChronicle (live), StudyGlobal (live beta)",
+    experience: "6 featured applications from concept toward production",
+    proof: "CampfireChai (live), JobHuntOS (Chrome Store), AlgoChronicle (live), StudyGlobal (beta)",
     know: "Rapid prototyping, database design, real-time systems, deployment automation",
     example:
-      "I built CampfireChai full-stack in 2 months: React 19 frontend, Node.js backend, Socket.io real-time, deployed on Vercel.",
+      "I built CampfireChai end-to-end: React 19 frontend, Node.js backend, Socket.io real-time, deployed on Vercel.",
   },
 ] as const;
 
@@ -159,12 +159,12 @@ export const MARKET_POSITION = {
     {
       id: "backend",
       label: "Backend roles",
-      detail: "High demand across fintech, cloud, and API infrastructure",
+      detail: "Steady demand across fintech, cloud, and API infrastructure",
     },
     {
       id: "ai",
       label: "AI roles",
-      detail: "Explosive growth — 3.4 open roles per qualified candidate",
+      detail: "High demand for engineers who ship LLM features into real products",
     },
     {
       id: "fullstack",
@@ -191,7 +191,7 @@ export const VALUE_PROPS = ROLE_WHY_HIRE.map((role) => ({
 }));
 
 export const RECRUITER_LINKS = [
-  { id: "resume", label: "Resume", sublabel: "Download PDF", href: SITE.resumeUrl, icon: "📄", external: true },
+  { id: "resume", label: "Resume", sublabel: "View / print PDF", href: SITE.resumeUrl, icon: "📄", external: false },
   { id: "linkedin", label: "LinkedIn", sublabel: "Professional profile", href: SITE.linkedin, icon: "💼", external: true },
   { id: "github", label: "GitHub", sublabel: "Code samples", href: SITE.github, icon: "🔗", external: true },
   { id: "email", label: "Email", sublabel: "Direct contact", href: `mailto:${SITE.email}`, icon: "📧", external: false },

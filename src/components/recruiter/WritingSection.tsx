@@ -48,7 +48,7 @@ export default function WritingSection() {
                 className="btn-primary"
                 onClick={() => setEssayOpen(true)}
               >
-                Quick read (popup)
+                Read summary
               </button>
               <Link href={SYSTEM_DESIGN_ESSAY.href} className="btn-secondary">
                 Open full article

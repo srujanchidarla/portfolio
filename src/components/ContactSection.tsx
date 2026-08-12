@@ -65,7 +65,6 @@ export default function ContactSection() {
                     {...("external" in link && link.external
                       ? { target: "_blank", rel: "noopener noreferrer" }
                       : {})}
-                    {...(link.id === "resume" ? { download: true } : {})}
                   >
                     <span className="recruiter-link__icon" aria-hidden="true">
                       {link.icon}
@@ -82,7 +81,7 @@ export default function ContactSection() {
         </motion.div>
 
         <p className="contact-section__updated">
-          Portfolio last updated: <time dateTime="2026-07-05">{SITE.lastUpdated}</time>
+          Portfolio last updated: <time dateTime="2026-07-15">{SITE.lastUpdated}</time>
         </p>
       </div>
     </section>

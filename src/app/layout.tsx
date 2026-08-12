@@ -21,21 +21,22 @@ const spaceMono = Space_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.website),
-  title: `${SITE.name} | ${PRIMARY_ROLE.title} · Aug 2026`,
+  title: `${SITE.name} | Software Engineer · Aug 2026`,
   description: PRIMARY_ROLE.headline,
   keywords: [
     "Srujan Chidarla",
-    "new grad backend engineer",
-    "entry level software engineer",
+    "new grad software engineer",
+    "backend engineer",
+    "AI engineer",
+    "full-stack engineer",
     "2026 graduate",
-    "CampfireChai",
     "JobHuntOS",
+    "CampfireChai",
     "Neocortex",
-    "United States",
     "STEM OPT",
   ],
   openGraph: {
-    title: `${SITE.name} — ${PRIMARY_ROLE.title} · 2M+ req/day`,
+    title: `${SITE.name} — Software Engineer · 2M+ req/day`,
     description: PRIMARY_ROLE.headline,
     type: "website",
     url: SITE.website,
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} — ${PRIMARY_ROLE.title}`,
+    title: `${SITE.name} — Software Engineer · Aug 2026`,
     description: PRIMARY_ROLE.headline,
   },
 };
@@ -76,7 +77,13 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className={`${inter.className} min-h-full flex flex-col antialiased`}>
+      <body
+        className={`${inter.className} min-h-full flex flex-col antialiased`}
+        suppressHydrationWarning
+      >
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         <ThemeProvider>
           <BootProvider>
             <BootLoader />

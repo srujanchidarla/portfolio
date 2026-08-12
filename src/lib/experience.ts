@@ -17,46 +17,25 @@ export interface Experience {
   roles?: { title: string; period: string }[];
 }
 
+/** Work experience only — education is rendered separately */
 export const EXPERIENCES: Experience[] = [
-  {
-    id: "masters",
-    company: "University of Fairfax",
-    companyShort: "UF",
-    role: "Master of Science in Computer Science",
-    type: "Graduating Aug 2026",
-    category: "Education",
-    duration: "Aug 2024 – Aug 2026",
-    location: "Fairfax, VA · United States",
-    headline: "4.0 GPA — learning and building while completing my degree",
-    description:
-      "Recent graduate completing my Master's in Computer Science with a 4.0 GPA. I've balanced coursework with shipping real projects (Neocortex, CampfireChai, JobHuntOS) and applying production lessons from prior roles. Ready to learn and grow in my first full-time role.",
-    achievements: [
-      "Maintaining 4.0/4.0 GPA while shipping side projects and internships",
-      "Deepened networking knowledge: TCP/IP, BGP, routing, and router fundamentals",
-      "Built 13+ projects spanning full-stack, AI, and systems design",
-      "Eager to bring discipline from athletics into a collaborative engineering team",
-    ],
-    techStack: ["Computer Networks", "System Design", "AI/ML", "Full-Stack"],
-    impact: "4.0/4.0 GPA · Graduating Aug 2026 · 13+ projects shipped",
-    color: "#8b5cf6",
-  },
   {
     id: "walletgyde",
     company: "WalletGyde",
     companyShort: "WG",
     role: "Full-Stack Web Developer",
     type: "Internship",
-    category: "Recent production experience",
+    category: "During Master's",
     duration: "Dec 2024 – May 2025",
     location: "Denver, USA · Remote",
     headline: "Shipped a fintech platform during my Master's — 35% engagement ↑",
     description:
-      "Built and deployed a responsive financial platform while studying. Owned features from API design to frontend polish — my most recent hands-on production experience before graduation.",
+      "Built and deployed a responsive financial platform while studying. Owned features from API design to frontend polish — recent hands-on production work during grad school.",
     achievements: [
       "Built Next.js + Supabase platform with RESTful APIs (35% engagement increase)",
       "Improved transaction processing speed by 40% through schema optimization",
       "Raised mobile Lighthouse scores by 30%",
-      "Learned to move fast in a small team while balancing graduate coursework",
+      "Shipped in a small team while balancing graduate coursework",
     ],
     techStack: ["Next.js", "Node.js", "Supabase", "PostgreSQL", "TailwindCSS"],
     impact: "35% Engagement ↑ · 40% Speed ↑ · Recent production ship",
@@ -66,14 +45,14 @@ export const EXPERIENCES: Experience[] = [
     id: "cognizant",
     company: "Cognizant Technology Solutions",
     companyShort: "CT",
-    role: "Full-Stack Developer / Software Engineer",
+    role: "Software Engineer",
     type: "Full-time · 2 yrs 7 mos",
-    category: "Pre-graduation professional experience",
+    category: "Pre-MS professional experience",
     duration: "Mar 2021 – Apr 2024",
     location: "Hyderabad, India",
-    headline: "My foundation in production — systems at 2M+ req/day, 99.9% uptime",
+    headline: "Production foundation — contributed on systems at 2M+ req/day, 99.9% uptime",
     description:
-      "Professional experience before graduate school. Contributed to enterprise microservices on an Agile platform — where I learned what production reliability, on-call discipline, and shipping under pressure actually mean.",
+      "Full-time engineering before graduate school. Contributed to enterprise Spring Boot microservices — learning production reliability, on-call discipline, and shipping under load.",
     achievements: [
       "Contributed to Spring Boot microservices processing 2M+ requests/day (99.9% uptime)",
       "Reduced page load times by 30% through SPA optimization",
@@ -89,3 +68,22 @@ export const EXPERIENCES: Experience[] = [
     ],
   },
 ];
+
+export const EDUCATION = [
+  {
+    id: "ms",
+    school: "University of Fairfax",
+    degree: "Master of Science in Computer Science",
+    duration: "Aug 2024 – Aug 2026 (Expected)",
+    detail: "GPA 4.0/4.0 · Shipping CampfireChai, JobHuntOS, and Neocortex while studying",
+    location: "Fairfax, VA",
+  },
+  {
+    id: "btech",
+    school: "VNR VJIET",
+    degree: "B.Tech, Information Technology",
+    duration: "Aug 2018 – Aug 2021",
+    detail: "GPA 3.8/4.0 · Graduated with Honors",
+    location: "Hyderabad, India",
+  },
+] as const;

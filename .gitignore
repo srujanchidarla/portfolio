@@ -33,9 +33,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
-# oversized source media (not used on the site — compress before adding)
+# oversized source media (GitHub limit is 100MB — compress before adding)
 /public/media/20260623_191137_2.mp4
 /public/media/20260629_162506_2.mp4
+/public/media/hybridathlete.mp4
 
 # vercel
 .vercel

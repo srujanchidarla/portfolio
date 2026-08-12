@@ -9,7 +9,7 @@ export default function HiringBanner() {
   const { openContact } = useContact();
 
   return (
-    <section className="hiring-banner" aria-label="Open to work">
+    <section className="hiring-banner" aria-label="Get in touch">
       <div className="wrap hiring-banner__inner">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -18,13 +18,12 @@ export default function HiringBanner() {
           transition={{ duration: 0.5 }}
           className="hiring-banner__content"
         >
-          <p className="hiring-banner__eyebrow">🚀 Actively looking for a full-time role</p>
+          <p className="hiring-banner__eyebrow">Always building</p>
           <h2 className="hiring-banner__title">
-            Senior Full-Stack Engineer · Backend · System Design
+            Software Engineer
           </h2>
           <p className="hiring-banner__sub">
-            Ready to bring production-scale experience to a team that values impact,
-            ownership, and continuous growth.
+            Production systems at 2M+ req/day, products in the wild, and a public practice streak.
           </p>
 
           <div className="hiring-banner__actions">
@@ -32,9 +31,9 @@ export default function HiringBanner() {
               Let&apos;s Talk
               <ArrowRight size={16} aria-hidden="true" />
             </button>
-            <a href={SITE.resumeUrl} className="btn-hiring-secondary" download>
+            <a href={SITE.resumeUrl} className="btn-hiring-secondary">
               <Download size={16} aria-hidden="true" />
-              Download Resume
+              View Resume
             </a>
           </div>
         </motion.div>

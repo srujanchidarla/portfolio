@@ -32,7 +32,7 @@ export default function StickyMobileCTA() {
 
   return (
     <div className="sticky-mobile-cta" role="navigation" aria-label="Quick actions">
-      <a href={SITE.resumeUrl} download className="sticky-mobile-cta__btn">
+      <a href={SITE.resumeUrl} className="sticky-mobile-cta__btn">
         <Download size={16} aria-hidden="true" />
         Resume
       </a>

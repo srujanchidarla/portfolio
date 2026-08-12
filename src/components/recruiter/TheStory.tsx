@@ -21,11 +21,11 @@ export default function TheStory() {
         >
           <p className="section-eyebrow">Beyond code</p>
           <h2 className="section-title">
-            Why I&apos;m <span className="gradient-text">ready</span>
+            Who I am <span className="gradient-text">off the clock</span>
           </h2>
           <p className="section-subtitle">
-            Athlete, learner, builder — not a leadership résumé, but a complete person excited for
-            my first full-time opportunity.
+            Athlete, learner, builder — production work at Cognizant, products in the wild, and a
+            training habit that doesn&apos;t turn off.
           </p>
         </motion.header>
 
@@ -54,6 +54,7 @@ export default function TheStory() {
         </motion.div>
 
         <a
+          id="local-guide"
           href={SITE.localGuide}
           target="_blank"
           rel="noopener noreferrer"
@@ -64,10 +65,12 @@ export default function TheStory() {
             <Image
               src={SITE_IMAGES.localGuide}
               alt="Google Local Guide Level 9 — Srujan Chidarla · 10k+ contributions, 52k+ points, 58M+ views"
-              width={720}
-              height={900}
+              width={1200}
+              height={1500}
+              quality={92}
               className="rh-story__local-guide-img"
-              sizes="(max-width: 768px) 100vw, 280px"
+              sizes="(max-width: 768px) 100vw, 360px"
+              style={{ objectPosition: "center 18%" }}
             />
           </div>
           <div className="rh-story__local-guide-body">
@@ -106,7 +109,7 @@ export default function TheStory() {
               cricket, football, and more. State-level medals taught me discipline, multitasking,
               and team mentality. Same energy I bring to sprint planning and shipping deadlines.
             </p>
-            <a href="/about#athlete" className="rh-story__link">
+            <a href="#athlete" className="rh-story__link">
               See athlete gallery
               <ArrowUpRight size={14} aria-hidden="true" />
             </a>

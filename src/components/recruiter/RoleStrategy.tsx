@@ -59,11 +59,11 @@ export default function RoleStrategy({ embedded = false }: RoleStrategyProps) {
         <div id="role-strategy" className="rh-roles__embedded-header">
           <p className="section-eyebrow">Role fit</p>
           <h3 className="rh-roles__hire-title">
-            Primary: {PRIMARY_ROLE.title} · also AI &amp; full-stack
+            Backend · AI · Full-Stack — one engineer
           </h3>
           <p className="section-subtitle rh-roles__embedded-sub">
-            Pick a track to see why I&apos;m a strong match — with concrete proof from production
-            work.
+            Equal depth across all three. Pick a track to see proof — or grab the matching
+            resume. The portfolio stays the same for every visitor.
           </p>
         </div>
       )}
@@ -167,7 +167,7 @@ export default function RoleStrategy({ embedded = false }: RoleStrategyProps) {
 
       {ROLE_RESUMES_AVAILABLE ? (
         <div className="rh-roles__resumes">
-          <p className="rh-roles__resumes-label">Download my role-specific resume</p>
+          <p className="rh-roles__resumes-label">Role-specific resumes (.md) · or print PDF from /resume</p>
           <div className="rh-roles__resumes-row">
             {availableRoleResumes.map((key) => {
               const resume = ROLE_RESUMES[key];
@@ -179,20 +179,23 @@ export default function RoleStrategy({ embedded = false }: RoleStrategyProps) {
                   className={`rh-roles__resume-btn${activeRole === key ? " is-active" : ""}`}
                 >
                   <Download size={14} aria-hidden="true" />
-                  {resume.shortLabel}
+                  {resume.shortLabel} (.md)
                 </a>
               );
             })}
+            <a href={SITE.resumeUrl} className="rh-roles__resume-btn">
+              Print PDF
+            </a>
           </div>
         </div>
       ) : (
         <p className="rh-roles__resume-note">
-          <a href={SITE.resumeUrl} download className="rh-roles__resume-fallback">
+          <a href={SITE.resumeUrl} className="rh-roles__resume-fallback">
             <Download size={14} aria-hidden="true" />
-            Download resume (PDF)
+            View resume
           </a>
           <span className="rh-roles__resume-hint">
-            Role-tailored resumes available on request.
+            Role-tailored files available as Markdown / print from /resume.
           </span>
         </p>
       )}
@@ -286,12 +289,12 @@ export default function RoleStrategy({ embedded = false }: RoleStrategyProps) {
                         className="btn-primary rh-roles__fit-resume"
                       >
                         <Download size={16} aria-hidden="true" />
-                        Download {activeResumeDownload.label} resume
+                        Download {activeResumeDownload.label} (.md)
                       </a>
                     ) : (
-                      <a href={SITE.resumeUrl} download className="btn-primary rh-roles__fit-resume">
+                      <a href={SITE.resumeUrl} className="btn-primary rh-roles__fit-resume">
                         <Download size={16} aria-hidden="true" />
-                        Download resume (PDF)
+                        View resume
                       </a>
                     )}
                   </motion.div>

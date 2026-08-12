@@ -2,14 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { Download, Menu, Moon, Sun, X } from "lucide-react";
-import { SITE, PRIMARY_ROLE } from "@/lib/site";
+import { SITE } from "@/lib/site";
 import { useContact } from "@/components/ContactProvider";
 import { useTheme } from "@/components/ThemeProvider";
 
 const NAV_LINKS = [
   { href: "/#experience", label: "Experience" },
   { href: "/#projects", label: "Projects" },
-  { href: "/#hire", label: "Hiring" },
+  { href: "/#skills", label: "Skills" },
+  { href: "/about", label: "About" },
+  { href: "/#writing", label: "Writing" },
   { href: "/#contact", label: "Contact" },
 ];
 
@@ -29,7 +31,7 @@ export default function Navbar() {
   return (
     <header className={`navbar${scrolled ? " navbar--scrolled" : ""}`}>
       <div className="wrap navbar__inner">
-        <a href="#hero" className="navbar__brand font-mono">
+        <a href="/" className="navbar__brand font-mono">
           {SITE.name.split(" ")[0]}
           <span className="navbar__brand-dot">.</span>
         </a>
@@ -45,9 +47,8 @@ export default function Navbar() {
         <div className="navbar__actions">
           <a
             href={SITE.resumeUrl}
-            download
             className="navbar__resume"
-            aria-label="Download resume PDF"
+            aria-label="View resume"
           >
             <Download size={15} aria-hidden="true" />
             <span>Resume</span>
@@ -65,7 +66,7 @@ export default function Navbar() {
 
           <button type="button" className="navbar__badge" onClick={openContact}>
             <span className="navbar__badge-dot" aria-hidden="true" />
-            Available · {PRIMARY_ROLE.short}
+            Say hello
           </button>
 
           <button
@@ -94,12 +95,11 @@ export default function Navbar() {
           ))}
           <a
             href={SITE.resumeUrl}
-            download
             className="navbar__resume navbar__resume--mobile"
             onClick={() => setMenuOpen(false)}
           >
             <Download size={15} aria-hidden="true" />
-            Download Resume (PDF)
+            View Resume
           </a>
           <button
             type="button"
@@ -112,7 +112,7 @@ export default function Navbar() {
             {theme === "dark" ? "Light mode" : "Dark mode"}
           </button>
           <button type="button" className="navbar__badge navbar__badge--mobile" onClick={openContact}>
-            Available · {PRIMARY_ROLE.title}
+            Say hello
           </button>
         </nav>
       )}

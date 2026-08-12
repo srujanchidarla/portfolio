@@ -37,7 +37,7 @@ export const COMPETENCIES: Competency[] = [
     id: "microservices",
     title: "Microservices Architecture",
     description:
-      "Designed and deployed Spring Boot microservices handling 2M+ requests/day",
+      "Contributed to Spring Boot microservices handling 2M+ requests/day",
     level: "advanced",
     years: "3+ years",
     example: "Cognizant — 99.9% uptime across production systems",
@@ -49,7 +49,7 @@ export const COMPETENCIES: Competency[] = [
     description: "End-to-end development from databases to UI",
     level: "advanced",
     years: "3+ years",
-    example: "Built 13+ projects spanning job search, edtech, and automation",
+    example: "CampfireChai, JobHuntOS, AlgoChronicle, StudyGlobal, and more",
     icon: "fullstack",
   },
   {
@@ -124,7 +124,7 @@ export const TOOLS: ToolSkill[] = [
   { name: "Git / GitHub", level: "advanced", years: "5+ years", project: "All projects" },
   { name: "Spring Boot", level: "advanced", years: "4+ years", project: "Cognizant microservices" },
   { name: "Next.js", level: "advanced", years: "2+ years", project: "Portfolio & JobHuntOS" },
-  { name: "React", level: "advanced", years: "3+ years", project: "13+ web applications" },
+  { name: "React", level: "advanced", years: "3+ years", project: "6 featured shipped apps" },
   { name: "MongoDB", level: "advanced", years: "3+ years", project: "Full-stack apps" },
   { name: "AWS", level: "advanced", years: "2+ years", project: "Cloud infrastructure" },
   { name: "Docker", level: "intermediate", years: "2+ years", project: "Service containerization" },

@@ -3,8 +3,7 @@
 import { motion } from "framer-motion";
 import { Calendar, GraduationCap, MapPin } from "lucide-react";
 import { LOOKING_FOR } from "@/lib/hiring";
-import { getScheduleHref, PRIMARY_ROLE, SITE, WORK_AUTH } from "@/lib/site";
-import RoleStrategy from "./RoleStrategy";
+import { getScheduleHref, SITE, WORK_AUTH } from "@/lib/site";
 
 export default function HiringSignal() {
   const scheduleHref = getScheduleHref();
@@ -18,12 +17,13 @@ export default function HiringSignal() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <p className="section-eyebrow">New grad hiring</p>
+          <p className="section-eyebrow">What&apos;s next</p>
           <h2 className="section-title">
             Open to <span className="gradient-text">work</span>
           </h2>
           <p className="section-subtitle">
-            {PRIMARY_ROLE.headline}
+            Looking for a full-time Software Engineer role after my MS — a team with mentorship
+            and real problems to ship against.
           </p>
         </motion.header>
 
@@ -66,8 +66,6 @@ export default function HiringSignal() {
             </div>
           ))}
         </div>
-
-        <RoleStrategy embedded />
       </div>
     </section>
   );

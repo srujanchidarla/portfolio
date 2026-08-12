@@ -110,7 +110,9 @@ export default function AvatarChatWidget() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          messages: nextMessages.map((m) => ({ role: m.role, content: m.content })),
+          messages: nextMessages
+            .slice(-12)
+            .map((m) => ({ role: m.role, content: m.content })),
           visitorType: activeType,
         }),
       });
@@ -176,7 +178,9 @@ export default function AvatarChatWidget() {
                     <Sparkles size={13} aria-hidden="true" />
                     Code Avatar Srujan
                   </p>
-                  <p className="avatar-chat__tagline">AI representative · Hiring ready</p>
+                  <p className="avatar-chat__tagline">
+                    Server-side AI · Grounded in this portfolio
+                  </p>
                 </div>
               </div>
               <button
@@ -268,10 +272,11 @@ export default function AvatarChatWidget() {
                 onKeyDown={handleKeyDown}
                 placeholder={
                   visitorType
-                    ? "Ask about experience, projects, hiring..."
+                    ? "Ask about experience, projects, skills..."
                     : "Select a mode above to start"
                 }
                 disabled={!visitorType || isLoading}
+                maxLength={2000}
                 rows={1}
                 aria-label="Chat message"
               />

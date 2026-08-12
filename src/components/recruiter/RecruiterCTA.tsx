@@ -24,8 +24,7 @@ export default function RecruiterCTA() {
             Let&apos;s <span className="gradient-text">connect</span>
           </h2>
           <p className="section-subtitle">
-            Graduating {SITE.gradDate} with a 4.0 GPA — excited to connect with teams hiring new
-            grads. I respond quickly.
+            MS CS · 4.0 · {SITE.location}. I respond quickly.
           </p>
 
           <div className="rh-cta__actions">
@@ -33,13 +32,13 @@ export default function RecruiterCTA() {
               {RECRUITER_CONTACT.email}
               <ArrowRight size={16} aria-hidden="true" />
             </a>
-            <a href={SITE.resumeUrl} download className="btn-secondary rh-cta__resume-btn">
+            <a href={SITE.resumeUrl} className="btn-secondary rh-cta__resume-btn">
               <Download size={16} aria-hidden="true" />
-              Download Resume (PDF)
+              View Resume
             </a>
             <a href={scheduleHref} className="btn-secondary">
               <Calendar size={16} aria-hidden="true" />
-              Schedule 15-min call
+              Schedule a call
             </a>
           </div>
 
@@ -75,12 +74,12 @@ export default function RecruiterCTA() {
             </button>
             <button type="button" className="rh-cta__card" onClick={openContact}>
               <strong>Message me</strong>
-              <span>Open contact form</span>
+              <span>Email, LinkedIn &amp; GitHub</span>
             </button>
           </div>
 
           <p className="rh-cta__updated">
-            Last updated <time dateTime="2026-07-10">{SITE.lastUpdated}</time>
+            Last updated <time dateTime="2026-08-11">{SITE.lastUpdated}</time>
           </p>
         </motion.div>
       </div>

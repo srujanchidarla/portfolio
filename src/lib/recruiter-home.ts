@@ -2,42 +2,43 @@ import { SITE } from "./site";
 
 export const HERO_METRICS = {
   gpa: 4.0,
-  projectsShipped: 13,
+  projectsShipped: 6,
   dailyRequests: 2_000_000,
 } as const;
 
+/** How I actually work — not a role picker */
 export const PROOF_CARDS = [
   {
-    id: "graduate",
-    label: "New grad ready",
-    headline: "Master's graduate, Aug 2026 · 4.0 GPA",
-    subline: "Shipped code while studying",
+    id: "backend",
+    label: "In production",
+    headline: "Systems at 2M+ req/day",
+    subline: "APIs · reliability · databases",
     detail:
-      "I'm finishing my MS in Computer Science with a 4.0 GPA. While in school I've shipped CampfireChai live, JobHuntOS to the Chrome Store, and I'm building Neocortex — proof I can learn fast and deliver.",
-    metrics: ["4.0/4.0 GPA", "Aug 2026 grad", "13+ projects", "First role ready"],
-    color: "#f97316",
+      "At Cognizant I contributed to Spring Boot microservices on a platform serving 500+ enterprise users at 99.9% uptime and ~2M+ requests/day — learning what production reliability, query optimization, and shipping under load actually feel like.",
+    metrics: ["2M+ req/day", "99.9% uptime", "Spring Boot", "Docker / CI"],
+    color: "#34d399",
     icon: "scale",
   },
   {
-    id: "production",
-    label: "Production exposure",
-    headline: "I've shipped in real environments",
-    subline: "Cognizant · WalletGyde · side projects",
+    id: "ai",
+    label: "With models",
+    headline: "LLM features in real products",
+    subline: "Routing · streaming · failover",
     detail:
-      "Before and during grad school I contributed to systems at 2M+ req/day, drove 35% engagement at a fintech startup, and kept shipping personal projects. I'm not senior — but I'm not starting from zero either.",
-    metrics: ["2M+ req/day exposure", "35% engagement ↑", "CampfireChai live", "JobHuntOS shipped"],
-    color: "#34d399",
+      "JobHuntOS routes Claude, Gemini, and Groq with SSE streaming and graceful provider failover — live on the Chrome Web Store. Neocortex pushes further with 15 agents and a 6-provider chain.",
+    metrics: ["JobHuntOS live", "Multi-LLM routing", "SSE streaming", "FastAPI agents"],
+    color: "#8b5cf6",
     icon: "impact",
   },
   {
-    id: "complete",
-    label: "Beyond code",
-    headline: "Athlete · learner · builder",
-    subline: "Discipline + curiosity + community",
+    id: "fullstack",
+    label: "Shipped",
+    headline: "Products from idea to deploy",
+    subline: "UI · API · data · launch",
     detail:
-      "State-level athletics taught me discipline and teamwork. I'm constantly exploring AI/ML and new stacks through projects like Neocortex. Google Local Guide Level 9 (58M+ views) — same curiosity I bring to codebases.",
-    metrics: ["State medals", "AI/ML curious", "Local Guide L9", "Team player"],
-    color: "#e8c547",
+      "CampfireChai, AlgoChronicle, StudyGlobal, JobHuntOS — complete UIs, APIs, data models, and deploys. WalletGyde internship: 35% engagement ↑ and 40% faster transactions while finishing my Master's.",
+    metrics: ["6 featured apps", "CampfireChai live", "35% engagement ↑", "Chrome Store"],
+    color: "#f97316",
     icon: "person",
   },
 ] as const;
@@ -48,6 +49,8 @@ export const IMPACT_PROJECTS = [
     title: "Neocortex",
     subtitle: "Jarvis Life OS",
     tag: "AI · Multi-Agent · In progress",
+    role: "Solo engineer · product, architecture, backend, and UI",
+    lanes: ["AI", "Backend"],
     journey: "Most ambitious — learning new tech at scale",
     problem:
       "My day spans fitness, job search, DSA practice, and deep work — but every tool lives in a different app.",
@@ -62,28 +65,11 @@ export const IMPACT_PROJECTS = [
     href: "https://github.com/srujanchidarla/neocortex",
   },
   {
-    id: "campfirechai",
-    title: "CampfireChai",
-    tag: "Community · Full-Stack · Live",
-    previewImage: "/project-previews/campfirechai.png",
-    journey: "First full-stack app shipped to real users",
-    problem:
-      "Desi outdoor groups in the US had no single place for trips, permits, carpools, and crew matching.",
-    solution:
-      "Full-stack monorepo: React 19 + Vite frontend, Express 5 + MongoDB API, Socket.io real-time chat, and AI trip drafts — live on Vercel.",
-    learned:
-      "How to ship end-to-end: database design, real-time features, deployment, and iterating from user feedback. This taught me production full-stack ownership.",
-    result: "Live on Vercel",
-    resultDetail: "15+ metro hubs, real-time trip coordination, and Magic Paste AI drafting.",
-    stack: ["React 19", "Node.js", "Express", "MongoDB", "Socket.io", "Vite"],
-    color: "#f59e0b",
-    href: "https://github.com/srujanchidarla/CampfireChai",
-    liveHref: "https://campfire-chai.vercel.app/",
-  },
-  {
     id: "jobhuntos",
     title: "JobHuntOS",
     tag: "AI · Chrome Extension",
+    role: "Solo engineer · extension, LLM routing, and product delivery",
+    lanes: ["AI", "Full-Stack"],
     previewImage: "/project-previews/jobhuntos.jpg",
     journey: "First product in the Chrome Web Store",
     problem:
@@ -100,9 +86,32 @@ export const IMPACT_PROJECTS = [
     liveHref: "https://job-hunt-os-eosin.vercel.app/",
   },
   {
+    id: "campfirechai",
+    title: "CampfireChai",
+    tag: "Community · Full-Stack · Live",
+    role: "Solo full-stack engineer · product through deployment",
+    lanes: ["Full-Stack", "Backend"],
+    previewImage: "/project-previews/campfirechai.png",
+    journey: "First full-stack app shipped to real users",
+    problem:
+      "Desi outdoor groups in the US had no single place for trips, permits, carpools, and crew matching.",
+    solution:
+      "Full-stack monorepo: React 19 + Vite frontend, Express 5 + MongoDB API, Socket.io real-time chat, and AI trip drafts — live on Vercel.",
+    learned:
+      "How to ship end-to-end: database design, real-time features, deployment, and iterating from user feedback. This taught me production full-stack ownership.",
+    result: "Live on Vercel",
+    resultDetail: "15+ metro hubs, real-time trip coordination, and Magic Paste AI drafting.",
+    stack: ["React 19", "Node.js", "Express", "MongoDB", "Socket.io", "Vite"],
+    color: "#f59e0b",
+    href: "https://github.com/srujanchidarla/CampfireChai",
+    liveHref: "https://campfire-chai.vercel.app/",
+  },
+  {
     id: "algochronicle",
     title: "AlgoChronicle",
     tag: "DSA · Automation · Live",
+    role: "Solo engineer · automation, data pipeline, and frontend",
+    lanes: ["Backend", "Full-Stack"],
     journey: "Turning GitHub commits into a self-updating coding journal",
     problem:
       "DSA practice is easy to start and hard to sustain — manual logging breaks streaks and progress gets lost across platforms.",
@@ -123,6 +132,8 @@ export const IMPACT_PROJECTS = [
     id: "studyglobal",
     title: "StudyGlobal",
     tag: "EdTech · Full-Stack",
+    role: "Full-stack engineer · product flow and API integrations",
+    lanes: ["Full-Stack"],
     previewImage: "/project-previews/studyglobal.jpg",
     journey: "Learning product thinking for a real audience",
     problem:
@@ -141,6 +152,8 @@ export const IMPACT_PROJECTS = [
     id: "fitconnect",
     title: "FitConnect",
     tag: "HealthTech · Full-Stack",
+    role: "System designer · data model, booking flows, and frontend",
+    lanes: ["Full-Stack", "Backend"],
     journey: "Most complex production-style system I designed",
     problem:
       "Fitness venues and trainers had no unified way to handle bookings and community coordination.",
@@ -148,8 +161,8 @@ export const IMPACT_PROJECTS = [
       "Venue booking, trainer discovery, scheduling, and community sports features in a single platform.",
     learned:
       "System design for real-time coordination, database modeling for bookings, and balancing feature scope with shipping.",
-    result: "60% increase in bookings",
-    resultDetail: "Full architecture with real-time coordination and clear UX.",
+    result: "Booking system design",
+    resultDetail: "Architecture for venues, trainers, and real-time slot coordination.",
     stack: ["React", "Node.js", "Real-time", "System Design"],
     color: "#10b981",
   },
@@ -162,9 +175,18 @@ export const SKILL_CLUSTERS = [
     id: "backend",
     label: "Backend",
     skills: [
-      { name: "Java / Spring Boot", strength: "Strong" as SkillStrength, years: "4+ yrs learning", proof: "Cognizant production foundation", level: 82 },
-      { name: "Node.js / Express", strength: "Strong" as SkillStrength, years: "3+ yrs learning", proof: "CampfireChai · JobHuntOS", level: 78 },
-      { name: "Python / FastAPI", strength: "Comfortable" as SkillStrength, years: "Learning", proof: "Neocortex · actively deepening", level: 65 },
+      { name: "Java / Spring Boot", strength: "Strong" as SkillStrength, years: "4+ yrs learning", proof: "Cognizant · 2M+ req/day foundation", level: 82 },
+      { name: "Node.js / Express", strength: "Strong" as SkillStrength, years: "3+ yrs learning", proof: "CampfireChai · JobHuntOS APIs", level: 78 },
+      { name: "Python / FastAPI", strength: "Comfortable" as SkillStrength, years: "Learning", proof: "Neocortex agent backend", level: 65 },
+    ],
+  },
+  {
+    id: "ai",
+    label: "AI / LLM",
+    skills: [
+      { name: "Multi-LLM orchestration", strength: "Strong" as SkillStrength, years: "Shipped", proof: "Claude · Gemini · Groq routing", level: 80 },
+      { name: "Streaming APIs (SSE)", strength: "Strong" as SkillStrength, years: "Shipped", proof: "JobHuntOS real-time analysis", level: 76 },
+      { name: "Prompt + agent design", strength: "Comfortable" as SkillStrength, years: "Learning", proof: "Neocortex · 15 agents", level: 68 },
     ],
   },
   {
@@ -181,17 +203,8 @@ export const SKILL_CLUSTERS = [
     label: "Cloud & Data",
     skills: [
       { name: "PostgreSQL / MySQL", strength: "Strong" as SkillStrength, years: "3+ yrs learning", proof: "Enterprise + Supabase", level: 75 },
-      { name: "MongoDB", strength: "Comfortable" as SkillStrength, years: "2+ yrs learning", proof: "CampfireChai production data", level: 68 },
-      { name: "AWS / Docker", strength: "Comfortable" as SkillStrength, years: "Learning", proof: "Cloud Practitioner cert · eager to deepen", level: 62 },
-    ],
-  },
-  {
-    id: "networking",
-    label: "Networking",
-    skills: [
-      { name: "TCP/IP & OSI Model", strength: "Strong" as SkillStrength, years: "Coursework + practice", proof: "Computer Networks · Cognizant", level: 78 },
-      { name: "BGP & Routing", strength: "Comfortable" as SkillStrength, years: "Learning", proof: "Router config · path selection", level: 65 },
-      { name: "LAN/WAN & Firewalls", strength: "Comfortable" as SkillStrength, years: "Learning", proof: "DNS · DHCP · switches", level: 62 },
+      { name: "MongoDB / Firebase", strength: "Comfortable" as SkillStrength, years: "2+ yrs learning", proof: "CampfireChai · AlgoChronicle", level: 70 },
+      { name: "AWS / Docker / CI", strength: "Comfortable" as SkillStrength, years: "Learning", proof: "Cloud Practitioner · GitHub Actions", level: 64 },
     ],
   },
 ] as const;
@@ -212,14 +225,14 @@ export const STORY_BEATS = [
   {
     year: "2024",
     title: "Masters in the US",
-    text: "Moved to the US for my Master's at University of Fairfax. 4.0 GPA, 13+ projects, and shipping CampfireChai and JobHuntOS while studying. Learning never stopped.",
+    text: "Moved to the US for my Master's at University of Fairfax. 4.0 GPA, featured shipped apps (CampfireChai, JobHuntOS, and more), and learning never stopped.",
     highlight: "4.0 GPA · shipping while studying",
   },
   {
     year: "Now",
-    title: "Ready for what's next",
-    text: "Graduating Aug 2026 and excited for my first full-time role. I want a team with mentorship, a learning culture, and real problems to solve. I'm ready to ship, listen, and grow.",
-    highlight: "First full-time role · Aug 2026",
+    title: "Still building",
+    text: "MS CS in progress (4.0). I ship products, train most days, and keep a public DSA streak. The through-line is the same: show up, finish, learn the next thing.",
+    highlight: "Shipping while studying",
   },
 ] as const;
 
@@ -234,11 +247,7 @@ export const SPORTS = [
   "Relay",
 ] as const;
 
-export const HIRING_ROLES = [
-  "Backend Engineer (Scale Expert)",
-  "AI Engineer (LLM Expert)",
-  "Full-Stack (Shipping Expert)",
-] as const;
+export const HIRING_ROLES = ["Software Engineer"] as const;
 
 export const RECRUITER_CONTACT = {
   email: SITE.email,

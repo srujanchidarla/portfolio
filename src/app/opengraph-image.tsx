@@ -36,7 +36,9 @@ export default function OpenGraphImage() {
         <div style={{ fontSize: 64, fontWeight: 700, lineHeight: 1.05, marginBottom: 16 }}>
           {SITE.name}
         </div>
-        <div style={{ fontSize: 32, color: "#fdba74", marginBottom: 28 }}>{PRIMARY_ROLE.title}</div>
+        <div style={{ fontSize: 28, color: "#fdba74", marginBottom: 28 }}>
+          Software Engineer
+        </div>
         <div style={{ fontSize: 24, color: "#d4d4d8", lineHeight: 1.45, maxWidth: 900 }}>
           2M+ req/day production experience · CampfireChai & JobHuntOS shipped · 4.0 GPA
         </div>

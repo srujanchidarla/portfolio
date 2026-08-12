@@ -25,11 +25,11 @@ export default function SkillsImpact() {
         >
           <p className="section-eyebrow">Technical foundation</p>
           <h2 className="section-title">
-            Strong foundation in <span className="gradient-text">core stacks</span>
+            Tools I actually <span className="gradient-text">use</span>
           </h2>
           <p className="section-subtitle">
-            Honest about where I&apos;m strong vs. still learning — ready to deepen expertise in a
-            production environment with mentorship.
+            Honest levels — ready to deepen in production, not pretending expertise I haven&apos;t
+            earned.
           </p>
         </motion.header>
 

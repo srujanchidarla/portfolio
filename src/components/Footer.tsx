@@ -15,10 +15,10 @@ export default function Footer() {
           <div className="footer__cta-text">
             <span className="footer__badge">
               <span className="footer__badge-dot" aria-hidden="true" />
-              🎓 New grad · seeking first full-time role
+              Engineer · athlete · builder
             </span>
             <p className="footer__headline font-mono">
-              Excited to learn, ship, and grow with your team.
+              Always shipping. Always training.
             </p>
           </div>
           <button type="button" className="btn-hiring-primary btn-hiring-primary--sm" onClick={openContact}>
@@ -28,9 +28,7 @@ export default function Footer() {
         </div>
 
         <div className="footer__links">
-          <a href={SITE.resumeUrl} download>
-            Resume
-          </a>
+          <a href={SITE.resumeUrl}>Resume</a>
           <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer">
             LinkedIn
           </a>
@@ -42,9 +40,9 @@ export default function Footer() {
           </a>
           <a href={`mailto:${SITE.email}`}>Email</a>
           <a href="/about">About</a>
-          <a href="/#hire">Hiring</a>
-          <a href="#github">GitHub activity</a>
-          <a href="#contact">Contact</a>
+          <a href="/#writing">Writing</a>
+          <a href="/#github">GitHub activity</a>
+          <a href="/#contact">Contact</a>
         </div>
 
         <div className="footer__bottom">

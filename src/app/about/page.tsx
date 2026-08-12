@@ -9,14 +9,14 @@ import { SITE } from "@/lib/site";
 export const metadata: Metadata = {
   title: `About | ${SITE.name}`,
   description:
-    "Beyond code — athlete discipline, learning journey, and what drives Srujan Chidarla as a new grad engineer.",
+    "Beyond code — athlete discipline, learning journey, and what drives Srujan Chidarla.",
 };
 
 export default function AboutPage() {
   return (
     <ContactProvider>
       <Navbar />
-      <main className="site-main overflow-x-hidden">
+      <main id="main-content" className="site-main overflow-x-hidden" tabIndex={-1}>
         <TheStory />
         <AthleteLife />
       </main>

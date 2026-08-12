@@ -50,7 +50,7 @@ function StrengthCarousel({
               fill
               className="rh-athlete__img rh-athlete__img--portrait"
               sizes="(max-width: 768px) 100vw, 33vw"
-              priority={i === 0}
+              loading="lazy"
             />
           </div>
         ))}
@@ -109,8 +109,8 @@ export default function AthleteLife() {
             Athlete <span className="gradient-text">discipline</span>
           </h2>
           <p className="section-subtitle">
-            Track, gym, and multi-sport training — the same consistency I bring to learning,
-            shipping, and showing up for a team.
+            Track, gym, and multi-sport training — the same consistency that shows up as 99.9%
+            uptime thinking, long-running AI side projects, and finishing products end-to-end.
           </p>
         </motion.header>
 
@@ -128,7 +128,7 @@ export default function AthleteLife() {
               key={item.id}
               className={`rh-athlete__card rh-athlete__card--${item.span}${
                 item.type === "carousel" ? " rh-athlete__card--carousel" : ""
-              }`}
+              }${item.type === "video" ? " rh-athlete__card--video" : ""}`}
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}

@@ -11,8 +11,30 @@ interface ChatRequestBody {
   visitorType?: VisitorType;
 }
 
+const MAX_BODY_BYTES = 32_000;
+const MAX_MESSAGES = 12;
+const MAX_MESSAGE_CHARS = 2_000;
+
+function isValidMessage(
+  value: unknown
+): value is ChatRequestBody["messages"][number] {
+  if (!value || typeof value !== "object") return false;
+  const message = value as { role?: unknown; content?: unknown };
+  return (
+    (message.role === "user" || message.role === "assistant") &&
+    typeof message.content === "string" &&
+    message.content.trim().length > 0 &&
+    message.content.length <= MAX_MESSAGE_CHARS
+  );
+}
+
 export async function POST(request: Request) {
-  let body: ChatRequestBody;
+  const contentLength = Number(request.headers.get("content-length") ?? 0);
+  if (contentLength > MAX_BODY_BYTES) {
+    return NextResponse.json({ error: "Request too large" }, { status: 413 });
+  }
+
+  let body: Partial<ChatRequestBody>;
 
   try {
     body = await request.json();
@@ -22,8 +44,17 @@ export async function POST(request: Request) {
 
   const { messages, visitorType = "visitor" } = body;
 
-  if (!Array.isArray(messages) || messages.length === 0) {
-    return NextResponse.json({ error: "Messages required" }, { status: 400 });
+  if (
+    !Array.isArray(messages) ||
+    messages.length === 0 ||
+    messages.length > MAX_MESSAGES ||
+    !messages.every(isValidMessage)
+  ) {
+    return NextResponse.json({ error: "Invalid messages" }, { status: 400 });
+  }
+
+  if (visitorType !== "visitor" && visitorType !== "recruiter") {
+    return NextResponse.json({ error: "Invalid visitor type" }, { status: 400 });
   }
 
   const lastUser = [...messages].reverse().find((m) => m.role === "user");

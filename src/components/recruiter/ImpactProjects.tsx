@@ -6,6 +6,19 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { IMPACT_PROJECTS } from "@/lib/recruiter-home";
 
+const PROJECT_ORDER = [
+  "jobhuntos",
+  "campfirechai",
+  "algochronicle",
+  "neocortex",
+  "studyglobal",
+  "fitconnect",
+] as const;
+
+const CURATED_PROJECTS = [...IMPACT_PROJECTS].sort(
+  (a, b) => PROJECT_ORDER.indexOf(a.id) - PROJECT_ORDER.indexOf(b.id)
+);
+
 function getPreviewUrl(project: (typeof IMPACT_PROJECTS)[number]): string | undefined {
   const p = project as unknown as { previewImage?: string };
   return p.previewImage;
@@ -104,11 +117,11 @@ function ProjectPreview({
   );
 }
 
-export default function ImpactProjects({ limit = IMPACT_PROJECTS.length }: { limit?: number }) {
-  const hasMore = IMPACT_PROJECTS.length > limit;
+export default function ImpactProjects({ limit = CURATED_PROJECTS.length }: { limit?: number }) {
+  const hasMore = CURATED_PROJECTS.length > limit;
   const [showAll, setShowAll] = useState(!hasMore);
-  const visibleProjects = showAll ? IMPACT_PROJECTS : IMPACT_PROJECTS.slice(0, limit);
-  const [active, setActive] = useState(Math.min(1, visibleProjects.length - 1));
+  const visibleProjects = showAll ? CURATED_PROJECTS : CURATED_PROJECTS.slice(0, limit);
+  const [active, setActive] = useState(0);
   const project = visibleProjects[active] ?? visibleProjects[0];
 
   useEffect(() => {
@@ -130,13 +143,13 @@ export default function ImpactProjects({ limit = IMPACT_PROJECTS.length }: { lim
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
         >
-          <p className="section-eyebrow">Learning by building</p>
+          <p className="section-eyebrow">Selected work</p>
           <h2 className="section-title">
-            Projects that <span className="gradient-text">taught me</span>
+            Products with <span className="gradient-text">real decisions behind them</span>
           </h2>
           <p className="section-subtitle">
-            From my first full-stack ship to my most ambitious system — each project came with a
-            lesson I carry forward.
+            Four projects first: the problem, what I built, the trade-offs I learned from, and a
+            working demo or source link. Two additional projects are available below.
           </p>
         </motion.header>
 
@@ -144,9 +157,11 @@ export default function ImpactProjects({ limit = IMPACT_PROJECTS.length }: { lim
           {visibleProjects.map((p, i) => (
             <button
               key={p.id}
+              id={`project-tab-${p.id}`}
               type="button"
               role="tab"
               aria-selected={active === i}
+              aria-controls={`project-panel-${p.id}`}
               className={`rh-projects__tab${active === i ? " is-active" : ""}`}
               onClick={() => setActive(i)}
               style={{ "--proj-color": p.color } as React.CSSProperties}
@@ -159,7 +174,9 @@ export default function ImpactProjects({ limit = IMPACT_PROJECTS.length }: { lim
 
         <motion.article
           key={project.id}
+          id={`project-panel-${project.id}`}
           role="tabpanel"
+          aria-labelledby={`project-tab-${project.id}`}
           className="rh-projects__card"
           style={{ "--proj-color": project.color } as React.CSSProperties}
           initial={{ opacity: 0, y: 20 }}
@@ -176,6 +193,10 @@ export default function ImpactProjects({ limit = IMPACT_PROJECTS.length }: { lim
                 ) : null}
               </h3>
               <p className="rh-projects__journey">{project.journey}</p>
+              <p className="rh-projects__role">
+                <strong>My role</strong>
+                <span>{project.role}</span>
+              </p>
             </div>
             <div className="rh-projects__result-badge">{project.result}</div>
           </div>
@@ -261,7 +282,7 @@ export default function ImpactProjects({ limit = IMPACT_PROJECTS.length }: { lim
                 setActive(limit);
               }}
             >
-              View {IMPACT_PROJECTS.length - limit} more projects
+              View {CURATED_PROJECTS.length - limit} more projects
             </button>
           </div>
         ) : null}

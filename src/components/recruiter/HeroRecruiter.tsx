@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
-import { ArrowRight, GraduationCap, MapPin, Trophy } from "lucide-react";
+import { ArrowRight, GraduationCap, MapPin, MessageCircle, Trophy } from "lucide-react";
 import { SITE, PRIMARY_ROLE, SITE_IMAGES } from "@/lib/site";
 import { HERO_METRICS } from "@/lib/recruiter-home";
 import { useContact } from "@/components/ContactProvider";
@@ -36,10 +36,6 @@ export default function HeroRecruiter() {
                 animate="visible"
                 className="hero__badges"
               >
-                <span className="hero__badge hero__badge--active">
-                  <GraduationCap size={12} aria-hidden="true" />
-                  {SITE.status}
-                </span>
                 <span className="hero__badge hero__badge--grad">
                   <span className="hero__badge-dot" aria-hidden="true" />
                   MS CS · {SITE.gradDate} · 4.0 GPA
@@ -81,10 +77,10 @@ export default function HeroRecruiter() {
                 animate="visible"
                 className="hero__desc"
               >
-                {PRIMARY_ROLE.headline} Before grad school I contributed to production systems at{" "}
-                <strong>2M+ req/day</strong>. I&apos;ve shipped <strong>CampfireChai</strong> (live),{" "}
-                <strong>JobHuntOS</strong> (Chrome Web Store), and I&apos;m building{" "}
-                <strong>Neocortex</strong>.
+                I contribute to production systems at <strong>2M+ req/day</strong> and ship products
+                people use — <strong>JobHuntOS</strong> on the Chrome Store,{" "}
+                <strong>CampfireChai</strong> live, and <strong>Neocortex</strong> in progress. MS CS
+                at 4.0, still learning in public.
               </motion.p>
 
               <motion.div
@@ -101,15 +97,7 @@ export default function HeroRecruiter() {
                     decimals={1}
                     className="hero__metric-value"
                   />
-                  <span>GPA</span>
-                </div>
-                <div className="hero__metric">
-                  <MetricCounter
-                    value={HERO_METRICS.projectsShipped}
-                    suffix="+"
-                    className="hero__metric-value"
-                  />
-                  <span>projects shipped</span>
+                  <span>GPA · theory</span>
                 </div>
                 <div className="hero__metric">
                   <MetricCounter
@@ -117,7 +105,14 @@ export default function HeroRecruiter() {
                     suffix="+"
                     className="hero__metric-value"
                   />
-                  <span>req/day exposure</span>
+                  <span>req/day · production</span>
+                </div>
+                <div className="hero__metric">
+                  <MetricCounter
+                    value={HERO_METRICS.projectsShipped}
+                    className="hero__metric-value"
+                  />
+                  <span>featured apps</span>
                 </div>
               </motion.div>
 
@@ -132,6 +127,16 @@ export default function HeroRecruiter() {
                   See what I&apos;ve built
                   <ArrowRight size={15} aria-hidden="true" />
                 </a>
+                <button
+                  type="button"
+                  className="btn-secondary"
+                  onClick={() =>
+                    document.querySelector<HTMLButtonElement>(".avatar-chat-fab")?.click()
+                  }
+                >
+                  <MessageCircle size={15} aria-hidden="true" />
+                  Ask my AI avatar
+                </button>
                 <button type="button" onClick={openContact} className="btn-secondary">
                   Let&apos;s connect
                 </button>
