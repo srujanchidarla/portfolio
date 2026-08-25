@@ -1,12 +1,12 @@
 # SRUJAN CHIDARLA
 
-**Baltimore, MD** · srujanchidarla.uof@gmail.com · [linkedin.com/in/srujan-chidarla](https://www.linkedin.com/in/srujan-chidarla) · [github.com/srujanchidarla](https://github.com/srujanchidarla) · [srujanchidarla.com](https://srujanchidarla.com)
+**srujanchidarla.uof@gmail.com** · [linkedin.com/in/srujan-chidarla](https://www.linkedin.com/in/srujan-chidarla) · [github.com/srujanchidarla](https://github.com/srujanchidarla) · [srujanchidarla.com](https://srujanchidarla.com)
 
 ---
 
 ## PROFESSIONAL SUMMARY
 
-Backend-focused software engineer with 2+ years of production experience building and operating Java/Spring Boot microservices at **2M+ requests/day** and **99.9% uptime**. Strong in REST API design, database optimization, distributed systems fundamentals, and CI/CD. MS in Computer Science (**4.0 GPA**, Aug 2026). Shipped production backends for **JobHuntOS** (Chrome Web Store), **CampfireChai** (live), and **AlgoChronicle**. Authorized to work in the U.S. via **STEM OPT** (36 months; no immediate H-1B sponsorship required).
+Software engineer with **2+ years** of production experience on Java/Spring Boot microservices at **2M+ requests/day** and **99.9% uptime**, plus **full-stack** and **networking** depth. Strong in REST API design, database optimization (P99 **250ms → 50ms**), distributed systems, and CI/CD. MS in Computer Science (**4.0 GPA**, Aug 2026). Coursework in **computer networks (TCP/IP, BGP/OSPF)** and system design. Shipped **JobHuntOS** (Chrome Web Store), **CampfireChai** (live), and **AlgoChronicle**. Authorized to work in the U.S. via **STEM OPT** (36 months).
 
 ---
 
@@ -68,7 +68,7 @@ Backend-focused software engineer with 2+ years of production experience buildin
 *Stack: Node.js, Express, SSE, REST APIs, LLM orchestration, Railway*
 
 ### CampfireChai · Real-Time Backend — Live on Vercel
-[campfire-chai.vercel.app](https://campfire-chai.vercel.app/) · [GitHub](https://github.com/srujanchidarla/CampfireChai)
+[wildlink.world](https://wildlink.world/) · [GitHub](https://github.com/srujanchidarla/CampfireChai)
 
 - Developed Express 5 + MongoDB backend for trip coordination across **15+ US metro hubs**
 - Implemented Socket.io real-time messaging, connection handling, and shared logistics state

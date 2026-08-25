@@ -1,12 +1,12 @@
 # SRUJAN CHIDARLA
 
-**Baltimore, MD** · srujanchidarla.uof@gmail.com · [linkedin.com/in/srujan-chidarla](https://www.linkedin.com/in/srujan-chidarla) · [github.com/srujanchidarla](https://github.com/srujanchidarla) · [srujanchidarla.com](https://srujanchidarla.com)
+**srujanchidarla.uof@gmail.com** · [linkedin.com/in/srujan-chidarla](https://www.linkedin.com/in/srujan-chidarla) · [github.com/srujanchidarla](https://github.com/srujanchidarla) · [srujanchidarla.com](https://srujanchidarla.com)
 
 ---
 
 ## PROFESSIONAL SUMMARY
 
-Full-Stack Engineer who ships complete products from UI to database to deployment. **5+ applications** in production or live beta — **CampfireChai** (Vercel), **JobHuntOS** (Chrome Web Store), **AlgoChronicle** (Vercel), **StudyGlobal** (live beta), and **Neocortex** (in active development). Strong across **React 19, Next.js, Node.js, Express, FastAPI**, real-time systems (**Socket.io**), and AI feature integration. **2+ years** production foundation at **2M+ req/day** and **99.9% uptime** (Cognizant). MS in Computer Science (**4.0 GPA**, Aug 2026). Authorized to work in the U.S. via **STEM OPT** (36 months; no immediate H-1B sponsorship required).
+Software engineer with **3+ years** of experience across **full-stack development**, **system design**, and **computer networks**. Contributed to production Spring Boot microservices at **2M+ requests/day** and **99.9% uptime**; ships complete products from UI to deploy — **CampfireChai** (Vercel), **JobHuntOS** (Chrome Web Store), **AlgoChronicle** (Vercel), **StudyGlobal** (live beta), and **Neocortex** (in development). MS in Computer Science (**4.0 GPA**, Aug 2026). Coursework in **TCP/IP, BGP/OSPF**, distributed systems, and system design. Authorized to work in the U.S. via **STEM OPT** (36 months).
 
 ---
 
@@ -17,7 +17,7 @@ Full-Stack Engineer who ships complete products from UI to database to deploymen
 **Databases:** MongoDB, PostgreSQL, MySQL, Firebase/Firestore, Supabase, SQLite; schema design, indexing, query optimization  
 **Cloud & DevOps:** AWS, Docker, Vercel, Railway, Netlify, GitHub Actions, CI/CD, Git  
 **AI integration:** Claude API, Gemini API, Groq API, prompt engineering, LLM routing with failover  
-**Core competencies:** End-to-end ownership, rapid MVP shipping, real-time coordination, product thinking, deployment automation
+**Core competencies:** Full-stack development, system design, distributed systems, computer networks, end-to-end ownership, real-time systems, deployment automation
 
 ---
 
@@ -58,7 +58,7 @@ Full-Stack Engineer who ships complete products from UI to database to deploymen
 ## SELECTED PROJECTS — SHIPPED PRODUCTS
 
 ### CampfireChai · Full-Stack Community Platform — Live on Vercel
-[campfire-chai.vercel.app](https://campfire-chai.vercel.app/) · [GitHub](https://github.com/srujanchidarla/CampfireChai)
+[wildlink.world](https://wildlink.world/) · [GitHub](https://github.com/srujanchidarla/CampfireChai)
 
 - **Frontend:** React 19 + Vite SPA — trip discovery, meetups, bucket lists, permits, crew matching across **15+ US metro hubs**
 - **Backend:** Express 5 + MongoDB API — JWT auth, geo trip search, hub-based content, complex trip/user/carpool relationships

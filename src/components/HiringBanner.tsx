@@ -19,11 +19,9 @@ export default function HiringBanner() {
           className="hiring-banner__content"
         >
           <p className="hiring-banner__eyebrow">Always building</p>
-          <h2 className="hiring-banner__title">
-            Software Engineer
-          </h2>
+          <h2 className="hiring-banner__title">Software Engineer</h2>
           <p className="hiring-banner__sub">
-            Production systems at 2M+ req/day, products in the wild, and a public practice streak.
+            Full-stack development, system design at 2M+ req/day, and products people actually use.
           </p>
 
           <div className="hiring-banner__actions">

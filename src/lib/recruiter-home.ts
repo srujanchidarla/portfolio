@@ -6,40 +6,40 @@ export const HERO_METRICS = {
   dailyRequests: 2_000_000,
 } as const;
 
-/** How I actually work — not a role picker */
+/** Three capability pillars — who I am, not roles I'm applying to */
 export const PROOF_CARDS = [
   {
-    id: "backend",
-    label: "In production",
-    headline: "Systems at 2M+ req/day",
-    subline: "APIs · reliability · databases",
+    id: "system-design",
+    label: "At scale",
+    headline: "System design in production",
+    subline: "Architecture · reliability · performance",
     detail:
-      "At Cognizant I contributed to Spring Boot microservices on a platform serving 500+ enterprise users at 99.9% uptime and ~2M+ requests/day — learning what production reliability, query optimization, and shipping under load actually feel like.",
-    metrics: ["2M+ req/day", "99.9% uptime", "Spring Boot", "Docker / CI"],
+      "At Cognizant I contributed to Spring Boot microservices at 2M+ requests/day and 99.9% uptime — optimizing a hot-path query from P99 ~250ms to ~50ms and learning what reliability under load actually requires.",
+    metrics: ["2M+ req/day", "99.9% uptime", "P99 optimization", "Microservices"],
     color: "#34d399",
     icon: "scale",
   },
   {
-    id: "ai",
-    label: "With models",
-    headline: "LLM features in real products",
-    subline: "Routing · streaming · failover",
+    id: "fullstack",
+    label: "End to end",
+    headline: "Full-stack products shipped",
+    subline: "UI · API · data · deploy",
     detail:
-      "JobHuntOS routes Claude, Gemini, and Groq with SSE streaming and graceful provider failover — live on the Chrome Web Store. Neocortex pushes further with 15 agents and a 6-provider chain.",
-    metrics: ["JobHuntOS live", "Multi-LLM routing", "SSE streaming", "FastAPI agents"],
-    color: "#8b5cf6",
-    icon: "impact",
+      "CampfireChai, JobHuntOS, AlgoChronicle, and StudyGlobal — complete UIs, APIs, data models, and deploys I own. WalletGyde internship: 35% engagement ↑ and 40% faster transactions while finishing my Master's.",
+    metrics: ["6 featured apps", "Chrome Web Store", "Live on Vercel", "Real-time systems"],
+    color: "#f97316",
+    icon: "ship",
   },
   {
-    id: "fullstack",
-    label: "Shipped",
-    headline: "Products from idea to deploy",
-    subline: "UI · API · data · launch",
+    id: "networking",
+    label: "How systems connect",
+    headline: "Networking & systems depth",
+    subline: "TCP/IP · routing · CI/CD · cloud",
     detail:
-      "CampfireChai, AlgoChronicle, StudyGlobal, JobHuntOS — complete UIs, APIs, data models, and deploys. WalletGyde internship: 35% engagement ↑ and 40% faster transactions while finishing my Master's.",
-    metrics: ["6 featured apps", "CampfireChai live", "35% engagement ↑", "Chrome Store"],
-    color: "#f97316",
-    icon: "person",
+      "MS coursework in computer networks (TCP/IP, BGP/OSPF) plus production infra work — Docker/CI at Cognizant, AlgoChronicle's push-to-publish pipeline, and thinking about how services talk, fail, and recover.",
+    metrics: ["TCP/IP · BGP/OSPF", "GitHub Actions", "Docker / CI", "Azure DevOps"],
+    color: "#0ea5e9",
+    icon: "infra",
   },
 ] as const;
 
@@ -87,7 +87,7 @@ export const IMPACT_PROJECTS = [
   },
   {
     id: "campfirechai",
-    title: "CampfireChai",
+    title: "Wildlink",
     tag: "Community · Full-Stack · Live",
     role: "Solo full-stack engineer · product through deployment",
     lanes: ["Full-Stack", "Backend"],
@@ -96,15 +96,15 @@ export const IMPACT_PROJECTS = [
     problem:
       "Desi outdoor groups in the US had no single place for trips, permits, carpools, and crew matching.",
     solution:
-      "Full-stack monorepo: React 19 + Vite frontend, Express 5 + MongoDB API, Socket.io real-time chat, and AI trip drafts — live on Vercel.",
+      "Full-stack monorepo: React 19 + Vite frontend, Express 5 + MongoDB API, Socket.io real-time chat, and AI trip drafts — live at wildlink.world.",
     learned:
       "How to ship end-to-end: database design, real-time features, deployment, and iterating from user feedback. This taught me production full-stack ownership.",
-    result: "Live on Vercel",
+    result: "Live at wildlink.world",
     resultDetail: "15+ metro hubs, real-time trip coordination, and Magic Paste AI drafting.",
     stack: ["React 19", "Node.js", "Express", "MongoDB", "Socket.io", "Vite"],
     color: "#f59e0b",
     href: "https://github.com/srujanchidarla/CampfireChai",
-    liveHref: "https://campfire-chai.vercel.app/",
+    liveHref: "https://wildlink.world/",
   },
   {
     id: "algochronicle",
@@ -190,6 +190,15 @@ export const SKILL_CLUSTERS = [
     ],
   },
   {
+    id: "infra",
+    label: "Networks & Infra",
+    skills: [
+      { name: "CI/CD (GitHub Actions)", strength: "Strong" as SkillStrength, years: "Shipped", proof: "AlgoChronicle push-to-publish", level: 78 },
+      { name: "Docker / Cloud deploy", strength: "Comfortable" as SkillStrength, years: "2+ yrs learning", proof: "Cognizant · Vercel · AWS", level: 68 },
+      { name: "Networks (TCP/IP, routing)", strength: "Comfortable" as SkillStrength, years: "MS coursework", proof: "BGP/OSPF · load balancing concepts", level: 62 },
+    ],
+  },
+  {
     id: "frontend",
     label: "Frontend",
     skills: [
@@ -199,8 +208,8 @@ export const SKILL_CLUSTERS = [
     ],
   },
   {
-    id: "infra",
-    label: "Cloud & Data",
+    id: "cloud",
+    label: "Databases & Cloud",
     skills: [
       { name: "PostgreSQL / MySQL", strength: "Strong" as SkillStrength, years: "3+ yrs learning", proof: "Enterprise + Supabase", level: 75 },
       { name: "MongoDB / Firebase", strength: "Comfortable" as SkillStrength, years: "2+ yrs learning", proof: "CampfireChai · AlgoChronicle", level: 70 },

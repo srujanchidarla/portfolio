@@ -57,7 +57,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "campfirechai",
-    title: "CampfireChai",
+    title: "Wildlink",
     period: "2025 – Present",
     tagline: "Community platform for Desi outdoor adventurers in the USA",
     description:
@@ -80,7 +80,7 @@ export const PROJECTS: Project[] = [
     links: [
       {
         label: "Live App",
-        href: "https://campfire-chai.vercel.app/",
+        href: "https://wildlink.world/",
       },
       {
         label: "GitHub",

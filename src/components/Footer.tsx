@@ -46,6 +46,18 @@ export default function Footer() {
           <a href="/#contact">Contact</a>
         </div>
 
+        <nav className="footer__legal" aria-label="Legal">
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+          <a href="/cookies">Cookies</a>
+          <a href="/data">Data</a>
+          <a href="/disclaimer">Disclaimer</a>
+          <a href="/accessibility">Accessibility</a>
+          <a href="/license">License</a>
+          <a href="/security">Security</a>
+          <a href="/legal">All policies</a>
+        </nav>
+
         <div className="footer__bottom">
           <p>
             © {year} {SITE.name}. Built with Next.js.

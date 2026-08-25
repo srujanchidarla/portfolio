@@ -1,6 +1,6 @@
 # SRUJAN CHIDARLA
 
-**Baltimore, MD** · srujanchidarla.uof@gmail.com · [linkedin.com/in/srujan-chidarla](https://www.linkedin.com/in/srujan-chidarla) · [github.com/srujanchidarla](https://github.com/srujanchidarla) · [srujanchidarla.com](https://srujanchidarla.com)
+**srujanchidarla.uof@gmail.com** · [linkedin.com/in/srujan-chidarla](https://www.linkedin.com/in/srujan-chidarla) · [github.com/srujanchidarla](https://github.com/srujanchidarla) · [srujanchidarla.com](https://srujanchidarla.com)
 
 ---
 
@@ -84,7 +84,7 @@ AI Engineer with production experience shipping **multi-model LLM systems** end-
 *Stack: Python, FastAPI, Next.js, Expo, SQLite, n8n, multi-agent orchestration, LLM routing*
 
 ### CampfireChai · AI-Assisted Trip Planning — Live on Vercel
-[campfire-chai.vercel.app](https://campfire-chai.vercel.app/) · [GitHub](https://github.com/srujanchidarla/CampfireChai)
+[wildlink.world](https://wildlink.world/) · [GitHub](https://github.com/srujanchidarla/CampfireChai)
 
 - Integrated **Magic Paste** AI trip drafting: natural-language trip descriptions → structured itineraries
 - Built multi-provider LLM fallbacks for AI-assisted trip planning with prompt engineering for vague or conflicting inputs

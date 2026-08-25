@@ -74,18 +74,22 @@ export default function WritingSection() {
         </div>
 
         <div className="rh-writing__grid">
-          {FEATURED.map((post, i) => (
-            <motion.a
+          {FEATURED.map((post, i) => {
+            const isInternal = post.href.startsWith("/");
+            const CardWrapper = isInternal ? Link : "a";
+            const cardProps = isInternal
+              ? { href: post.href }
+              : { href: post.href, target: "_blank" as const, rel: "noopener noreferrer" };
+
+            return (
+            <motion.div
               key={post.id}
-              href={post.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rh-writing__card"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.35, delay: i * 0.06 }}
             >
+              <CardWrapper {...cardProps} className="rh-writing__card">
               <div className="rh-writing__meta">
                 <time dateTime={post.date}>{formatWritingDate(post.date)}</time>
                 <span className="rh-writing__tags">
@@ -97,11 +101,13 @@ export default function WritingSection() {
               <h3 className="rh-writing__title">{post.title}</h3>
               <p className="rh-writing__summary">{post.summary}</p>
               <span className="rh-writing__link">
-                Read on LinkedIn
+                {isInternal ? "Read working note" : "Read on LinkedIn"}
                 <ArrowUpRight size={14} aria-hidden="true" />
               </span>
-            </motion.a>
-          ))}
+              </CardWrapper>
+            </motion.div>
+            );
+          })}
         </div>
 
         <div className="rh-writing__footer">

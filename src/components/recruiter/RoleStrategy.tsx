@@ -51,19 +51,19 @@ export default function RoleStrategy({ embedded = false }: RoleStrategyProps) {
             Where I <span className="gradient-text">fit best</span>
           </h2>
           <p className="section-subtitle">
-            Primary focus: <strong>{PRIMARY_ROLE.title}</strong>. Also strong fit for AI and
-            full-stack tracks — pick one to see proof and examples.
+            Primary focus: <strong>{PRIMARY_ROLE.tagline}</strong>. Also strong fit for platform,
+            AI, and full-stack tracks — pick one to see proof and examples.
           </p>
         </motion.header>
       ) : (
         <div id="role-strategy" className="rh-roles__embedded-header">
           <p className="section-eyebrow">Role fit</p>
           <h3 className="rh-roles__hire-title">
-            Backend · AI · Full-Stack — one engineer
+            Backend · Platform · AI · Full-Stack — ranked by fit
           </h3>
           <p className="section-subtitle rh-roles__embedded-sub">
-            Equal depth across all three. Pick a track to see proof — or grab the matching
-            resume. The portfolio stays the same for every visitor.
+            Backend and platform are primary; AI and full-stack are strong secondary tracks. Pick
+            one to see proof — or grab the matching resume.
           </p>
         </div>
       )}
@@ -162,7 +162,7 @@ export default function RoleStrategy({ embedded = false }: RoleStrategyProps) {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
       >
-        <strong>Why these 3:</strong> {ROLE_STRATEGY_WHY}
+        <strong>Why these 4:</strong> {ROLE_STRATEGY_WHY}
       </motion.p>
 
       {ROLE_RESUMES_AVAILABLE ? (

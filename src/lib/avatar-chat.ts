@@ -27,7 +27,7 @@ export function getSuggestions(visitorType: VisitorType): readonly string[] {
 }
 
 export const WELCOME_MESSAGES: Record<VisitorType, string> = {
-  recruiter: `Hi — I'm **Code Avatar Srujan**, Srujan's AI representative. Srujan is an engineer (MS CS, Aug 2026, 4.0 GPA) with production experience and products in the wild.
+  recruiter: `Hi — I'm **Code Avatar Srujan**, Srujan's AI representative. Srujan is a **software engineer** (MS CS, Aug 2026, 4.0 GPA) with full-stack, system design, and networking depth — plus production experience at **2M+ req/day**.
 
 Ask about projects, experience, skills, or how to connect.`,
   visitor: `Hey! I'm **Code Avatar Srujan** — here to help you explore Srujan's portfolio.
@@ -50,15 +50,15 @@ Your job: Represent Srujan as an engineer, athlete, and builder. Showcase shippe
 ${audience}
 
 Key facts:
-- Completing MS CS Aug 2026 (4.0 GPA) — not senior or mid-level
+- Software engineer completing MS CS Aug 2026 (4.0 GPA) — not senior or mid-level
+- Full-stack development: React/Next.js, Node.js, Java/Spring Boot, Python/FastAPI
+- System design: contributed to 2M+ req/day production systems, P99 latency optimization, microservices
+- Networking: MS coursework in TCP/IP, BGP/OSPF; connects to how services communicate and fail
 - Prior full-time production role at Cognizant (India) before grad school
-- Graduating Master's in Computer Science, University of Fairfax, Aug 2026, GPA 4.0/4.0
-- Pre-graduation professional experience at Cognizant (contributed to systems at 2M+ req/day, 99.9% uptime)
 - Recent production internship at WalletGyde (35% engagement increase, 40% faster transactions)
-- Shipped CampfireChai (live), JobHuntOS (Chrome Web Store), building Neocortex (15-agent life OS)
-- Strong foundation in Java/Spring Boot, React/Next.js; comfortable learning Python, AWS, AI/ML
+- Shipped CampfireChai (live), JobHuntOS (Chrome Web Store), AlgoChronicle (automated pipeline)
 - Multi-sport athlete — discipline, teamwork, performing under pressure
-- Location: Baltimore, MD (United States)
+- Authorized to work in the U.S. via STEM OPT (36 months); open to relocating anywhere in the US
 - Values: shipping, training, learning in public
 - Email: ${SITE.email}
 - LinkedIn: ${SITE.linkedin}
@@ -82,13 +82,13 @@ NEVER mention Teaching Assistant, TA, teaching students, or mentoring juniors �
 
 When asked about work or background:
 - Comfortable across APIs, product UI, and LLM features because that's how he ships
-- United States based (Baltimore, MD)
+- United States work authorization (STEM OPT); open to remote or on-site nationwide
 - Proof: Cognizant 2M+ req/day, JobHuntOS Chrome extension, CampfireChai live
 
 Common questions:
 - "Are you a new grad?" → Completing MS CS Aug 2026 with 4.0 GPA. Prior Cognizant full-time + shipped CampfireChai and JobHuntOS.
 - "Tell me about your experience" → Master's (4.0 GPA), WalletGyde internship (35% engagement), Cognizant (2M+ req/day contribution).
-- "What are you looking for?" → Point to the work on this site and [Contact](#contact) — don't pitch a job search.
+- "What are you looking for?" → Point to the work on this site and [Contact](#contact) — share values (real products, mentorship, ship-and-learn) only if asked directly.
 - "Salary?" → Happy to talk in conversation if they ask.
 
 Response style:
@@ -140,7 +140,7 @@ Honest skill levels in [Skills](#skills).`;
     return `**Top picks:**
 
 - **Neocortex** — my ongoing Jarvis Life OS with 15 AI agents ([GitHub](https://github.com/srujanchidarla/neocortex))
-- **CampfireChai** — live community app for Desi outdoor adventurers ([Live](https://campfire-chai.vercel.app/) · [GitHub](https://github.com/srujanchidarla/CampfireChai))
+- **CampfireChai (Wildlink)** — live community app for Desi outdoor adventurers ([Live](https://wildlink.world/) · [GitHub](https://github.com/srujanchidarla/CampfireChai))
 - **StudyGlobal** — international student platform (research → relocation → in-country support)
 - **JobHuntOS** — AI Chrome extension on the Web Store
 - **FitConnect** — social fitness platform in [Showcases](#showcases)
@@ -192,7 +192,7 @@ See all with certificate links in [Certifications](#certifications).`;
   if (q.includes("campfire") || q.includes("outdoor") || q.includes("desi")) {
     return `**CampfireChai** is my live full-stack community platform for Desi outdoor adventurers in the US — trips, meetups, permits, bucket lists, AI trip drafts, and real-time chat.
 
-[Live app](https://campfire-chai.vercel.app/) · [GitHub](https://github.com/srujanchidarla/CampfireChai)`;
+[Live app](https://wildlink.world/) · [GitHub](https://github.com/srujanchidarla/CampfireChai)`;
   }
 
   if (q.includes("neocortex") || q.includes("jarvis") || q.includes("life os")) {
@@ -202,7 +202,7 @@ Stack: FastAPI, Next.js, Expo, SQLite, n8n, 6-provider LLM failover. [GitHub rep
   }
 
   if (q.includes("relocat") || q.includes("location")) {
-    return `Based in **Baltimore, MD · United States**.`;
+    return `Authorized to work in the **United States** (STEM OPT). **Open to relocating** anywhere in the US for the right role.`;
   }
 
   if (visitorType === "recruiter") {

@@ -293,6 +293,9 @@ export default function AvatarChatWidget() {
               <button type="button" onClick={openContact}>
                 Schedule a call
               </button>
+              <a href="/privacy" className="avatar-chat__privacy">
+                Privacy
+              </a>
             </footer>
           </motion.div>
         )}

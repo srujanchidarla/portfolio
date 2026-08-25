@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Srujan Chidarla</string>
+    <string name="title_activity_main">Srujan Chidarla</string>
+    <string name="package_name">com.srujanchidarla.portfolio</string>
+    <string name="custom_url_scheme">com.srujanchidarla.portfolio</string>
+</resources>

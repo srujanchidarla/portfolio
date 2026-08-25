@@ -7,7 +7,7 @@ export interface Competency {
   level: ProficiencyLevel;
   years: string;
   example: string;
-  icon: "microservices" | "fullstack" | "architecture" | "performance";
+  icon: "microservices" | "fullstack" | "architecture" | "performance" | "platform";
 }
 
 export interface TechnicalSkill {
@@ -51,6 +51,15 @@ export const COMPETENCIES: Competency[] = [
     years: "3+ years",
     example: "CampfireChai, JobHuntOS, AlgoChronicle, StudyGlobal, and more",
     icon: "fullstack",
+  },
+  {
+    id: "cloud-infra",
+    title: "Cloud & Infrastructure",
+    description: "CI/CD pipelines, cloud deploys, and automation across live products",
+    level: "intermediate",
+    years: "2+ years",
+    example: "AlgoChronicle push-to-publish · Cognizant Docker/CI · Vercel deploys",
+    icon: "platform",
   },
   {
     id: "system-design",

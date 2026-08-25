@@ -1,10 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar, Download, MessageCircle } from "lucide-react";
+import { ArrowRight, Calendar, Download, MessageCircle, Share2 } from "lucide-react";
 import { getScheduleHref, SITE } from "@/lib/site";
 import { RECRUITER_CONTACT } from "@/lib/recruiter-home";
 import { useContact } from "@/components/ContactProvider";
+import { canSharePortfolio, sharePortfolio } from "@/lib/share-portfolio";
 
 export default function RecruiterCTA() {
   const { openContact } = useContact();
@@ -24,12 +25,15 @@ export default function RecruiterCTA() {
             Let&apos;s <span className="gradient-text">connect</span>
           </h2>
           <p className="section-subtitle">
-            MS CS · 4.0 · {SITE.location}. I respond quickly.
+            MS CS · 4.0 · Open to relocate in the US. I respond quickly.
           </p>
 
           <div className="rh-cta__actions">
-            <a href={`mailto:${RECRUITER_CONTACT.email}`} className="btn-primary">
-              {RECRUITER_CONTACT.email}
+            <a
+              href={`mailto:${RECRUITER_CONTACT.email}`}
+              className="btn-primary rh-cta__email-btn"
+            >
+              Email me
               <ArrowRight size={16} aria-hidden="true" />
             </a>
             <a href={SITE.resumeUrl} className="btn-secondary rh-cta__resume-btn">
@@ -40,6 +44,16 @@ export default function RecruiterCTA() {
               <Calendar size={16} aria-hidden="true" />
               Schedule a call
             </a>
+            {canSharePortfolio() ? (
+              <button
+                type="button"
+                className="btn-secondary"
+                onClick={() => void sharePortfolio()}
+              >
+                <Share2 size={16} aria-hidden="true" />
+                Share portfolio
+              </button>
+            ) : null}
           </div>
 
           <div className="rh-cta__grid">
@@ -79,7 +93,7 @@ export default function RecruiterCTA() {
           </div>
 
           <p className="rh-cta__updated">
-            Last updated <time dateTime="2026-08-11">{SITE.lastUpdated}</time>
+            Last updated <time dateTime="2026-08-22">{SITE.lastUpdated}</time>
           </p>
         </motion.div>
       </div>

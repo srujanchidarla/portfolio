@@ -1,13 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BarChart3, Rocket, Layers } from "lucide-react";
+import { BarChart3, Layers, Server } from "lucide-react";
 import { PROOF_CARDS } from "@/lib/recruiter-home";
 
 const ICONS = {
   scale: BarChart3,
-  impact: Rocket,
-  person: Layers,
+  ship: Layers,
+  infra: Server,
 } as const;
 
 export default function ProofSection() {
@@ -25,7 +25,7 @@ export default function ProofSection() {
             Built in production, <span className="gradient-text">shipped for people</span>
           </h2>
           <p className="section-subtitle">
-            A few facts about the work — not a menu of job titles.
+            Full-stack development, system design, and networking — shown through work, not job titles.
           </p>
         </motion.header>
 

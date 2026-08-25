@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Mail, ExternalLink, Code2, MapPin } from "lucide-react";
+import { X, Mail, ExternalLink, Code2 } from "lucide-react";
 import { SITE } from "@/lib/site";
 
 interface ContactModalProps {
@@ -129,10 +129,6 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
               </a>
             </div>
 
-            <div className="modal-location">
-              <MapPin size={16} aria-hidden="true" />
-              {SITE.location}
-            </div>
           </motion.div>
         </motion.div>
       )}

@@ -1,0 +1,5 @@
+Contact: mailto:srujanchidarla.uof@gmail.com
+Expires: 2027-08-24T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://srujanchidarla.com/.well-known/security.txt
+Policy: https://srujanchidarla.com/security

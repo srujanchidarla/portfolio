@@ -19,6 +19,7 @@ const ICONS = {
   fullstack: Layers,
   architecture: Boxes,
   performance: Gauge,
+  platform: Cloud,
 } as const;
 
 function CompetencyCard({ item, index }: { item: Competency; index: number }) {

@@ -14,6 +14,15 @@ export type WritingPost = {
  */
 export const WRITING_POSTS: WritingPost[] = [
   {
+    id: "networking-to-microservices",
+    title: "TCP backpressure taught me more about microservices than most blog posts",
+    date: "2026-08-22",
+    summary:
+      "Computer networks coursework (congestion control, flow control, BGP/OSPF) maps cleanly onto service design: queues, rate limits, circuit breakers, and why P99 latency matters when the pipe fills up.",
+    tags: ["Networking", "System Design", "Backend"],
+    href: "/research/networking-microservices-bridge",
+  },
+  {
     id: "ai-agents-2026",
     title: "Why multi-agent systems are leaving the demo phase",
     date: "2026-07-08",

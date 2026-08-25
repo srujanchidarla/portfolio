@@ -40,6 +40,52 @@ export type ResearchItem = {
  */
 export const RESEARCH_ITEMS: readonly ResearchItem[] = [
   {
+    slug: "networking-microservices-bridge",
+    kind: "idea",
+    status: "idea",
+    title: "From TCP congestion to service backpressure: what networks coursework teaches backend engineers",
+    subtitle:
+      "A bridge note — not a paper. How BGP/OSPF and flow control thinking apply when microservices share a congested path.",
+    date: "2026-08-22",
+    authors: [SITE.name],
+    venue: "Working note",
+    abstract:
+      "Networks class gives you vocabulary most backend tutorials skip: congestion, backpressure, routing tables, and what happens when the pipe is full. Those ideas map directly onto queues, rate limits, circuit breakers, and the P99 latency work I did at Cognizant.",
+    tags: ["Networking", "System Design", "Distributed Systems"],
+    readingMinutes: 7,
+    sections: [
+      {
+        heading: "The bridge",
+        body: [
+          "TCP slows down when the network is congested. A microservice should do the same when downstream is saturated — but we often keep accepting requests until everything times out.",
+          "BGP picks routes based on policy and reachability. Service meshes and API gateways do something similar: route around unhealthy instances, prefer local paths, fail over when a hop is down.",
+          "The vocabulary transfers. The implementation is different. That's the point — networks coursework is not a detour from backend engineering.",
+        ],
+      },
+      {
+        heading: "What I saw in production",
+        body: [
+          "At Cognizant, a hot path query ran at P99 ~250ms under load. Indexing and query shape fixed it to ~50ms — but the symptom looked like congestion: requests piling up, threads waiting, timeouts at the edge.",
+          "AlgoChronicle's GitHub Actions pipeline is a different layer, but the same instinct: don't let unbounded work enter the system. Parse, validate, sync, then update the UI — each stage has a boundary.",
+          "JobHuntOS LLM routing is failover routing. When Claude throttles, walk the chain — same mental model as routing around a down BGP peer, except the 'peer' charges per token.",
+        ],
+      },
+      {
+        heading: "What I'm exploring next",
+        body: [
+          "One infra artifact: Terraform module or observability write-up for Neocortex deploy — showing how I think about deploy and ops, not just app code.",
+          "Publish this note on LinkedIn and link it from the portfolio writing section.",
+          "Keep connecting networks theory to backend practice in system design conversations.",
+        ],
+      },
+    ],
+    openQuestions: [
+      "Where does explicit backpressure belong — gateway, service, or client?",
+      "Can lightweight observability (latency histograms per hop) replace over-engineered service meshes for small teams?",
+      "How much networking depth do platform interviews actually test vs. cloud-native tooling?",
+    ],
+  },
+  {
     slug: "llm-provider-failover",
     kind: "idea",
     status: "idea",

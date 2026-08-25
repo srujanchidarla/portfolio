@@ -22,8 +22,8 @@ export default function HiringSignal() {
             Open to <span className="gradient-text">work</span>
           </h2>
           <p className="section-subtitle">
-            Looking for a full-time Software Engineer role after my MS — a team with mentorship
-            and real problems to ship against.
+            Graduating Aug 2026 — interested in teams that ship real products with mentorship and
+            strong engineering culture.
           </p>
         </motion.header>
 
@@ -46,7 +46,7 @@ export default function HiringSignal() {
           </span>
           <span>
             <MapPin size={16} aria-hidden="true" />
-            {SITE.location}
+            Open to relocate anywhere in the US
           </span>
           <span>
             <Calendar size={16} aria-hidden="true" />

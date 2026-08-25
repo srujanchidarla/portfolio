@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Inter, Space_Mono } from "next/font/google";
-import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { BootProvider } from "@/components/BootProvider";
 import CustomCursor from "@/components/CustomCursor";
 import BootLoader from "@/components/BootLoader";
+import MobileShell from "@/components/MobileShell";
+import CookieConsentProvider from "@/components/CookieConsentProvider";
 import { PRIMARY_ROLE, SITE } from "@/lib/site";
 
 const inter = Inter({
@@ -25,18 +26,18 @@ export const metadata: Metadata = {
   description: PRIMARY_ROLE.headline,
   keywords: [
     "Srujan Chidarla",
-    "new grad software engineer",
-    "backend engineer",
-    "AI engineer",
-    "full-stack engineer",
+    "software engineer",
+    "full-stack developer",
+    "system design",
+    "computer networks",
+    "distributed systems",
     "2026 graduate",
     "JobHuntOS",
     "CampfireChai",
-    "Neocortex",
     "STEM OPT",
   ],
   openGraph: {
-    title: `${SITE.name} — Software Engineer · 2M+ req/day`,
+    title: `${SITE.name} — Full-stack · System design · 2M+ req/day`,
     description: PRIMARY_ROLE.headline,
     type: "website",
     url: SITE.website,
@@ -86,10 +87,12 @@ export default function RootLayout({
         </a>
         <ThemeProvider>
           <BootProvider>
-            <BootLoader />
-            <CustomCursor />
-            {children}
-            <Analytics />
+            <CookieConsentProvider>
+              <BootLoader />
+              <CustomCursor />
+              <MobileShell />
+              {children}
+            </CookieConsentProvider>
           </BootProvider>
         </ThemeProvider>
       </body>

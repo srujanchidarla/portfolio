@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
-import { ArrowRight, GraduationCap, MapPin, MessageCircle, Trophy } from "lucide-react";
+import { ArrowRight, MessageCircle, Trophy } from "lucide-react";
 import { SITE, PRIMARY_ROLE, SITE_IMAGES } from "@/lib/site";
 import { HERO_METRICS } from "@/lib/recruiter-home";
 import { useContact } from "@/components/ContactProvider";
@@ -40,10 +40,6 @@ export default function HeroRecruiter() {
                   <span className="hero__badge-dot" aria-hidden="true" />
                   MS CS · {SITE.gradDate} · 4.0 GPA
                 </span>
-                <span className="hero__badge">
-                  <MapPin size={12} aria-hidden="true" />
-                  {SITE.location}
-                </span>
                 <span className="hero__badge hero__badge--athlete">
                   <Trophy size={12} aria-hidden="true" />
                   Multi-sport athlete
@@ -77,10 +73,11 @@ export default function HeroRecruiter() {
                 animate="visible"
                 className="hero__desc"
               >
-                I contribute to production systems at <strong>2M+ req/day</strong> and ship products
-                people use — <strong>JobHuntOS</strong> on the Chrome Store,{" "}
-                <strong>CampfireChai</strong> live, and <strong>Neocortex</strong> in progress. MS CS
-                at 4.0, still learning in public.
+                I build across the stack — production systems at <strong>2M+ req/day</strong>,
+                system design under real load, and networks coursework (TCP/IP, BGP/OSPF) that
+                informs how I think about services. Shipped{" "}
+                <strong>JobHuntOS</strong>, <strong>CampfireChai</strong>, and{" "}
+                <strong>AlgoChronicle</strong>. MS CS at 4.0, graduating Aug 2026.
               </motion.p>
 
               <motion.div

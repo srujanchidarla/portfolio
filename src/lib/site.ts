@@ -3,14 +3,13 @@ export const PRIMARY_ROLE = {
   short: "Engineer",
   tagline: "Software Engineer",
   headline:
-    "MS CS (Aug 2026, 4.0 GPA) — production systems at 2M+ req/day, and products people actually use.",
+    "MS CS (Aug 2026, 4.0 GPA) — system design, computer networks, and production AI systems at 2M+ req/day.",
 } as const;
 
 export const SITE = {
   name: "Srujan Chidarla",
   role: PRIMARY_ROLE.tagline,
-  tagline: "MS CS Aug 2026 · 2M+ req/day · CampfireChai & JobHuntOS",
-  location: "Baltimore, MD · United States",
+  tagline: "System design · Networks · AI · MS CS Aug 2026",
   status: "Engineer · athlete · builder",
   gradDate: "August 2026",
   email: "srujanchidarla.uof@gmail.com",
@@ -22,10 +21,10 @@ export const SITE = {
   localGuidePhotos:
     "https://www.google.com/maps/contrib/117828540649458317543/photos/@39.0235484,-76.9385184,11z/data=!3m1!4b1!4m3!8m2!3m1!1e1?entry=ttu",
   resumeUrl: "/resume",
-  lastUpdated: "August 11, 2026",
+  lastUpdated: "August 24, 2026",
 } as const;
 
-export type RoleResumeKey = "backend" | "ai" | "fullstack";
+export type RoleResumeKey = "backend" | "platform" | "ai" | "fullstack";
 
 /** Role-tailored resumes — set `available: true` when the file exists in /public/resumes/ */
 export const ROLE_RESUMES: Record<
@@ -36,19 +35,25 @@ export const ROLE_RESUMES: Record<
     label: "Backend Engineer",
     href: "/resumes/Srujan-Chidarla-Backend.md",
     shortLabel: "Backend",
-    available: false,
+    available: true,
+  },
+  platform: {
+    label: "Platform Engineer",
+    href: "/resumes/Srujan-Chidarla-Platform.md",
+    shortLabel: "Platform",
+    available: true,
   },
   ai: {
     label: "AI Engineer",
     href: "/resumes/Srujan-Chidarla-AI.md",
     shortLabel: "AI",
-    available: false,
+    available: true,
   },
   fullstack: {
     label: "Full-Stack Engineer",
     href: "/resumes/Srujan-Chidarla-FullStack.md",
     shortLabel: "Full-Stack",
-    available: false,
+    available: true,
   },
 };
 
