@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
@@ -12,14 +12,8 @@ type Props = {
 };
 
 export default function SystemDesignModal({ isOpen, onClose }: Props) {
-  const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || typeof document === "undefined") return;
 
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -33,7 +27,7 @@ export default function SystemDesignModal({ isOpen, onClose }: Props) {
     };
   }, [isOpen, onClose]);
 
-  if (!mounted) return null;
+  if (!isOpen || typeof document === "undefined") return null;
 
   return createPortal(
     <AnimatePresence>

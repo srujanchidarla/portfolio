@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 
 export type Theme = "dark" | "light";
 
@@ -15,26 +15,21 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 const STORAGE_KEY = "theme";
 
 function applyTheme(theme: Theme) {
+  if (typeof document === "undefined") return;
   const root = document.documentElement;
   root.setAttribute("data-theme", theme);
   root.style.colorScheme = theme;
 }
 
 function readDomTheme(): Theme {
+  if (typeof document === "undefined") return "dark";
   const attr = document.documentElement.getAttribute("data-theme");
   if (attr === "dark" || attr === "light") return attr;
   return "dark";
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // Start dark to match SSR; sync from the blocking script on mount
-  const [theme, setThemeState] = useState<Theme>("dark");
-
-  useEffect(() => {
-    const t = readDomTheme();
-    setThemeState(t);
-    applyTheme(t);
-  }, []);
+  const [theme, setThemeState] = useState<Theme>(() => readDomTheme());
 
   const setTheme = (t: Theme) => {
     setThemeState(t);

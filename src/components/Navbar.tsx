@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Download, Menu, Moon, Sun, X } from "lucide-react";
 import { SITE } from "@/lib/site";
@@ -32,16 +33,16 @@ export default function Navbar() {
   return (
     <header className={`navbar${scrolled ? " navbar--scrolled" : ""}`}>
       <div className="wrap navbar__inner">
-        <a href="/" className="navbar__brand font-mono">
+        <Link href="/" className="navbar__brand font-mono">
           {SITE.name.split(" ")[0]}
           <span className="navbar__brand-dot">.</span>
-        </a>
+        </Link>
 
         <nav className="navbar__links" aria-label="Main navigation">
           {NAV_LINKS.map((link) => (
-            <a key={link.href} href={link.href} className="navbar__link">
+            <Link key={link.href} href={link.href} className="navbar__link">
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -85,14 +86,14 @@ export default function Navbar() {
       {menuOpen && (
         <nav className="navbar__mobile" aria-label="Mobile navigation">
           {NAV_LINKS.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="navbar__mobile-link"
               onClick={() => setMenuOpen(false)}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
           <a
             href={SITE.resumeUrl}

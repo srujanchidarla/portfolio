@@ -8,7 +8,7 @@ import { useContact } from "@/components/ContactProvider";
 import { canSharePortfolio, sharePortfolio } from "@/lib/share-portfolio";
 
 export default function RecruiterCTA() {
-  const { openContact } = useContact();
+  const { openContact, openAvatarChat } = useContact();
   const scheduleHref = getScheduleHref();
 
   return (
@@ -78,9 +78,7 @@ export default function RecruiterCTA() {
             <button
               type="button"
               className="rh-cta__card rh-cta__card--chat"
-              onClick={() => {
-                document.querySelector<HTMLButtonElement>(".avatar-chat-fab")?.click();
-              }}
+              onClick={openAvatarChat}
             >
               <MessageCircle size={18} aria-hidden="true" />
               <strong>Ask my AI avatar</strong>

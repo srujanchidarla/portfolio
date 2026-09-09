@@ -44,6 +44,13 @@ export default function AvatarChatWidget() {
   }, [messages, isOpen, isLoading, scrollToBottom]);
 
   useEffect(() => {
+    const openRequested = () => setIsOpen(true);
+    if (typeof window === "undefined") return undefined;
+    window.addEventListener("portfolio-open-avatar-chat", openRequested);
+    return () => window.removeEventListener("portfolio-open-avatar-chat", openRequested);
+  }, []);
+
+  useEffect(() => {
     if (!isOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setIsOpen(false);

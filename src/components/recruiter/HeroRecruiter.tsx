@@ -19,7 +19,7 @@ const fadeUp: Variants = {
 };
 
 export default function HeroRecruiter() {
-  const { openContact } = useContact();
+  const { openContact, openAvatarChat } = useContact();
 
   return (
     <section id="hero" className="hero">
@@ -124,13 +124,7 @@ export default function HeroRecruiter() {
                   See what I&apos;ve built
                   <ArrowRight size={15} aria-hidden="true" />
                 </a>
-                <button
-                  type="button"
-                  className="btn-secondary"
-                  onClick={() =>
-                    document.querySelector<HTMLButtonElement>(".avatar-chat-fab")?.click()
-                  }
-                >
+                <button type="button" className="btn-secondary" onClick={openAvatarChat}>
                   <MessageCircle size={15} aria-hidden="true" />
                   Ask my AI avatar
                 </button>

@@ -1,23 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --c-bg: #0a0b0a;
-  --c-bg-elevated: #0f110f;
-  --c-surface: #141614;
-  --c-surface2: #1a1c1a;
+  --c-bg: #0b0d0a;
+  --c-bg-elevated: #111511;
+  --c-surface: #161911;
+  --c-surface2: #202418;
   --c-border: rgba(255, 255, 255, 0.08);
-  --c-border-hover: rgba(249, 115, 22, 0.35);
+  --c-border-hover: rgba(249, 115, 22, 0.42);
   --c-primary: #f97316;
-  --c-primary-light: #fb923c;
+  --c-primary-light: #fdba74;
   --c-primary-rgb: 249, 115, 22;
   --c-primary-dim: rgba(249, 115, 22, 0.12);
   --c-field: #22c55e;
   --c-field-rgb: 34, 197, 94;
   --c-accent: #fbbf24;
   --c-accent-dim: rgba(251, 191, 36, 0.12);
-  --c-muted: #9ca3af;
-  --c-text: #f3f4f6;
-  --c-text-secondary: #d1d5db;
+  --c-muted: #a1a6a8;
+  --c-text: #eef2ea;
+  --c-text-secondary: #c9d0c5;
   --font-inter: var(--font-inter-var), system-ui, sans-serif;
   --font-mono: var(--font-space-mono-var), "Courier New", monospace;
   --radius-sm: 8px;
@@ -29,13 +29,12 @@
 }
 
 html[data-theme="light"] {
-  --c-bg: #f8fafc;
-  --c-bg-elevated: #f1f5f9;
-  --c-surface: #ffffff;
-  --c-surface2: #f8fafc;
-  --c-border: rgba(15, 23, 42, 0.14);
-  --c-border-hover: rgba(194, 65, 12, 0.45);
-  /* Darker orange / gold so accents stay readable on white */
+  --c-bg: #fbf9f4;
+  --c-bg-elevated: #f4eee6;
+  --c-surface: #fffefb;
+  --c-surface2: #f7f2e9;
+  --c-border: rgba(30, 41, 59, 0.14);
+  --c-border-hover: rgba(194, 65, 12, 0.48);
   --c-primary: #c2410c;
   --c-primary-light: #ea580c;
   --c-primary-rgb: 194, 65, 12;
@@ -44,10 +43,9 @@ html[data-theme="light"] {
   --c-accent-dim: rgba(161, 98, 7, 0.12);
   --c-field: #15803d;
   --c-field-rgb: 21, 128, 61;
-  /* High-contrast type — sentences must stay solid, not washed */
-  --c-muted: #334155;
-  --c-text: #020617;
-  --c-text-secondary: #0f172a;
+  --c-muted: #475569;
+  --c-text: #17211b;
+  --c-text-secondary: #334155;
   --shadow-card: 0 1px 0 rgba(15, 23, 42, 0.04) inset, 0 10px 24px rgba(15, 23, 42, 0.08);
   --shadow-card-hover: 0 1px 0 rgba(15, 23, 42, 0.05) inset, 0 18px 40px rgba(15, 23, 42, 0.12);
 }
@@ -148,21 +146,33 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.site-main {
+  position: relative;
+  display: block;
+  overflow-x: hidden;
+}
+
+.site-main > section,
+.site-main > article,
+.site-main > div {
+  position: relative;
+} 
+
 ::selection {
   background: rgba(var(--c-primary-rgb), 0.35);
   color: #fff;
 }
 
 .wrap {
-  width: 100%;
-  max-width: 1120px;
+  width: min(100%, 1180px);
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 clamp(20px, 4vw, 32px);
 }
 
 @media (min-width: 768px) {
   .wrap {
-    padding: 0 32px;
+    padding: 0 clamp(24px, 4vw, 40px);
   }
 }
 
@@ -332,13 +342,14 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   gap: 28px;
-  align-items: stretch;
+  align-items: center;
 }
 
 @media (min-width: 1024px) {
   .hero__grid {
-    grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
-    gap: 36px;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 414px);
+    gap: 42px;
+    align-items: center;
   }
 }
 
@@ -482,6 +493,8 @@ body {
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
   gap: 12px;
   margin-bottom: 0;
 }
@@ -3583,6 +3596,7 @@ html[data-theme="light"] .navbar__resume:hover {
   display: flex;
   flex-direction: column;
   gap: 28px;
+  align-items: stretch;
 }
 
 .footer__cta {
@@ -3623,7 +3637,8 @@ html[data-theme="light"] .navbar__resume:hover {
 .footer__links {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  align-items: center;
+  gap: 14px 20px;
 }
 
 .footer__links a {
@@ -3641,6 +3656,7 @@ html[data-theme="light"] .navbar__resume:hover {
 .footer__legal {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 14px 20px;
   padding-top: 4px;
 }
@@ -3678,6 +3694,14 @@ html[data-theme="light"] .navbar__resume:hover {
 @media (max-width: 768px) {
   .contact-section__inner {
     padding: 24px 20px;
+  }
+
+  .footer__cta {
+    align-items: stretch;
+  }
+
+  .footer__bottom {
+    flex-direction: column;
   }
 }
 

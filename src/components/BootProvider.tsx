@@ -4,7 +4,6 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -22,12 +21,6 @@ export function BootProvider({ children }: { children: React.ReactNode }) {
 
   const markBootReady = useCallback(() => {
     setBootReady(true);
-  }, []);
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setBootReady(true);
-    }
   }, []);
 
   const value = useMemo(

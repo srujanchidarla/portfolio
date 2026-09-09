@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useBoot } from "@/components/BootProvider";
 
 const BOOT_FRAMES = [
@@ -22,21 +22,23 @@ export default function BootLoader() {
   const { markBootReady } = useBoot();
   const [show, setShow] = useState(true);
   const [leaving, setLeaving] = useState(false);
-  const markBootReadyRef = useRef(markBootReady);
-  markBootReadyRef.current = markBootReady;
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setShow(false);
-      markBootReadyRef.current();
-      return;
+      const skipId = window.setTimeout(() => {
+        setShow(false);
+        markBootReady();
+      }, 0);
+      return () => window.clearTimeout(skipId);
     }
 
     try {
       if (sessionStorage.getItem(BOOT_SEEN_KEY)) {
-        setShow(false);
-        markBootReadyRef.current();
-        return;
+        const skipId = window.setTimeout(() => {
+          setShow(false);
+          markBootReady();
+        }, 0);
+        return () => window.clearTimeout(skipId);
       }
     } catch {
       /* private browsing */
@@ -56,7 +58,7 @@ export default function BootLoader() {
           /* ignore */
         }
         setShow(false);
-        markBootReadyRef.current();
+        markBootReady();
       }, EXIT_MS);
     }, TOTAL_MS);
 
@@ -65,7 +67,7 @@ export default function BootLoader() {
       window.clearTimeout(leaveId);
       document.body.classList.remove("boot-loading");
     };
-  }, []);
+  }, [markBootReady]);
 
   useEffect(() => {
     if (!show) document.body.classList.remove("boot-loading");

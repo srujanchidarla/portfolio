@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { IMPACT_PROJECTS } from "@/lib/recruiter-home";
@@ -122,13 +122,9 @@ export default function ImpactProjects({ limit = CURATED_PROJECTS.length }: { li
   const [showAll, setShowAll] = useState(!hasMore);
   const visibleProjects = showAll ? CURATED_PROJECTS : CURATED_PROJECTS.slice(0, limit);
   const [active, setActive] = useState(0);
-  const project = visibleProjects[active] ?? visibleProjects[0];
+  const safeActive = active >= visibleProjects.length ? 0 : active;
+  const project = visibleProjects[safeActive] ?? visibleProjects[0];
 
-  useEffect(() => {
-    if (active >= visibleProjects.length) {
-      setActive(0);
-    }
-  }, [active, visibleProjects.length]);
   const href = "href" in project ? project.href : undefined;
   const liveHref = "liveHref" in project ? project.liveHref : undefined;
   const previewImage = getPreviewUrl(project);

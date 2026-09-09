@@ -11,16 +11,11 @@ const ALL_NODES = AI_ERA_ARCHITECTURE.flatMap((layer) =>
 
 export default function SystemArchitectureDiagram() {
   const [activeId, setActiveId] = useState<string | null>(null);
-  const [mounted, setMounted] = useState(false);
 
   const active = useMemo(
     () => ALL_NODES.find((node) => node.id === activeId) ?? null,
     [activeId]
   );
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     if (!activeId) return;
@@ -34,7 +29,7 @@ export default function SystemArchitectureDiagram() {
   }, [activeId]);
 
   const hopModal =
-    mounted && active
+    active && typeof document !== "undefined"
       ? createPortal(
           <div
             className="sd-hop-overlay"

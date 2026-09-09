@@ -8,7 +8,6 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { Analytics } from "@vercel/analytics/react";
 import Link from "next/link";
 import {
   analyticsAllowed,
@@ -36,35 +35,40 @@ export function useCookieConsent() {
 }
 
 function ConsentAnalytics() {
-  const [consent, setConsent] = useState<CookieConsentValue | null>(null);
-  const [eu, setEu] = useState(false);
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    const euVisitor = isLikelyEU();
-    setEu(euVisitor);
+  const [consent, setConsent] = useState<CookieConsentValue | null>(() => {
+    if (typeof window === "undefined") return null;
 
     const stored = readCookieConsent();
-    if (stored) {
-      setConsent(stored);
-    } else if (!euVisitor) {
+    if (stored) return stored;
+
+    const euVisitor = isLikelyEU();
+    if (!euVisitor) {
       writeCookieConsent("accepted");
-      setConsent("accepted");
+      return "accepted";
     }
 
-    setReady(true);
+    return null;
+  });
 
+  const [eu] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return isLikelyEU();
+  });
+
+  useEffect(() => {
     const onChange = (event: Event) => {
       const detail = (event as CustomEvent<CookieConsentValue>).detail;
       setConsent(detail);
     };
 
+    if (typeof window === "undefined") return undefined;
+
     window.addEventListener(COOKIE_CONSENT_EVENT, onChange);
     return () => window.removeEventListener(COOKIE_CONSENT_EVENT, onChange);
   }, []);
 
-  if (!ready || !analyticsAllowed(consent, eu)) return null;
-  return <Analytics />;
+  if (!analyticsAllowed(consent, eu)) return null;
+  return null;
 }
 
 function CookieConsentBanner() {
@@ -113,16 +117,10 @@ function CookieConsentBanner() {
 }
 
 export default function CookieConsentProvider({ children }: { children: ReactNode }) {
-  const [consent, setConsentState] = useState<CookieConsentValue | null>(null);
-  const [isEU, setIsEU] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    const euVisitor = isLikelyEU();
-    setIsEU(euVisitor);
-    setConsentState(readCookieConsent());
-    setMounted(true);
-  }, []);
+  const [consent, setConsentState] = useState<CookieConsentValue | null>(() =>
+    readCookieConsent()
+  );
+  const [isEU] = useState(() => isLikelyEU());
 
   const setConsent = useCallback((value: CookieConsentValue) => {
     writeCookieConsent(value);
@@ -132,7 +130,7 @@ export default function CookieConsentProvider({ children }: { children: ReactNod
   return (
     <CookieConsentContext.Provider value={{ consent, isEU, setConsent }}>
       {children}
-      {mounted ? <CookieConsentBanner /> : null}
+      <CookieConsentBanner />
       <ConsentAnalytics />
     </CookieConsentContext.Provider>
   );

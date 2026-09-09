@@ -6,17 +6,17 @@ const MODAL_SELECTOR =
   ".sd-hop-overlay, .sd-modal-overlay, .modal-overlay, [role='dialog']";
 
 export default function CustomCursor() {
-  const [enabled, setEnabled] = useState(false);
+  const [enabled] = useState(() =>
+    typeof window !== "undefined" && window.matchMedia("(pointer: fine)").matches
+  );
   const [position, setPosition] = useState({ x: -100, y: -100 });
   const [visible, setVisible] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [overModal, setOverModal] = useState(false);
 
   useEffect(() => {
-    const isFinePointer = window.matchMedia("(pointer: fine)").matches;
-    if (!isFinePointer) return;
+    if (!enabled) return;
 
-    setEnabled(true);
     document.body.classList.add("custom-cursor-active");
 
     const onMove = (e: MouseEvent) => {
@@ -51,7 +51,7 @@ export default function CustomCursor() {
       window.removeEventListener("mousemove", onMove);
       document.documentElement.removeEventListener("mouseleave", onLeave);
     };
-  }, []);
+  }, [enabled]);
 
   if (!enabled || overModal) return null;
 

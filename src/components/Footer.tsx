@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { useContact } from "@/components/ContactProvider";
@@ -39,23 +40,23 @@ export default function Footer() {
             Local Guide
           </a>
           <a href={`mailto:${SITE.email}`}>Email</a>
-          <a href="/about">About</a>
-          <a href="/#writing">Writing</a>
-          <a href="/research">Research</a>
-          <a href="/#github">GitHub activity</a>
-          <a href="/#contact">Contact</a>
+          <Link href="/about">About</Link>
+          <Link href="/#writing">Writing</Link>
+          <Link href="/research">Research</Link>
+          <Link href="/#github">GitHub activity</Link>
+          <Link href="/#contact">Contact</Link>
         </div>
 
         <nav className="footer__legal" aria-label="Legal">
-          <a href="/privacy">Privacy</a>
-          <a href="/terms">Terms</a>
-          <a href="/cookies">Cookies</a>
-          <a href="/data">Data</a>
-          <a href="/disclaimer">Disclaimer</a>
-          <a href="/accessibility">Accessibility</a>
-          <a href="/license">License</a>
-          <a href="/security">Security</a>
-          <a href="/legal">All policies</a>
+          <Link href="/privacy">Privacy</Link>
+          <Link href="/terms">Terms</Link>
+          <Link href="/cookies">Cookies</Link>
+          <Link href="/data">Data</Link>
+          <Link href="/disclaimer">Disclaimer</Link>
+          <Link href="/accessibility">Accessibility</Link>
+          <Link href="/license">License</Link>
+          <Link href="/security">Security</Link>
+          <Link href="/legal">All policies</Link>
         </nav>
 
         <div className="footer__bottom">

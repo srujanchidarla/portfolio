@@ -47,12 +47,13 @@ export function readCookieConsent(): CookieConsentValue | null {
 }
 
 export function writeCookieConsent(value: CookieConsentValue): void {
+  if (typeof window === "undefined") return;
   window.localStorage.setItem(COOKIE_CONSENT_KEY, value);
   window.dispatchEvent(new CustomEvent(COOKIE_CONSENT_EVENT, { detail: value }));
 }
 
 export function isLikelyEU(): boolean {
-  if (typeof window === "undefined") return false;
+  if (typeof window === "undefined" || typeof navigator === "undefined") return false;
 
   const langs = navigator.languages?.length ? navigator.languages : [navigator.language];
   for (const lang of langs) {
