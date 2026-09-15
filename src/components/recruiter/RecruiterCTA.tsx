@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Download, MessageCircle, Share2 } from "lucide-react";
 import { getScheduleHref, SITE } from "@/lib/site";
@@ -10,6 +11,11 @@ import { canSharePortfolio, sharePortfolio } from "@/lib/share-portfolio";
 export default function RecruiterCTA() {
   const { openContact, openAvatarChat } = useContact();
   const scheduleHref = getScheduleHref();
+  const [canShare, setCanShare] = useState(false);
+
+  useEffect(() => {
+    setCanShare(canSharePortfolio());
+  }, []);
 
   return (
     <section id="contact" className="rh-cta">
@@ -44,7 +50,7 @@ export default function RecruiterCTA() {
               <Calendar size={16} aria-hidden="true" />
               Schedule a call
             </a>
-            {canSharePortfolio() ? (
+            {canShare ? (
               <button
                 type="button"
                 className="btn-secondary"

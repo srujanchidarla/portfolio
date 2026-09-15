@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Mono } from "next/font/google";
+import { Manrope, Space_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { BootProvider } from "@/components/BootProvider";
@@ -9,9 +9,9 @@ import MobileShell from "@/components/MobileShell";
 import CookieConsentProvider from "@/components/CookieConsentProvider";
 import { PRIMARY_ROLE, SITE } from "@/lib/site";
 
-const inter = Inter({
+const manrope = Manrope({
   subsets: ["latin"],
-  variable: "--font-inter-var",
+  variable: "--font-manrope-var",
 });
 
 const spaceMono = Space_Mono({
@@ -55,31 +55,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const themeInitScript = `
-  (function () {
-    try {
-      var key = 'theme';
-      var stored = localStorage.getItem(key);
-      var theme = (stored === 'dark' || stored === 'light')
-        ? stored
-        : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-      document.documentElement.setAttribute('data-theme', theme);
-      document.documentElement.style.colorScheme = theme;
-    } catch (e) {}
-  })();
-  `;
-
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceMono.variable} h-full`}
+      className={`${manrope.variable} ${spaceMono.variable} h-full`}
       suppressHydrationWarning
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
+      <head />
       <body
-        className={`${inter.className} min-h-full flex flex-col antialiased`}
+        className={`${manrope.className} min-h-full flex flex-col antialiased`}
         suppressHydrationWarning
       >
         <a href="#main-content" className="skip-link">

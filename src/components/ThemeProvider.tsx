@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 export type Theme = "dark" | "light";
 
@@ -30,6 +30,25 @@ function readDomTheme(): Theme {
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>(() => readDomTheme());
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    try {
+      const stored = window.localStorage.getItem(STORAGE_KEY);
+      const preferred =
+        stored === "dark" || stored === "light"
+          ? stored
+          : window.matchMedia?.("(prefers-color-scheme: light)").matches
+            ? "light"
+            : "dark";
+
+      setThemeState(preferred);
+      applyTheme(preferred);
+    } catch {
+      applyTheme("dark");
+    }
+  }, []);
 
   const setTheme = (t: Theme) => {
     setThemeState(t);
