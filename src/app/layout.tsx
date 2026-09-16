@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope, Space_Mono } from "next/font/google";
+import { Outfit, Fira_Code } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { BootProvider } from "@/components/BootProvider";
@@ -9,15 +9,14 @@ import MobileShell from "@/components/MobileShell";
 import CookieConsentProvider from "@/components/CookieConsentProvider";
 import { PRIMARY_ROLE, SITE } from "@/lib/site";
 
-const manrope = Manrope({
+const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-manrope-var",
+  variable: "--font-outfit-var",
 });
 
-const spaceMono = Space_Mono({
-  weight: ["400", "700"],
+const firaCode = Fira_Code({
   subsets: ["latin"],
-  variable: "--font-space-mono-var",
+  variable: "--font-fira-code-var",
 });
 
 export const metadata: Metadata = {
@@ -58,12 +57,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${manrope.variable} ${spaceMono.variable} h-full`}
+      className={`${outfit.variable} ${firaCode.variable} h-full`}
       suppressHydrationWarning
     >
       <head />
       <body
-        className={`${manrope.className} min-h-full flex flex-col antialiased`}
+        className={`${outfit.className} min-h-full flex flex-col antialiased`}
         suppressHydrationWarning
       >
         <a href="#main-content" className="skip-link">

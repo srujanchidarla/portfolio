@@ -18,8 +18,8 @@
   --c-muted: #a1a6a8;
   --c-text: #eef2ea;
   --c-text-secondary: #c9d0c5;
-  --font-inter: var(--font-manrope-var), "Avenir Next", "Inter", system-ui, sans-serif;
-  --font-mono: var(--font-space-mono-var), "Courier New", monospace;
+  --font-inter: var(--font-outfit-var), "Avenir Next", "Inter", system-ui, sans-serif;
+  --font-mono: var(--font-fira-code-var), "Courier New", monospace;
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
