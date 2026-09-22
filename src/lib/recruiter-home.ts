@@ -87,11 +87,11 @@ export const IMPACT_PROJECTS = [
   },
   {
     id: "campfirechai",
-    title: "Wildlink",
+    title: "Wildmate",
     tag: "Community · Full-Stack · Live",
     role: "Solo full-stack engineer · product through deployment",
     lanes: ["Full-Stack", "Backend"],
-    previewImage: "/project-previews/campfirechai.png",
+    previewImage: "/project-previews/campfirechai.jpg",
     journey: "First full-stack app shipped to real users",
     problem:
       "Desi outdoor groups in the US had no single place for trips, permits, carpools, and crew matching.",

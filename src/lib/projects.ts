@@ -57,7 +57,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "campfirechai",
-    title: "Wildlink",
+    title: "Wildmate",
     period: "2025 – Present",
     tagline: "Community platform for Desi outdoor adventurers in the USA",
     description:
