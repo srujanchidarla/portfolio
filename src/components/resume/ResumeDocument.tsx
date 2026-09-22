@@ -60,7 +60,7 @@ export default function ResumeDocument() {
         <div className="resume-doc__job">
           <div className="resume-doc__job-top">
             <h3>WalletGyde — Full-Stack Web Developer (Internship)</h3>
-            <span>Dec 2024 – May 2025 · Denver, CO (Remote)</span>
+            <span>Jan 2025 – Dec 2025 · Denver, CO (Remote)</span>
           </div>
           <ul>
             <li>

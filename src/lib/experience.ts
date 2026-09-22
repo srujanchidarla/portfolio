@@ -26,7 +26,7 @@ export const EXPERIENCES: Experience[] = [
     role: "Full-Stack Web Developer",
     type: "Internship",
     category: "During Master's",
-    duration: "Dec 2024 – May 2025",
+    duration: "Jan 2025 – Dec 2025",
     location: "Denver, USA · Remote",
     headline: "Shipped a fintech platform during my Master's — 35% engagement ↑",
     description:
