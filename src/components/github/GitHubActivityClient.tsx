@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ExternalLink, Star, GitFork, HelpCircle, Lock, Award } from "lucide-react";
+import { ExternalLink, Star, GitFork, HelpCircle, Lock, Award, BarChart3 } from "lucide-react";
 import type { ContributionDay, GitHubActivityData } from "@/lib/github";
 
 const LEVEL_COLORS = [
@@ -73,6 +73,25 @@ function ContributionGraph({
   const [hovered, setHovered] = useState<ContributionDay | null>(null);
   const weeks = buildWeeks(days);
   const monthLabels = monthLabelsForWeeks(weeks);
+
+  if (days.length === 0) {
+    return (
+      <div className="gh-graph">
+        <div className="gh-graph__header">
+          <div>
+            <h3 className="gh-graph__title">Contribution activity</h3>
+            <p className="gh-graph__stat">
+              <strong>{total.toLocaleString()}</strong> contributions in the last year
+            </p>
+          </div>
+        </div>
+        <div className="gh-empty">
+          <BarChart3 size={20} aria-hidden="true" />
+          <p>Live heatmap is temporarily unavailable — GitHub&apos;s API didn&apos;t return day-by-day data on this load.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="gh-graph">
@@ -189,6 +208,20 @@ function LanguageBar({
 }) {
   const top = detailed.slice(0, 6);
   const colors = ["#f97316", "#fbbf24", "#fb923c", "#34d399", "#a78bfa", "#8b95a8"];
+
+  if (top.length === 0) {
+    return (
+      <div className="gh-lang">
+        <div className="gh-lang__header">
+          <h3 className="gh-lang__title">Coding activity</h3>
+        </div>
+        <div className="gh-empty">
+          <BarChart3 size={20} aria-hidden="true" />
+          <p>Language breakdown is temporarily unavailable — check the repo list below instead.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="gh-lang">

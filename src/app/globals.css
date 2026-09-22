@@ -520,6 +520,13 @@ body {
   border: 1px solid var(--c-border);
   border-top: 2px solid var(--c-primary);
   text-align: center;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero__metric:hover {
+  transform: translateY(-2px);
+  border-color: rgba(var(--c-primary-rgb), 0.5);
+  box-shadow: 0 8px 20px rgba(var(--c-primary-rgb), 0.12);
 }
 
 .hero__metric-value {
@@ -3543,15 +3550,16 @@ html[data-theme="light"] .navbar__resume:hover {
   border: none;
   cursor: pointer;
   text-decoration: none;
-  background: #ffd700;
-  color: #0a1628;
-  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.3);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--c-primary);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(var(--c-primary-rgb), 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .btn-hiring-primary:hover {
+  background: #ea580c;
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(255, 215, 0, 0.4);
+  box-shadow: 0 6px 24px rgba(var(--c-primary-rgb), 0.4);
 }
 
 .btn-hiring-primary--sm {
@@ -4967,6 +4975,25 @@ html[data-theme="light"] .navbar__resume:hover {
   font-family: var(--font-mono);
 }
 
+.gh-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--c-muted);
+  border: 1px dashed var(--c-border);
+  border-radius: 14px;
+}
+
+.gh-empty p {
+  font-size: 13px;
+  line-height: 1.5;
+  max-width: 32ch;
+}
+
 .gh-graph__stat-note {
   font-size: 12px;
   font-weight: 400;
@@ -6346,12 +6373,22 @@ html[data-theme="light"] .navbar__resume:hover {
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.rh-skills__cluster-tabs button:hover {
+  border-color: rgba(var(--c-primary-rgb), 0.5);
+  color: var(--c-text);
 }
 
 .rh-skills__cluster-tabs button.is-active {
   border-color: var(--c-primary);
   color: var(--c-primary);
   background: var(--c-primary-dim);
+}
+
+.rh-skills__cluster-tabs button.is-active:hover {
+  color: var(--c-primary);
 }
 
 .rh-skills__row {
@@ -6930,6 +6967,9 @@ html[data-theme="light"] .navbar__resume:hover {
     /* bleed to screen edges so pills can scroll cleanly */
     margin: 0 -24px 22px;
     padding: 2px 24px 10px;
+    /* fade the trailing edge so an off-screen tab reads as scrollable, not missing */
+    -webkit-mask-image: linear-gradient(to right, black calc(100% - 36px), transparent);
+    mask-image: linear-gradient(to right, black calc(100% - 36px), transparent);
   }
 
   .rh-projects__nav::-webkit-scrollbar {
@@ -7418,11 +7458,20 @@ html[data-theme="light"] .navbar__resume:hover {
   padding: 0;
   background: rgba(255, 255, 255, 0.35);
   cursor: pointer;
+  transition: background 0.2s ease, width 0.2s ease;
+}
+
+.rh-athlete__dot:hover {
+  background: rgba(255, 255, 255, 0.65);
 }
 
 .rh-athlete__dot.is-active {
   background: var(--c-accent);
   width: 14px;
+}
+
+.rh-athlete__dot.is-active:hover {
+  background: var(--c-accent);
 }
 
 .rh-athlete__caption {
