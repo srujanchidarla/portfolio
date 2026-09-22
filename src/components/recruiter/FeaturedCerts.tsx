@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
 import { CERTIFICATIONS } from "@/lib/certifications";
+import { CertBrandIcon, certAccentHex } from "@/lib/cert-icons";
 
 const FEATURED_IDS = [
   "aws-cp",
@@ -31,6 +32,12 @@ function CertItem({
       transition={{ duration: 0.25, delay }}
     >
       <a href={cert.url} target="_blank" rel="noopener noreferrer" className="rh-certs__item">
+        <span
+          className="rh-certs__icon"
+          style={{ "--cert-color": `#${certAccentHex(cert.id)}` } as React.CSSProperties}
+        >
+          <CertBrandIcon certId={cert.id} size={16} />
+        </span>
         <span className="rh-certs__title">{cert.title}</span>
         <span className="rh-certs__meta">
           {cert.issuer} · {cert.issued}
