@@ -25,7 +25,7 @@ export const PROOF_CARDS = [
     headline: "Full-stack products shipped",
     subline: "UI · API · data · deploy",
     detail:
-      "Wildmate, JobHuntOS, AlgoChronicle, StudyGlobal, and AgriWise — complete UIs, APIs, data models, and deploys I own. WalletGyde internship: 35% engagement ↑ and 40% faster transactions while finishing my Master's.",
+      "Wildmate, JobHuntOS, AlgoChronicle, StudyGlobal, and AgriWise — complete UIs, APIs, data models, and deploys I own. WalletGyde internship: 35% engagement ↑ and 40% faster transactions while earning my Master's.",
     metrics: ["7 featured apps", "Chrome Web Store", "Live on Vercel", "Real-time systems"],
     color: "#f97316",
     icon: "ship",
@@ -233,7 +233,7 @@ export const SKILL_CLUSTERS = [
     label: "Databases & Cloud",
     skills: [
       { name: "PostgreSQL / MySQL", strength: "Strong" as SkillStrength, years: "3+ yrs learning", proof: "Enterprise + Supabase", level: 75 },
-      { name: "MongoDB / Firebase", strength: "Comfortable" as SkillStrength, years: "2+ yrs learning", proof: "CampfireChai · AlgoChronicle", level: 70 },
+      { name: "MongoDB / Firebase", strength: "Comfortable" as SkillStrength, years: "2+ yrs learning", proof: "Wildmate · AlgoChronicle", level: 70 },
       { name: "AWS / Docker / CI", strength: "Comfortable" as SkillStrength, years: "Learning", proof: "Cloud Practitioner · GitHub Actions", level: 64 },
     ],
   },
@@ -255,14 +255,14 @@ export const STORY_BEATS = [
   {
     year: "2024",
     title: "Masters in the US",
-    text: "Moved to the US for my Master's at University of Fairfax. 4.0 GPA, featured shipped apps (CampfireChai, JobHuntOS, and more), and learning never stopped.",
-    highlight: "4.0 GPA · shipping while studying",
+    text: "Moved to the US for my Master's at University of Fairfax. 4.0 GPA, featured shipped apps (Wildmate, JobHuntOS, and more), and learning never stopped.",
+    highlight: "4.0 GPA · shipped while studying",
   },
   {
     year: "Now",
     title: "Still building",
-    text: "MS CS in progress (4.0). I ship products, train most days, and keep a public DSA streak. The through-line is the same: show up, finish, learn the next thing.",
-    highlight: "Shipping while studying",
+    text: "MS CS complete (4.0, Aug 2026). I ship products, train most days, and keep a public DSA streak. The through-line is the same: show up, finish, learn the next thing.",
+    highlight: "Always shipping, always training",
   },
 ] as const;
 

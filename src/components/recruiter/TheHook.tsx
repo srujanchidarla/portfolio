@@ -16,9 +16,9 @@ const MODES: Record<
     metric: HERO_METRICS.gpa,
     suffix: "/4.0",
     decimals: 1,
-    label: "GPA · graduating Aug 2026",
+    label: "GPA · graduated Aug 2026",
     story:
-      "Finishing my Master's in Computer Science with a 4.0 GPA while shipping CampfireChai, JobHuntOS, and Neocortex. I'm an ambitious new grad — not hiding my experience, but honest that I want to learn and grow on a team.",
+      "Finished my Master's in Computer Science with a 4.0 GPA while shipping Wildmate, JobHuntOS, and Neocortex. I'm an ambitious new grad — not hiding my experience, but honest that I want to learn and grow on a team.",
   },
   ship: {
     title: "What I've already shipped",

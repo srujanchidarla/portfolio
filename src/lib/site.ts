@@ -3,13 +3,13 @@ export const PRIMARY_ROLE = {
   short: "Engineer",
   tagline: "Software Engineer",
   headline:
-    "MS CS (Aug 2026, 4.0 GPA) — system design, computer networks, and production AI systems at 2M+ req/day.",
+    "MS CS grad (Aug 2026, 4.0 GPA) — system design, computer networks, and production AI systems at 2M+ req/day.",
 } as const;
 
 export const SITE = {
   name: "Srujan Chidarla",
   role: PRIMARY_ROLE.tagline,
-  tagline: "System design · Networks · AI · MS CS Aug 2026",
+  tagline: "System design · Networks · AI · MS CS grad, Aug 2026",
   status: "Engineer · athlete · builder",
   gradDate: "August 2026",
   email: "srujanchidarla.uof@gmail.com",

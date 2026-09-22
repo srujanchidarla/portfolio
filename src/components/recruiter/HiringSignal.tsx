@@ -22,7 +22,7 @@ export default function HiringSignal() {
             Open to <span className="gradient-text">work</span>
           </h2>
           <p className="section-subtitle">
-            Graduating Aug 2026 — interested in teams that ship real products with mentorship and
+            Graduated Aug 2026 — interested in teams that ship real products with mentorship and
             strong engineering culture.
           </p>
         </motion.header>
@@ -42,7 +42,7 @@ export default function HiringSignal() {
         <div className="rh-hire__meta">
           <span>
             <GraduationCap size={16} aria-hidden="true" />
-            Graduating {SITE.gradDate} · 4.0 GPA
+            Graduated {SITE.gradDate} · 4.0 GPA
           </span>
           <span>
             <MapPin size={16} aria-hidden="true" />
@@ -50,7 +50,7 @@ export default function HiringSignal() {
           </span>
           <span>
             <Calendar size={16} aria-hidden="true" />
-            Available after graduation
+            Available now
           </span>
         </div>
 

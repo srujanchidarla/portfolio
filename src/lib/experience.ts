@@ -74,8 +74,8 @@ export const EDUCATION = [
     id: "ms",
     school: "University of Fairfax",
     degree: "Master of Science in Computer Science",
-    duration: "Aug 2024 – Aug 2026 (Expected)",
-    detail: "GPA 4.0/4.0 · Shipping CampfireChai, JobHuntOS, and Neocortex while studying",
+    duration: "Aug 2024 – Aug 2026",
+    detail: "GPA 4.0/4.0 · Shipped Wildmate, JobHuntOS, and AgriWise while earning it",
     location: "Fairfax, VA",
   },
   {

@@ -25,7 +25,7 @@ export const LOOKING_FOR = [
     id: "location",
     title: "Logistics",
     items: [
-      `Graduating ${SITE.gradDate} · available to start after`,
+      `Graduated ${SITE.gradDate} · available now`,
       "United States · STEM OPT (36 months)",
       "No immediate sponsorship required",
       "Open to relocating anywhere in the US — remote or on-site",
@@ -142,8 +142,8 @@ export const ROLE_WHY_HIRE = [
     title: "Full-Stack Engineer",
     bullets: [
       "I ship products end-to-end: UI, API, data model, and deploy — not just components.",
-      "Live products: CampfireChai, JobHuntOS, AlgoChronicle, StudyGlobal — plus Neocortex in progress.",
-      "WalletGyde internship: 35% engagement ↑ and 40% faster transactions while finishing my Master's.",
+      "Live products: Wildmate, JobHuntOS, AlgoChronicle, StudyGlobal, AgriWise — plus Neocortex in progress.",
+      "WalletGyde internship: 35% engagement ↑ and 40% faster transactions while earning my Master's.",
     ],
   },
 ] as const;

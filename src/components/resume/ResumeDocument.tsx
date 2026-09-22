@@ -26,8 +26,9 @@ export default function ResumeDocument() {
           <strong>2M+ req/day</strong> and <strong>99.9% uptime</strong>; cut hot-path{" "}
           <strong>P99 latency from ~250ms to ~50ms</strong>. Ships AI with real routing and
           failover — <strong>JobHuntOS</strong> (Chrome Web Store) and <strong>Neocortex</strong>{" "}
-          (15 agents, 6-provider chain). MS CS coursework in TCP/IP, BGP/OSPF, distributed systems (
-          <strong>GPA 4.0/4.0</strong>, Aug 2026). Open to relocate nationwide · STEM OPT (36 months).
+          (15 agents, 6-provider chain). MS CS in TCP/IP, BGP/OSPF, distributed systems (
+          <strong>GPA 4.0/4.0</strong>, graduated Aug 2026). Open to relocate nationwide · STEM OPT
+          (36 months).
         </p>
       </section>
 
@@ -174,8 +175,8 @@ export default function ResumeDocument() {
       <section>
         <h2>Education</h2>
         <p>
-          <strong>University of Fairfax</strong> — M.S. Computer Science · Aug 2024 – Aug 2026
-          (Expected) · GPA 4.0/4.0
+          <strong>University of Fairfax</strong> — M.S. Computer Science · Aug 2024 – Aug 2026 ·
+          GPA 4.0/4.0
           <br />
           <em>
             Coursework: System Design · Distributed Systems · Computer Networks (TCP/IP, BGP/OSPF) ·

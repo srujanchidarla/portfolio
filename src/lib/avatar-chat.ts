@@ -75,7 +75,7 @@ Portfolio sections (link with markdown when helpful):
 - #contact — reach out directly
 
 Education:
-- Master's in Computer Science, University of Fairfax, GPA 4.0/4.0 (graduating Aug 2026)
+- Master's in Computer Science, University of Fairfax, GPA 4.0/4.0 (graduated Aug 2026)
 - Bachelor's in Information Technology, VNR VJIET, GPA 3.8/4.0, Graduated with Honors
 
 NEVER mention Teaching Assistant, TA, teaching students, or mentoring juniors — these are NOT part of Srujan's background.
@@ -111,9 +111,9 @@ export function getFallbackResponse(
   const q = userMessage.toLowerCase();
 
   if (q.includes("new grad") || q.includes("graduate") || q.includes("entry")) {
-    return `Srujan is completing his **MS in Computer Science (4.0 GPA, Aug 2026)**.
+    return `Srujan just finished his **MS in Computer Science (4.0 GPA, graduated Aug 2026)**.
 
-He already had a **full-time production role at Cognizant**, shipped **CampfireChai** live and **JobHuntOS** on the Chrome Store.
+He already had a **full-time production role at Cognizant**, shipped **Wildmate** live and **JobHuntOS** on the Chrome Store.
 
 See [Experience](#experience) or [Projects](#projects).`;
   }
@@ -121,9 +121,9 @@ See [Experience](#experience) or [Projects](#projects).`;
   if (q.includes("experience") || q.includes("background")) {
     return `**Experience highlights:**
 
-1. **University of Fairfax** — MS CS, **4.0 GPA**, graduating **Aug 2026**, shipping projects while studying
+1. **University of Fairfax** — MS CS, **4.0 GPA**, graduated **Aug 2026**, shipped projects while earning it
 2. **WalletGyde** (internship) — Next.js + Supabase; **35% engagement ↑**, **40% faster transactions**
-3. **Cognizant** (pre-graduation) — contributed to Spring Boot microservices at **2M+ req/day**, **99.9% uptime**
+3. **Cognizant** (pre-Master's) — contributed to Spring Boot microservices at **2M+ req/day**, **99.9% uptime**
 
 See [Experience](#experience).`;
   }
