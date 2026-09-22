@@ -59,14 +59,15 @@ export const PROJECTS: Project[] = [
     id: "campfirechai",
     title: "Wildmate",
     period: "2025 – Present",
-    tagline: "Community platform for Desi outdoor adventurers in the USA",
+    tagline: "Community platform for outdoor adventurers",
     description:
-      "A full-stack community platform I built for Desi and Indian outdoor adventurers — trip discovery, meetups, bucket-list planning, permits, crew matching, and real-time trip coordination in one product across 15+ US metro hubs and all 50 states.",
+      "A full-stack community platform for outdoor adventurers — trip discovery, meetups, permits, crew matching, and real-time trip coordination for hikes, paddles, climbs, and stargazing, in one product across 15+ US metro hubs.",
     highlights: [
       "React 19 + Vite frontend, Express 5/Mongoose API — JWT auth, geo trip search, hub-based content",
-      "Socket.io trip chat, shared logistics (gear, meals, carpools), member approvals",
-      "AI trip drafting (Magic Paste) with multi-provider fallbacks; NPS events + Weather.gov integration",
-      "Bucket lists with A–Z visit playbooks; seasonal recommendations by country, hub, and season",
+      "Magic Paste: paste a messy trip idea, get a structured itinerary with geocoded waypoints and multi-provider LLM fallbacks (Gemini, Groq, OpenRouter, Together AI, Cohere, Claude)",
+      "Socket.io trip chat, shared logistics (gear, meals, carpools, permits, costs), member approvals",
+      "Weather.gov + Wikipedia-powered trail context; permit/lottery bulletin and a dedicated park-passes guide",
+      "Capacitor 7 iOS/Android shells wrapping the live wildmate.app frontend, with FCM push on Android",
     ],
     tags: [
       "React 19",
@@ -80,7 +81,7 @@ export const PROJECTS: Project[] = [
     links: [
       {
         label: "Live App",
-        href: "https://wildlink.world/",
+        href: "https://wildmate.app/",
       },
       {
         label: "GitHub",

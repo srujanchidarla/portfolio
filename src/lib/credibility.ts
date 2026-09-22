@@ -93,7 +93,7 @@ export const OPEN_SOURCE: ProfileHighlight = {
   subtitle: "Shipped extensions used in real workflows",
     items: [
       "Neocortex — local-first Jarvis Life OS with 15 AI agents (FastAPI, Next.js, Expo)",
-      "CampfireChai — live outdoor community app for Desi adventurers (React, Node, MongoDB, Socket.io)",
+      "CampfireChai (Wildmate) — live outdoor community app for adventurers (React, Node, MongoDB, Socket.io)",
       "JobHuntOS — AI Chrome extension for job search (MV3, LLM routing, Chrome Web Store)",
     "PixelPeek — Chrome extension for real-time media dimension analysis (privacy-first, local processing)",
     "TrueScreenshot — VS Code extension for exact code screenshots with syntax highlighting",

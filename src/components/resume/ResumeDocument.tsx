@@ -134,7 +134,7 @@ export default function ResumeDocument() {
 
         <div className="resume-doc__job">
           <div className="resume-doc__job-top">
-            <h3>CampfireChai — Real-Time + AI Coordination</h3>
+            <h3>CampfireChai (Wildmate) — Real-Time + AI Coordination</h3>
             <span>Live · Socket.io · LLM fallbacks</span>
           </div>
           <ul>

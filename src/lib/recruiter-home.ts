@@ -94,17 +94,17 @@ export const IMPACT_PROJECTS = [
     previewImage: "/project-previews/campfirechai.jpg",
     journey: "First full-stack app shipped to real users",
     problem:
-      "Desi outdoor groups in the US had no single place for trips, permits, carpools, and crew matching.",
+      "Outdoor adventurers had no single place to find crews, plan trips, and handle the logistics — permits, gear, carpools — around hikes, paddles, and climbs.",
     solution:
-      "Full-stack monorepo: React 19 + Vite frontend, Express 5 + MongoDB API, Socket.io real-time chat, and AI trip drafts — live at wildlink.world.",
+      "Full-stack monorepo: React 19 + Vite frontend, Express 5 + MongoDB API, Socket.io real-time trip chat, and Magic Paste — paste a messy trip idea and get a structured itinerary with geocoded waypoints — live at wildmate.app.",
     learned:
       "How to ship end-to-end: database design, real-time features, deployment, and iterating from user feedback. This taught me production full-stack ownership.",
-    result: "Live at wildlink.world",
+    result: "Live at wildmate.app",
     resultDetail: "15+ metro hubs, real-time trip coordination, and Magic Paste AI drafting.",
     stack: ["React 19", "Node.js", "Express", "MongoDB", "Socket.io", "Vite"],
     color: "#f59e0b",
     href: "https://github.com/srujanchidarla/CampfireChai",
-    liveHref: "https://wildlink.world/",
+    liveHref: "https://wildmate.app/",
   },
   {
     id: "algochronicle",

@@ -140,7 +140,7 @@ Honest skill levels in [Skills](#skills).`;
     return `**Top picks:**
 
 - **Neocortex** — my ongoing Jarvis Life OS with 15 AI agents ([GitHub](https://github.com/srujanchidarla/neocortex))
-- **CampfireChai (Wildmate)** — live community app for Desi outdoor adventurers ([Live](https://wildlink.world/) · [GitHub](https://github.com/srujanchidarla/CampfireChai))
+- **CampfireChai (Wildmate)** — live community app for outdoor adventurers ([Live](https://wildmate.app/) · [GitHub](https://github.com/srujanchidarla/CampfireChai))
 - **StudyGlobal** — international student platform (research → relocation → in-country support)
 - **JobHuntOS** — AI Chrome extension on the Web Store
 - **FitConnect** — social fitness platform in [Showcases](#showcases)
@@ -190,9 +190,9 @@ See all with certificate links in [Certifications](#certifications).`;
   }
 
   if (q.includes("campfire") || q.includes("outdoor") || q.includes("desi")) {
-    return `**CampfireChai (Wildmate)** is my live full-stack community platform for Desi outdoor adventurers in the US — trips, meetups, permits, bucket lists, AI trip drafts, and real-time chat.
+    return `**CampfireChai (Wildmate)** is my live full-stack community platform for outdoor adventurers — trips, meetups, permits, crew matching, Magic Paste AI trip drafting, and real-time chat.
 
-[Live app](https://wildlink.world/) · [GitHub](https://github.com/srujanchidarla/CampfireChai)`;
+[Live app](https://wildmate.app/) · [GitHub](https://github.com/srujanchidarla/CampfireChai)`;
   }
 
   if (q.includes("neocortex") || q.includes("jarvis") || q.includes("life os")) {
