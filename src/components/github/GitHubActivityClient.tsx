@@ -115,16 +115,20 @@ function ContributionGraph({
         </Tooltip>
       </div>
 
-      {hovered && hovered.date && (
-        <p className="gh-graph__hover">
-          <strong>{hovered.count}</strong> contributions on{" "}
-          {new Date(hovered.date + "T12:00:00").toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-          })}
-        </p>
-      )}
+      <p className="gh-graph__hover">
+        {hovered && hovered.date ? (
+          <>
+            <strong>{hovered.count}</strong> contributions on{" "}
+            {new Date(hovered.date + "T12:00:00").toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            })}
+          </>
+        ) : (
+          <>&nbsp;</>
+        )}
+      </p>
 
       <div className="gh-graph__layout">
         <div className="gh-graph__day-labels" aria-hidden="true">
