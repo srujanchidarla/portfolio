@@ -1570,29 +1570,29 @@ body.boot-loading {
   filter: drop-shadow(0 7px 12px rgba(0, 0, 0, 0.3));
   animation:
     boot-hybrid-lap 1.35s ease-in-out infinite,
-    boot-hybrid-stage 0.8s ease both;
+    boot-hybrid-stage 0.65s ease both;
 }
 
 .boot-hybrid__runner:nth-child(2) {
   animation-delay: 0s, 0s;
 }
 .boot-hybrid__runner:nth-child(3) {
-  animation-delay: 0s, 0.8s;
+  animation-delay: 0s, 0.65s;
 }
 .boot-hybrid__runner:nth-child(4) {
-  animation-delay: 0s, 1.6s;
+  animation-delay: 0s, 1.3s;
 }
 .boot-hybrid__runner:nth-child(5) {
-  animation-delay: 0s, 2.4s;
+  animation-delay: 0s, 1.95s;
 }
 .boot-hybrid__runner:nth-child(6) {
-  animation-delay: 0s, 3.2s;
+  animation-delay: 0s, 2.6s;
 }
 .boot-hybrid__runner:nth-child(7) {
-  animation-delay: 0s, 4s;
+  animation-delay: 0s, 3.25s;
 }
 .boot-hybrid__runner:nth-child(8) {
-  animation-delay: 0s, 4.8s;
+  animation-delay: 0s, 3.9s;
 }
 
 .boot-hybrid__identity {
@@ -1670,29 +1670,29 @@ body.boot-loading {
   font-family: var(--font-mono);
   font-size: 12px;
   opacity: 0;
-  animation: boot-hybrid-stage 0.8s ease both;
+  animation: boot-hybrid-stage 0.65s ease both;
 }
 
 .boot-hybrid__label:nth-child(1) {
   animation-delay: 0s;
 }
 .boot-hybrid__label:nth-child(2) {
-  animation-delay: 0.8s;
+  animation-delay: 0.65s;
 }
 .boot-hybrid__label:nth-child(3) {
-  animation-delay: 1.6s;
+  animation-delay: 1.3s;
 }
 .boot-hybrid__label:nth-child(4) {
-  animation-delay: 2.4s;
+  animation-delay: 1.95s;
 }
 .boot-hybrid__label:nth-child(5) {
-  animation-delay: 3.2s;
+  animation-delay: 2.6s;
 }
 .boot-hybrid__label:nth-child(6) {
-  animation-delay: 4s;
+  animation-delay: 3.25s;
 }
 .boot-hybrid__label:nth-child(7) {
-  animation-delay: 4.8s;
+  animation-delay: 3.9s;
 }
 
 .boot-hybrid__cursor {
@@ -1721,7 +1721,7 @@ body.boot-loading {
   border-radius: inherit;
   background: linear-gradient(90deg, var(--c-primary), var(--c-accent));
   box-shadow: 0 0 12px color-mix(in srgb, var(--c-primary) 38%, transparent);
-  animation: boot-minimal-progress 5.6s linear forwards;
+  animation: boot-minimal-progress 4.55s linear forwards;
 }
 
 .boot-hybrid__pipeline {
@@ -1747,29 +1747,29 @@ body.boot-loading {
   background: var(--c-surface);
   font-size: 15px;
   opacity: 0.3;
-  animation: boot-hybrid-dot 0.8s ease both;
+  animation: boot-hybrid-dot 0.65s ease both;
 }
 
 .boot-hybrid__dot:nth-child(1) {
   animation-delay: 0s;
 }
 .boot-hybrid__dot:nth-child(2) {
-  animation-delay: 0.8s;
+  animation-delay: 0.65s;
 }
 .boot-hybrid__dot:nth-child(3) {
-  animation-delay: 1.6s;
+  animation-delay: 1.3s;
 }
 .boot-hybrid__dot:nth-child(4) {
-  animation-delay: 2.4s;
+  animation-delay: 1.95s;
 }
 .boot-hybrid__dot:nth-child(5) {
-  animation-delay: 3.2s;
+  animation-delay: 2.6s;
 }
 .boot-hybrid__dot:nth-child(6) {
-  animation-delay: 4s;
+  animation-delay: 3.25s;
 }
 .boot-hybrid__dot:nth-child(7) {
-  animation-delay: 4.8s;
+  animation-delay: 3.9s;
 }
 
 @keyframes boot-hybrid-stage {

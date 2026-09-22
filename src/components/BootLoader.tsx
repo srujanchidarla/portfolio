@@ -14,9 +14,9 @@ const BOOT_FRAMES = [
 ] as const;
 
 const BOOT_SEEN_KEY = "portfolio-boot-seen";
-/** Must match CSS stage timing (7 × 0.8s) */
-const TOTAL_MS = 5600;
-const EXIT_MS = 480;
+/** Must match CSS stage timing (7 × 0.65s) */
+const TOTAL_MS = 4550;
+const EXIT_MS = 420;
 
 export default function BootLoader() {
   const { markBootReady } = useBoot();
