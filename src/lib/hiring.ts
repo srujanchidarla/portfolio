@@ -183,8 +183,8 @@ export const ROLE_FIT = [
     id: "fullstack" as const,
     title: "Full-Stack Engineer",
     heading: "Why I'm your fit",
-    experience: "6 featured applications from concept toward production",
-    proof: "CampfireChai (live), JobHuntOS (Chrome Store), AlgoChronicle (live), StudyGlobal (beta)",
+    experience: "7 featured applications from concept toward production",
+    proof: "Wildmate (live), JobHuntOS (Chrome Store), AlgoChronicle (live), AgriWise (live), StudyGlobal (beta)",
     know: "Rapid prototyping, database design, real-time systems, deployment automation",
     example:
       "I built CampfireChai end-to-end: React 19 frontend, Node.js backend, Socket.io real-time, deployed on Vercel.",
@@ -217,7 +217,7 @@ export const MARKET_POSITION = {
   competitive: [
     "Production scale (2M+ req/day) — most new grads don't have this",
     "System design + networks coursework — depth beyond typical full-stack portfolios",
-    "Full-stack shipping proof — six featured apps, not tutorial clones",
+    "Full-stack shipping proof — seven featured apps, not tutorial clones",
     "LLM product shipped (JobHuntOS) — real product constraints, not demos",
     "4.0 MS GPA while building in public — consistency and discipline",
   ],
@@ -238,7 +238,7 @@ export const VALUE_PROPS = [
     icon: "◈",
     title: "Full-stack shipping",
     description:
-      "Six featured apps from UI through API, data model, and deploy — CampfireChai, JobHuntOS, AlgoChronicle, and more.",
+      "Seven featured apps from UI through API, data model, and deploy — Wildmate, JobHuntOS, AlgoChronicle, and more.",
     example: "WalletGyde internship: 35% engagement ↑ and 40% faster transactions.",
   },
   {

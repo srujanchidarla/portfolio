@@ -141,6 +141,7 @@ Honest skill levels in [Skills](#skills).`;
 
 - **Neocortex** — my ongoing Jarvis Life OS with 15 AI agents ([GitHub](https://github.com/srujanchidarla/neocortex))
 - **CampfireChai (Wildmate)** — live community app for outdoor adventurers ([Live](https://wildmate.app/) · [GitHub](https://github.com/srujanchidarla/CampfireChai))
+- **AgriWise** — digital agriculture platform for Indian farmers, 8 modules ([Live](https://agriwise-mauve.vercel.app/))
 - **StudyGlobal** — international student platform (research → relocation → in-country support)
 - **JobHuntOS** — AI Chrome extension on the Web Store
 - **FitConnect** — social fitness platform in [Showcases](#showcases)
@@ -193,6 +194,12 @@ See all with certificate links in [Certifications](#certifications).`;
     return `**CampfireChai (Wildmate)** is my live full-stack community platform for outdoor adventurers — trips, meetups, permits, crew matching, Magic Paste AI trip drafting, and real-time chat.
 
 [Live app](https://wildmate.app/) · [GitHub](https://github.com/srujanchidarla/CampfireChai)`;
+  }
+
+  if (q.includes("agriwise") || q.includes("agri") || q.includes("farmer") || q.includes("farming")) {
+    return `**AgriWise** is a full digital agriculture platform I built for Indian farmers — 8 modules covering AI-powered soil and crop recommendations, real-time pricing and 30-day forecasts across 2,500+ mandis, a cultivation calendar, a supply-chain marketplace, and loan/scheme navigation, in 22 Indian languages.
+
+[Live app](https://agriwise-mauve.vercel.app/)`;
   }
 
   if (q.includes("neocortex") || q.includes("jarvis") || q.includes("life os")) {

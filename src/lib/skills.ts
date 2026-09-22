@@ -133,7 +133,7 @@ export const TOOLS: ToolSkill[] = [
   { name: "Git / GitHub", level: "advanced", years: "5+ years", project: "All projects" },
   { name: "Spring Boot", level: "advanced", years: "4+ years", project: "Cognizant microservices" },
   { name: "Next.js", level: "advanced", years: "2+ years", project: "Portfolio & JobHuntOS" },
-  { name: "React", level: "advanced", years: "3+ years", project: "6 featured shipped apps" },
+  { name: "React", level: "advanced", years: "3+ years", project: "7 featured shipped apps" },
   { name: "MongoDB", level: "advanced", years: "3+ years", project: "Full-stack apps" },
   { name: "AWS", level: "advanced", years: "2+ years", project: "Cloud infrastructure" },
   { name: "Docker", level: "intermediate", years: "2+ years", project: "Service containerization" },

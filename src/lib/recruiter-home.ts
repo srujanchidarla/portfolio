@@ -2,7 +2,7 @@ import { SITE } from "./site";
 
 export const HERO_METRICS = {
   gpa: 4.0,
-  projectsShipped: 6,
+  projectsShipped: 7,
   dailyRequests: 2_000_000,
 } as const;
 
@@ -25,8 +25,8 @@ export const PROOF_CARDS = [
     headline: "Full-stack products shipped",
     subline: "UI · API · data · deploy",
     detail:
-      "CampfireChai, JobHuntOS, AlgoChronicle, and StudyGlobal — complete UIs, APIs, data models, and deploys I own. WalletGyde internship: 35% engagement ↑ and 40% faster transactions while finishing my Master's.",
-    metrics: ["6 featured apps", "Chrome Web Store", "Live on Vercel", "Real-time systems"],
+      "Wildmate, JobHuntOS, AlgoChronicle, StudyGlobal, and AgriWise — complete UIs, APIs, data models, and deploys I own. WalletGyde internship: 35% engagement ↑ and 40% faster transactions while finishing my Master's.",
+    metrics: ["7 featured apps", "Chrome Web Store", "Live on Vercel", "Real-time systems"],
     color: "#f97316",
     icon: "ship",
   },
@@ -44,6 +44,27 @@ export const PROOF_CARDS = [
 ] as const;
 
 export const IMPACT_PROJECTS = [
+  {
+    id: "agriwise",
+    title: "AgriWise",
+    tag: "AgriTech · AI · Live",
+    role: "Solo engineer · full-stack product and AI features",
+    lanes: ["AI", "Full-Stack"],
+    previewImage: "/project-previews/agriwise.jpg",
+    journey: "Widest platform scope — 8 modules shipped solo",
+    problem:
+      "Indian farmers had no single platform connecting soil data, market prices, weather, and government financial schemes — just fragmented, unreliable sources.",
+    solution:
+      "A full digital agriculture ecosystem: AI-powered soil and crop recommendations, real-time pricing and 30-day forecasts across 2,500+ mandis, a cultivation calendar with weather alerts, a supply-chain marketplace, and loan/scheme navigation — in 22 Indian languages.",
+    learned:
+      "How to scope and ship a genuinely multi-domain product — agronomy, commodity markets, weather, and government finance — as one coherent platform, and where AI adds real signal versus where it's just noise.",
+    result: "Live at agriwise-mauve.vercel.app",
+    resultDetail:
+      "8 integrated modules — soil intelligence, 2,500+ mandi price forecasts, cultivation planning, and financial-scheme navigation.",
+    stack: ["Next.js", "Tailwind CSS", "Turbopack"],
+    color: "#65a30d",
+    liveHref: "https://agriwise-mauve.vercel.app/",
+  },
   {
     id: "neocortex",
     title: "Neocortex",
