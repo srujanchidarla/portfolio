@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
-import { ArrowRight, MessageCircle, Trophy } from "lucide-react";
+import { ArrowRight, MessageCircle, Rocket, Trophy } from "lucide-react";
 import { SITE, PRIMARY_ROLE, SITE_IMAGES } from "@/lib/site";
 import { HERO_METRICS } from "@/lib/recruiter-home";
 import { useContact } from "@/components/ContactProvider";
@@ -51,8 +51,25 @@ export default function HeroRecruiter() {
         <div className="hero__layout">
           <div className="hero__grid">
             <div className="hero__content">
-              <motion.div
+              <motion.a
+                href="https://wildmate.app/"
+                target="_blank"
+                rel="noopener noreferrer"
                 custom={0}
+                variants={fadeUp}
+                initial="hidden"
+                animate="visible"
+                className="hero__launch"
+              >
+                <Rocket size={13} aria-hidden="true" />
+                <span>
+                  <strong>Just shipped</strong> — Wildmate is live, check it out
+                </span>
+                <ArrowRight size={13} className="hero__launch-arrow" aria-hidden="true" />
+              </motion.a>
+
+              <motion.div
+                custom={1}
                 variants={fadeUp}
                 initial="hidden"
                 animate="visible"
@@ -69,7 +86,7 @@ export default function HeroRecruiter() {
               </motion.div>
 
               <motion.h1
-                custom={1}
+                custom={2}
                 variants={fadeUp}
                 initial="hidden"
                 animate="visible"
@@ -79,7 +96,7 @@ export default function HeroRecruiter() {
               </motion.h1>
 
               <motion.p
-                custom={2}
+                custom={3}
                 variants={fadeUp}
                 initial="hidden"
                 animate="visible"
@@ -89,7 +106,7 @@ export default function HeroRecruiter() {
               </motion.p>
 
               <motion.p
-                custom={3}
+                custom={4}
                 variants={fadeUp}
                 initial="hidden"
                 animate="visible"
@@ -103,7 +120,7 @@ export default function HeroRecruiter() {
               </motion.p>
 
               <motion.div
-                custom={4}
+                custom={5}
                 variants={fadeUp}
                 initial="hidden"
                 animate="visible"
@@ -136,7 +153,7 @@ export default function HeroRecruiter() {
               </motion.div>
 
               <motion.div
-                custom={5}
+                custom={6}
                 variants={fadeUp}
                 initial="hidden"
                 animate="visible"
@@ -195,6 +212,19 @@ export default function HeroRecruiter() {
         </div>
 
         <div className="hero__mobile-content">
+          <a
+            href="https://wildmate.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hero__launch hero__launch--mobile"
+          >
+            <Rocket size={13} aria-hidden="true" />
+            <span>
+              <strong>Just shipped</strong> — Wildmate is live
+            </span>
+            <ArrowRight size={13} className="hero__launch-arrow" aria-hidden="true" />
+          </a>
+
           <div className="hero__mobile-badges">
             <span className="hero__badge hero__badge--grad">
               <span className="hero__badge-dot" aria-hidden="true" />

@@ -360,6 +360,53 @@ body {
   flex-direction: column;
 }
 
+.hero__launch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px 7px 10px;
+  margin-bottom: 16px;
+  border-radius: 9999px;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--c-accent);
+  font-size: 12.5px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.hero__launch svg:first-child {
+  flex-shrink: 0;
+  animation: pulse-dot 2.4s ease infinite;
+}
+
+.hero__launch strong {
+  color: inherit;
+  font-weight: 700;
+}
+
+.hero__launch-arrow {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.hero__launch:hover {
+  transform: translateY(-1px);
+  border-color: rgba(245, 158, 11, 0.55);
+  background: rgba(245, 158, 11, 0.16);
+}
+
+.hero__launch:hover .hero__launch-arrow {
+  transform: translateX(2px);
+}
+
+.hero__launch--mobile {
+  white-space: normal;
+  text-align: left;
+}
+
 .hero__badges {
   display: flex;
   flex-direction: column;
