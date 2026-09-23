@@ -8,7 +8,7 @@ export const SYSTEM_DESIGN_ESSAY = {
   tags: ["System Design", "AI", "Architecture"] as const,
   href: "/writing/system-design",
   summary:
-    "From monoliths to microservices to LLM-aware platforms — why system design still matters for new grads shipping real products, and how I apply it in CampfireChai, JobHuntOS, and production work.",
+    "From monoliths to microservices to LLM-aware platforms — why system design still matters for new grads shipping real products, and how I apply it in Wildmate, JobHuntOS, and production work.",
 } as const;
 
 export type ArchNode = {
@@ -129,7 +129,7 @@ export const SYSTEM_DESIGN_SECTIONS = [
     id: "why",
     heading: "Why I'm writing this",
     body: [
-      "I'm not a principal architect. I'm a new grad who got early exposure to systems that served millions of requests a day, then spent the last year shipping my own products — CampfireChai, JobHuntOS, StudyGlobal, and Neocortex.",
+      "I'm not a principal architect. I'm a new grad who got early exposure to systems that served millions of requests a day, then spent the last year shipping my own products — Wildmate, JobHuntOS, StudyGlobal, and Neocortex.",
       "Every time something broke (and things always break), the lesson was the same: cute demos don't survive traffic. System design is the difference between \"it works on my laptop\" and \"it still works at 2 a.m. when one dependency flakes.\"",
     ],
   },
@@ -156,7 +156,7 @@ export const SYSTEM_DESIGN_SECTIONS = [
     heading: "Why it still matters for someone like me",
     body: [
       "Recruiters don't hire new grads to invent CAP theorem papers. They hire people who can reason about trade-offs: consistency vs latency, sync vs async, cache hit vs stale data, one service vs a tangle of five.",
-      "At Cognizant-scale exposure I saw what 99.9% uptime feels like operationally. In CampfireChai I felt real-time coordination (Socket.io) meet product urgency. In StudyGlobal I cared about data shape for real users. System design is the thread connecting all of that.",
+      "At Cognizant-scale exposure I saw what 99.9% uptime feels like operationally. In Wildmate I felt real-time coordination (Socket.io) meet product urgency. In StudyGlobal I cared about data shape for real users. System design is the thread connecting all of that.",
       "If you can sketch the request path — user → edge → API → service → cache/DB → queue → monitors — and explain one failure mode at each hop, you're already ahead of most tutorial portfolios.",
     ],
   },

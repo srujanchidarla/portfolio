@@ -32,7 +32,8 @@ export const metadata: Metadata = {
     "distributed systems",
     "2026 graduate",
     "JobHuntOS",
-    "CampfireChai",
+    "Wildmate",
+    "AgriWise",
     "STEM OPT",
   ],
   openGraph: {

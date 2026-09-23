@@ -7265,6 +7265,13 @@ html[data-theme="light"] .navbar__resume:hover {
   border-radius: var(--radius-lg);
   background: var(--c-surface);
   border: 1px solid var(--c-border);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rh-story__card:hover {
+  border-color: rgba(var(--c-primary-rgb), 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 }
 
 .rh-story__card h3 {
@@ -9211,11 +9218,14 @@ html[data-theme="light"] .navbar__resume:hover {
   color: inherit;
   cursor: pointer;
   text-align: left;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .rh-cta__card:hover {
   border-color: var(--c-primary);
+  background: rgba(var(--c-primary-rgb), 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(var(--c-primary-rgb), 0.12);
 }
 
 .rh-cta__card strong {

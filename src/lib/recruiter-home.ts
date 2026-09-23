@@ -197,7 +197,7 @@ export const SKILL_CLUSTERS = [
     label: "Backend",
     skills: [
       { name: "Java / Spring Boot", strength: "Strong" as SkillStrength, years: "4+ yrs learning", proof: "Cognizant · 2M+ req/day foundation", level: 82 },
-      { name: "Node.js / Express", strength: "Strong" as SkillStrength, years: "3+ yrs learning", proof: "CampfireChai · JobHuntOS APIs", level: 78 },
+      { name: "Node.js / Express", strength: "Strong" as SkillStrength, years: "3+ yrs learning", proof: "Wildmate · JobHuntOS APIs", level: 78 },
       { name: "Python / FastAPI", strength: "Comfortable" as SkillStrength, years: "Learning", proof: "Neocortex agent backend", level: 65 },
     ],
   },
@@ -223,7 +223,7 @@ export const SKILL_CLUSTERS = [
     id: "frontend",
     label: "Frontend",
     skills: [
-      { name: "React / Next.js", strength: "Strong" as SkillStrength, years: "3+ yrs learning", proof: "CampfireChai · StudyGlobal · portfolio", level: 80 },
+      { name: "React / Next.js", strength: "Strong" as SkillStrength, years: "3+ yrs learning", proof: "Wildmate · StudyGlobal · portfolio", level: 80 },
       { name: "TypeScript", strength: "Strong" as SkillStrength, years: "3+ yrs learning", proof: "Production codebases", level: 76 },
       { name: "Real-time UI", strength: "Comfortable" as SkillStrength, years: "2+ yrs learning", proof: "Socket.io · live dashboards", level: 68 },
     ],

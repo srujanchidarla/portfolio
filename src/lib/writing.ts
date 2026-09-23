@@ -45,7 +45,7 @@ export const WRITING_POSTS: WritingPost[] = [
     title: "New grads don't need a perfect stack — they need shipped proof",
     date: "2026-06-10",
     summary:
-      "Why CampfireChai and JobHuntOS matter more on a résumé than another unfinished tutorial clone — and how recruiters actually scan portfolios.",
+      "Why Wildmate and JobHuntOS matter more on a résumé than another unfinished tutorial clone — and how recruiters actually scan portfolios.",
     tags: ["Career", "New Grad", "Portfolio"],
     href: "https://www.linkedin.com/in/srujan-chidarla",
   },

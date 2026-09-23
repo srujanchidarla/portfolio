@@ -21,7 +21,7 @@ export const SITE = {
   localGuidePhotos:
     "https://www.google.com/maps/contrib/117828540649458317543/photos/@39.0235484,-76.9385184,11z/data=!3m1!4b1!4m3!8m2!3m1!1e1?entry=ttu",
   resumeUrl: "/resume",
-  lastUpdated: "August 24, 2026",
+  lastUpdated: "September 23, 2026",
 } as const;
 
 export type RoleResumeKey = "backend" | "platform" | "ai" | "fullstack";

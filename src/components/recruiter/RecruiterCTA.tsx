@@ -97,7 +97,7 @@ export default function RecruiterCTA() {
           </div>
 
           <p className="rh-cta__updated">
-            Last updated <time dateTime="2026-08-22">{SITE.lastUpdated}</time>
+            Last updated <time dateTime="2026-09-23">{SITE.lastUpdated}</time>
           </p>
         </motion.div>
       </div>

@@ -49,7 +49,7 @@ export const COMPETENCIES: Competency[] = [
     description: "End-to-end development from databases to UI",
     level: "advanced",
     years: "3+ years",
-    example: "CampfireChai, JobHuntOS, AlgoChronicle, StudyGlobal, and more",
+    example: "Wildmate, JobHuntOS, AlgoChronicle, StudyGlobal, and more",
     icon: "fullstack",
   },
   {
