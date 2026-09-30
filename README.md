@@ -105,3 +105,6 @@ This is my personal portfolio. The code is public for anyone curious how it's bu
 ---
 
 Built by [Srujan Chidarla](https://srujanchidarla.com) · [LinkedIn](https://www.linkedin.com/in/srujan-chidarla) · [GitHub](https://github.com/srujanchidarla)
+
+
+by srujan chidarla
