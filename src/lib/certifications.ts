@@ -42,7 +42,7 @@ export const CERTIFICATIONS: Certification[] = [
     title: "AWS Cloud Practitioner",
     issuer: "Amazon Web Services",
     issued: "May 2026",
-    url: "https://www.linkedin.com/in/srujan-chidarla/",
+    url: "https://www.linkedin.com/feed/update/urn:li:activity:7459700195958730752/",
     category: "cloud",
   },
   {
