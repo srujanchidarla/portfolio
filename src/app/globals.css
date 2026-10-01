@@ -251,6 +251,12 @@ body {
   box-shadow: 0 4px 20px rgba(var(--c-primary-rgb), 0.4);
 }
 
+.btn-primary:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: 0 1px 6px rgba(var(--c-primary-rgb), 0.35);
+  transition-duration: 0.08s;
+}
+
 .btn-secondary {
   background: transparent;
   color: var(--c-text-secondary);
@@ -262,6 +268,12 @@ body {
   border-color: rgba(255, 255, 255, 0.18);
   background: rgba(255, 255, 255, 0.03);
   transform: translateY(-1px);
+}
+
+.btn-secondary:active {
+  transform: translateY(0) scale(0.97);
+  background: rgba(255, 255, 255, 0.06);
+  transition-duration: 0.08s;
 }
 
 /* ── Hero ── */
@@ -400,6 +412,10 @@ body {
 
 .hero__launch:hover .hero__launch-arrow {
   transform: translateX(2px);
+}
+
+.hero__launch:active {
+  transform: translateY(0) scale(0.97);
 }
 
 .hero__launch--mobile {
@@ -574,6 +590,10 @@ body {
   transform: translateY(-2px);
   border-color: rgba(var(--c-primary-rgb), 0.5);
   box-shadow: 0 8px 20px rgba(var(--c-primary-rgb), 0.12);
+}
+
+.hero__metric:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .hero__metric-value {
@@ -4774,6 +4794,10 @@ html[data-theme="light"] .navbar__resume:hover {
   transform: translateY(-2px);
 }
 
+.cert-card:active {
+  transform: translateY(0) scale(0.98);
+}
+
 .cert-card__top {
   display: flex;
   align-items: flex-start;
@@ -4926,6 +4950,10 @@ html[data-theme="light"] .navbar__resume:hover {
   transform: translateY(-1px);
 }
 
+.github-stat-card:active {
+  transform: translateY(0) scale(0.98);
+}
+
 .github-stat-card__value {
   font-family: var(--font-mono);
   font-size: clamp(1.35rem, 2.8vw, 1.65rem);
@@ -5045,6 +5073,43 @@ html[data-theme="light"] .navbar__resume:hover {
   font-size: 13px;
   line-height: 1.5;
   max-width: 32ch;
+}
+
+/* ── Skeleton loading blocks ── */
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--c-surface);
+  border-radius: 6px;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--c-text) 8%, transparent),
+    transparent
+  );
+  animation: skeleton-sweep 1.6s ease-in-out infinite;
+}
+
+@keyframes skeleton-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none;
+  }
 }
 
 .gh-graph__stat-note {
@@ -5352,6 +5417,10 @@ html[data-theme="light"] .navbar__resume:hover {
 .github-repo-card:hover {
   border-color: color-mix(in srgb, var(--gh-level-4) 50%, var(--c-border));
   transform: translateY(-2px);
+}
+
+.github-repo-card:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .github-repo-card__top {
@@ -6434,6 +6503,10 @@ html[data-theme="light"] .navbar__resume:hover {
   color: var(--c-text);
 }
 
+.rh-skills__cluster-tabs button:active {
+  transform: scale(0.96);
+}
+
 .rh-skills__cluster-tabs button.is-active {
   border-color: var(--c-primary);
   color: var(--c-primary);
@@ -6538,6 +6611,10 @@ html[data-theme="light"] .navbar__resume:hover {
   border-color: color-mix(in srgb, var(--proj-color) 45%, var(--c-border));
   color: var(--c-text);
   transform: translateY(-1px);
+}
+
+.rh-projects__tab:active {
+  transform: translateY(0) scale(0.96);
 }
 
 .rh-projects__tab-dot {
@@ -7274,6 +7351,10 @@ html[data-theme="light"] .navbar__resume:hover {
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 }
 
+.rh-story__card:active {
+  transform: translateY(0) scale(0.99);
+}
+
 .rh-story__card h3 {
   font-size: 17px;
   font-weight: 700;
@@ -7502,6 +7583,10 @@ html[data-theme="light"] .navbar__resume:hover {
 
 .rh-athlete__nav-btn:hover {
   background: rgba(255, 255, 255, 0.16);
+}
+
+.rh-athlete__nav-btn:active {
+  transform: scale(0.9);
 }
 
 .rh-athlete__dots {
@@ -9228,6 +9313,10 @@ html[data-theme="light"] .navbar__resume:hover {
   box-shadow: 0 10px 24px rgba(var(--c-primary-rgb), 0.12);
 }
 
+.rh-cta__card:active {
+  transform: translateY(0) scale(0.98);
+}
+
 .rh-cta__card strong {
   font-size: 15px;
   color: var(--c-text);
@@ -9564,6 +9653,10 @@ html[data-theme="light"] .navbar__resume:hover {
   transform: translateY(-1px);
 }
 
+.rh-lg__strip:active {
+  transform: translateY(0) scale(0.99);
+}
+
 .rh-lg__avatar-wrap {
   position: relative;
   display: block;
@@ -9893,6 +9986,10 @@ html[data-theme="light"] .navbar__resume:hover {
 .rh-certs__item:hover {
   border-color: rgba(var(--c-primary-rgb), 0.45);
   background: rgba(var(--c-primary-rgb), 0.04);
+}
+
+.rh-certs__item:active {
+  transform: scale(0.98);
 }
 .rh-certs__icon {
   grid-row: 1 / span 2;

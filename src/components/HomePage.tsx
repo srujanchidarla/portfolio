@@ -1,15 +1,18 @@
+import { Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import HeroRecruiter from "@/components/recruiter/HeroRecruiter";
 import ProofSection from "@/components/recruiter/ProofSection";
 import Experience from "@/components/Experience";
 import ImpactProjects from "@/components/recruiter/ImpactProjects";
 import DailyDSA from "@/components/recruiter/DailyDSA";
+import DailyDSASkeleton from "@/components/recruiter/DailyDSASkeleton";
 import SkillsImpact from "@/components/recruiter/SkillsImpact";
 import FeaturedCerts from "@/components/recruiter/FeaturedCerts";
 import WritingSection from "@/components/recruiter/WritingSection";
 import AthleteLife from "@/components/recruiter/AthleteLife";
 import LocalGuideBanner from "@/components/recruiter/LocalGuideBanner";
 import GitHubActivity from "@/components/GitHubActivity";
+import GitHubActivitySkeleton from "@/components/github/GitHubActivitySkeleton";
 import RecruiterCTA from "@/components/recruiter/RecruiterCTA";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 import Footer from "@/components/Footer";
@@ -25,13 +28,17 @@ export default function HomePage() {
         <ProofSection />
         <Experience />
         <ImpactProjects limit={4} />
-        <DailyDSA />
+        <Suspense fallback={<DailyDSASkeleton />}>
+          <DailyDSA />
+        </Suspense>
         <SkillsImpact />
         <FeaturedCerts />
         <WritingSection />
         <AthleteLife />
         <LocalGuideBanner />
-        <GitHubActivity />
+        <Suspense fallback={<GitHubActivitySkeleton />}>
+          <GitHubActivity />
+        </Suspense>
         <RecruiterCTA />
       </main>
       <StickyMobileCTA />
