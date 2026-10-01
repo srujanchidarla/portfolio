@@ -30,6 +30,14 @@ export const CERT_CATEGORIES: Record<CertCategory, string> = {
 
 export const CERTIFICATIONS: Certification[] = [
   {
+    id: "genai-productivity-microsoft",
+    title: "Build Your Generative AI Productivity Skills with Microsoft and LinkedIn",
+    issuer: "Microsoft · LinkedIn Learning",
+    issued: "Sep 2026",
+    url: "https://www.linkedin.com/learning/certificates/088e490b132b85793f1700598fe8145b08fee042755564e51e85c6bc5c732651",
+    category: "ai",
+  },
+  {
     id: "aws-cp",
     title: "AWS Cloud Practitioner",
     issuer: "Amazon Web Services",

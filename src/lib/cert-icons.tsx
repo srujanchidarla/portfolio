@@ -41,13 +41,17 @@ const BRAND_ICON_BY_CERT_ID: Record<string, BrandIcon> = {
 };
 
 /**
- * AWS has no mark in simple-icons (they don't permit third-party use of their
- * logo), so it gets a generic cloud glyph tinted with their brand orange
- * instead of an unbranded default color.
+ * AWS and Microsoft have no marks in simple-icons (neither permits
+ * third-party use of their logo), so they get a generic glyph tinted with
+ * their real brand color instead of an unbranded default.
  */
 const FALLBACK_COLOR_BY_CERT_ID: Record<string, string> = {
   "aws-cp": "FF9900",
+  "genai-productivity-microsoft": "0078D4",
 };
+
+/** Certs about AI/prompting rather than a specific tool get a sparkle instead of a cloud. */
+const SPARKLE_FALLBACK_IDS = new Set(["prompt-eng", "genai-productivity-microsoft"]);
 
 const DEFAULT_FALLBACK_COLOR = "64748b";
 
@@ -55,7 +59,7 @@ export function CertBrandIcon({ certId, size = 16 }: { certId: string; size?: nu
   const brand = BRAND_ICON_BY_CERT_ID[certId];
 
   if (!brand) {
-    const Fallback = certId === "prompt-eng" ? Sparkles : Cloud;
+    const Fallback = SPARKLE_FALLBACK_IDS.has(certId) ? Sparkles : Cloud;
     const color = FALLBACK_COLOR_BY_CERT_ID[certId];
     return (
       <Fallback
