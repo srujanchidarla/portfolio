@@ -7,11 +7,11 @@ import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { IMPACT_PROJECTS } from "@/lib/recruiter-home";
 
 const PROJECT_ORDER = [
+  "algochronicle",
   "campfirechai",
   "jobhuntos",
   "neocortex",
   "agriwise",
-  "algochronicle",
   "studyglobal",
   "fitconnect",
 ] as const;
@@ -145,8 +145,8 @@ export default function ImpactProjects({ limit = CURATED_PROJECTS.length }: { li
             Products with <span className="gradient-text">real decisions behind them</span>
           </h2>
           <p className="section-subtitle">
-            Four projects first: the problem, what I built, the trade-offs I learned from, and a
-            working demo or source link. Three additional projects are available below.
+            Seven projects — the problem, what I built, the trade-offs I learned from, and a
+            working demo or source link for each.
           </p>
         </motion.header>
 

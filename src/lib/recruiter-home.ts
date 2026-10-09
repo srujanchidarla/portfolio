@@ -132,6 +132,7 @@ export const IMPACT_PROJECTS = [
     title: "AlgoChronicle",
     tag: "DSA · Automation · Live",
     role: "Solo engineer · automation, data pipeline, and frontend",
+    previewImage: "/project-previews/algochronicle.jpg",
     lanes: ["Backend", "Full-Stack"],
     journey: "Turning GitHub commits into a self-updating coding journal",
     problem:

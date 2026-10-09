@@ -27,7 +27,7 @@ export default function HomePage() {
         <HeroRecruiter />
         <ProofSection />
         <Experience />
-        <ImpactProjects limit={4} />
+        <ImpactProjects />
         <Suspense fallback={<DailyDSASkeleton />}>
           <DailyDSA />
         </Suspense>
