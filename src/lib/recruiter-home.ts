@@ -147,7 +147,7 @@ export const IMPACT_PROJECTS = [
     stack: ["Next.js", "TypeScript", "Firebase", "GitHub Actions", "Tailwind"],
     color: "#22c55e",
     href: "https://github.com/srujanchidarla/algochronicle",
-    liveHref: "https://algochronicle.vercel.app/",
+    liveHref: "https://www.algochronicle.com/",
     dsaRepoHref: "https://github.com/srujanchidarla/dsa-problems",
   },
   {
