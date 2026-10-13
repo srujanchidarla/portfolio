@@ -52,7 +52,7 @@ export default function HeroRecruiter() {
           <div className="hero__grid">
             <div className="hero__content">
               <motion.a
-                href="https://wildmate.app/"
+                href="https://www.algochronicle.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 custom={0}
@@ -63,7 +63,7 @@ export default function HeroRecruiter() {
               >
                 <Rocket size={13} aria-hidden="true" />
                 <span>
-                  <strong>Just shipped</strong> — Wildmate is live, check it out
+                  <strong>Try it free</strong> — AlgoChronicle, learn DSA one stage at a time
                 </span>
                 <ArrowRight size={13} className="hero__launch-arrow" aria-hidden="true" />
               </motion.a>
@@ -213,14 +213,14 @@ export default function HeroRecruiter() {
 
         <div className="hero__mobile-content">
           <a
-            href="https://wildmate.app/"
+            href="https://www.algochronicle.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="hero__launch hero__launch--mobile"
           >
             <Rocket size={13} aria-hidden="true" />
             <span>
-              <strong>Just shipped</strong> — Wildmate is live
+              <strong>Try it free</strong> — AlgoChronicle is live
             </span>
             <ArrowRight size={13} className="hero__launch-arrow" aria-hidden="true" />
           </a>

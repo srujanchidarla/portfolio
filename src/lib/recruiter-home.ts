@@ -130,21 +130,21 @@ export const IMPACT_PROJECTS = [
   {
     id: "algochronicle",
     title: "AlgoChronicle",
-    tag: "DSA · Automation · Live",
-    role: "Solo engineer · automation, data pipeline, and frontend",
+    tag: "DSA · Learning Platform · Live",
+    role: "Solo engineer · full-stack product, Firebase, Android app, and automation pipeline",
     previewImage: "/project-previews/algochronicle.jpg",
     lanes: ["Backend", "Full-Stack"],
-    journey: "Turning GitHub commits into a self-updating coding journal",
+    journey: "A free, beginner-friendly DSA path — and my own public coding journal",
     problem:
-      "DSA practice is easy to start and hard to sustain — manual logging breaks streaks and progress gets lost across platforms.",
+      "DSA prep is scattered across platforms, hard to sustain without a plan, and progress doesn't carry over — so people start strong and quit by week two.",
     solution:
-      "Automated DSA tracker: push a `dayXXX_*` folder to dsa-problems, GitHub Actions syncs to Firestore, and AlgoChronicle updates with streaks, stats, and revision views.",
+      "A free path of 159 hand-picked problems across 13 levels, with a daily problem, a lesson on the next topic the night before, step-by-step visualizers, tested solutions in Python/Java/C++, and spaced reviews. My own practice syncs in automatically: push to dsa-problems, GitHub Actions updates Firestore, and the journal, stats, and streak update themselves.",
     learned:
-      "CI/CD automation end-to-end, parsing structured READMEs in Actions, Firebase admin on Vercel, and building a product I'd actually use daily for interview prep.",
-    result: "Live on Vercel",
+      "Shipping a real product end-to-end — accounts and live cross-device sync, web push and email reminders on each user's local schedule, an installable PWA, and an Android app (Trusted Web Activity) now in closed testing — on top of the CI/CD pipeline that turns my own commits into content.",
+    result: "Try it free",
     resultDetail:
-      "40-day schedule, streak tracking, platform/complexity stats, spaced-revision views, and zero manual logging after push.",
-    stack: ["Next.js", "TypeScript", "Firebase", "GitHub Actions", "Tailwind"],
+      "159 problems in 13 levels, a problem-of-the-day, step-by-step visualizers, spaced reviews, and reminders by push and email — plus an Android app in testing.",
+    stack: ["Next.js", "TypeScript", "Firebase", "GitHub Actions", "Tailwind", "Android (TWA)"],
     color: "#22c55e",
     href: "https://github.com/srujanchidarla/algochronicle",
     liveHref: "https://www.algochronicle.com/",
