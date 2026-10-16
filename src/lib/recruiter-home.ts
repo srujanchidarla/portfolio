@@ -138,13 +138,13 @@ export const IMPACT_PROJECTS = [
     problem:
       "DSA prep is scattered across platforms, hard to sustain without a plan, and progress doesn't carry over — so people start strong and quit by week two.",
     solution:
-      "A free path of 159 hand-picked problems across 13 levels, with a daily problem, a lesson on the next topic the night before, step-by-step visualizers, tested solutions in Python/Java/C++, and spaced reviews. My own practice syncs in automatically: push to dsa-problems, GitHub Actions updates Firestore, and the journal, stats, and streak update themselves.",
+      "A free roadmap of 159 hand-picked problems across 13 levels, each with a checklist, plus a daily problem, step-by-step visualizers, and spaced reviews. Company prep covers 126 companies' recently asked questions, and a study plan turns your target companies, interview date, and daily time into a day-by-day schedule. Connect LeetCode and solved problems tick themselves.",
     learned:
-      "Shipping a real product end-to-end — accounts and live cross-device sync, web push and email reminders on each user's local schedule, an installable PWA, and an Android app (Trusted Web Activity) now in closed testing — on top of the CI/CD pipeline that turns my own commits into content.",
+      "Designing one product for very different users — first-timers, casual practicers, and people with interviews in three weeks — so the homepage, plans, and reminders adapt to each. Plus the engineering underneath: live cross-device sync, hourly server jobs for reminders and LeetCode sync, web push, an installable PWA, and native apps.",
     result: "Try it free",
     resultDetail:
-      "159 problems in 13 levels, a problem-of-the-day, step-by-step visualizers, spaced reviews, and reminders by push and email — plus an Android app in testing.",
-    stack: ["Next.js", "TypeScript", "Firebase", "GitHub Actions", "Tailwind", "Android (TWA)"],
+      "159 problems in 13 levels, company prep for 126 companies, adaptive study plans, LeetCode auto-sync, and daily push reminders — with Android and iPhone apps coming soon.",
+    stack: ["Next.js", "TypeScript", "Firebase", "GitHub Actions", "Tailwind", "Capacitor (iOS)", "Android (TWA)"],
     color: "#22c55e",
     href: "https://github.com/srujanchidarla/algochronicle",
     liveHref: "https://www.algochronicle.com/",
