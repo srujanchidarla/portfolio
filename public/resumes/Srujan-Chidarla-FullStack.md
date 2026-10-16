@@ -6,7 +6,7 @@
 
 ## PROFESSIONAL SUMMARY
 
-Software engineer with **3+ years** of experience across **full-stack development**, **system design**, and **computer networks**. Contributed to production Spring Boot microservices at **2M+ requests/day** and **99.9% uptime**; ships complete products from UI to deploy — **CampfireChai** (Vercel), **JobHuntOS** (Chrome Web Store), **AlgoChronicle** (Vercel), **StudyGlobal** (live beta), and **Neocortex** (in development). MS in Computer Science (**4.0 GPA**, Aug 2026). Coursework in **TCP/IP, BGP/OSPF**, distributed systems, and system design. Authorized to work in the U.S. via **STEM OPT** (36 months).
+Software engineer with **3+ years** of experience across **full-stack development**, **system design**, and **computer networks**. Contributed to production Spring Boot microservices at **2M+ requests/day** and **99.9% uptime**; ships complete products from UI to deploy — **CampfireChai** (Vercel), **JobHuntOS** (Chrome Web Store), **AlgoChronicle** (live), **StudyGlobal** (live beta), and **Neocortex** (in development). MS in Computer Science (**4.0 GPA**, Aug 2026). Coursework in **TCP/IP, BGP/OSPF**, distributed systems, and system design. Authorized to work in the U.S. via **STEM OPT** (36 months).
 
 ---
 
@@ -90,15 +90,15 @@ Software engineer with **3+ years** of experience across **full-stack developmen
 
 *Stack: Next.js, TypeScript, PostgreSQL, Auth.js, API integrations, Netlify*
 
-### AlgoChronicle · Automated Full-Stack Publishing Pipeline — Live on Vercel
-[algochronicle.vercel.app](https://algochronicle.vercel.app/) · [GitHub](https://github.com/srujanchidarla/algochronicle)
+### AlgoChronicle · Full-Stack DSA Learning Platform — Live
+[algochronicle.com](https://www.algochronicle.com/) · [GitHub](https://github.com/srujanchidarla/algochronicle)
 
-- **Frontend:** Next.js dashboard — streak tracking, platform/complexity stats, RSS feed, spaced-revision views
-- **Backend:** Next.js API routes ingesting parsed commit metadata from GitHub Actions webhooks
-- **Automation:** Push → GitHub Actions → API parsing (C++, Java, Python) → Firestore sync → live site update
-- **Result:** Zero manual logging after push; **40-day schedule** with real-time progress tracking
+- **Product:** Free DSA platform — 159-problem roadmap across 13 levels with checklists and visualizers, spaced reviews (1 day / 1 week / 1 month), and interview prep for **126 companies** filterable by recency
+- **Frontend:** Next.js + TypeScript homepage that adapts to each visitor (first visit, casual practice, interview plan) with no layout shift; installable PWA; WCAG AA contrast and keyboard support
+- **Backend:** Firebase Auth + Firestore with live cross-device sync; study-plan engine that turns target companies, interview date, and daily time into a day-by-day schedule
+- **Automation:** Hourly jobs for time-zone-aware push reminders and LeetCode auto-sync; push-to-publish pipeline (GitHub Actions → Firestore) for my own practice journal
 
-*Stack: Next.js, TypeScript, Firebase/Firestore, GitHub Actions, Vercel*
+*Stack: Next.js, TypeScript, Firebase/Firestore, GitHub Actions, Web Push, Tailwind CSS, Capacitor, Vercel*
 
 ### Neocortex · Full-Stack Multi-Agent Life OS (In Development)
 [github.com/srujanchidarla/neocortex](https://github.com/srujanchidarla/neocortex)

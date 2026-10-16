@@ -51,11 +51,11 @@ Aug 2018 – Aug 2021 · **GPA: 3.8/4.0** · Graduated with Honors
 
 ## PROJECTS
 
-### AlgoChronicle · DSA Progress System + Event-Driven Pipeline — Live
+### AlgoChronicle · DSA Learning Platform + Event-Driven Pipeline — Live
 **C++ · Java · Python · Next.js · Firebase · GitHub Actions**
 
-- Built a push-to-publish system for algorithm practice: git push → Actions parse solutions → Firestore → live streak dashboard (zero manual steps)
-- Applied data structures and algorithms daily across C++, Java, and Python; automated metadata parsing and spaced-revision views
+- Built a free DSA platform (159-problem roadmap, interview prep for 126 companies, adaptive study plans, spaced reviews) used as my daily practice ground
+- Push-to-publish system: git push → Actions parse solutions → Firestore → live journal; hourly jobs for reminders and LeetCode sync
 
 ### JobHuntOS · Production LLM Workflow Tool — Live on Chrome Web Store
 **TypeScript · Node.js · Express · SSE · Claude / Gemini / Groq**

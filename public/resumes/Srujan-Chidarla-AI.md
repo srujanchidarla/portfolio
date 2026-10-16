@@ -93,12 +93,12 @@ AI Engineer with production experience shipping **multi-model LLM systems** end-
 
 *Stack: React 19, Node.js, Express, MongoDB, Socket.io, LLM APIs, Vercel*
 
-### AlgoChronicle · Event-Driven Automation Pipeline — Live on Vercel
-[algochronicle.vercel.app](https://algochronicle.vercel.app/) · [GitHub](https://github.com/srujanchidarla/algochronicle)
+### AlgoChronicle · Event-Driven Learning Platform — Live
+[algochronicle.com](https://www.algochronicle.com/) · [GitHub](https://github.com/srujanchidarla/algochronicle)
 
-- Engineered **GitHub Actions → Next.js API → Firestore** pipeline for zero-manual publishing after git push
-- Parsed structured README metadata (C++, Java, Python solutions) into streak stats, platform breakdowns, and RSS feeds
-- Designed Firestore schema for contributions, streaks, and analytics aggregation
+- Event-driven automation: **GitHub Actions → Next.js API → Firestore** publishes my DSA practice with zero manual steps
+- Data pipeline over **126 companies'** interview datasets: normalized frequency and recency scoring to rank and blend problems per user goal
+- Hourly per-user jobs: time-zone-aware reminders and LeetCode sync; adaptive study plans recomputed daily from real progress
 
 *Stack: Next.js, TypeScript, Firebase/Firestore, GitHub Actions, REST APIs*
 

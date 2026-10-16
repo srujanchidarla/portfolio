@@ -148,13 +148,17 @@ export default function ResumeDocument() {
 
         <div className="resume-doc__job">
           <div className="resume-doc__job-top">
-            <h3>AlgoChronicle — Event-Driven Publish Pipeline</h3>
-            <span>Live · GitHub Actions → Firestore</span>
+            <h3>AlgoChronicle — Full-Stack DSA Learning Platform</h3>
+            <span>Live · Next.js · Firebase · GitHub Actions</span>
           </div>
           <ul>
             <li>
-              Push-triggered ingest pipeline (C++/Java/Python) with zero manual logging and live
-              streak dashboards
+              Free DSA platform: 159-problem roadmap, interview prep for 126 companies, adaptive
+              study plans, and spaced reviews
+            </li>
+            <li>
+              Hourly jobs for time-zone-aware push reminders and LeetCode sync; push-to-publish
+              pipeline (git push → Actions → Firestore)
             </li>
           </ul>
         </div>

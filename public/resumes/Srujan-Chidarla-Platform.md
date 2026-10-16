@@ -53,9 +53,10 @@ Software engineer with production experience operating services at **2M+ request
 
 ## SELECTED PROJECTS — PLATFORM & INFRA FOCUS
 
-### AlgoChronicle · Automated CI/CD Pipeline — Live on Vercel
-- GitHub Actions syncs DSA commits to Firestore; site updates with zero manual logging after push
-- End-to-end automation: structured README parsing, Firebase admin on serverless, streak tracking UI
+### AlgoChronicle · Pipelines & Scheduled Jobs — Live
+- GitHub Actions syncs DSA commits to Firestore; the site updates with zero manual logging after push
+- Hourly scheduled jobs drive time-zone-aware reminders (with a catch-up window for late runs) and server-side LeetCode sync for every connected account
+- Web push (VAPID + APNs), installable PWA, native shells (Capacitor iOS, Android TWA); production builds on Vercel with edge caching
 - *Stack: Next.js, GitHub Actions, Firebase, Vercel, TypeScript*
 
 ### CampfireChai · Full-Stack Platform — Live on Vercel

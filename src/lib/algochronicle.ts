@@ -4,9 +4,9 @@
  */
 
 export const ALGOCHRONICLE = {
-  siteUrl: "https://algochronicle.vercel.app",
+  siteUrl: "https://www.algochronicle.com",
   logsApi: "https://algochronicle.vercel.app/api/getLogs",
-  consistencyUrl: "https://algochronicle.vercel.app/consistency",
+  consistencyUrl: "https://www.algochronicle.com/consistency",
   dsaRepo: "https://github.com/srujanchidarla/dsa-problems",
   siteRepo: "https://github.com/srujanchidarla/algochronicle",
 } as const;

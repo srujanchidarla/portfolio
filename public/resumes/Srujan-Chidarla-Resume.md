@@ -63,11 +63,11 @@ Software engineer with **3+ years** of experience building systems at the inters
 - Real-time trip chat and logistics across **15+ US metro hubs** (WebSocket session design, geo search, JWT auth)
 - **Magic Paste** AI drafting with multi-provider LLM fallbacks for natural language → structured itineraries
 
-### AlgoChronicle · Event-Driven Publish Pipeline — Live on Vercel
+### AlgoChronicle · Full-Stack DSA Learning Platform — Live
 **Next.js · Firebase · GitHub Actions**
 
-- Push-triggered pipeline: git push → Actions → API parse (C++/Java/Python) → Firestore → live dashboard
-- Zero-manual logging; streak and spaced-revision views updated within seconds of each commit
+- Free DSA platform: 159-problem roadmap, interview prep for 126 companies, adaptive study plans, spaced reviews
+- Hourly jobs for time-zone-aware push reminders and LeetCode sync; push-to-publish pipeline (git push → Actions → Firestore)
 
 ### FitConnect · Booking System Design
 **React · Node.js · Real-time scheduling**

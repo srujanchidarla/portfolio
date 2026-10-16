@@ -77,14 +77,15 @@ Software engineer with **2+ years** of production experience on Java/Spring Boot
 
 *Stack: Node.js, Express, MongoDB, Socket.io, REST APIs*
 
-### AlgoChronicle · Event-Driven Publishing Pipeline — Live on Vercel
-[algochronicle.vercel.app](https://algochronicle.vercel.app/) · [GitHub](https://github.com/srujanchidarla/algochronicle)
+### AlgoChronicle · Learning Platform Backend — Live
+[algochronicle.com](https://www.algochronicle.com/) · [GitHub](https://github.com/srujanchidarla/algochronicle)
 
-- Engineered GitHub Actions → Next.js API → Firestore pipeline for zero-manual publishing after git push
-- Parsed structured README metadata into streak stats, platform breakdowns, and RSS feed generation
-- Designed Firestore data model for contributions, streaks, and analytics aggregation
+- Designed the Firestore data model and merge logic for live cross-device progress sync (solved problems, reviews, roadmap, study plans)
+- Built hourly serverless jobs: time-zone-aware push reminders (Web Push + APNs) with catch-up for late cron runs, and LeetCode sync that merges new solves into each account
+- Study-plan engine: ranks problems across **126 company datasets** (normalized frequency + recency) and sizes a schedule from interview date and daily time
+- Push-to-publish pipeline: GitHub Actions → Next.js API → Firestore with zero manual steps
 
-*Stack: Next.js, TypeScript, Firebase/Firestore, GitHub Actions, REST APIs*
+*Stack: Next.js API routes, TypeScript, Firebase/Firestore, GitHub Actions, Web Push, REST APIs*
 
 ### StudyGlobal · EdTech API Platform — Live Beta
 [studyglobalscholar.netlify.app](https://studyglobalscholar.netlify.app/)
