@@ -3,20 +3,9 @@
 import { useEffect, useState } from "react";
 import { useBoot } from "@/components/BootProvider";
 
-const BOOT_FRAMES = [
-  { emoji: "🏃", label: "Warming up" },
-  { emoji: "🏋️", label: "Building strength" },
-  { emoji: "💻", label: "Booting systems" },
-  { emoji: "⚖️", label: "Balancing load" },
-  { emoji: "🤖", label: "Routing models" },
-  { emoji: "📡", label: "Syncing signals" },
-  { emoji: "🚀", label: "Ready to ship" },
-] as const;
-
 const BOOT_SEEN_KEY = "portfolio-boot-seen";
-/** Must match CSS stage timing (7 × 0.65s) */
-const TOTAL_MS = 4550;
-const EXIT_MS = 420;
+const BOOT_MS = 980;
+const EXIT_MS = 280;
 
 export default function BootLoader() {
   const { markBootReady } = useBoot();
@@ -60,7 +49,7 @@ export default function BootLoader() {
         setShow(false);
         markBootReady();
       }, EXIT_MS);
-    }, TOTAL_MS);
+    }, BOOT_MS);
 
     return () => {
       cancelled = true;
@@ -82,49 +71,12 @@ export default function BootLoader() {
       aria-live="polite"
       aria-label="Loading portfolio"
     >
-      <div className="boot-hybrid">
-        <div className="boot-hybrid__track" aria-hidden="true">
-          <span className="boot-hybrid__lane" />
-          {BOOT_FRAMES.map((item) => (
-            <span key={item.label} className="boot-hybrid__runner">
-              {item.emoji}
-            </span>
-          ))}
-        </div>
-
-        <div className="boot-hybrid__identity">
-          <p className="boot-hybrid__name">Srujan Chidarla</p>
-          <p className="boot-hybrid__theme">
-            <span>CODE</span>
-            <i aria-hidden="true">×</i>
-            <span>DISCIPLINE</span>
-          </p>
-        </div>
-
-        <div className="boot-hybrid__terminal">
-          <span className="boot-hybrid__prompt" aria-hidden="true">
-            &gt;
-          </span>
-          <div className="boot-hybrid__labels">
-            {BOOT_FRAMES.map((item) => (
-              <p key={item.label} className="boot-hybrid__label">
-                {item.label}
-                <span className="boot-hybrid__cursor" aria-hidden="true" />
-              </p>
-            ))}
-          </div>
-        </div>
-
+      <div className="boot-splash">
+        <p className="boot-splash__kicker">Portfolio</p>
+        <p className="boot-hybrid__name">Srujan Chidarla</p>
+        <p className="boot-splash__line">Systems · products · discipline</p>
         <div className="boot-hybrid__bar" aria-hidden="true">
           <span />
-        </div>
-
-        <div className="boot-hybrid__pipeline" aria-hidden="true">
-          {BOOT_FRAMES.map((item) => (
-            <span key={item.label} className="boot-hybrid__dot">
-              {item.emoji}
-            </span>
-          ))}
         </div>
       </div>
     </div>

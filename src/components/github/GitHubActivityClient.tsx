@@ -196,10 +196,10 @@ function ContributionGraph({
 }
 
 const GROUP_COLORS: Record<string, string> = {
-  "JavaScript/TypeScript": "#f97316",
-  Java: "#f0a878",
-  Python: "#34d399",
-  "C++": "#a78bfa",
+  "JavaScript/TypeScript": "#e8c49a",
+  Java: "#f0d8b0",
+  Python: "#5dcaa5",
+  "C++": "#8eb4d4",
   Other: "#8b95a8",
 };
 
@@ -211,7 +211,7 @@ function LanguageBar({
   grouped: GitHubActivityData["groupedLanguageStats"];
 }) {
   const top = detailed.slice(0, 6);
-  const colors = ["#f97316", "#fbbf24", "#fb923c", "#34d399", "#a78bfa", "#8b95a8"];
+  const colors = ["#e8c49a", "#f3e6cf", "#5dcaa5", "#8eb4d4", "#c4b5a0", "#8b95a8"];
 
   if (top.length === 0) {
     return (

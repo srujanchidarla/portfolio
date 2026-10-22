@@ -1,7 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { ArrowUpRight, ExternalLink, X } from "lucide-react";
@@ -23,14 +22,15 @@ const CURATED_PROJECTS = [...IMPACT_PROJECTS].sort(
 
 type Project = (typeof IMPACT_PROJECTS)[number];
 
-function getPreviewUrl(project: Project): string | undefined {
-  const p = project as unknown as { previewImage?: string };
-  return p.previewImage;
-}
-
 function getBestLink(project: Project): string | undefined {
   const p = project as unknown as { liveHref?: string; href?: string };
   return p.liveHref ?? p.href;
+}
+
+/** A public product homepage. Repo and store links stay as buttons, not previews. */
+function getLiveSite(project: Project): string | undefined {
+  if ("liveHref" in project && typeof project.liveHref === "string") return project.liveHref;
+  return undefined;
 }
 
 function getDomain(url: string | undefined): string | null {
@@ -51,30 +51,96 @@ const tileVariants: Variants = {
   }),
 };
 
+const LIVE_WIDTH = 1280;
+
+function useInView(rootMargin = "240px") {
+  const ref = useRef<HTMLDivElement>(null);
+  const [seen, setSeen] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || seen) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        setSeen(true);
+        observer.disconnect();
+      },
+      { rootMargin }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [rootMargin, seen]);
+
+  return { ref, seen };
+}
+
+/** Scaled, non-interactive snapshot of a live homepage. Loads only once it nears the viewport. */
+function LiveHomepage({ src, title }: { src: string; title: string }) {
+  const { ref, seen } = useInView();
+  const [box, setBox] = useState({ w: 0, h: 0 });
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const measure = () => setBox({ w: el.clientWidth, h: el.clientHeight });
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [ref]);
+
+  const scale = box.w > 0 ? box.w / LIVE_WIDTH : 0;
+  const frameHeight = scale > 0 ? Math.max(1, Math.ceil(box.h / scale)) : 0;
+
+  return (
+    <div ref={ref} className={`rh-projects__live${ready ? " is-ready" : ""}`}>
+      <div className="rh-projects__live-skeleton" aria-hidden="true" />
+      {seen && scale > 0 ? (
+        <iframe
+          title={`${title} homepage`}
+          src={src}
+          className="rh-projects__live-frame"
+          style={{ width: LIVE_WIDTH, height: frameHeight, transform: `scale(${scale})` }}
+          sandbox="allow-scripts allow-same-origin allow-forms"
+          referrerPolicy="origin"
+          tabIndex={-1}
+          onLoad={() => setReady(true)}
+        />
+      ) : null}
+    </div>
+  );
+}
+
+function PreviewFallback({ title, tag }: { title: string; tag?: string }) {
+  return (
+    <div className="rh-projects__preview-fallback" aria-hidden="true">
+      <span className="rh-projects__preview-monogram">{title.charAt(0)}</span>
+      <span className="rh-projects__preview-fallback-name">{title}</span>
+      {tag ? <span className="rh-projects__preview-fallback-tag">{tag}</span> : null}
+    </div>
+  );
+}
+
 function ProjectPreview({
   title,
   accent,
   href,
-  previewImage,
+  liveSrc,
   tag,
 }: {
   title: string;
   accent: string;
   href?: string;
-  previewImage?: string;
+  liveSrc?: string;
   tag?: string;
 }) {
-  const [hasImage, setHasImage] = useState(true);
-  const domain = useMemo(() => getDomain(href), [href]);
-  const showImage = Boolean(previewImage) && hasImage;
+  const domain = useMemo(() => getDomain(liveSrc ?? href), [liveSrc, href]);
 
   return (
-    <a
+    <div
       className="rh-projects__preview"
-      href={href}
-      target={href ? "_blank" : undefined}
-      rel={href ? "noopener noreferrer" : undefined}
-      aria-label={href ? `Open ${title}` : undefined}
       style={{ "--proj-color": accent } as React.CSSProperties}
     >
       <div className="rh-projects__preview-bar" aria-hidden="true">
@@ -83,41 +149,36 @@ function ProjectPreview({
           <span />
           <span />
         </span>
-        <span className="rh-projects__preview-domain">{domain ?? title.toLowerCase()}</span>
+        <span className="rh-projects__preview-domain">
+          {liveSrc ? <span className="rh-projects__preview-live">Live</span> : null}
+          {domain ?? title.toLowerCase()}
+        </span>
         <span className="rh-projects__preview-icon">
           <ExternalLink size={14} aria-hidden="true" />
         </span>
       </div>
 
-      <div
-        className={`rh-projects__preview-viewport${showImage ? "" : " is-placeholder"}`}
-        style={{ position: "relative" }}
-      >
-        {showImage ? (
-          <Image
-            src={previewImage as string}
-            alt={`${title} homepage preview`}
-            fill
-            className="rh-projects__preview-img"
-            sizes="(max-width: 1024px) 100vw, 860px"
-            onError={() => setHasImage(false)}
-          />
-        ) : (
-          <div className="rh-projects__preview-fallback" aria-hidden="true">
-            <span className="rh-projects__preview-monogram">{title.charAt(0)}</span>
-            <span className="rh-projects__preview-fallback-name">{title}</span>
-            {tag ? <span className="rh-projects__preview-fallback-tag">{tag}</span> : null}
-          </div>
-        )}
+      <div className={`rh-projects__preview-viewport${liveSrc ? "" : " is-placeholder"}`}>
+        {liveSrc ? <LiveHomepage src={liveSrc} title={title} /> : <PreviewFallback title={title} tag={tag} />}
       </div>
-    </a>
+
+      {href ? (
+        <a
+          className="rh-projects__preview-hit"
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Open ${title}`}
+        />
+      ) : null}
+    </div>
   );
 }
 
 function ProjectCaseStudy({ project, titleId }: { project: Project; titleId?: string }) {
   const href = "href" in project ? project.href : undefined;
   const liveHref = "liveHref" in project ? project.liveHref : undefined;
-  const previewImage = getPreviewUrl(project);
+  const liveSrc = getLiveSite(project);
   const bestLink = getBestLink(project);
 
   return (
@@ -145,7 +206,7 @@ function ProjectCaseStudy({ project, titleId }: { project: Project; titleId?: st
           title={project.title}
           accent={project.color}
           href={bestLink}
-          previewImage={previewImage}
+          liveSrc={liveSrc}
           tag={project.tag}
         />
         {project.resultDetail ? (
@@ -223,9 +284,7 @@ function ProjectTile({
   index: number;
   onOpen: () => void;
 }) {
-  const previewImage = getPreviewUrl(project);
-  const [hasImage, setHasImage] = useState(true);
-  const showImage = Boolean(previewImage) && hasImage;
+  const liveSrc = getLiveSite(project);
 
   return (
     <motion.button
@@ -240,15 +299,8 @@ function ProjectTile({
       viewport={{ once: true, margin: "-60px" }}
     >
       <div className="rh-projects__tile-media">
-        {showImage ? (
-          <Image
-            src={previewImage as string}
-            alt={`${project.title} preview`}
-            fill
-            className="rh-projects__tile-img"
-            sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 380px"
-            onError={() => setHasImage(false)}
-          />
+        {liveSrc ? (
+          <LiveHomepage src={liveSrc} title={project.title} />
         ) : (
           <div className="rh-projects__tile-fallback" aria-hidden="true">
             <span>{project.title.charAt(0)}</span>

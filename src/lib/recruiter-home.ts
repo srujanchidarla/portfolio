@@ -16,7 +16,7 @@ export const PROOF_CARDS = [
     detail:
       "At Cognizant I contributed to Spring Boot microservices at 2M+ requests/day and 99.9% uptime — optimizing a hot-path query from P99 ~250ms to ~50ms and learning what reliability under load actually requires.",
     metrics: ["2M+ req/day", "99.9% uptime", "P99 optimization", "Microservices"],
-    color: "#34d399",
+    color: "#5dcaa5",
     icon: "scale",
   },
   {
@@ -27,7 +27,7 @@ export const PROOF_CARDS = [
     detail:
       "Wildmate, JobHuntOS, AlgoChronicle, StudyGlobal, and AgriWise — complete UIs, APIs, data models, and deploys I own. WalletGyde internship: 35% engagement ↑ and 40% faster transactions while earning my Master's.",
     metrics: ["7 featured apps", "Chrome Web Store", "Live on Vercel", "Real-time systems"],
-    color: "#f97316",
+    color: "#e8c49a",
     icon: "ship",
   },
   {
@@ -38,7 +38,7 @@ export const PROOF_CARDS = [
     detail:
       "MS coursework in computer networks (TCP/IP, BGP/OSPF) plus production infra work — Docker/CI at Cognizant, AlgoChronicle's push-to-publish pipeline, and thinking about how services talk, fail, and recover.",
     metrics: ["TCP/IP · BGP/OSPF", "GitHub Actions", "Docker / CI", "Azure DevOps"],
-    color: "#0ea5e9",
+    color: "#8eb4d4",
     icon: "infra",
   },
 ] as const;

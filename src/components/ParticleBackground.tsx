@@ -9,10 +9,7 @@ interface Particle {
   vy: number;
   size: number;
   opacity: number;
-  char: string;
 }
-
-const CODE_CHARS = ["TCP", "BGP", "{}", "=>", "DNS", "API", "1st", "99", "fn", "[]"];
 
 export default function ParticleBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -24,25 +21,25 @@ export default function ParticleBackground() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationId: number;
+    let animationId = 0;
     let particles: Particle[] = [];
 
     const resize = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = canvas.offsetWidth * ratio;
+      canvas.height = canvas.offsetHeight * ratio;
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
     };
 
     const initParticles = () => {
-      const count = Math.min(24, Math.floor(canvas.offsetWidth / 40));
+      const count = Math.min(36, Math.floor(canvas.offsetWidth / 36));
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * canvas.offsetWidth,
         y: Math.random() * canvas.offsetHeight,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        size: Math.random() * 10 + 8,
-        opacity: Math.random() * 0.15 + 0.05,
-        char: CODE_CHARS[Math.floor(Math.random() * CODE_CHARS.length)],
+        vx: (Math.random() - 0.5) * 0.18,
+        vy: (Math.random() - 0.5) * 0.18,
+        size: Math.random() * 1.4 + 0.6,
+        opacity: Math.random() * 0.35 + 0.08,
       }));
     };
 
@@ -58,14 +55,10 @@ export default function ParticleBackground() {
         if (p.y < 0) p.y = canvas.offsetHeight;
         if (p.y > canvas.offsetHeight) p.y = 0;
 
-        ctx.font = `${p.size}px monospace`;
-        const colors = [
-          `rgba(249, 115, 22, ${p.opacity * 0.7})`,
-          `rgba(251, 191, 36, ${p.opacity * 0.6})`,
-          `rgba(34, 197, 94, ${p.opacity * 0.5})`,
-        ];
-        ctx.fillStyle = colors[p.char.charCodeAt(0) % colors.length];
-        ctx.fillText(p.char, p.x, p.y);
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(232, 196, 154, ${p.opacity})`;
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
       });
 
       animationId = requestAnimationFrame(draw);
@@ -76,7 +69,6 @@ export default function ParticleBackground() {
     draw();
 
     const handleResize = () => {
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
       resize();
       initParticles();
     };

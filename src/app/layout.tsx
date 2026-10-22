@@ -1,20 +1,26 @@
 import type { Metadata } from "next";
-import { Outfit, Fira_Code } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { BootProvider } from "@/components/BootProvider";
-import CustomCursor from "@/components/CustomCursor";
 import BootLoader from "@/components/BootLoader";
 import MobileShell from "@/components/MobileShell";
 import CookieConsentProvider from "@/components/CookieConsentProvider";
 import { PRIMARY_ROLE, SITE } from "@/lib/site";
 
-const outfit = Outfit({
+const sans = Geist({
   subsets: ["latin"],
   variable: "--font-outfit-var",
 });
 
-const firaCode = Fira_Code({
+const display = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-display-var",
+});
+
+const mono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-fira-code-var",
 });
@@ -58,12 +64,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${firaCode.variable} h-full`}
+      className={`${sans.variable} ${display.variable} ${mono.variable} h-full`}
       suppressHydrationWarning
     >
       <head />
       <body
-        className={`${outfit.className} min-h-full flex flex-col antialiased`}
+        className={`${sans.className} min-h-full flex flex-col antialiased`}
         suppressHydrationWarning
       >
         <a href="#main-content" className="skip-link">
@@ -73,7 +79,6 @@ export default function RootLayout({
           <BootProvider>
             <CookieConsentProvider>
               <BootLoader />
-              <CustomCursor />
               <MobileShell />
               {children}
             </CookieConsentProvider>

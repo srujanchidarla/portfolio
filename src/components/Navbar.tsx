@@ -9,11 +9,9 @@ import { useTheme } from "@/components/ThemeProvider";
 
 const NAV_LINKS = [
   { href: "/#experience", label: "Experience" },
-  { href: "/#projects", label: "Projects" },
-  { href: "/#skills", label: "Skills" },
+  { href: "/#projects", label: "Work" },
   { href: "/about", label: "About" },
   { href: "/#writing", label: "Writing" },
-  { href: "/research", label: "Research" },
   { href: "/#contact", label: "Contact" },
 ];
 

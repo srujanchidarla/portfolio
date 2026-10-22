@@ -18,8 +18,8 @@ export default function Footer() {
               <span className="footer__badge-dot" aria-hidden="true" />
               Engineer · athlete · builder
             </span>
-            <p className="footer__headline font-mono">
-              Always shipping. Always training.
+            <p className="footer__headline">
+              Systems, products, and the discipline to finish them.
             </p>
           </div>
           <button type="button" className="btn-hiring-primary btn-hiring-primary--sm" onClick={openContact}>

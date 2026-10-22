@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
-import { ArrowRight, MessageCircle, Rocket, Trophy } from "lucide-react";
-import { SITE, PRIMARY_ROLE, SITE_IMAGES } from "@/lib/site";
+import { ArrowRight, MessageCircle } from "lucide-react";
+import { SITE, SITE_IMAGES } from "@/lib/site";
 import { HERO_METRICS } from "@/lib/recruiter-home";
 import { useContact } from "@/components/ContactProvider";
 import ParticleBackground from "@/components/ParticleBackground";
@@ -61,29 +61,20 @@ export default function HeroRecruiter() {
                 animate="visible"
                 className="hero__launch"
               >
-                <Rocket size={13} aria-hidden="true" />
-                <span>
-                  <strong>Try it free</strong> — AlgoChronicle, learn DSA one stage at a time
-                </span>
+                <span className="hero__launch-dot" aria-hidden="true" />
+                <span>AlgoChronicle is live — DSA, one stage at a time</span>
                 <ArrowRight size={13} className="hero__launch-arrow" aria-hidden="true" />
               </motion.a>
 
-              <motion.div
+              <motion.p
                 custom={1}
                 variants={fadeUp}
                 initial="hidden"
                 animate="visible"
-                className="hero__badges"
+                className="hero__kicker"
               >
-                <span className="hero__badge hero__badge--grad">
-                  <span className="hero__badge-dot" aria-hidden="true" />
-                  MS CS grad · {SITE.gradDate} · 4.0 GPA
-                </span>
-                <span className="hero__badge hero__badge--athlete">
-                  <Trophy size={12} aria-hidden="true" />
-                  Multi-sport athlete
-                </span>
-              </motion.div>
+                Engineer · athlete · MS CS, {SITE.gradDate}
+              </motion.p>
 
               <motion.h1
                 custom={2}
@@ -92,7 +83,7 @@ export default function HeroRecruiter() {
                 animate="visible"
                 className="hero__title"
               >
-                Hi, I&apos;m <span className="gradient-text">Srujan</span>
+                Srujan <em>Chidarla</em>
               </motion.h1>
 
               <motion.p
@@ -102,7 +93,7 @@ export default function HeroRecruiter() {
                 animate="visible"
                 className="hero__role"
               >
-                {PRIMARY_ROLE.tagline}
+                Systems that stay up. Products people finish.
               </motion.p>
 
               <motion.p
@@ -112,11 +103,10 @@ export default function HeroRecruiter() {
                 animate="visible"
                 className="hero__desc"
               >
-                I build across the stack — production systems at <strong>2M+ req/day</strong>,
-                system design under real load, and networks coursework (TCP/IP, BGP/OSPF) that
-                informs how I think about services. Shipped{" "}
-                <strong>JobHuntOS</strong>, <strong>Wildmate</strong>, and{" "}
-                <strong>AlgoChronicle</strong>. MS CS at 4.0, graduated Aug 2026.
+                Three years on Spring Boot services at <strong>2M+ requests a day</strong> and{" "}
+                <strong>99.9% uptime</strong>, then an MS in Computer Science at a 4.0. The same
+                standard is in what I ship — <strong>AlgoChronicle</strong>, <strong>JobHuntOS</strong>,
+                and <strong>Wildmate</strong>.
               </motion.p>
 
               <motion.div
@@ -160,7 +150,7 @@ export default function HeroRecruiter() {
                 className="hero__actions"
               >
                 <a href="#projects" className="btn-primary">
-                  See what I&apos;ve built
+                  See the work
                   <ArrowRight size={15} aria-hidden="true" />
                 </a>
                 <button type="button" className="btn-secondary" onClick={openAvatarChat}>
@@ -191,7 +181,7 @@ export default function HeroRecruiter() {
                 <div className="hero__photo-glow" aria-hidden="true" />
                 <p className="hero__photo-caption">
                   <span className="hero__photo-dot" aria-hidden="true" />
-                  Shipping code in the wild
+                  Building in public
                 </p>
               </div>
             </motion.div>
@@ -218,26 +208,21 @@ export default function HeroRecruiter() {
             rel="noopener noreferrer"
             className="hero__launch hero__launch--mobile"
           >
-            <Rocket size={13} aria-hidden="true" />
-            <span>
-              <strong>Try it free</strong> — AlgoChronicle is live
-            </span>
+            <span className="hero__launch-dot" aria-hidden="true" />
+            <span>AlgoChronicle is live</span>
             <ArrowRight size={13} className="hero__launch-arrow" aria-hidden="true" />
           </a>
 
-          <div className="hero__mobile-badges">
-            <span className="hero__badge hero__badge--grad">
-              <span className="hero__badge-dot" aria-hidden="true" />
-              MS CS grad · {SITE.gradDate} · 4.0 GPA
-            </span>
-            <span className="hero__badge hero__badge--athlete">
-              <Trophy size={12} aria-hidden="true" />
-              Multi-sport athlete
-            </span>
-          </div>
+          <p className="hero__kicker hero__kicker--mobile">
+            Engineer · athlete · MS CS, {SITE.gradDate}
+          </p>
 
-          <h1 className="hero__mobile-title">Srujan Chidarla</h1>
-          <p className="hero__mobile-caption">{PRIMARY_ROLE.headline}</p>
+          <h1 className="hero__mobile-title">
+            Srujan <em>Chidarla</em>
+          </h1>
+          <p className="hero__mobile-caption">
+            Systems that stay up. Products people finish. 4.0 MS CS, production at 2M+ requests a day.
+          </p>
 
           <div className="hero__mobile-metrics">
             <div className="hero__metric">
@@ -268,7 +253,7 @@ export default function HeroRecruiter() {
 
           <div className="hero__mobile-actions">
             <a href="#projects" className="btn-primary hero__mobile-cta-primary">
-              See what I&apos;ve built
+              See the work
               <ArrowRight size={15} aria-hidden="true" />
             </a>
             <div className="hero__mobile-actions-row">

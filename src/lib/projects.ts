@@ -90,7 +90,7 @@ export const PROJECTS: Project[] = [
     ],
     status: "Live",
     association: "Personal Project",
-    gradient: ["#ea580c", "#f59e0b"],
+    gradient: ["#e8c49a", "#8eb4d4"],
   },
   {
     id: "jobhuntos",
