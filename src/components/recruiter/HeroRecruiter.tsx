@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { motion, type Variants } from "framer-motion";
+import { useEffect, useState, type ReactNode } from "react";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { SITE, SITE_IMAGES } from "@/lib/site";
+import { ALGOCHRONICLE } from "@/lib/algochronicle";
 import { useContact } from "@/components/ContactProvider";
 
 function GitHubLogo() {
@@ -60,6 +62,122 @@ function MapsLogo() {
       />
       <circle cx="12" cy="9" r="2.6" fill="#fff" />
     </svg>
+  );
+}
+
+function AlgoLive() {
+  return (
+    <a
+      href={ALGOCHRONICLE.siteUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="hero__launch"
+    >
+      <span className="hero__launch-dot" aria-hidden="true" />
+      AlgoChronicle is live
+      <ArrowRight size={13} className="hero__launch-arrow" aria-hidden="true" />
+    </a>
+  );
+}
+
+function CountUp({
+  to,
+  delay,
+  duration,
+  decimals = 0,
+}: {
+  to: number;
+  delay: number;
+  duration: number;
+  decimals?: number;
+}) {
+  const reduce = useReducedMotion();
+  const [value, setValue] = useState(reduce ? to : 0);
+
+  useEffect(() => {
+    if (reduce) {
+      setValue(to);
+      return;
+    }
+
+    let frame = 0;
+    const startAt = performance.now() + delay;
+    const tick = (now: number) => {
+      const elapsed = now - startAt;
+      if (elapsed < 0) {
+        frame = requestAnimationFrame(tick);
+        return;
+      }
+      const progress = Math.min(1, elapsed / duration);
+      const eased = to > 20 ? 1 - Math.pow(1 - progress, 3) : progress;
+      const next = to * eased;
+      setValue(decimals > 0 ? Number(next.toFixed(decimals)) : Math.round(next));
+      if (progress < 1) frame = requestAnimationFrame(tick);
+      else setValue(to);
+    };
+
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [to, delay, duration, decimals, reduce]);
+
+  if (decimals > 0) return value.toFixed(decimals);
+  return value.toLocaleString("en-US");
+}
+
+function Metric({
+  label,
+  finalText,
+  value,
+}: {
+  label: string;
+  finalText: string;
+  value: ReactNode;
+}) {
+  return (
+    <div className="hero__metric" aria-label={`${finalText} ${label}`}>
+      <span className="hero__metric-value">
+        <span className="hero__metric-count" aria-hidden="true">
+          {value}
+        </span>
+        <span className="hero__metric-count hero__metric-count--sizer" aria-hidden="true">
+          {finalText}
+        </span>
+      </span>
+      <span aria-hidden="true">{label}</span>
+    </div>
+  );
+}
+
+function HeroProof({ centered = false }: { centered?: boolean }) {
+  return (
+    <div className={centered ? "hero__proof hero__proof--center" : "hero__proof"}>
+      <div className="hero__proof-metrics">
+        <Metric
+          label="GPA"
+          finalText="4.0/4.0"
+          value={
+            <>
+              <CountUp to={4} delay={550} duration={1200} decimals={1} />
+              /4.0
+            </>
+          }
+        />
+        <Metric
+          label="req/day"
+          finalText="1,999,999+"
+          value={
+            <>
+              <CountUp to={1999999} delay={450} duration={1800} />+
+            </>
+          }
+        />
+        <Metric
+          label="apps shipped"
+          finalText="7"
+          value={<CountUp to={7} delay={700} duration={1000} />}
+        />
+      </div>
+    </div>
   );
 }
 
@@ -161,15 +279,16 @@ export default function HeroRecruiter() {
         <div className="hero__layout">
           <div className="hero__grid">
             <div className="hero__content">
-              <motion.p
+              <motion.div
                 custom={0}
                 variants={fadeUp}
                 initial="hidden"
                 animate="visible"
-                className="hero__kicker"
+                className="hero__eyebrow"
               >
-                Software engineer
-              </motion.p>
+                <p className="hero__kicker">Software engineer</p>
+                <AlgoLive />
+              </motion.div>
 
               <SignedName className="hero__title" />
 
@@ -180,8 +299,12 @@ export default function HeroRecruiter() {
                 animate="visible"
                 className="hero__role"
               >
-                I build systems that stay up, and products people finish.
+                I build systems that stay up,
+                <br />
+                and products people finish.
               </motion.p>
+
+              <HeroProof />
 
               <motion.div
                 custom={3}
@@ -201,56 +324,65 @@ export default function HeroRecruiter() {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.5, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
               >
                 <HeroSocials />
               </motion.div>
             </div>
 
-            <motion.aside
-              className="hero__note"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <p className="hero__note-lead">Engineer, athlete, builder.</p>
-              <p className="hero__note-line">
-                I train most days
-                <br />
-                and ship the rest.
-              </p>
-            </motion.aside>
+            <div className="hero__portrait">
+              <motion.aside
+                className="hero__note"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <p className="hero__note-lead">Engineer, athlete, builder.</p>
+                <p className="hero__note-line">
+                  I train most days
+                  <br />
+                  and ship the rest.
+                </p>
+              </motion.aside>
 
-            <motion.div
-              className="hero__visual"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              <div className="hero__photo-frame">
-                <div className="hero__glow" aria-hidden="true" />
-                <Image
-                  src={SITE_IMAGES.hero}
-                  alt="Portrait of Srujan Chidarla"
-                  fill
-                  priority
-                  className="hero__photo"
-                  sizes="(max-width: 1024px) 84vw, 460px"
-                />
-              </div>
-            </motion.div>
+              <motion.div
+                className="hero__visual"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+              >
+                <div className="hero__photo-frame">
+                  <div className="hero__glow" aria-hidden="true" />
+                  <Image
+                    src={SITE_IMAGES.hero}
+                    alt="Portrait of Srujan Chidarla"
+                    fill
+                    priority
+                    className="hero__photo"
+                    sizes="300px"
+                  />
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </div>
 
       <section className="hero__mobile-card" aria-label="Srujan Chidarla profile">
         <div className="hero__mobile-content">
-          <p className="hero__kicker hero__kicker--mobile">Software engineer</p>
+          <div className="hero__eyebrow hero__eyebrow--center">
+            <p className="hero__kicker hero__kicker--mobile">Software engineer</p>
+            <AlgoLive />
+          </div>
 
           <SignedName className="hero__mobile-title" />
           <p className="hero__mobile-caption">
-            I build systems that stay up, and products people finish.
+            I build systems that stay up,
+            <br />
+            and products people finish.
           </p>
+
+          <HeroProof centered />
 
           <div className="hero__mobile-actions">
             <a href="#projects" className="btn-primary hero__mobile-cta-primary">
@@ -265,16 +397,26 @@ export default function HeroRecruiter() {
           <HeroSocials centered />
         </div>
 
-        <div className="hero__mobile-photo-wrap">
-          <div className="hero__glow" aria-hidden="true" />
-          <Image
-            src={SITE_IMAGES.hero}
-                  alt="Portrait of Srujan Chidarla"
-            fill
-            priority
-            className="hero__mobile-photo"
-            sizes="(max-width: 768px) 80vw, 400px"
-          />
+        <div className="hero__mobile-portrait">
+          <aside className="hero__note">
+            <p className="hero__note-lead">Engineer, athlete, builder.</p>
+            <p className="hero__note-line">
+              I train most days
+              <br />
+              and ship the rest.
+            </p>
+          </aside>
+          <div className="hero__mobile-photo-wrap">
+            <div className="hero__glow" aria-hidden="true" />
+            <Image
+              src={SITE_IMAGES.hero}
+              alt="Portrait of Srujan Chidarla"
+              fill
+              priority
+              className="hero__mobile-photo"
+              sizes="220px"
+            />
+          </div>
         </div>
       </section>
     </section>
