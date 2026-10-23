@@ -4,19 +4,16 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Download, Menu, Moon, Sun, X } from "lucide-react";
 import { SITE } from "@/lib/site";
-import { useContact } from "@/components/ContactProvider";
 import { useTheme } from "@/components/ThemeProvider";
 
 const NAV_LINKS = [
-  { href: "/#experience", label: "Experience" },
   { href: "/#projects", label: "Work" },
+  { href: "/#experience", label: "Experience" },
   { href: "/about", label: "About" },
-  { href: "/#writing", label: "Writing" },
   { href: "/#contact", label: "Contact" },
 ];
 
 export default function Navbar() {
-  const { openContact } = useContact();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { theme, toggle } = useTheme();
@@ -31,9 +28,8 @@ export default function Navbar() {
   return (
     <header className={`navbar${scrolled ? " navbar--scrolled" : ""}`}>
       <div className="wrap navbar__inner">
-        <Link href="/" className="navbar__brand font-mono">
+        <Link href="/" className="navbar__brand">
           {SITE.name.split(" ")[0]}
-          <span className="navbar__brand-dot">.</span>
         </Link>
 
         <nav className="navbar__links" aria-label="Main navigation">
@@ -62,11 +58,6 @@ export default function Navbar() {
             title={theme === "dark" ? "Light mode" : "Dark mode"}
           >
             {theme === "dark" ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
-          </button>
-
-          <button type="button" className="navbar__badge" onClick={openContact}>
-            <span className="navbar__badge-dot" aria-hidden="true" />
-            Say hello
           </button>
 
           <button
@@ -110,9 +101,6 @@ export default function Navbar() {
             }}
           >
             {theme === "dark" ? "Light mode" : "Dark mode"}
-          </button>
-          <button type="button" className="navbar__badge navbar__badge--mobile" onClick={openContact}>
-            Say hello
           </button>
         </nav>
       )}

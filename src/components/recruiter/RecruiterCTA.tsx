@@ -81,6 +81,15 @@ export default function RecruiterCTA() {
               <strong>GitHub</strong>
               <span>github.com/srujanchidarla</span>
             </a>
+            <a
+              href={RECRUITER_CONTACT.leetcode}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rh-cta__card"
+            >
+              <strong>LeetCode</strong>
+              <span>leetcode.com/u/srujanchidarla</span>
+            </a>
             <button
               type="button"
               className="rh-cta__card rh-cta__card--chat"
@@ -92,7 +101,7 @@ export default function RecruiterCTA() {
             </button>
             <button type="button" className="rh-cta__card" onClick={openContact}>
               <strong>Message me</strong>
-              <span>Email, LinkedIn &amp; GitHub</span>
+              <span>Email, LinkedIn, GitHub, LeetCode</span>
             </button>
           </div>
 

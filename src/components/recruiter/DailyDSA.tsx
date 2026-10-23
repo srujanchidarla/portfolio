@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { ALGOCHRONICLE, fetchDSAActivity } from "@/lib/algochronicle";
+import { SITE } from "@/lib/site";
 
 function formatDate(dateStr: string): string {
   if (!dateStr) return "";
@@ -62,6 +63,15 @@ export default async function DailyDSA() {
                 dsa-problems repo
                 <ArrowUpRight size={14} aria-hidden="true" />
               </Link>
+              <a
+                href={SITE.leetcode}
+                className="btn-secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LeetCode
+                <ArrowUpRight size={14} aria-hidden="true" />
+              </a>
             </div>
           </div>
         </div>
@@ -160,6 +170,15 @@ export default async function DailyDSA() {
                 Source repo
                 <ArrowUpRight size={14} aria-hidden="true" />
               </Link>
+              <a
+                href={SITE.leetcode}
+                className="btn-secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LeetCode
+                <ArrowUpRight size={14} aria-hidden="true" />
+              </a>
             </div>
           </div>
         </div>

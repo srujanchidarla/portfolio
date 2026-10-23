@@ -15,6 +15,7 @@ export const SITE = {
   email: "srujanchidarla.uof@gmail.com",
   linkedin: "https://www.linkedin.com/in/srujan-chidarla",
   github: "https://github.com/srujanchidarla",
+  leetcode: "https://leetcode.com/u/srujanchidarla/",
   website: "https://srujanchidarla.com",
   localGuide: "https://www.google.com/maps/contrib/117828540649458317543",
   localGuideShort: "https://maps.app.goo.gl/MAkrodDNB5Lktii9A",
@@ -99,8 +100,8 @@ export const WORK_AUTH = {
 } as const;
 
 export const SITE_IMAGES = {
-  /** Cropped café headshot — hero */
-  hero: "/images/hero.jpg",
+  /** Café portrait, background removed */
+  hero: "/images/hero3.png",
   /** Mural café / MacBook — coding lifestyle */
   coding: "/images/IMG_5502.jpg",
   /** Google Local Guide Level 9 badge card */

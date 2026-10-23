@@ -1,16 +1,24 @@
 "use client";
 
 import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { useContact } from "@/components/ContactProvider";
 
 export default function Footer() {
   const { openContact } = useContact();
+  const reduce = useReducedMotion();
   const year = new Date().getFullYear();
 
   return (
-    <footer className="footer">
+    <motion.footer
+      className="footer"
+      initial={reduce ? false : { opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "0px 0px -40px 0px" }}
+      transition={{ duration: reduce ? 0 : 0.55, ease: [0.22, 1, 0.36, 1] }}
+    >
       <div className="wrap footer__inner">
         <div className="footer__cta">
           <div className="footer__cta-text">
@@ -35,6 +43,9 @@ export default function Footer() {
           </a>
           <a href={SITE.github} target="_blank" rel="noopener noreferrer">
             GitHub
+          </a>
+          <a href={SITE.leetcode} target="_blank" rel="noopener noreferrer">
+            LeetCode
           </a>
           <a href={SITE.localGuide} target="_blank" rel="noopener noreferrer">
             Local Guide
@@ -66,6 +77,6 @@ export default function Footer() {
           <p className="footer__updated">Last updated {SITE.lastUpdated}</p>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }

@@ -278,10 +278,12 @@ function ProjectCaseStudy({ project, titleId }: { project: Project; titleId?: st
 function ProjectTile({
   project,
   index,
+  lead = false,
   onOpen,
 }: {
   project: Project;
   index: number;
+  lead?: boolean;
   onOpen: () => void;
 }) {
   const liveSrc = getLiveSite(project);
@@ -289,7 +291,7 @@ function ProjectTile({
   return (
     <motion.button
       type="button"
-      className="rh-projects__tile"
+      className={`rh-projects__tile${lead ? " rh-projects__tile--lead" : ""}`}
       style={{ "--proj-color": project.color } as React.CSSProperties}
       onClick={onOpen}
       custom={index}
@@ -309,8 +311,14 @@ function ProjectTile({
         <span className="rh-projects__tile-tag">{project.tag}</span>
       </div>
       <div className="rh-projects__tile-body">
-        <h3>{project.title}</h3>
-        <p>{project.journey}</p>
+        {lead ? <span className="rh-projects__tile-kicker">Featured</span> : null}
+        <h3>
+          {project.title}
+          {"subtitle" in project && project.subtitle ? (
+            <span className="rh-projects__subtitle"> — {project.subtitle}</span>
+          ) : null}
+        </h3>
+        <p>{lead ? project.resultDetail : project.journey}</p>
         <div className="rh-projects__tile-meta">
           <span className="rh-projects__tile-result">{project.result}</span>
           <span className="rh-projects__tile-cta">
@@ -384,9 +392,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
 
 export default function ImpactProjects() {
   const [activeId, setActiveId] = useState<string | null>(null);
-  const featured = CURATED_PROJECTS[0];
-  const rest = CURATED_PROJECTS.slice(1);
-  const activeProject = rest.find((p) => p.id === activeId) ?? null;
+  const activeProject = CURATED_PROJECTS.find((p) => p.id === activeId) ?? null;
 
   return (
     <section id="projects" className="rh-projects">
@@ -402,27 +408,20 @@ export default function ImpactProjects() {
             Products with <span className="gradient-text">real decisions behind them</span>
           </h2>
           <p className="section-subtitle">
-            Seven projects — AlgoChronicle up close below, six more a click away for the
-            full case study.
+            AlgoChronicle is up front. The other six sit in an even grid — open any card for
+            the case study.
           </p>
         </motion.header>
 
-        <motion.article
-          className="rh-projects__card rh-projects__card--featured"
-          style={{ "--proj-color": featured.color } as React.CSSProperties}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.35 }}
-        >
-          <span className="rh-projects__featured-label">Featured</span>
-          <ProjectCaseStudy project={featured} />
-        </motion.article>
-
-        <h3 className="rh-projects__more-heading">More projects</h3>
-        <div className="rh-projects__tiles">
-          {rest.map((p, i) => (
-            <ProjectTile key={p.id} project={p} index={i} onOpen={() => setActiveId(p.id)} />
+        <div className="rh-projects__bento">
+          {CURATED_PROJECTS.map((p, i) => (
+            <ProjectTile
+              key={p.id}
+              project={p}
+              index={i}
+              lead={i === 0}
+              onOpen={() => setActiveId(p.id)}
+            />
           ))}
         </div>
       </div>

@@ -124,6 +124,16 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 GitHub Profile
               </a>
 
+              <a
+                href={SITE.leetcode}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary modal-actions__btn"
+              >
+                <ExternalLink size={18} aria-hidden="true" />
+                LeetCode Profile
+              </a>
+
               <a href={SITE.resumeUrl} className="btn-secondary modal-actions__btn">
                 View Resume
               </a>

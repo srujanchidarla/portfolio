@@ -63,6 +63,7 @@ Key facts:
 - Email: ${SITE.email}
 - LinkedIn: ${SITE.linkedin}
 - GitHub: ${SITE.github} — 41 repositories (public + private), Pull Shark achievement
+- LeetCode: ${SITE.leetcode}
 - Resume: ${SITE.resumeUrl}
 
 Portfolio sections (link with markdown when helpful):
@@ -167,6 +168,7 @@ He responds quickly.`;
 - 📧 [${SITE.email}](mailto:${SITE.email})
 - 💼 [LinkedIn](${SITE.linkedin})
 - 🔗 [GitHub](${SITE.github})
+- 🧩 [LeetCode](${SITE.leetcode})
 - 📄 [Resume](${SITE.resumeUrl})
 - 💬 [Contact section](#contact) on this site
 

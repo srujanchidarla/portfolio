@@ -14,6 +14,7 @@ import LocalGuideBanner from "@/components/recruiter/LocalGuideBanner";
 import GitHubActivity from "@/components/GitHubActivity";
 import GitHubActivitySkeleton from "@/components/github/GitHubActivitySkeleton";
 import RecruiterCTA from "@/components/recruiter/RecruiterCTA";
+import Reveal from "@/components/Reveal";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 import Footer from "@/components/Footer";
 import { ContactProvider } from "@/components/ContactProvider";
@@ -28,17 +29,23 @@ export default function HomePage() {
         <ProofSection />
         <Experience />
         <ImpactProjects />
-        <Suspense fallback={<DailyDSASkeleton />}>
-          <DailyDSA />
-        </Suspense>
+        <Reveal>
+          <Suspense fallback={<DailyDSASkeleton />}>
+            <DailyDSA />
+          </Suspense>
+        </Reveal>
         <SkillsImpact />
         <FeaturedCerts />
         <WritingSection />
         <AthleteLife />
-        <LocalGuideBanner />
-        <Suspense fallback={<GitHubActivitySkeleton />}>
-          <GitHubActivity />
-        </Suspense>
+        <Reveal>
+          <LocalGuideBanner />
+        </Reveal>
+        <Reveal>
+          <Suspense fallback={<GitHubActivitySkeleton />}>
+            <GitHubActivity />
+          </Suspense>
+        </Reveal>
         <RecruiterCTA />
       </main>
       <StickyMobileCTA />

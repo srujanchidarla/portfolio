@@ -284,5 +284,6 @@ export const RECRUITER_CONTACT = {
   email: SITE.email,
   linkedin: SITE.linkedin,
   github: SITE.github,
+  leetcode: SITE.leetcode,
   resume: SITE.resumeUrl,
 } as const;

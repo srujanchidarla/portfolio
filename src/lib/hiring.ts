@@ -255,6 +255,7 @@ export const RECRUITER_LINKS = [
   { id: "resume", label: "Resume", sublabel: "View / print PDF", href: SITE.resumeUrl, icon: "📄", external: false },
   { id: "linkedin", label: "LinkedIn", sublabel: "Professional profile", href: SITE.linkedin, icon: "💼", external: true },
   { id: "github", label: "GitHub", sublabel: "Code samples", href: SITE.github, icon: "🔗", external: true },
+  { id: "leetcode", label: "LeetCode", sublabel: "Practice profile", href: SITE.leetcode, icon: "🧩", external: true },
   { id: "email", label: "Email", sublabel: "Direct contact", href: `mailto:${SITE.email}`, icon: "📧", external: false },
   { id: "chat", label: "Let's Talk", sublabel: "Chat or schedule a call", icon: "💬", action: "contact" as const },
 ] as const;
