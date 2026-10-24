@@ -744,6 +744,16 @@ html[data-theme="light"] .hero__note-lead {
   .hero__proof-metrics .hero__metric {
     animation: none;
   }
+
+  .hero__sketch {
+    animation: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .hero__duster {
+    display: none;
+  }
 }
 
 .hero__role {
@@ -1010,15 +1020,28 @@ html[data-theme="light"] .hero__glow {
 
 .hero__mobile-photo-wrap {
   position: relative;
+  border-radius: 22px;
+  box-shadow:
+    0 0 0 1px rgba(232, 196, 154, 0.28),
+    0 18px 32px rgba(0, 0, 0, 0.42);
+}
+
+html[data-theme="light"] .hero__mobile-photo-wrap {
+  box-shadow:
+    0 0 0 1px rgba(138, 90, 43, 0.28),
+    0 16px 32px rgba(48, 28, 10, 0.18),
+    0 0 36px rgba(196, 132, 72, 0.22);
 }
 
 .hero__photo-frame {
   position: relative;
   z-index: 1;
-  border-radius: 0;
+  border-radius: 22px;
   overflow: visible;
   border: none;
-  box-shadow: none;
+  box-shadow:
+    0 0 0 1px rgba(232, 196, 154, 0.28),
+    0 18px 32px rgba(0, 0, 0, 0.42);
   background: transparent;
   height: auto;
   min-height: 0;
@@ -1037,19 +1060,50 @@ html[data-theme="light"] .hero__glow {
   }
 }
 
+.hero__sketch {
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(148deg, #fff 0% 40%, transparent 58%);
+  mask-image: linear-gradient(148deg, #fff 0% 40%, transparent 58%);
+  -webkit-mask-size: 280% 280%;
+  mask-size: 280% 280%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: 100% 100%;
+  mask-position: 100% 100%;
+}
+
+.hero__duster {
+  position: absolute;
+  z-index: 3;
+  left: -6%;
+  top: -4%;
+  width: 72%;
+  height: 11%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 252, 247, 0.55) 46%,
+    rgba(255, 248, 236, 0.2) 64%,
+    transparent 86%
+  );
+  filter: blur(8px);
+  opacity: 0;
+}
+
 .hero__photo,
 .hero__mobile-photo {
   z-index: 1;
   object-fit: cover;
   object-position: center center;
   border-radius: 22px;
-  box-shadow:
-    0 0 0 1px rgba(232, 196, 154, 0.28),
-    0 18px 32px rgba(0, 0, 0, 0.42);
 }
 
-html[data-theme="light"] .hero__photo,
-html[data-theme="light"] .hero__mobile-photo {
+html[data-theme="light"] .hero__photo-frame {
   box-shadow:
     0 0 0 1px rgba(138, 90, 43, 0.28),
     0 16px 32px rgba(48, 28, 10, 0.18),
@@ -1123,9 +1177,8 @@ html[data-theme="light"] .hero__mobile-photo {
     height: auto;
     aspect-ratio: 1122 / 1600;
     background: transparent;
-    border-radius: 0;
+    border-radius: 22px;
     border: none;
-    box-shadow: none;
     overflow: visible;
     filter: none;
   }

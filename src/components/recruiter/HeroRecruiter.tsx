@@ -1,12 +1,70 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { SITE, SITE_IMAGES } from "@/lib/site";
 import { ALGOCHRONICLE } from "@/lib/algochronicle";
 import { useContact } from "@/components/ContactProvider";
+
+function SketchReveal({ children }: { children: ReactNode }) {
+  const sketchRef = useRef<HTMLDivElement>(null);
+  const dusterRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const sketch = sketchRef.current;
+    const duster = dusterRef.current;
+    if (!sketch || !duster) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      sketch.style.webkitMaskImage = "none";
+      sketch.style.maskImage = "none";
+      duster.style.display = "none";
+      return;
+    }
+
+    const delay = 280;
+    const duration = 2350;
+    let start = 0;
+    let frame = 0;
+
+    const tick = (now: number) => {
+      if (!start) start = now;
+      const t = Math.min(1, Math.max(0, (now - start - delay) / duration));
+      const eased = 1 - Math.pow(1 - t, 3);
+      const pos = (1 - eased) * 100;
+      sketch.style.webkitMaskPosition = `${pos}% ${pos}%`;
+      sketch.style.maskPosition = `${pos}% ${pos}%`;
+
+      const x = -28 + eased * 92;
+      const y = -46 + eased * 460;
+      const opacity = t < 0.08 ? t / 0.08 : t > 0.84 ? (1 - t) / 0.16 : 0.7;
+      duster.style.opacity = String(Math.max(0, opacity));
+      duster.style.transform = `translate3d(${x}%, ${y}%, 0) rotate(${-34 + eased * 12}deg)`;
+
+      if (t < 1) {
+        frame = requestAnimationFrame(tick);
+      } else {
+        sketch.style.webkitMaskImage = "none";
+        sketch.style.maskImage = "none";
+        duster.style.opacity = "0";
+      }
+    };
+
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  return (
+    <>
+      <div className="hero__sketch" ref={sketchRef}>
+        {children}
+      </div>
+      <span className="hero__duster" ref={dusterRef} aria-hidden="true" />
+    </>
+  );
+}
 
 function GitHubLogo() {
   return (
@@ -345,24 +403,21 @@ export default function HeroRecruiter() {
                 </p>
               </motion.aside>
 
-              <motion.div
-                className="hero__visual"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
-              >
+              <div className="hero__visual">
                 <div className="hero__photo-frame">
                   <div className="hero__glow" aria-hidden="true" />
-                  <Image
-                    src={SITE_IMAGES.hero}
-                    alt="Portrait of Srujan Chidarla"
-                    fill
-                    priority
-                    className="hero__photo"
-                    sizes="300px"
-                  />
+                  <SketchReveal>
+                    <Image
+                      src={SITE_IMAGES.hero}
+                      alt="Portrait of Srujan Chidarla"
+                      fill
+                      priority
+                      className="hero__photo"
+                      sizes="300px"
+                    />
+                  </SketchReveal>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>
@@ -408,14 +463,16 @@ export default function HeroRecruiter() {
           </aside>
           <div className="hero__mobile-photo-wrap">
             <div className="hero__glow" aria-hidden="true" />
-            <Image
-              src={SITE_IMAGES.hero}
-              alt="Portrait of Srujan Chidarla"
-              fill
-              priority
-              className="hero__mobile-photo"
-              sizes="220px"
-            />
+            <SketchReveal>
+              <Image
+                src={SITE_IMAGES.hero}
+                alt="Portrait of Srujan Chidarla"
+                fill
+                priority
+                className="hero__mobile-photo"
+                sizes="220px"
+              />
+            </SketchReveal>
           </div>
         </div>
       </section>
