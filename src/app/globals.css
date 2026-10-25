@@ -2650,7 +2650,7 @@ body.boot-loading {
     height: auto;
     min-height: 0;
     aspect-ratio: 1122 / 1600;
-    border-radius: 0;
+    border-radius: 22px;
     background: transparent;
     overflow: visible;
     margin: 18px 0 0;
@@ -2662,6 +2662,7 @@ body.boot-loading {
     width: min(240px, 68%);
     margin: 0;
     flex-shrink: 0;
+    border-radius: 22px;
   }
 
   .hero__mobile-photo-wrap .hero__glow {
