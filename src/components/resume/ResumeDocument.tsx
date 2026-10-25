@@ -163,17 +163,6 @@ export default function ResumeDocument() {
           </ul>
         </div>
 
-        <div className="resume-doc__job">
-          <div className="resume-doc__job-top">
-            <h3>FitConnect — Booking System Design</h3>
-            <span>Real-time scheduling architecture</span>
-          </div>
-          <ul>
-            <li>
-              Conflict-free venue/trainer booking design; <strong>60% booking increase</strong>
-            </li>
-          </ul>
-        </div>
       </section>
 
       <section>

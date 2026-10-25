@@ -68,7 +68,7 @@ Key facts:
 
 Portfolio sections (link with markdown when helpful):
 - #experience — WalletGyde + Cognizant work; #education for degrees
-- #projects — Neocortex, Wildmate (live), JobHuntOS, AgriWise (live), AlgoChronicle (live), StudyGlobal, FitConnect
+- #projects — Neocortex, Wildmate (live), JobHuntOS, AgriWise (live), AlgoChronicle (live), Study Chapter (live)
 - #skills — honest skill levels (Strong vs Comfortable)
 - #certifications — featured verified credentials
 - #github — live GitHub activity
@@ -143,9 +143,8 @@ Honest skill levels in [Skills](#skills).`;
 - **Neocortex** — my ongoing Jarvis Life OS with 15 AI agents ([GitHub](https://github.com/srujanchidarla/neocortex))
 - **CampfireChai (Wildmate)** — live community app for outdoor adventurers ([Live](https://wildmate.app/) · [GitHub](https://github.com/srujanchidarla/CampfireChai))
 - **AgriWise** — digital agriculture platform for Indian farmers, 8 modules ([Live](https://agriwise-mauve.vercel.app/))
-- **StudyGlobal** — international student platform (research → relocation → in-country support)
+- **Study Chapter** — live study-destination product ([Live](https://studyglobalscholar.netlify.app/))
 - **JobHuntOS** — AI Chrome extension on the Web Store
-- **FitConnect** — social fitness platform in [Showcases](#showcases)
 
 Which one should I break down?`;
   }

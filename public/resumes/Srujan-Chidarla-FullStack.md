@@ -110,14 +110,6 @@ Software engineer with **3+ years** of experience across **full-stack developmen
 
 *Stack: Next.js, Expo, Python, FastAPI, SQLite, n8n, multi-agent LLM orchestration*
 
-### FitConnect · HealthTech Booking Platform
-- Designed full-stack venue booking system: facility search, trainer discovery, scheduling, and real-time slot updates
-- **Result:** **60% increase in bookings** through conflict-free scheduling and clearer UX
-
-*Stack: React, Node.js, PostgreSQL, real-time coordination, system design*
-
----
-
 ## EDUCATION
 
 **University of Fairfax** · Master of Science in Computer Science  

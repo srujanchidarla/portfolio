@@ -69,13 +69,6 @@ Software engineer with **3+ years** of experience building systems at the inters
 - Free DSA platform: 159-problem roadmap, interview prep for 126 companies, adaptive study plans, spaced reviews
 - Hourly jobs for time-zone-aware push reminders and LeetCode sync; push-to-publish pipeline (git push → Actions → Firestore)
 
-### FitConnect · Booking System Design
-**React · Node.js · Real-time scheduling**
-
-- Conflict-free venue/trainer booking architecture; **60% booking increase** through clearer scheduling flows
-
----
-
 ## EDUCATION
 
 **University of Fairfax** · M.S. Computer Science · Aug 2024 – Aug 2026 (Expected) · **GPA 4.0/4.0**  

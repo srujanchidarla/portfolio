@@ -138,12 +138,12 @@ export const IMPACT_PROJECTS = [
     problem:
       "DSA prep is scattered across platforms, hard to sustain without a plan, and progress doesn't carry over — so people start strong and quit by week two.",
     solution:
-      "A free roadmap of 159 hand-picked problems across 13 levels, each with a checklist, plus a daily problem, step-by-step visualizers, and spaced reviews. Company prep covers 126 companies' recently asked questions, and a study plan turns your target companies, interview date, and daily time into a day-by-day schedule. Connect LeetCode and solved problems tick themselves.",
+      "A free roadmap of 159 hand-picked problems across 13 levels, each with a checklist, plus a daily problem, step-by-step visualizers, and spaced reviews. Interview tags cover 419 companies, and a study plan turns your target companies, interview date, and daily time into a day-by-day schedule. Connect LeetCode and solved problems tick themselves.",
     learned:
       "Designing one product for very different users — first-timers, casual practicers, and people with interviews in three weeks — so the homepage, plans, and reminders adapt to each. Plus the engineering underneath: live cross-device sync, hourly server jobs for reminders and LeetCode sync, web push, an installable PWA, and native apps.",
     result: "Try it free",
     resultDetail:
-      "159 problems in 13 levels, company prep for 126 companies, adaptive study plans, LeetCode auto-sync, and daily push reminders — with Android and iPhone apps coming soon.",
+      "159 problems in 13 levels, 223+ walkthroughs, interview tags for 419 companies, adaptive study plans, and LeetCode auto-sync.",
     stack: ["Next.js", "TypeScript", "Firebase", "GitHub Actions", "Tailwind", "Capacitor (iOS)", "Android (TWA)"],
     color: "#22c55e",
     href: "https://github.com/srujanchidarla/algochronicle",
@@ -152,41 +152,23 @@ export const IMPACT_PROJECTS = [
   },
   {
     id: "studyglobal",
-    title: "StudyGlobal",
-    tag: "EdTech · Full-Stack",
-    role: "Full-stack engineer · product flow and API integrations",
+    title: "Study Chapter",
+    tag: "EdTech · Live",
+    role: "Full-stack engineer · product flow and the planning tools",
     lanes: ["Full-Stack"],
-    previewImage: "/project-previews/studyglobal.jpg",
-    journey: "Learning product thinking for a real audience",
+    journey: "A starting point before a country is chosen",
     problem:
-      "International students struggle with fragmented visa, housing, and relocation tools.",
+      "International students get a country picked for them, then hunt for cost, applications, and discounts in separate tabs.",
     solution:
-      "End-to-end platform with cost-of-living APIs, document vault, university matching, and visa workflows.",
+      "Study Chapter starts from subject, budget, and priorities, then holds destinations, applications, lessons, a year-one cost calculator, and student discounts.",
     learned:
-      "How to design for a specific user journey (international students) and integrate third-party APIs into a coherent product.",
-    result: "40% faster visa workflows",
-    resultDetail: "One place for the full journey — from research to in-country support.",
-    stack: ["Next.js", "TypeScript", "API Integration", "PostgreSQL"],
+      "A matcher should shortlist, not decide. Cost tools have to show the first year, and every discount has to point at the official page.",
+    result: "Live as Study Chapter",
+    resultDetail:
+      "Compare destinations, then plan applications, year-one cost, and student discounts in one place.",
+    stack: ["Next.js", "TypeScript", "API Integration"],
     color: "#3b82f6",
     liveHref: "https://studyglobalscholar.netlify.app/",
-  },
-  {
-    id: "fitconnect",
-    title: "FitConnect",
-    tag: "HealthTech · Full-Stack",
-    role: "System designer · data model, booking flows, and frontend",
-    lanes: ["Full-Stack", "Backend"],
-    journey: "Most complex production-style system I designed",
-    problem:
-      "Fitness venues and trainers had no unified way to handle bookings and community coordination.",
-    solution:
-      "Venue booking, trainer discovery, scheduling, and community sports features in a single platform.",
-    learned:
-      "System design for real-time coordination, database modeling for bookings, and balancing feature scope with shipping.",
-    result: "Booking system design",
-    resultDetail: "Architecture for venues, trainers, and real-time slot coordination.",
-    stack: ["React", "Node.js", "Real-time", "System Design"],
-    color: "#10b981",
   },
 ] as const;
 
