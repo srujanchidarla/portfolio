@@ -2635,20 +2635,13 @@ body.boot-loading {
   .hero__mobile-portrait {
     display: flex;
     align-items: center;
-    gap: 14px;
+    justify-content: center;
     width: 100%;
     margin-top: 22px;
   }
 
   .hero__mobile-portrait .hero__note {
-    display: flex;
-    flex: 1;
-    min-width: 0;
-    max-width: none;
-  }
-
-  .hero__mobile-portrait .hero__note-lead {
-    font-size: 1.2rem;
+    display: none;
   }
 
   .hero__mobile-photo-wrap {
@@ -2666,7 +2659,7 @@ body.boot-loading {
   }
 
   .hero__mobile-portrait .hero__mobile-photo-wrap {
-    width: 58%;
+    width: min(240px, 68%);
     margin: 0;
     flex-shrink: 0;
   }
@@ -2679,10 +2672,10 @@ body.boot-loading {
   }
 
   html[data-theme="light"] .hero__mobile-photo-wrap .hero__glow {
-    left: -80%;
-    top: 6%;
-    width: 140%;
-    height: 88%;
+    left: -16%;
+    top: 10%;
+    width: 48%;
+    height: 72%;
   }
 
   .hero__mobile-photo-wrap::before,
