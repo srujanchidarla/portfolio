@@ -8338,20 +8338,15 @@ html[data-theme="light"] .navbar__resume:hover {
 
 @media (min-width: 1024px) {
   .rh-athlete__grid {
-    grid-template-columns: 1.2fr 0.9fr 0.9fr;
-    grid-template-rows: auto auto;
+    grid-template-columns: 1fr 1fr;
   }
 
   .rh-athlete__card--wide {
     grid-column: 1 / -1;
   }
 
-  .rh-athlete__card--tall {
-    grid-row: span 1;
-  }
-
   .rh-athlete__card--end {
-    grid-column: 3;
+    grid-column: auto;
   }
 }
 

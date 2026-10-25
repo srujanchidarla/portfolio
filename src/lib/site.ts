@@ -137,33 +137,6 @@ export const ATHLETE_MEDIA = [
     span: "tall" as const,
   },
   {
-    id: "gym-strength",
-    type: "carousel" as const,
-    src: "/media/strength-back.jpeg",
-    alt: "Srujan training — strength and discipline",
-    label: "Strength",
-    caption: "Same discipline that shows up in sprints and shipping.",
-    span: "normal" as const,
-    slides: [
-      {
-        src: "/media/strength-back.jpeg",
-        alt: "Srujan training — back strength pose",
-      },
-      {
-        src: "/media/strength-front-1.jpeg",
-        alt: "Srujan — fitness progress, front view",
-      },
-      {
-        src: "/media/strength-front-2.jpeg",
-        alt: "Srujan — confident fitness portrait",
-      },
-      {
-        src: "/media/strength-front-3.jpeg",
-        alt: "Srujan — strength and presence",
-      },
-    ],
-  },
-  {
     id: "hybrid",
     type: "video" as const,
     src: "/media/hybridathlete-web.mp4",
