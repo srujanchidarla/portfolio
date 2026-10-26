@@ -64,7 +64,7 @@ export default function TheStory() {
           <div className="rh-story__local-guide-media">
             <Image
               src={SITE_IMAGES.localGuide}
-              alt="Google Local Guide Level 9 — Srujan Chidarla · 10k+ contributions, 52k+ points, 58M+ views"
+              alt={`Google Local Guide Level ${LOCAL_GUIDE.level} — Srujan Chidarla · ${LOCAL_GUIDE.contributions} contributions, ${LOCAL_GUIDE.points} points, ${LOCAL_GUIDE.views} views`}
               width={1200}
               height={1500}
               quality={92}
@@ -94,6 +94,14 @@ export default function TheStory() {
                 <span>views</span>
               </div>
             </div>
+            <p className="rh-story__local-guide-progress">
+              {LOCAL_GUIDE.pointsExact} of {LOCAL_GUIDE.pointsGoal} points
+            </p>
+            <ul className="rh-story__local-guide-badges">
+              {LOCAL_GUIDE.badges.map((badge) => (
+                <li key={badge}>{badge}</li>
+              ))}
+            </ul>
             <span className="rh-story__link">
               See what I&apos;ve posted to Google Maps
               <ArrowUpRight size={14} aria-hidden="true" />

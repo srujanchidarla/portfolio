@@ -58,6 +58,7 @@ Key facts:
 - Recent production internship at WalletGyde (35% engagement increase, 40% faster transactions)
 - Shipped Wildmate (live), JobHuntOS (Chrome Web Store), AlgoChronicle (automated pipeline)
 - Multi-sport athlete — discipline, teamwork, performing under pressure
+- Google Local Guide Level 9: 11k contributions, 54k points (53,605 of 100,000), 76M views. Master badges: Reviewer, Photographer, Trailblazer, Fact Finder. 7,268 photos, 497 videos, 421 reviews, 2,005 answers, 161 places added.
 - Authorized to work in the U.S. via STEM OPT (36 months); open to relocating anywhere in the US
 - Values: shipping, training, learning in public
 - Email: ${SITE.email}
@@ -72,6 +73,7 @@ Portfolio sections (link with markdown when helpful):
 - #skills — honest skill levels (Strong vs Comfortable)
 - #certifications — featured verified credentials
 - #github — live GitHub activity
+- #local-guide — Google Maps Local Guide Level 9
 - #story — athletics, learning mindset
 - #contact — reach out directly
 

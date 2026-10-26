@@ -110,10 +110,26 @@ export const SITE_IMAGES = {
 
 export const LOCAL_GUIDE = {
   level: 9,
-  contributions: "10k+",
-  points: "52k+",
-  views: "58M+",
+  contributions: "11k",
+  points: "54k",
+  views: "76M",
+  pointsExact: "53,605",
+  pointsGoal: "100,000",
+  pointsProgress: 53.6,
   tagline: "Explorer · Sanchari",
+  badges: [
+    "Master Reviewer",
+    "Master Photographer",
+    "Master Trailblazer",
+    "Master Fact Finder",
+  ],
+  breakdown: [
+    { value: "7,268", label: "photos" },
+    { value: "497", label: "videos" },
+    { value: "421", label: "reviews" },
+    { value: "2,005", label: "answers" },
+    { value: "161", label: "places added" },
+  ],
 } as const;
 
 /** Curated athlete media for the portfolio (recruiter-safe picks) */

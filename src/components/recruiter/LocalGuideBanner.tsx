@@ -42,12 +42,36 @@ export default function LocalGuideBanner() {
                 <span>views</span>
               </li>
             </ul>
+            <p className="rh-lg__progress">
+              <span className="rh-lg__track" aria-hidden="true">
+                <span style={{ width: `${LOCAL_GUIDE.pointsProgress}%` }} />
+              </span>
+              <span>
+                {LOCAL_GUIDE.pointsExact} of {LOCAL_GUIDE.pointsGoal} points
+              </span>
+            </p>
           </div>
 
           <span className="rh-lg__cta">
             View profile
             <ArrowUpRight size={15} aria-hidden="true" />
           </span>
+
+          <div className="rh-lg__details">
+            <ul className="rh-lg__badges" aria-label="Local Guide badges">
+              {LOCAL_GUIDE.badges.map((badge) => (
+                <li key={badge}>{badge}</li>
+              ))}
+            </ul>
+            <ul className="rh-lg__mix" aria-label="What the contributions are">
+              {LOCAL_GUIDE.breakdown.map((item) => (
+                <li key={item.label}>
+                  <strong>{item.value}</strong>
+                  <span>{item.label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </a>
       </div>
     </section>
