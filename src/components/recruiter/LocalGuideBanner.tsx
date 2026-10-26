@@ -20,7 +20,7 @@ export default function LocalGuideBanner() {
               height={600}
               quality={92}
               className="rh-lg__avatar"
-              sizes="(max-width: 640px) 152px, 200px"
+              sizes="(max-width: 720px) 46vw, 420px"
             />
           </span>
 
