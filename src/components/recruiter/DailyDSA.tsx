@@ -11,31 +11,37 @@ function formatDate(dateStr: string): string {
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
 
-function ConsistencyBadge() {
+function PracticeActions() {
   return (
-    <a
-      href={LEETCODE_STREAK.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="rh-dsa__badge"
-      aria-label={`${LEETCODE_STREAK.title} on LeetCode`}
-    >
-      <span className="rh-dsa__badge-media">
-        <Image
-          src={SITE_IMAGES.leetcode50Days}
-          alt={`${LEETCODE_STREAK.title} — ${LEETCODE_STREAK.note}`}
-          width={575}
-          height={1024}
-          quality={90}
-          className="rh-dsa__badge-img"
-          sizes="(max-width: 900px) 220px, 240px"
-        />
-      </span>
-      <span className="rh-dsa__badge-copy">
-        <strong>{LEETCODE_STREAK.days}-day consistency</strong>
-        <span>{LEETCODE_STREAK.note}</span>
-      </span>
-    </a>
+    <div className="rh-dsa__actions">
+      <a
+        href={ALGOCHRONICLE.siteUrl}
+        className="btn-primary"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Open AlgoChronicle
+        <ExternalLink size={14} aria-hidden="true" />
+      </a>
+      <Link
+        href={ALGOCHRONICLE.dsaRepo}
+        className="btn-secondary"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Source repo
+        <ArrowUpRight size={14} aria-hidden="true" />
+      </Link>
+      <a
+        href={SITE.leetcode}
+        className="btn-secondary"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        LeetCode
+        <ArrowUpRight size={14} aria-hidden="true" />
+      </a>
+    </div>
   );
 }
 
@@ -48,71 +54,8 @@ export default async function DailyDSA() {
   }
 
   const hasProblems = Boolean(data?.recentProblems.length);
-
-  if (!hasProblems) {
-    return (
-      <section id="daily-dsa" className="rh-dsa" aria-labelledby="daily-dsa-title">
-        <div className="wrap">
-          <header className="rh-section-header">
-            <p className="section-eyebrow">Interview prep · live feed</p>
-            <h2 id="daily-dsa-title" className="section-title">
-              Daily <span className="gradient-text">DSA practice</span>
-            </h2>
-            <p className="section-subtitle">
-              Solve → push to{" "}
-              <a href={ALGOCHRONICLE.dsaRepo} target="_blank" rel="noopener noreferrer">
-                dsa-problems
-              </a>{" "}
-              → auto-publish on AlgoChronicle. Consistency recruiters can verify.
-            </p>
-          </header>
-
-          <div className="rh-dsa__layout rh-dsa__layout--empty">
-            <div className="rh-dsa__empty">
-              <p className="rh-dsa__empty-title">Pipeline is live — feed syncing</p>
-              <p className="rh-dsa__empty-text">
-                Structured DSA folders in GitHub sync to AlgoChronicle for streaks, stats, and
-                revision views. Open the tracker or repo to see the latest activity.
-              </p>
-              <div className="rh-dsa__actions">
-                <a
-                  href={ALGOCHRONICLE.siteUrl}
-                  className="btn-primary"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Open AlgoChronicle
-                  <ExternalLink size={14} aria-hidden="true" />
-                </a>
-                <Link
-                  href={ALGOCHRONICLE.dsaRepo}
-                  className="btn-secondary"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  dsa-problems repo
-                  <ArrowUpRight size={14} aria-hidden="true" />
-                </Link>
-                <a
-                  href={SITE.leetcode}
-                  className="btn-secondary"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  LeetCode
-                  <ArrowUpRight size={14} aria-hidden="true" />
-                </a>
-              </div>
-            </div>
-            <ConsistencyBadge />
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  const [latest, ...rest] = data!.recentProblems;
-  const log = rest.slice(0, 4);
+  const latest = hasProblems ? data!.recentProblems[0] : null;
+  const log = hasProblems ? data!.recentProblems.slice(1, 5) : [];
 
   return (
     <section id="daily-dsa" className="rh-dsa" aria-labelledby="daily-dsa-title">
@@ -127,95 +70,108 @@ export default async function DailyDSA() {
             <a href={ALGOCHRONICLE.dsaRepo} target="_blank" rel="noopener noreferrer">
               dsa-problems
             </a>{" "}
-            → Auto-publish on AlgoChronicle. Consistency recruiters can verify.
+            → publish on AlgoChronicle. Consistency recruiters can verify.
           </p>
         </header>
 
-        <div className="rh-dsa__layout">
-          <ConsistencyBadge />
+        <a
+          href={LEETCODE_STREAK.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rh-dsa__proof"
+          aria-label={`${LEETCODE_STREAK.title} on LeetCode`}
+        >
+          <span className="rh-dsa__proof-media">
+            <Image
+              src={SITE_IMAGES.leetcode50Days}
+              alt=""
+              width={575}
+              height={1024}
+              quality={90}
+              className="rh-dsa__proof-img"
+              sizes="(max-width: 720px) 120px, 168px"
+            />
+          </span>
+          <span className="rh-dsa__proof-copy">
+            <span className="rh-dsa__proof-eyebrow">LeetCode</span>
+            <strong className="rh-dsa__proof-title">{LEETCODE_STREAK.title}</strong>
+            <span className="rh-dsa__proof-note">{LEETCODE_STREAK.note}</span>
+            <span className="rh-dsa__proof-stats" aria-label="Practice stats">
+              <span>
+                <em>{LEETCODE_STREAK.days}</em>
+                days
+              </span>
+              {hasProblems ? (
+                <>
+                  <span>
+                    <em>{data!.totalProblems}</em>
+                    logged
+                  </span>
+                  <span>
+                    <em>{data!.latestDay}</em>
+                    latest day
+                  </span>
+                </>
+              ) : null}
+            </span>
+          </span>
+          <span className="rh-dsa__proof-cta">
+            View badge
+            <ArrowUpRight size={15} aria-hidden="true" />
+          </span>
+        </a>
 
-          <article className="rh-dsa__featured">
-            <p className="rh-dsa__featured-label">Latest solved</p>
-            <p className="rh-dsa__featured-day">Day {latest.dayNumber}</p>
-            <h3 className="rh-dsa__featured-title">{latest.title}</h3>
-            <div className="rh-dsa__featured-meta">
-              {[latest.platform, latest.difficulty, latest.pattern].filter(Boolean).join(" · ")}
-            </div>
-            {latest.date && (
-              <time className="rh-dsa__featured-date" dateTime={latest.date}>
-                {formatDate(latest.date)}
-              </time>
-            )}
-            <div className="rh-dsa__metrics" aria-label="Practice stats">
-              <div>
-                <strong>{data!.currentStreak}</strong>
-                <span>streak</span>
+        {hasProblems && latest ? (
+          <div className="rh-dsa__board">
+            <article className="rh-dsa__featured">
+              <p className="rh-dsa__featured-label">Latest solved</p>
+              <p className="rh-dsa__featured-day">Day {latest.dayNumber}</p>
+              <h3 className="rh-dsa__featured-title">{latest.title}</h3>
+              <div className="rh-dsa__featured-meta">
+                {[latest.platform, latest.difficulty, latest.pattern].filter(Boolean).join(" · ")}
               </div>
-              <div>
-                <strong>{data!.totalProblems}</strong>
-                <span>logged</span>
-              </div>
-              <div>
-                <strong>{data!.latestDay}</strong>
-                <span>latest day</span>
-              </div>
-            </div>
-          </article>
+              {latest.date ? (
+                <time className="rh-dsa__featured-date" dateTime={latest.date}>
+                  {formatDate(latest.date)}
+                </time>
+              ) : null}
+            </article>
 
-          <div className="rh-dsa__feed">
-            <p className="rh-dsa__feed-label">Recent log</p>
-            <ol className="rh-dsa__timeline">
-              {log.map((problem) => (
-                <li key={problem.id} className="rh-dsa__row">
-                  <span className="rh-dsa__row-day">D{problem.dayNumber}</span>
-                  <div className="rh-dsa__row-body">
-                    <span className="rh-dsa__row-title">{problem.title}</span>
-                    <span className="rh-dsa__row-meta">
-                      {[problem.platform, problem.difficulty, problem.pattern]
-                        .filter(Boolean)
-                        .join(" · ")}
-                    </span>
-                  </div>
-                  {problem.date && (
-                    <time className="rh-dsa__row-date" dateTime={problem.date}>
-                      {formatDate(problem.date)}
-                    </time>
-                  )}
-                </li>
-              ))}
-            </ol>
-
-            <div className="rh-dsa__actions">
-              <a
-                href={ALGOCHRONICLE.siteUrl}
-                className="btn-primary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Open AlgoChronicle
-                <ExternalLink size={14} aria-hidden="true" />
-              </a>
-              <Link
-                href={ALGOCHRONICLE.dsaRepo}
-                className="btn-secondary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Source repo
-                <ArrowUpRight size={14} aria-hidden="true" />
-              </Link>
-              <a
-                href={SITE.leetcode}
-                className="btn-secondary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                LeetCode
-                <ArrowUpRight size={14} aria-hidden="true" />
-              </a>
+            <div className="rh-dsa__feed">
+              <p className="rh-dsa__feed-label">Recent log</p>
+              <ol className="rh-dsa__timeline">
+                {log.map((problem) => (
+                  <li key={problem.id} className="rh-dsa__row">
+                    <span className="rh-dsa__row-day">D{problem.dayNumber}</span>
+                    <div className="rh-dsa__row-body">
+                      <span className="rh-dsa__row-title">{problem.title}</span>
+                      <span className="rh-dsa__row-meta">
+                        {[problem.platform, problem.difficulty, problem.pattern]
+                          .filter(Boolean)
+                          .join(" · ")}
+                      </span>
+                    </div>
+                    {problem.date ? (
+                      <time className="rh-dsa__row-date" dateTime={problem.date}>
+                        {formatDate(problem.date)}
+                      </time>
+                    ) : null}
+                  </li>
+                ))}
+              </ol>
+              <PracticeActions />
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="rh-dsa__empty">
+            <p className="rh-dsa__empty-title">Pipeline is live — feed syncing</p>
+            <p className="rh-dsa__empty-text">
+              Structured DSA folders in GitHub sync to AlgoChronicle for streaks, stats, and
+              revision views. Open the tracker or repo to see the latest activity.
+            </p>
+            <PracticeActions />
+          </div>
+        )}
       </div>
     </section>
   );
