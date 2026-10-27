@@ -1,13 +1,42 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { ALGOCHRONICLE, fetchDSAActivity } from "@/lib/algochronicle";
-import { SITE } from "@/lib/site";
+import { LEETCODE_STREAK, SITE, SITE_IMAGES } from "@/lib/site";
 
 function formatDate(dateStr: string): string {
   if (!dateStr) return "";
   const d = new Date(dateStr + "T12:00:00");
   if (Number.isNaN(d.getTime())) return dateStr;
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+}
+
+function ConsistencyBadge() {
+  return (
+    <a
+      href={LEETCODE_STREAK.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="rh-dsa__badge"
+      aria-label={`${LEETCODE_STREAK.title} on LeetCode`}
+    >
+      <span className="rh-dsa__badge-media">
+        <Image
+          src={SITE_IMAGES.leetcode50Days}
+          alt={`${LEETCODE_STREAK.title} — ${LEETCODE_STREAK.note}`}
+          width={575}
+          height={1024}
+          quality={90}
+          className="rh-dsa__badge-img"
+          sizes="(max-width: 900px) 220px, 240px"
+        />
+      </span>
+      <span className="rh-dsa__badge-copy">
+        <strong>{LEETCODE_STREAK.days}-day consistency</strong>
+        <span>{LEETCODE_STREAK.note}</span>
+      </span>
+    </a>
+  );
 }
 
 export default async function DailyDSA() {
@@ -38,41 +67,44 @@ export default async function DailyDSA() {
             </p>
           </header>
 
-          <div className="rh-dsa__empty">
-            <p className="rh-dsa__empty-title">Pipeline is live — feed syncing</p>
-            <p className="rh-dsa__empty-text">
-              Structured DSA folders in GitHub sync to AlgoChronicle for streaks, stats, and
-              revision views. Open the tracker or repo to see the latest activity.
-            </p>
-            <div className="rh-dsa__actions">
-              <a
-                href={ALGOCHRONICLE.siteUrl}
-                className="btn-primary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Open AlgoChronicle
-                <ExternalLink size={14} aria-hidden="true" />
-              </a>
-              <Link
-                href={ALGOCHRONICLE.dsaRepo}
-                className="btn-secondary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                dsa-problems repo
-                <ArrowUpRight size={14} aria-hidden="true" />
-              </Link>
-              <a
-                href={SITE.leetcode}
-                className="btn-secondary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                LeetCode
-                <ArrowUpRight size={14} aria-hidden="true" />
-              </a>
+          <div className="rh-dsa__layout rh-dsa__layout--empty">
+            <div className="rh-dsa__empty">
+              <p className="rh-dsa__empty-title">Pipeline is live — feed syncing</p>
+              <p className="rh-dsa__empty-text">
+                Structured DSA folders in GitHub sync to AlgoChronicle for streaks, stats, and
+                revision views. Open the tracker or repo to see the latest activity.
+              </p>
+              <div className="rh-dsa__actions">
+                <a
+                  href={ALGOCHRONICLE.siteUrl}
+                  className="btn-primary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open AlgoChronicle
+                  <ExternalLink size={14} aria-hidden="true" />
+                </a>
+                <Link
+                  href={ALGOCHRONICLE.dsaRepo}
+                  className="btn-secondary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  dsa-problems repo
+                  <ArrowUpRight size={14} aria-hidden="true" />
+                </Link>
+                <a
+                  href={SITE.leetcode}
+                  className="btn-secondary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LeetCode
+                  <ArrowUpRight size={14} aria-hidden="true" />
+                </a>
+              </div>
             </div>
+            <ConsistencyBadge />
           </div>
         </div>
       </section>
@@ -100,6 +132,8 @@ export default async function DailyDSA() {
         </header>
 
         <div className="rh-dsa__layout">
+          <ConsistencyBadge />
+
           <article className="rh-dsa__featured">
             <p className="rh-dsa__featured-label">Latest solved</p>
             <p className="rh-dsa__featured-day">Day {latest.dayNumber}</p>

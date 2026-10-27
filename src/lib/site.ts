@@ -106,6 +106,16 @@ export const SITE_IMAGES = {
   coding: "/images/IMG_5502.jpg",
   /** Google Local Guide Level 9 badge card */
   localGuide: "/images/google-local-guide.jpg",
+  /** LeetCode 50 Days Badge 2026 */
+  leetcode50Days: "/images/leetcode-50-days-2026.png",
+} as const;
+
+export const LEETCODE_STREAK = {
+  days: 50,
+  year: 2026,
+  title: "50 Days Badge 2026",
+  note: "Solving problems 50+ days in 2026",
+  href: SITE.leetcode,
 } as const;
 
 export const LOCAL_GUIDE = {
