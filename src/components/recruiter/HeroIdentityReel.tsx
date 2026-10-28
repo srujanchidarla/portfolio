@@ -59,13 +59,18 @@ function ReelCard({ item, certIndex }: { item: HeroReelItem; certIndex: number }
             fill
             sizes="220px"
             className="hero__reel-img"
-            style={{ objectPosition: item.objectPosition }}
+            style={
+              item.mediaClass?.includes("logo")
+                ? undefined
+                : { objectPosition: item.objectPosition }
+            }
           />
         )}
       </span>
       <span className="hero__reel-meta">
         <span className="hero__reel-eyebrow">{item.eyebrow}</span>
         <strong>{item.title}</strong>
+        {item.blurb ? <span className="hero__reel-blurb">{item.blurb}</span> : null}
       </span>
     </div>
   );

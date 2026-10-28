@@ -21,6 +21,7 @@ export type HeroReelItem =
       href: string;
       eyebrow: string;
       title: string;
+      blurb?: string;
       image: string;
       images?: readonly string[];
       objectPosition: string;
@@ -44,8 +45,10 @@ export const HERO_REEL_ITEMS: HeroReelItem[] = [
     href: "/work/algochronicle",
     eyebrow: "Live product",
     title: "AlgoChronicle",
-    image: "/project-pages/algochronicle-today.jpg",
-    objectPosition: "center top",
+    blurb: "Daily DSA journal with reminders that stick",
+    image: "/project-logos/algochronicle.png",
+    objectPosition: "center center",
+    mediaClass: "hero__reel-media--logo",
   },
   {
     id: "wildmate",
@@ -54,8 +57,10 @@ export const HERO_REEL_ITEMS: HeroReelItem[] = [
     href: "/work/campfirechai",
     eyebrow: "Live product",
     title: "Wildmate",
-    image: "/project-pages/wildmate-home.jpg",
-    objectPosition: "center top",
+    blurb: "Outdoor community for trips, crews & meetups",
+    image: "/project-logos/wildmate.png",
+    objectPosition: "center center",
+    mediaClass: "hero__reel-media--logo",
   },
   {
     id: "leetcode",

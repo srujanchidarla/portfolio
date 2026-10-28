@@ -568,6 +568,22 @@ html[data-theme="light"] .hero__reel-lead {
   height: 148px;
 }
 
+.hero__reel-media--logo {
+  display: grid;
+  place-items: center;
+  height: 142px;
+  background:
+    radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--c-primary) 10%, transparent), transparent 62%),
+    var(--c-surface);
+}
+
+.hero__reel-media--logo .hero__reel-img {
+  object-fit: contain;
+  object-position: center;
+  padding: 18px;
+  box-sizing: border-box;
+}
+
 .hero__reel-img {
   object-fit: cover;
 }
@@ -592,6 +608,13 @@ html[data-theme="light"] .hero__reel-lead {
   font-weight: 650;
   line-height: 1.25;
   color: var(--c-text);
+}
+
+.hero__reel-blurb {
+  margin-top: 2px;
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--c-muted);
 }
 
 .hero__reel-cert {
