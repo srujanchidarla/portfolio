@@ -8,6 +8,7 @@ import { SITE, SITE_IMAGES } from "@/lib/site";
 import { ALGOCHRONICLE } from "@/lib/algochronicle";
 import { useContact } from "@/components/ContactProvider";
 import HeroIdentityReel from "@/components/recruiter/HeroIdentityReel";
+import { HERO_PRODUCT_LOGOS } from "@/lib/hero-reel";
 
 function SketchReveal({ children }: { children: ReactNode }) {
   const sketchRef = useRef<HTMLDivElement>(null);
@@ -433,19 +434,35 @@ export default function HeroRecruiter() {
             and products people finish.
           </p>
 
-          <HeroProof centered />
-
-          <div className="hero__mobile-actions">
-            <a href="#projects" className="btn-primary hero__mobile-cta-primary">
-              View my work
-              <ArrowRight size={15} aria-hidden="true" />
-            </a>
-            <button type="button" onClick={openContact} className="btn-secondary">
-              Let&apos;s connect
-            </button>
+          <div className="hero__mobile-signal">
+            <p className="hero__mobile-identity">Engineer, athlete, builder.</p>
+            <ul className="hero__mobile-apps">
+              {HERO_PRODUCT_LOGOS.map((product) => (
+                <li key={product.id}>
+                  <a
+                    href={product.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hero__mobile-app"
+                  >
+                    <span className="hero__mobile-app-logo" aria-hidden="true">
+                      <Image
+                        src={product.image}
+                        alt=""
+                        width={22}
+                        height={22}
+                      />
+                    </span>
+                    <span className="hero__mobile-app-name">{product.title}</span>
+                    <span className="hero__mobile-app-tag">Live</span>
+                    <span className="hero__mobile-app-go" aria-hidden="true">
+                      ↗
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
-
-          <HeroSocials centered />
         </div>
 
         <div className="hero__mobile-portrait">
@@ -462,6 +479,22 @@ export default function HeroRecruiter() {
               />
             </SketchReveal>
           </div>
+        </div>
+
+        <div className="hero__mobile-connect">
+          <HeroProof centered />
+
+          <div className="hero__mobile-actions">
+            <a href="#projects" className="btn-primary hero__mobile-cta-primary">
+              View my work
+              <ArrowRight size={15} aria-hidden="true" />
+            </a>
+            <button type="button" onClick={openContact} className="btn-secondary">
+              Let&apos;s connect
+            </button>
+          </div>
+
+          <HeroSocials centered />
         </div>
       </section>
     </section>

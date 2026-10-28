@@ -11,6 +11,7 @@ import {
 } from "@/lib/hero-reel";
 
 const SLIDE_HEIGHT = 236;
+const SLIDE_HEIGHT_COMPACT = 210;
 
 function ReelCard({ item, certIndex }: { item: HeroReelItem; certIndex: number }) {
   if (item.kind === "text") {
@@ -76,11 +77,12 @@ function ReelCard({ item, certIndex }: { item: HeroReelItem; certIndex: number }
   );
 }
 
-export default function HeroIdentityReel() {
+export default function HeroIdentityReel({ compact = false }: { compact?: boolean }) {
   const reduceMotion = useReducedMotion();
   const [index, setIndex] = useState(0);
   const [certIndex, setCertIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const slideHeight = compact ? SLIDE_HEIGHT_COMPACT : SLIDE_HEIGHT;
   const active = HERO_REEL_ITEMS[index] ?? HERO_REEL_ITEMS[0];
   const sportsGallery =
     active.kind === "media" && active.images?.length ? active.images : null;
@@ -113,7 +115,8 @@ export default function HeroIdentityReel() {
 
   return (
     <div
-      className={`hero__reel${paused ? " is-paused" : ""}`}
+      className={`hero__reel${compact ? " hero__reel--compact" : ""}${paused ? " is-paused" : ""}`}
+      style={{ ["--hero-reel-slide" as string]: `${slideHeight}px` }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
@@ -133,7 +136,7 @@ export default function HeroIdentityReel() {
         ) : (
           <motion.div
             className="hero__reel-track"
-            animate={{ y: -index * SLIDE_HEIGHT }}
+            animate={{ y: -index * slideHeight }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
             {HERO_REEL_ITEMS.map((item) => (

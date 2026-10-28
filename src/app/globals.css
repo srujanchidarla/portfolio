@@ -446,6 +446,7 @@ html[data-theme="light"] .btn-primary:hover {
 }
 
 .hero__reel {
+  --hero-reel-slide: 236px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -456,8 +457,8 @@ html[data-theme="light"] .btn-primary:hover {
   position: relative;
   z-index: 1;
   width: 100%;
-  height: 236px;
-  max-height: 236px;
+  height: var(--hero-reel-slide);
+  max-height: var(--hero-reel-slide);
   overflow: hidden;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -485,8 +486,8 @@ html[data-theme="light"] .btn-primary:hover {
 }
 
 .hero__reel-slide {
-  flex: 0 0 236px;
-  height: 236px;
+  flex: 0 0 var(--hero-reel-slide);
+  height: var(--hero-reel-slide);
   width: 100%;
   display: flex;
   align-items: center;
@@ -2800,12 +2801,134 @@ body.boot-loading {
     color: var(--c-text);
   }
 
+  .hero__mobile-signal {
+    width: min(100%, 320px);
+    margin: 2px auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero__mobile-identity {
+    margin: 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(0.95rem, 3.8vw, 1.05rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    color: var(--c-primary);
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  html[data-theme="light"] .hero__mobile-identity {
+    color: var(--c-text);
+  }
+
+  .hero__mobile-apps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .hero__mobile-apps > li {
+    width: 100%;
+  }
+
+  .hero__mobile-app {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 44px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--c-border);
+    background: color-mix(in srgb, var(--c-surface) 90%, transparent);
+    text-decoration: none;
+    color: inherit;
+    box-sizing: border-box;
+  }
+
+  .hero__mobile-app:active {
+    background: color-mix(in srgb, var(--c-surface) 70%, var(--c-bg));
+  }
+
+  .hero__mobile-app-logo {
+    flex: 0 0 28px;
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--c-bg-elevated);
+  }
+
+  .hero__mobile-app-logo img {
+    display: block;
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+  }
+
+  .hero__mobile-app-name {
+    flex: 0 1 auto;
+    min-width: 0;
+    font-size: 14px;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    white-space: nowrap;
+    color: var(--c-text);
+    text-align: left;
+  }
+
+  .hero__mobile-app-tag {
+    margin-left: auto;
+    flex: 0 0 auto;
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+    white-space: nowrap;
+  }
+
+  .hero__mobile-app-go {
+    flex: 0 0 auto;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--c-muted);
+  }
+
   .hero__mobile-portrait {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin-top: 22px;
+    margin-top: 18px;
+  }
+
+  .hero__mobile-connect {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .hero__mobile-connect .hero__proof--center {
+    margin-bottom: 16px;
   }
 
   .hero__mobile-portrait .hero__note {
@@ -2912,7 +3035,7 @@ body.boot-loading {
     color: var(--c-text-secondary);
     line-height: 1.5;
     font-size: 1.18rem;
-    margin: 0 0 16px;
+    margin: 0 0 14px;
     font-weight: 400;
     max-width: 22em;
     text-align: center;
@@ -8907,7 +9030,7 @@ html[data-theme="light"] .navbar__resume:hover {
   text-decoration: underline;
 }
 
-/* ── Athlete life (lightbox) ── */
+/* ── Athlete life (lightbox) · mobile products ── */
 
 .rh-athlete {
   padding: 56px 0 64px;

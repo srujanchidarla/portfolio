@@ -28,6 +28,26 @@ export type HeroReelItem =
       mediaClass?: string;
     };
 
+/** Product logo cards used in the desktop reel and mobile hero strip. */
+export const HERO_PRODUCT_LOGOS = [
+  {
+    id: "algochronicle",
+    href: "/work/algochronicle",
+    liveUrl: "https://www.algochronicle.com/",
+    title: "AlgoChronicle",
+    blurb: "Daily DSA journal with reminders that stick",
+    image: "/project-logos/algochronicle.png",
+  },
+  {
+    id: "wildmate",
+    href: "/work/campfirechai",
+    liveUrl: "https://wildmate.app/",
+    title: "Wildmate",
+    blurb: "Outdoor community for trips, crews & meetups",
+    image: "/project-logos/wildmate.png",
+  },
+] as const;
+
 /** Tight feed: who I am → shipped work → proof → athlete. */
 export const HERO_REEL_ITEMS: HeroReelItem[] = [
   {
@@ -41,24 +61,24 @@ export const HERO_REEL_ITEMS: HeroReelItem[] = [
   {
     id: "algochronicle",
     kind: "media",
-    label: "AlgoChronicle",
-    href: "/work/algochronicle",
+    label: HERO_PRODUCT_LOGOS[0].title,
+    href: HERO_PRODUCT_LOGOS[0].href,
     eyebrow: "Live product",
-    title: "AlgoChronicle",
-    blurb: "Daily DSA journal with reminders that stick",
-    image: "/project-logos/algochronicle.png",
+    title: HERO_PRODUCT_LOGOS[0].title,
+    blurb: HERO_PRODUCT_LOGOS[0].blurb,
+    image: HERO_PRODUCT_LOGOS[0].image,
     objectPosition: "center center",
     mediaClass: "hero__reel-media--logo",
   },
   {
     id: "wildmate",
     kind: "media",
-    label: "Wildmate",
-    href: "/work/campfirechai",
+    label: HERO_PRODUCT_LOGOS[1].title,
+    href: HERO_PRODUCT_LOGOS[1].href,
     eyebrow: "Live product",
-    title: "Wildmate",
-    blurb: "Outdoor community for trips, crews & meetups",
-    image: "/project-logos/wildmate.png",
+    title: HERO_PRODUCT_LOGOS[1].title,
+    blurb: HERO_PRODUCT_LOGOS[1].blurb,
+    image: HERO_PRODUCT_LOGOS[1].image,
     objectPosition: "center center",
     mediaClass: "hero__reel-media--logo",
   },
