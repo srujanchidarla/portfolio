@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { SITE, SITE_IMAGES } from "@/lib/site";
 import { ALGOCHRONICLE } from "@/lib/algochronicle";
 import { useContact } from "@/components/ContactProvider";
+import HeroIdentityReel from "@/components/recruiter/HeroIdentityReel";
 
 function SketchReveal({ children }: { children: ReactNode }) {
   const sketchRef = useRef<HTMLDivElement>(null);
@@ -395,12 +396,7 @@ export default function HeroRecruiter() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
               >
-                <p className="hero__note-lead">Engineer, athlete, builder.</p>
-                <p className="hero__note-line">
-                  I train most days
-                  <br />
-                  and ship the rest.
-                </p>
+                <HeroIdentityReel />
               </motion.aside>
 
               <div className="hero__visual">
@@ -453,14 +449,6 @@ export default function HeroRecruiter() {
         </div>
 
         <div className="hero__mobile-portrait">
-          <aside className="hero__note">
-            <p className="hero__note-lead">Engineer, athlete, builder.</p>
-            <p className="hero__note-line">
-              I train most days
-              <br />
-              and ship the rest.
-            </p>
-          </aside>
           <div className="hero__mobile-photo-wrap">
             <div className="hero__glow" aria-hidden="true" />
             <SketchReveal>

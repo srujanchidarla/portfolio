@@ -142,6 +142,52 @@ export const LOCAL_GUIDE = {
   ],
 } as const;
 
+/** State / district sports certificates */
+export const SPORTS_CERTIFICATES = [
+  {
+    id: "cert-1",
+    src: "/media/sports-certificates/1.jpeg",
+    alt: "High jump — district winner, Inter-Polytechnic Sports Meet 2015-16",
+    title: "High jump",
+    detail: "District winner · 2016",
+  },
+  {
+    id: "cert-2",
+    src: "/media/sports-certificates/2.jpeg",
+    alt: "Athletics 4×100m — third place, Vignan Mahotsav 2020",
+    title: "4×100m relay",
+    detail: "Vignan Mahotsav · III",
+  },
+  {
+    id: "cert-3",
+    src: "/media/sports-certificates/3.jpeg",
+    alt: "Handball — A.P. State Mini Inter District Championship",
+    title: "Handball",
+    detail: "State mini · 2013-14",
+  },
+  {
+    id: "cert-4",
+    src: "/media/sports-certificates/4.jpeg",
+    alt: "Handball — School Games Federation Telangana inter-district",
+    title: "Handball",
+    detail: "School Games · 2014-15",
+  },
+  {
+    id: "cert-5",
+    src: "/media/sports-certificates/5.jpeg",
+    alt: "Relay — VNR VJIET Sports Fest merit certificate",
+    title: "Relay",
+    detail: "Sports Fest · merit",
+  },
+  {
+    id: "cert-6",
+    src: "/media/sports-certificates/6.jpeg",
+    alt: "Relay 4×100m — first place, VNR VJIET Sports Fest 2020",
+    title: "4×100m relay",
+    detail: "Sports Fest · I place",
+  },
+] as const;
+
 /** Curated athlete media for the portfolio (recruiter-safe picks) */
 export const ATHLETE_MEDIA = [
   {
@@ -150,7 +196,7 @@ export const ATHLETE_MEDIA = [
     src: "/media/track-sunset.jpg",
     alt: "Srujan on the track at sunset",
     label: "Track",
-    caption: "Chase the sun — never outrun your purpose.",
+    caption: "Never outrun your purpose.",
     span: "wide" as const,
   },
   {
@@ -159,7 +205,7 @@ export const ATHLETE_MEDIA = [
     src: "/media/gym-mindset.jpg",
     alt: "Srujan training in the gym under a Michael Jordan quote",
     label: "Mindset",
-    caption: "Obstacles don't stop you — you climb, go through, or work around.",
+    caption: "Climb it, go through it, or work around it.",
     span: "tall" as const,
   },
   {
@@ -168,7 +214,7 @@ export const ATHLETE_MEDIA = [
     src: "/media/hybridathlete-web.mp4",
     alt: "Srujan hybrid athlete training — track and gym",
     label: "Hybrid",
-    caption: "Sprints, strength, and the same daily discipline.",
+    caption: "Sprints, strength, same daily reps.",
     span: "end" as const,
   },
 ] as const;
