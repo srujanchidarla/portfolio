@@ -40,6 +40,7 @@ export const EXPERIENCES: Experience[] = [
     techStack: ["Next.js", "Node.js", "Supabase", "PostgreSQL", "TailwindCSS"],
     impact: "35% Engagement ↑ · 40% Speed ↑ · Recent production ship",
     color: "#10b981",
+    logoUrl: "/company-logos/walletgyde.png",
   },
   {
     id: "cognizant",
@@ -62,6 +63,7 @@ export const EXPERIENCES: Experience[] = [
     techStack: ["Java", "Spring Boot", "React", "Angular", "MySQL", "AWS", "Docker"],
     impact: "2M+ Daily Requests · 99.9% Uptime · Production foundation",
     color: "#0070ad",
+    logoUrl: "/company-logos/cognizant.png",
     roles: [
       { title: "Programmer Analyst (Full Stack)", period: "Nov 2022 – Apr 2024" },
       { title: "Program Analyst Trainee", period: "Oct 2021 – Oct 2022" },
