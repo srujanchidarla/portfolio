@@ -4,9 +4,10 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Medal } from "lucide-react";
 import { ATHLETE_MEDIA, SPORTS_CERTIFICATES } from "@/lib/site";
 import { SPORTS } from "@/lib/recruiter-home";
+import LapHeader from "@/components/fx/LapHeader";
 
 const VIDEO = ATHLETE_MEDIA.find((item) => item.type === "video")!;
 const STILLS = ATHLETE_MEDIA.filter((item) => item.type === "image");
@@ -88,31 +89,23 @@ export default function AthleteLife() {
   }, [activeIndex, close, showPrev, showNext]);
 
   return (
-    <section id="athlete" className="rh-athlete">
+    <section id="athlete" className="lap ot">
       <div className="wrap">
-        <header className="rh-athlete__header">
-          <p className="section-eyebrow">Off the field</p>
-          <h2 className="section-title">
-            Athlete <span className="gradient-text">discipline</span>
-          </h2>
-          <p className="rh-athlete__lede">
-            Same daily reps that ship products — track, gym, and multi-sport.
-          </p>
-          <p className="rh-athlete__sports" aria-label="Sports I play">
-            {SPORTS.join(" · ")}
-          </p>
-        </header>
+        <LapHeader
+          lap="08"
+          eyebrow="Off the track"
+          title={
+            <>
+              Athlete <em>discipline</em>
+            </>
+          }
+          lede="Same daily reps that ship products — track, gym, and multi-sport since school."
+        />
 
-        <div className="rh-athlete__stage">
-          <motion.figure
-            className="rh-athlete__feature"
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.35 }}
-          >
+        <div className="ot__stage">
+          <figure className="ot__shot ot__shot--video" data-reveal>
             <video
-              className="rh-athlete__feature-media"
+              className="ot__media"
               src={VIDEO.src}
               muted
               playsInline
@@ -121,58 +114,65 @@ export default function AthleteLife() {
               preload="metadata"
               aria-label={VIDEO.alt}
             />
-            <figcaption className="rh-athlete__shot-cap">{VIDEO.label}</figcaption>
-          </motion.figure>
+            <figcaption className="ot__cap">
+              <span>{VIDEO.label}</span>
+              {VIDEO.caption}
+            </figcaption>
+          </figure>
 
-          <div className="rh-athlete__aside">
-            <div className="rh-athlete__stills">
-              {STILLS.map((item, i) => (
-                <motion.figure
-                  key={item.id}
-                  className={`rh-athlete__still rh-athlete__still--${item.id}`}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.35, delay: 0.05 + i * 0.05 }}
+          {STILLS.map((item) => (
+            <figure key={item.id} className={`ot__shot ot__shot--${item.id}`} data-reveal>
+              <Image
+                src={item.src}
+                alt={item.alt}
+                fill
+                className="ot__media"
+                sizes="(max-width: 768px) 50vw, 30vw"
+              />
+              <figcaption className="ot__cap">
+                <span>{item.label}</span>
+                {item.caption}
+              </figcaption>
+            </figure>
+          ))}
+
+          <div className="ot__medals" data-reveal>
+            <p className="ot__medals-head">
+              <Medal size={15} aria-hidden="true" />
+              State &amp; district certificates
+              <span>{CERTS.length}</span>
+            </p>
+            <div className="ot__strip" role="list">
+              {CERTS.map((cert, index) => (
+                <button
+                  key={cert.id}
+                  type="button"
+                  className="ot__thumb"
+                  role="listitem"
+                  title={`${cert.title} — ${cert.detail}`}
+                  aria-label={`View certificate: ${cert.title}, ${cert.detail}`}
+                  onClick={() => openAt(index)}
                 >
-                  <Image
-                    src={item.src}
-                    alt={item.alt}
-                    fill
-                    className="rh-athlete__still-img"
-                    sizes="(max-width: 768px) 50vw, 28vw"
-                  />
-                  <figcaption className="rh-athlete__shot-cap">{item.label}</figcaption>
-                </motion.figure>
+                  <Image src={cert.src} alt="" fill sizes="160px" />
+                  <span className="ot__thumb-cap">
+                    <strong>{cert.title}</strong>
+                    {cert.detail}
+                  </span>
+                </button>
               ))}
-            </div>
-
-            <div className="rh-athlete__proof">
-              <p className="rh-athlete__proof-label">State sports · medals</p>
-              <div className="rh-athlete__strip" role="list">
-                {CERTS.map((cert, index) => (
-                  <button
-                    key={cert.id}
-                    type="button"
-                    className="rh-athlete__thumb"
-                    role="listitem"
-                    title={`${cert.title} — ${cert.detail}`}
-                    aria-label={`View certificate: ${cert.title}, ${cert.detail}`}
-                    onClick={() => openAt(index)}
-                  >
-                    <Image
-                      src={cert.src}
-                      alt=""
-                      fill
-                      className="rh-athlete__thumb-img"
-                      sizes="140px"
-                    />
-                  </button>
-                ))}
-              </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="ot__sports" aria-label={`Sports I play: ${SPORTS.join(", ")}`}>
+        {[0, 1].map((copy) => (
+          <ul key={copy} aria-hidden="true">
+            {SPORTS.map((sport) => (
+              <li key={sport}>{sport}</li>
+            ))}
+          </ul>
+        ))}
       </div>
 
       {mounted &&

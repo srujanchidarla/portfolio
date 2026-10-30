@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import TheStory from "@/components/recruiter/TheStory";
 import AthleteLife from "@/components/recruiter/AthleteLife";
+import LocalGuideBanner from "@/components/recruiter/LocalGuideBanner";
 import Footer from "@/components/Footer";
 import { ContactProvider } from "@/components/ContactProvider";
 import { SITE } from "@/lib/site";
@@ -18,6 +19,7 @@ export default function AboutPage() {
       <Navbar />
       <main id="main-content" className="site-main overflow-x-hidden" tabIndex={-1}>
         <TheStory />
+        <LocalGuideBanner />
         <AthleteLife />
       </main>
       <Footer />

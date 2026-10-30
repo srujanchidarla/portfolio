@@ -1,114 +1,125 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, Calendar, Download, MessageCircle, Share2 } from "lucide-react";
+import { ArrowUpRight, Calendar, Check, Copy, Download, Mail, MessageCircle, Share2 } from "lucide-react";
 import { getScheduleHref, SITE } from "@/lib/site";
 import { RECRUITER_CONTACT } from "@/lib/recruiter-home";
 import { useContact } from "@/components/ContactProvider";
 import { canSharePortfolio, sharePortfolio } from "@/lib/share-portfolio";
+import { GitHubLogo, LeetCodeLogo, LinkedInLogo } from "@/components/fx/BrandLogos";
+
+const PROFILES = [
+  { href: RECRUITER_CONTACT.linkedin, label: "LinkedIn", handle: "in/srujan-chidarla", Logo: LinkedInLogo },
+  { href: RECRUITER_CONTACT.github, label: "GitHub", handle: "srujanchidarla", Logo: GitHubLogo },
+  { href: RECRUITER_CONTACT.leetcode, label: "LeetCode", handle: "u/srujanchidarla", Logo: LeetCodeLogo },
+];
 
 export default function RecruiterCTA() {
   const { openContact, openAvatarChat } = useContact();
   const scheduleHref = getScheduleHref();
   const [canShare, setCanShare] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     setCanShare(canSharePortfolio());
   }, []);
 
+  useEffect(() => {
+    if (!copied) return;
+    const id = window.setTimeout(() => setCopied(false), 1800);
+    return () => window.clearTimeout(id);
+  }, [copied]);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(RECRUITER_CONTACT.email);
+      setCopied(true);
+    } catch {
+      window.location.href = `mailto:${RECRUITER_CONTACT.email}`;
+    }
+  };
+
   return (
-    <section id="contact" className="rh-cta">
-      <div className="wrap">
-        <motion.div
-          className="rh-cta__inner"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-        >
-          <p className="section-eyebrow">Contact</p>
-          <h2 className="section-title">
-            Let&apos;s <span className="gradient-text">connect</span>
-          </h2>
-          <p className="section-subtitle">
-            MS CS · 4.0 · Open to relocate in the US. I respond quickly.
-          </p>
+    <section id="contact" className="lap fin">
+      <div className="fin__checker" aria-hidden="true" />
+      <div className="wrap fin__inner">
+        <p className="lap-head__eyebrow fin__eyebrow" data-reveal>
+          <span className="lap-head__lap">Lap 10</span>
+          <span className="lap-head__rule" aria-hidden="true" />
+          Finish line
+        </p>
+        <h2 className="fin__title" data-reveal>
+          Let&apos;s build something <em>that ships.</em>
+        </h2>
+        <p className="fin__lede" data-reveal>
+          MS CS · 4.0 · graduating August 2026 · open to relocate anywhere in the US. I respond quickly.
+        </p>
 
-          <div className="rh-cta__actions">
-            <a
-              href={`mailto:${RECRUITER_CONTACT.email}`}
-              className="btn-primary rh-cta__email-btn"
-            >
-              Email me
-              <ArrowRight size={16} aria-hidden="true" />
-            </a>
-            <a href={SITE.resumeUrl} className="btn-secondary rh-cta__resume-btn">
-              <Download size={16} aria-hidden="true" />
-              View Resume
-            </a>
-            <a href={scheduleHref} className="btn-secondary">
-              <Calendar size={16} aria-hidden="true" />
-              Schedule a call
-            </a>
-            {canShare ? (
-              <button
-                type="button"
-                className="btn-secondary"
-                onClick={() => void sharePortfolio()}
-              >
-                <Share2 size={16} aria-hidden="true" />
-                Share portfolio
-              </button>
-            ) : null}
-          </div>
+        <div className="fin__mail" data-reveal>
+          <a href={`mailto:${RECRUITER_CONTACT.email}`} className="fin__email">
+            <Mail size={18} aria-hidden="true" />
+            {RECRUITER_CONTACT.email}
+          </a>
+          <button
+            type="button"
+            className="fin__copy"
+            onClick={copyEmail}
+            aria-label={copied ? "Email copied" : "Copy email address"}
+          >
+            {copied ? <Check size={16} aria-hidden="true" /> : <Copy size={16} aria-hidden="true" />}
+            <span aria-live="polite">{copied ? "Copied" : "Copy"}</span>
+          </button>
+        </div>
 
-          <div className="rh-cta__grid">
-            <a
-              href={RECRUITER_CONTACT.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rh-cta__card"
-            >
-              <strong>LinkedIn</strong>
-              <span>linkedin.com/in/srujan-chidarla</span>
-            </a>
-            <a
-              href={RECRUITER_CONTACT.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rh-cta__card"
-            >
-              <strong>GitHub</strong>
-              <span>github.com/srujanchidarla</span>
-            </a>
-            <a
-              href={RECRUITER_CONTACT.leetcode}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rh-cta__card"
-            >
-              <strong>LeetCode</strong>
-              <span>leetcode.com/u/srujanchidarla</span>
-            </a>
-            <button
-              type="button"
-              className="rh-cta__card rh-cta__card--chat"
-              onClick={openAvatarChat}
-            >
-              <MessageCircle size={18} aria-hidden="true" />
-              <strong>Ask my AI avatar</strong>
-              <span>Questions about my work & availability</span>
+        <div className="fin__actions" data-reveal>
+          <a href={SITE.resumeUrl} className="btn-primary">
+            <Download size={16} aria-hidden="true" />
+            View resume
+          </a>
+          <a href={scheduleHref} className="btn-secondary">
+            <Calendar size={16} aria-hidden="true" />
+            Schedule a call
+          </a>
+          <button type="button" className="btn-secondary" onClick={openAvatarChat}>
+            <MessageCircle size={16} aria-hidden="true" />
+            Ask my AI avatar
+          </button>
+          {canShare ? (
+            <button type="button" className="btn-secondary" onClick={() => void sharePortfolio()}>
+              <Share2 size={16} aria-hidden="true" />
+              Share
             </button>
-            <button type="button" className="rh-cta__card" onClick={openContact}>
-              <strong>Message me</strong>
-              <span>Email, LinkedIn, GitHub, LeetCode</span>
-            </button>
-          </div>
+          ) : null}
+        </div>
 
-          <p className="rh-cta__updated">
-            Last updated <time dateTime="2026-09-23">{SITE.lastUpdated}</time>
-          </p>
-        </motion.div>
+        <ul className="fin__profiles" data-reveal>
+          {PROFILES.map(({ href, label, handle, Logo }) => (
+            <li key={label}>
+              <a href={href} target="_blank" rel="noopener noreferrer" className="fin__profile" data-spot>
+                <span className="fin__profile-logo" aria-hidden="true">
+                  <Logo className="fin__profile-svg" />
+                </span>
+                <span className="fin__profile-copy">
+                  <strong>{label}</strong>
+                  <span>{handle}</span>
+                </span>
+                <ArrowUpRight size={16} aria-hidden="true" className="fin__profile-go" />
+              </a>
+            </li>
+          ))}
+          <li>
+            <button type="button" className="fin__profile" onClick={openContact} data-spot>
+              <span className="fin__profile-logo" aria-hidden="true">
+                <Mail size={18} />
+              </span>
+              <span className="fin__profile-copy">
+                <strong>Message me</strong>
+                <span>All the ways to reach me</span>
+              </span>
+              <ArrowUpRight size={16} aria-hidden="true" className="fin__profile-go" />
+            </button>
+          </li>
+        </ul>
       </div>
     </section>
   );

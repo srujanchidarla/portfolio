@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import CaseStudy from "@/components/work/CaseStudy";
 import { ContactProvider } from "@/components/ContactProvider";
 import { getCaseStudy } from "@/lib/case-studies";
-import { IMPACT_PROJECTS } from "@/lib/recruiter-home";
+import { CURATED_PROJECTS, IMPACT_PROJECTS } from "@/lib/recruiter-home";
 import { SITE } from "@/lib/site";
 
 type PageProps = {
@@ -40,15 +40,20 @@ export default async function WorkCaseStudyPage({ params }: PageProps) {
   const study = getCaseStudy(slug);
   if (!project || !study) notFound();
 
-  const others = IMPACT_PROJECTS.filter((item) => item.id !== project.id).slice(0, 3);
+  const index = CURATED_PROJECTS.findIndex((item) => item.id === project.id);
+  const next = CURATED_PROJECTS[(index + 1) % CURATED_PROJECTS.length];
 
   return (
     <ContactProvider>
       <Navbar />
-      <main id="main-content" className="site-main case-page" tabIndex={-1}>
-        <div className="wrap case-page__wrap">
-          <CaseStudy project={project} study={study} others={others} />
-        </div>
+      <main id="main-content" className="site-main" tabIndex={-1}>
+        <CaseStudy
+          project={project}
+          study={study}
+          next={next}
+          index={index}
+          total={CURATED_PROJECTS.length}
+        />
       </main>
       <Footer />
     </ContactProvider>

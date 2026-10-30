@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   HERO_REEL_CERT_INTERVAL_MS,
   HERO_REEL_INTERVAL_MS,
@@ -28,37 +28,43 @@ function ReelCard({ item, certIndex }: { item: HeroReelItem; certIndex: number }
   }
 
   const gallery = item.images?.length ? item.images : [item.image];
-  const image = gallery[certIndex % gallery.length] ?? item.image;
+  const image = item.image;
 
   return (
     <div className="hero__reel-card">
       <span className={`hero__reel-media${item.mediaClass ? ` ${item.mediaClass}` : ""}`}>
         {item.images?.length ? (
-          <AnimatePresence mode="wait" initial={false}>
+          // All certificates stay mounted (and loaded); only the active one is visible.
+          gallery.map((src, i) => (
             <motion.span
-              key={image}
+              key={src}
               className="hero__reel-cert"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              initial={false}
+              // Outgoing leaves fast, incoming waits for it, so two documents never overlap.
+              animate={
+                i === certIndex % gallery.length
+                  ? { opacity: 1, y: 0, transition: { duration: 0.4, delay: 0.16, ease: [0.22, 1, 0.36, 1] } }
+                  : { opacity: 0, y: -8, transition: { duration: 0.16, ease: "easeIn" } }
+              }
             >
               <Image
-                src={image}
+                src={src}
                 alt=""
                 fill
                 sizes="220px"
+                loading="eager"
                 className="hero__reel-img"
                 style={{ objectPosition: item.objectPosition }}
               />
             </motion.span>
-          </AnimatePresence>
+          ))
         ) : (
           <Image
             src={image}
             alt=""
             fill
             sizes="220px"
+            loading="eager"
             className="hero__reel-img"
             style={
               item.mediaClass?.includes("logo")

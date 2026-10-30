@@ -40,13 +40,13 @@ function LiveHomepage({ src, title }: { src: string; title: string }) {
   const frameHeight = scale > 0 ? Math.max(1, Math.ceil(box.h / scale)) : 0;
 
   return (
-    <div ref={ref} className={`rh-projects__live${ready ? " is-ready" : ""}`}>
-      <div className="rh-projects__live-skeleton" aria-hidden="true" />
+    <div ref={ref} className={`cover-live${ready ? " is-ready" : ""}`}>
+      <div className="cover-live__skeleton" aria-hidden="true" />
       {seen && scale > 0 ? (
         <iframe
           title={`${title} homepage`}
           src={src}
-          className="rh-projects__live-frame"
+          className="cover-live__frame"
           style={{ width: LIVE_WIDTH, height: frameHeight, transform: `scale(${scale})` }}
           sandbox="allow-scripts allow-same-origin allow-forms"
           referrerPolicy="origin"
@@ -77,7 +77,7 @@ export default function ProjectCover({
         src={image}
         alt=""
         fill
-        className="work-card__img"
+        className="cover-img"
         sizes={sizes}
       />
     );
@@ -88,7 +88,7 @@ export default function ProjectCover({
   }
 
   return (
-    <div className="work-card__fallback" style={{ background: color }} aria-hidden="true">
+    <div className="cover-fallback" style={{ background: color }} aria-hidden="true">
       <span>{title.charAt(0)}</span>
     </div>
   );

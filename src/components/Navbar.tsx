@@ -2,21 +2,22 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Download, Menu, Moon, Sun, X } from "lucide-react";
+import { ArrowUpRight, Moon, Sun } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { useTheme } from "@/components/ThemeProvider";
 
 const NAV_LINKS = [
-  { href: "/#projects", label: "Work" },
-  { href: "/#experience", label: "Experience" },
-  { href: "/about", label: "About" },
-  { href: "/#contact", label: "Contact" },
+  { href: "/#projects", label: "Work", num: "01" },
+  { href: "/#experience", label: "Experience", num: "03" },
+  { href: "/#writing", label: "Writing", num: "07" },
+  { href: "/about", label: "About", num: "08" },
+  { href: "/#contact", label: "Contact", num: "10" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const { theme, toggle } = useTheme();
+  const { toggle } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -25,85 +26,107 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMenuOpen(false);
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [menuOpen]);
+
   return (
-    <header className={`navbar${scrolled ? " navbar--scrolled" : ""}`}>
-      <div className="wrap navbar__inner">
-        <Link href="/" className="navbar__brand">
-          {SITE.name.split(" ")[0]}
+    <header className={`nv${scrolled ? " nv--scrolled" : ""}${menuOpen ? " nv--open" : ""}`}>
+      <div className="nv__bar">
+        <Link href="/" className="nv__brand" aria-label={`${SITE.name}, home`}>
+          <span className="nv__mark" aria-hidden="true">
+            SC
+          </span>
+          <span className="nv__name">
+            Srujan<em>Chidarla</em>
+          </span>
         </Link>
 
-        <nav className="navbar__links" aria-label="Main navigation">
+        <nav className="nv__links" aria-label="Main navigation">
           {NAV_LINKS.map((link) => (
-            <Link key={link.href} href={link.href} className="navbar__link">
+            <Link key={link.href} href={link.href} className="nv__link">
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="navbar__actions">
-          <a
-            href={SITE.resumeUrl}
-            className="navbar__resume"
-            aria-label="View resume"
-          >
-            <Download size={15} aria-hidden="true" />
-            <span>Resume</span>
-          </a>
-
+        <div className="nv__actions">
+          <span className="nv__status" title="Graduating August 2026, open to roles">
+            <span className="nv__pulse" aria-hidden="true" />
+            Open to work
+          </span>
+          {/* Both icons render; CSS picks one from html[data-theme] so SSR and client markup match. */}
           <button
             type="button"
-            className="theme-toggle"
+            className="nv__icon nv__theme"
             onClick={toggle}
-            aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
-            title={theme === "dark" ? "Light mode" : "Dark mode"}
+            aria-label="Toggle light and dark theme"
+            title="Toggle theme"
           >
-            {theme === "dark" ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
+            <Sun size={16} aria-hidden="true" className="nv__theme-sun" />
+            <Moon size={16} aria-hidden="true" className="nv__theme-moon" />
           </button>
-
+          <a href={SITE.resumeUrl} className="nv__resume">
+            Resume
+            <ArrowUpRight size={14} aria-hidden="true" />
+          </a>
           <button
             type="button"
-            className="navbar__menu-btn"
+            className="nv__burger"
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
+            aria-controls="nv-sheet"
           >
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
           </button>
         </div>
       </div>
 
-      {menuOpen && (
-        <nav className="navbar__mobile" aria-label="Mobile navigation">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="navbar__mobile-link"
-              onClick={() => setMenuOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <a
-            href={SITE.resumeUrl}
-            className="navbar__resume navbar__resume--mobile"
-            onClick={() => setMenuOpen(false)}
-          >
-            <Download size={15} aria-hidden="true" />
-            View Resume
+      <div id="nv-sheet" className="nv__sheet" hidden={!menuOpen}>
+        <nav aria-label="Mobile navigation">
+          <ol className="nv__sheet-links">
+            {NAV_LINKS.map((link, i) => (
+              <li key={link.href} style={{ animationDelay: `${0.04 + i * 0.05}s` }}>
+                <Link href={link.href} onClick={() => setMenuOpen(false)}>
+                  <span className="nv__sheet-num">{link.num}</span>
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </nav>
+        <div className="nv__sheet-foot">
+          <a href={SITE.resumeUrl} className="btn-primary" onClick={() => setMenuOpen(false)}>
+            View resume
+            <ArrowUpRight size={15} aria-hidden="true" />
           </a>
           <button
             type="button"
-            className="theme-toggle theme-toggle--mobile"
+            className="btn-secondary"
             onClick={() => {
               toggle();
               setMenuOpen(false);
             }}
           >
-            {theme === "dark" ? "Light mode" : "Dark mode"}
+            <Sun size={15} aria-hidden="true" className="nv__theme-sun" />
+            <Moon size={15} aria-hidden="true" className="nv__theme-moon" />
+            <span className="nv__theme-sun">Light mode</span>
+            <span className="nv__theme-moon">Dark mode</span>
           </button>
-        </nav>
-      )}
+          <a className="nv__sheet-mail" href={`mailto:${SITE.email}`}>
+            {SITE.email}
+          </a>
+        </div>
+      </div>
     </header>
   );
 }

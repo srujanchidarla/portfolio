@@ -1,15 +1,19 @@
+import LapHeader from "@/components/fx/LapHeader";
+
 /** Loading placeholder shown while GitHubActivity's live data streams in. */
 export default function GitHubActivitySkeleton() {
   return (
-    <section id="github" className="github-section" aria-hidden="true">
+    <section id="github" className="lap github-section" aria-hidden="true">
       <div className="wrap">
-        <header className="github-header">
-          <p className="section-eyebrow">Open Source Activity</p>
-          <h2 className="section-title">
-            GitHub <span className="gradient-text">Activity</span>
-          </h2>
-          <div className="skeleton" style={{ height: 16, width: "70%", margin: "0 auto 24px" }} />
-        </header>
+        <LapHeader
+          lap="09"
+          eyebrow="Open source activity"
+          title={
+            <>
+              Code, <em>in public</em>
+            </>
+          }
+        />
 
         <div className="github-stats">
           {Array.from({ length: 5 }).map((_, i) => (

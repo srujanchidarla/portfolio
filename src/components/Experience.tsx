@@ -1,60 +1,62 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { GraduationCap } from "lucide-react";
 import { EDUCATION, EXPERIENCES } from "@/lib/experience";
 import ExperienceCard from "./experience/ExperienceCard";
+import LapHeader from "@/components/fx/LapHeader";
+
+function gpa(detail: string) {
+  const [first, ...rest] = detail.split(" · ");
+  const match = first.match(/GPA\s+([\d.]+)\/([\d.]+)/);
+  return match ? { value: match[1], scale: match[2], note: rest.join(" · ") } : { value: "", scale: "", note: detail };
+}
 
 export default function Experience() {
   return (
-    <section id="experience" className="experience-section">
+    <section id="experience" className="lap xps">
       <div className="wrap">
-        <motion.header
-          className="experience-header"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="section-eyebrow">Work history</p>
-          <h2 className="section-title">
-            Experience that <span className="gradient-text">grounds the degree</span>
-          </h2>
-          <p className="section-subtitle">
-            Production engineering at Cognizant, then a fintech internship during my MS — the work
-            that sits behind the degree.
-          </p>
-        </motion.header>
+        <LapHeader
+          lap="03"
+          eyebrow="Work history"
+          title={
+            <>
+              Experience that <em>grounds the degree</em>
+            </>
+          }
+          lede="Production engineering at Cognizant, then a fintech internship during my MS — the work that sits behind the degree."
+        />
 
-        <div className="exp-list">
-          {EXPERIENCES.map((exp, i) => (
-            <motion.div
-              key={exp.id}
-              className="exp-list__item"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.45, delay: i * 0.08 }}
-            >
+        <div className="xps__relay">
+          {EXPERIENCES.map((exp) => (
+            <div key={exp.id} data-reveal>
               <ExperienceCard exp={exp} />
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        <div id="education" className="rh-education">
-          <h3 className="rh-education__title">Education</h3>
-          <ul className="rh-education__list">
-            {EDUCATION.map((ed) => (
-              <li key={ed.id}>
-                <div className="rh-education__row">
-                  <strong>{ed.school}</strong>
-                  <span>{ed.duration}</span>
-                </div>
-                <p className="rh-education__degree">{ed.degree}</p>
-                <p className="rh-education__detail">
-                  {ed.detail} · {ed.location}
-                </p>
-              </li>
-            ))}
+        <div id="education" className="edu">
+          <p className="edu__label">
+            <GraduationCap size={16} aria-hidden="true" />
+            Education
+          </p>
+          <ul className="edu__grid">
+            {EDUCATION.map((ed) => {
+              const score = gpa(ed.detail);
+              return (
+                <li key={ed.id} className="edu__card" data-reveal data-spot>
+                  <div className="edu__score" aria-label={`GPA ${score.value} of ${score.scale}`}>
+                    <strong>{score.value}</strong>
+                    <span>/ {score.scale} GPA</span>
+                  </div>
+                  <div className="edu__copy">
+                    <p className="edu__degree">{ed.degree}</p>
+                    <p className="edu__school">
+                      {ed.school} · {ed.location}
+                    </p>
+                    <p className="edu__note">{score.note}</p>
+                  </div>
+                  <span className="edu__dates">{ed.duration}</span>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>

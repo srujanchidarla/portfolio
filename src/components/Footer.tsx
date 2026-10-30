@@ -1,82 +1,106 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUp } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { useContact } from "@/components/ContactProvider";
 
+const COLUMNS = [
+  {
+    title: "Site",
+    links: [
+      { label: "Work", href: "/#projects" },
+      { label: "Experience", href: "/#experience" },
+      { label: "Writing", href: "/#writing" },
+      { label: "Research", href: "/research" },
+      { label: "About", href: "/about" },
+      { label: "Resume", href: SITE.resumeUrl },
+    ],
+  },
+  {
+    title: "Elsewhere",
+    links: [
+      { label: "LinkedIn", href: SITE.linkedin, external: true },
+      { label: "GitHub", href: SITE.github, external: true },
+      { label: "LeetCode", href: SITE.leetcode, external: true },
+      { label: "Local Guide", href: SITE.localGuide, external: true },
+      { label: "Email", href: `mailto:${SITE.email}` },
+    ],
+  },
+  {
+    title: "Policies",
+    links: [
+      { label: "Privacy", href: "/privacy" },
+      { label: "Terms", href: "/terms" },
+      { label: "Cookies", href: "/cookies" },
+      { label: "Accessibility", href: "/accessibility" },
+      { label: "Security", href: "/security" },
+      { label: "All policies", href: "/legal" },
+    ],
+  },
+];
+
 export default function Footer() {
   const { openContact } = useContact();
-  const reduce = useReducedMotion();
   const year = new Date().getFullYear();
 
   return (
-    <motion.footer
-      className="footer"
-      initial={reduce ? false : { opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -40px 0px" }}
-      transition={{ duration: reduce ? 0 : 0.55, ease: [0.22, 1, 0.36, 1] }}
-    >
-      <div className="wrap footer__inner">
-        <div className="footer__cta">
-          <div className="footer__cta-text">
-            <span className="footer__badge">
-              <span className="footer__badge-dot" aria-hidden="true" />
-              Engineer · athlete · builder
-            </span>
-            <p className="footer__headline">
-              Systems, products, and the discipline to finish them.
+    <footer className="ft">
+      <div className="wrap">
+        <div className="ft__top">
+          <div className="ft__pitch">
+            <p className="ft__badge">
+              <span aria-hidden="true" />
+              {SITE.status}
             </p>
+            <p className="ft__line">
+              Systems, products, and <em>the discipline to finish them.</em>
+            </p>
+            <button type="button" className="btn-primary" onClick={openContact}>
+              Let&apos;s talk
+              <ArrowRight size={15} aria-hidden="true" />
+            </button>
           </div>
-          <button type="button" className="btn-hiring-primary btn-hiring-primary--sm" onClick={openContact}>
-            Let&apos;s Talk
-            <ArrowRight size={15} aria-hidden="true" />
-          </button>
+
+          <nav className="ft__cols" aria-label="Footer">
+            {COLUMNS.map((col) => (
+              <div key={col.title}>
+                <p className="ft__col-title">{col.title}</p>
+                <ul>
+                  {col.links.map((link) => (
+                    <li key={link.label}>
+                      {"external" in link && link.external ? (
+                        <a href={link.href} target="_blank" rel="noopener noreferrer">
+                          {link.label}
+                        </a>
+                      ) : link.href.startsWith("/") && !link.href.startsWith(SITE.resumeUrl) ? (
+                        <Link href={link.href}>{link.label}</Link>
+                      ) : (
+                        <a href={link.href}>{link.label}</a>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </nav>
         </div>
 
-        <div className="footer__links">
-          <a href={SITE.resumeUrl}>Resume</a>
-          <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer">
-            LinkedIn
-          </a>
-          <a href={SITE.github} target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
-          <a href={SITE.leetcode} target="_blank" rel="noopener noreferrer">
-            LeetCode
-          </a>
-          <a href={SITE.localGuide} target="_blank" rel="noopener noreferrer">
-            Local Guide
-          </a>
-          <a href={`mailto:${SITE.email}`}>Email</a>
-          <Link href="/about">About</Link>
-          <Link href="/#writing">Writing</Link>
-          <Link href="/research">Research</Link>
-          <Link href="/#github">GitHub activity</Link>
-          <Link href="/#contact">Contact</Link>
-        </div>
+        <p className="ft__wordmark" aria-hidden="true">
+          Srujan Chidarla
+        </p>
 
-        <nav className="footer__legal" aria-label="Legal">
-          <Link href="/privacy">Privacy</Link>
-          <Link href="/terms">Terms</Link>
-          <Link href="/cookies">Cookies</Link>
-          <Link href="/data">Data</Link>
-          <Link href="/disclaimer">Disclaimer</Link>
-          <Link href="/accessibility">Accessibility</Link>
-          <Link href="/license">License</Link>
-          <Link href="/security">Security</Link>
-          <Link href="/legal">All policies</Link>
-        </nav>
-
-        <div className="footer__bottom">
+        <div className="ft__bottom">
           <p>
             © {year} {SITE.name}. Built with Next.js.
           </p>
-          <p className="footer__updated">Last updated {SITE.lastUpdated}</p>
+          <p>Last updated {SITE.lastUpdated}</p>
+          <a href="#main-content" className="ft__top-link">
+            Back to start
+            <ArrowUp size={14} aria-hidden="true" />
+          </a>
         </div>
       </div>
-    </motion.footer>
+    </footer>
   );
 }

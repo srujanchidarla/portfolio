@@ -11,14 +11,14 @@ export default function CompanyLogo({ exp }: { exp: Experience }) {
       <img
         src={exp.logoUrl}
         alt=""
-        className="exp-logo__img"
+        className="xp__logo-img"
         onError={() => setImgFailed(true)}
       />
     );
   }
 
   return (
-    <span className="exp-logo__initials" style={{ color: exp.color }}>
+    <span className="xp__logo-initials" style={{ color: exp.color }}>
       {exp.companyShort}
     </span>
   );

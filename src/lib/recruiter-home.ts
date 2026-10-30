@@ -172,6 +172,20 @@ export const IMPACT_PROJECTS = [
   },
 ] as const;
 
+/** Display order for the work grid and case-study "next project" links. */
+const PROJECT_ORDER = [
+  "algochronicle",
+  "campfirechai",
+  "jobhuntos",
+  "neocortex",
+  "agriwise",
+  "studyglobal",
+] as const;
+
+export const CURATED_PROJECTS = [...IMPACT_PROJECTS].sort(
+  (a, b) => PROJECT_ORDER.indexOf(a.id) - PROJECT_ORDER.indexOf(b.id)
+);
+
 export type SkillStrength = "Strong" | "Comfortable" | "Foundational";
 
 export const SKILL_CLUSTERS = [

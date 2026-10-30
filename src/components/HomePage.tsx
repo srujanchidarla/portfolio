@@ -14,38 +14,33 @@ import LocalGuideBanner from "@/components/recruiter/LocalGuideBanner";
 import GitHubActivity from "@/components/GitHubActivity";
 import GitHubActivitySkeleton from "@/components/github/GitHubActivitySkeleton";
 import RecruiterCTA from "@/components/recruiter/RecruiterCTA";
-import Reveal from "@/components/Reveal";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 import Footer from "@/components/Footer";
+import LapRail from "@/components/fx/LapRail";
 import { ContactProvider } from "@/components/ContactProvider";
 
-/** Personal portfolio: work, projects, practice, and how I live. */
+/** Personal portfolio as a race log: each section is a lap. */
 export default function HomePage() {
   return (
     <ContactProvider>
       <Navbar />
+      <LapRail />
       <main id="main-content" className="site-main overflow-x-hidden" tabIndex={-1}>
         <HeroRecruiter />
+        <ImpactProjects />
         <ProofSection />
         <Experience />
-        <ImpactProjects />
-        <Reveal>
-          <Suspense fallback={<DailyDSASkeleton />}>
-            <DailyDSA />
-          </Suspense>
-        </Reveal>
+        <Suspense fallback={<DailyDSASkeleton />}>
+          <DailyDSA />
+        </Suspense>
         <SkillsImpact />
         <FeaturedCerts />
         <WritingSection />
         <AthleteLife />
-        <Reveal>
-          <LocalGuideBanner />
-        </Reveal>
-        <Reveal>
-          <Suspense fallback={<GitHubActivitySkeleton />}>
-            <GitHubActivity />
-          </Suspense>
-        </Reveal>
+        <LocalGuideBanner />
+        <Suspense fallback={<GitHubActivitySkeleton />}>
+          <GitHubActivity />
+        </Suspense>
         <RecruiterCTA />
       </main>
       <StickyMobileCTA />

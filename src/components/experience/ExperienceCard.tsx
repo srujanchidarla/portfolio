@@ -2,96 +2,109 @@
 
 import { useState } from "react";
 import type { CSSProperties } from "react";
-import { ChevronDown } from "lucide-react";
+import { Plus } from "lucide-react";
 import type { Experience } from "@/lib/experience";
 import CompanyLogo from "./CompanyLogo";
 
-interface ExperienceCardProps {
-  exp: Experience;
-  defaultExpanded?: boolean;
+/** "35% Engagement ↑ · 40% Speed ↑ · Recent production ship" → figures with labels. */
+function impactFigures(impact: string) {
+  return impact.split(" · ").flatMap((part) => {
+    const match = part.match(/^([\d.,]+[%MK+]*\+?)\s+(.+)$/);
+    return match ? [{ value: match[1], label: match[2].replace("↑", "").trim(), up: part.includes("↑") }] : [];
+  });
 }
 
-export default function ExperienceCard({ exp, defaultExpanded = false }: ExperienceCardProps) {
+function startYear(duration: string) {
+  const years = duration.match(/\d{4}/g) ?? [];
+  if (years.length < 2 || years[0] === years[1]) return years[0] ?? "";
+  return `${years[0]}–${years[1].slice(2)}`;
+}
+
+export default function ExperienceCard({ exp, defaultExpanded = false }: { exp: Experience; defaultExpanded?: boolean }) {
   const [expanded, setExpanded] = useState(defaultExpanded);
-  const panelId = `exp-panel-${exp.id}`;
+  const panelId = `xp-panel-${exp.id}`;
+  const figures = impactFigures(exp.impact);
 
   return (
     <article
-      className={`exp-card${expanded ? " exp-card--expanded" : ""}`}
+      className={`xp${expanded ? " is-open" : ""}`}
       style={{ "--exp-color": exp.color } as CSSProperties}
     >
-      <div className="exp-card__accent" aria-hidden="true" />
-
-      <button
-        type="button"
-        className="exp-card__header-btn"
-        onClick={() => setExpanded((v) => !v)}
-        aria-expanded={expanded}
-        aria-controls={panelId}
-      >
-        <div className="exp-logo">
-          <CompanyLogo exp={exp} />
-        </div>
-
-        <div className="exp-card__meta">
-          <div className="exp-card__top-row">
-            <h3 className="exp-card__company">{exp.company}</h3>
-            <span className="exp-card__type">{exp.type}</span>
-          </div>
-          {exp.category && <p className="exp-card__category">{exp.category}</p>}
-          <p className="exp-card__role">{exp.role}</p>
-          <p className="exp-card__duration">
-            {exp.duration} · {exp.location}
-          </p>
-        </div>
-
-        <ChevronDown size={18} className="exp-card__chevron" aria-hidden="true" />
-      </button>
-
-      <div className="exp-card__summary">
-        <p className="exp-card__headline">{exp.headline}</p>
-        <p className="exp-card__impact">{exp.impact}</p>
+      <div className="xp__when">
+        <span className="xp__year">{startYear(exp.duration)}</span>
+        <span className="xp__span">{exp.duration}</span>
       </div>
 
-      {expanded && (
-        <div id={panelId} className="exp-card__body" role="region">
-          <p className="exp-card__desc">{exp.description}</p>
+      <span className="xp__baton" aria-hidden="true" />
 
-          {exp.roles && exp.roles.length > 0 && (
-            <div className="exp-card__roles">
-              <span className="exp-card__label">Role progression</span>
-              <ul>
-                {exp.roles.map((r) => (
-                  <li key={r.title}>
-                    <strong>{r.title}</strong>
-                    <span>{r.period}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          <div className="exp-card__block">
-            <span className="exp-card__label">Key achievements</span>
-            <ul className="exp-card__achievements">
-              {exp.achievements.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+      <div className="xp__card" data-spot>
+        <header className="xp__head">
+          <span className="xp__logo">
+            <CompanyLogo exp={exp} />
+          </span>
+          <div className="xp__who">
+            <h3>{exp.company}</h3>
+            <p>
+              {exp.role} <span>· {exp.location}</span>
+            </p>
           </div>
+          <span className="xp__type">{exp.category ?? exp.type}</span>
+        </header>
 
-          <div className="exp-card__block">
-            <span className="exp-card__label">Tech stack</span>
-            <div className="exp-card__tags">
-              {exp.techStack.map((tag) => (
-                <span key={tag} className="exp-card__tag">
-                  {tag}
-                </span>
+        <p className="xp__headline">{exp.headline}</p>
+
+        {figures.length ? (
+          <ul className="xp__figures">
+            {figures.map((f) => (
+              <li key={f.label}>
+                <strong>
+                  {f.value}
+                  {f.up ? <span aria-label="increase">↑</span> : null}
+                </strong>
+                <span>{f.label}</span>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+
+        <button
+          type="button"
+          className="xp__toggle"
+          onClick={() => setExpanded((v) => !v)}
+          aria-expanded={expanded}
+          aria-controls={panelId}
+        >
+          <Plus size={15} aria-hidden="true" />
+          {expanded ? "Hide details" : "Achievements & stack"}
+        </button>
+
+        <div id={panelId} className="xp__body" hidden={!expanded}>
+          <p className="xp__desc">{exp.description}</p>
+
+          {exp.roles && exp.roles.length > 0 ? (
+            <ol className="xp__roles" aria-label="Role progression">
+              {exp.roles.map((r) => (
+                <li key={r.title}>
+                  <strong>{r.title}</strong>
+                  <span>{r.period}</span>
+                </li>
               ))}
-            </div>
-          </div>
+            </ol>
+          ) : null}
+
+          <ul className="xp__wins">
+            {exp.achievements.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+
+          <ul className="xp__stack" aria-label="Tech stack">
+            {exp.techStack.map((tag) => (
+              <li key={tag}>{tag}</li>
+            ))}
+          </ul>
         </div>
-      )}
+      </div>
     </article>
   );
 }

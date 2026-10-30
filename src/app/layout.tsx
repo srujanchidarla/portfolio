@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Big_Shoulders, Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
+import "./splits.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { BootProvider } from "@/components/BootProvider";
 import BootLoader from "@/components/BootLoader";
 import MobileShell from "@/components/MobileShell";
 import CookieConsentProvider from "@/components/CookieConsentProvider";
+import MotionFX from "@/components/fx/MotionFX";
+import InlineScript from "@/components/fx/InlineScript";
 import { PRIMARY_ROLE, SITE } from "@/lib/site";
 
 const sans = Geist({
@@ -18,6 +21,11 @@ const display = Instrument_Serif({
   weight: "400",
   style: ["normal", "italic"],
   variable: "--font-display-var",
+});
+
+const athletic = Big_Shoulders({
+  subsets: ["latin"],
+  variable: "--font-athletic-var",
 });
 
 const mono = Geist_Mono({
@@ -56,6 +64,8 @@ export const metadata: Metadata = {
   },
 };
 
+const PRE_PAINT = `(function(){var d=document.documentElement;try{var t=localStorage.getItem("theme");if(t!=="dark"&&t!=="light"){t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}d.setAttribute("data-theme",t);d.style.colorScheme=t}catch(e){}d.classList.add("js");setTimeout(function(){if(!d.classList.contains("fx-ready"))d.classList.remove("js")},3000)})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -64,10 +74,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sans.variable} ${display.variable} ${mono.variable} h-full`}
+      className={`${sans.variable} ${display.variable} ${athletic.variable} ${mono.variable} h-full`}
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
-      <head />
+      <head>
+        {/* Set theme and reveal state before first paint so nothing flashes. */}
+        <InlineScript html={PRE_PAINT} />
+      </head>
       <body
         className={`${sans.className} min-h-full flex flex-col antialiased`}
         suppressHydrationWarning
@@ -80,6 +94,7 @@ export default function RootLayout({
             <CookieConsentProvider>
               <BootLoader />
               <MobileShell />
+              <MotionFX />
               {children}
             </CookieConsentProvider>
           </BootProvider>

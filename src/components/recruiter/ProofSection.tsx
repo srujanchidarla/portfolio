@@ -1,8 +1,7 @@
-"use client";
-
-import { motion } from "framer-motion";
+import type { CSSProperties } from "react";
 import { BarChart3, Layers, Server } from "lucide-react";
 import { PROOF_CARDS } from "@/lib/recruiter-home";
+import LapHeader from "@/components/fx/LapHeader";
 
 const ICONS = {
   scale: BarChart3,
@@ -10,55 +9,61 @@ const ICONS = {
   infra: Server,
 } as const;
 
+/** The one number that anchors each discipline. */
+const HEADLINE_STAT: Record<string, { value: string; unit: string }> = {
+  "system-design": { value: "2M+", unit: "requests / day" },
+  fullstack: { value: "7", unit: "apps shipped" },
+  networking: { value: "TCP/IP", unit: "to the deploy pipeline" },
+};
+
 export default function ProofSection() {
   return (
-    <section id="proof" className="rh-proof">
+    <section id="proof" className="lap dz">
       <div className="wrap">
-        <motion.header
-          className="rh-section-header"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-        >
-          <p className="section-eyebrow">How I work</p>
-          <h2 className="section-title">
-            Built in production, <span className="gradient-text">shipped for people</span>
-          </h2>
-          <p className="section-subtitle">
-            Full-stack development, system design, and networking — shown through work, not job titles.
-          </p>
-        </motion.header>
+        <LapHeader
+          lap="02"
+          eyebrow="How I work"
+          title={
+            <>
+              Built in production, <em>shipped for people</em>
+            </>
+          }
+          lede="Full-stack development, system design, and networking — shown through work, not job titles."
+        />
 
-        <div className="rh-proof__pillars">
+        <div className="dz__grid">
           {PROOF_CARDS.map((card, i) => {
             const Icon = ICONS[card.icon];
+            const stat = HEADLINE_STAT[card.id];
             return (
-              <motion.article
+              <article
                 key={card.id}
-                className="rh-proof__pillar"
-                style={{ "--proof-color": card.color } as React.CSSProperties}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
+                className="dz__col"
+                style={{ "--dz-color": card.color, "--d": `${i * 0.08}s` } as CSSProperties}
+                data-reveal
+                data-spot
               >
-                <div className="rh-proof__pillar-top">
-                  <span className="rh-proof__pillar-icon" aria-hidden="true">
-                    <Icon size={18} />
+                <div className="dz__top">
+                  <span className="dz__icon" aria-hidden="true">
+                    <Icon size={17} />
                   </span>
-                  <p className="rh-proof__pillar-label">{card.label}</p>
+                  <span className="dz__label">{card.label}</span>
                 </div>
-                <h3>{card.headline}</h3>
-                <p className="rh-proof__subline">{card.subline}</p>
-                <p className="rh-proof__detail">{card.detail}</p>
-                <div className="rh-proof__metrics">
+                {stat ? (
+                  <p className="dz__stat">
+                    <strong>{stat.value}</strong>
+                    <span>{stat.unit}</span>
+                  </p>
+                ) : null}
+                <h3 className="dz__title">{card.headline}</h3>
+                <p className="dz__sub">{card.subline}</p>
+                <p className="dz__detail">{card.detail}</p>
+                <ul className="dz__chips">
                   {card.metrics.map((m) => (
-                    <span key={m} className="rh-proof__metric-pill">
-                      {m}
-                    </span>
+                    <li key={m}>{m}</li>
                   ))}
-                </div>
-              </motion.article>
+                </ul>
+              </article>
             );
           })}
         </div>

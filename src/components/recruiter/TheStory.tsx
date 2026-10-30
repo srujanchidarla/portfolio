@@ -1,163 +1,89 @@
-"use client";
-
-import Image from "next/image";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import type { CSSProperties } from "react";
 import { ArrowUpRight } from "lucide-react";
-import { LOCAL_GUIDE, SITE, SITE_IMAGES } from "@/lib/site";
 import { STORY_BEATS } from "@/lib/recruiter-home";
 
-export default function TheStory() {
-  const [active, setActive] = useState(STORY_BEATS.length - 1);
+const CARDS = [
+  {
+    title: "Athletics",
+    text: "I play almost every sport — handball, track, volleyball, badminton, basketball, cricket, football, and more. State-level medals taught me discipline, multitasking, and team mentality. Same energy I bring to sprint planning and shipping deadlines.",
+    link: { label: "See athlete gallery", href: "#athlete", external: false },
+  },
+  {
+    title: "Always learning",
+    text: "I'm constantly exploring — AI/ML through Neocortex, networking through coursework, new frameworks through side projects. 18+ certifications, hackathons, and a curiosity that doesn't switch off when class ends.",
+  },
+  {
+    title: "Neocortex ambition",
+    text: "My most ambitious side project: a 15-agent local-first life OS. It's not finished — but it shows I'm willing to take on hard problems, learn unfamiliar stacks, and stay disciplined over months of building.",
+    link: { label: "View Neocortex on GitHub", href: "https://github.com/srujanchidarla/neocortex", external: true },
+  },
+  {
+    title: "Why I'm excited",
+    text: "I want a team with mentorship, psychological safety to ask questions, and a culture where junior engineers ship real code. I'm not looking for the biggest title — I'm looking for the right place to grow into the engineer I know I can become.",
+  },
+] as const;
 
+export default function TheStory() {
   return (
-    <section id="story" className="rh-story">
+    <section id="story" className="ab">
+      <div className="ab__glow" aria-hidden="true" />
       <div className="wrap">
-        <motion.header
-          className="rh-section-header"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-        >
-          <p className="section-eyebrow">Beyond code</p>
-          <h2 className="section-title">
-            Who I am <span className="gradient-text">off the clock</span>
-          </h2>
-          <p className="section-subtitle">
+        <header className="ab__hero">
+          <p className="lap-head__eyebrow hx-in">
+            <span className="lap-head__lap">About</span>
+            <span className="lap-head__rule" aria-hidden="true" />
+            Beyond code
+          </p>
+          <h1 className="ab__title hx-in" style={{ animationDelay: "0.08s" }}>
+            Who I am <em>off the clock</em>
+          </h1>
+          <p className="ab__lede hx-in" style={{ animationDelay: "0.16s" }}>
             Athlete, learner, builder — production work at Cognizant, products in the wild, and a
             training habit that doesn&apos;t turn off.
           </p>
-        </motion.header>
+        </header>
 
-        <div className="rh-story__timeline">
+        <ol className="ab__splits">
           {STORY_BEATS.map((beat, i) => (
-            <button
+            <li
               key={beat.year}
-              type="button"
-              className={`rh-story__beat${active === i ? " is-active" : ""}`}
-              onClick={() => setActive(i)}
+              className={i === STORY_BEATS.length - 1 ? "ab__split is-now" : "ab__split"}
+              style={{ "--d": `${i * 0.08}s` } as CSSProperties}
+              data-reveal
             >
-              <span className="rh-story__year">{beat.year}</span>
-              <span className="rh-story__beat-title">{beat.title}</span>
-            </button>
+              <span className="ab__split-mark" aria-hidden="true" />
+              <span className="ab__split-year">{beat.year}</span>
+              <h2 className="ab__split-title">{beat.title}</h2>
+              <p className="ab__split-high">{beat.highlight}</p>
+              <p className="ab__split-text">{beat.text}</p>
+            </li>
           ))}
-        </div>
+        </ol>
 
-        <motion.div
-          key={active}
-          className="rh-story__panel"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <p className="rh-story__highlight">{STORY_BEATS[active].highlight}</p>
-          <p className="rh-story__text">{STORY_BEATS[active].text}</p>
-        </motion.div>
-
-        <a
-          id="local-guide"
-          href={SITE.localGuide}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="rh-story__local-guide"
-          aria-label="View Srujan's Google Local Guide Level 9 profile on Google Maps"
-        >
-          <div className="rh-story__local-guide-media">
-            <Image
-              src={SITE_IMAGES.localGuide}
-              alt={`Google Local Guide Level ${LOCAL_GUIDE.level} — Srujan Chidarla · ${LOCAL_GUIDE.contributions} contributions, ${LOCAL_GUIDE.points} points, ${LOCAL_GUIDE.views} views`}
-              width={1200}
-              height={1500}
-              quality={92}
-              className="rh-story__local-guide-img"
-              sizes="(max-width: 768px) 100vw, 360px"
-              style={{ objectPosition: "center 18%" }}
-            />
-          </div>
-          <div className="rh-story__local-guide-body">
-            <p className="rh-story__local-guide-eyebrow">Google Maps</p>
-            <h3>Local Guide Level {LOCAL_GUIDE.level}</h3>
-            <p>
-              I document places as I explore — the same curiosity and attention to detail I bring
-              to product UX and shipping.
-            </p>
-            <div className="rh-story__local-guide-stats">
-              <div>
-                <strong>{LOCAL_GUIDE.contributions}</strong>
-                <span>contributions</span>
-              </div>
-              <div>
-                <strong>{LOCAL_GUIDE.points}</strong>
-                <span>points</span>
-              </div>
-              <div>
-                <strong>{LOCAL_GUIDE.views}</strong>
-                <span>views</span>
-              </div>
-            </div>
-            <p className="rh-story__local-guide-progress">
-              {LOCAL_GUIDE.pointsExact} of {LOCAL_GUIDE.pointsGoal} points
-            </p>
-            <ul className="rh-story__local-guide-badges">
-              {LOCAL_GUIDE.badges.map((badge) => (
-                <li key={badge}>{badge}</li>
-              ))}
-            </ul>
-            <span className="rh-story__link">
-              See what I&apos;ve posted to Google Maps
-              <ArrowUpRight size={14} aria-hidden="true" />
-            </span>
-          </div>
-        </a>
-
-        <div className="rh-story__grid">
-          <div className="rh-story__card">
-            <h3>Athletics</h3>
-            <p>
-              I play almost every sport — handball, track, volleyball, badminton, basketball,
-              cricket, football, and more. State-level medals taught me discipline, multitasking,
-              and team mentality. Same energy I bring to sprint planning and shipping deadlines.
-            </p>
-            <a href="#athlete" className="rh-story__link">
-              See athlete gallery
-              <ArrowUpRight size={14} aria-hidden="true" />
-            </a>
-          </div>
-
-          <div className="rh-story__card">
-            <h3>Always learning</h3>
-            <p>
-              I&apos;m constantly exploring — AI/ML through Neocortex, networking through coursework,
-              new frameworks through side projects. 18+ certifications, hackathons, and a curiosity
-              that doesn&apos;t switch off when class ends.
-            </p>
-          </div>
-
-          <div className="rh-story__card">
-            <h3>Neocortex ambition</h3>
-            <p>
-              My most ambitious side project: a 15-agent local-first life OS. It&apos;s not finished —
-              but it shows I&apos;m willing to take on hard problems, learn unfamiliar stacks, and
-              stay disciplined over months of building.
-            </p>
-            <a
-              href="https://github.com/srujanchidarla/neocortex"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rh-story__link"
+        <div className="ab__cards">
+          {CARDS.map((card, i) => (
+            <article
+              key={card.title}
+              className="ab__card"
+              style={{ "--d": `${(i % 2) * 0.08}s` } as CSSProperties}
+              data-reveal
+              data-spot
             >
-              View Neocortex on GitHub
-              <ArrowUpRight size={14} aria-hidden="true" />
-            </a>
-          </div>
-
-          <div className="rh-story__card">
-            <h3>Why I&apos;m excited</h3>
-            <p>
-              I want a team with mentorship, psychological safety to ask questions, and a culture
-              where junior engineers ship real code. I&apos;m not looking for the biggest title — I&apos;m
-              looking for the right place to grow into the engineer I know I can become.
-            </p>
-          </div>
+              <span className="ab__card-num">{String(i + 1).padStart(2, "0")}</span>
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+              {"link" in card ? (
+                <a
+                  href={card.link.href}
+                  className="wk-link"
+                  {...(card.link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                >
+                  {card.link.label}
+                  <ArrowUpRight size={14} aria-hidden="true" />
+                </a>
+              ) : null}
+            </article>
+          ))}
         </div>
       </div>
     </section>

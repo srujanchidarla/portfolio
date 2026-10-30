@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ExternalLink, Star, GitFork, HelpCircle, Lock, Award, BarChart3 } from "lucide-react";
 import type { ContributionDay, GitHubActivityData } from "@/lib/github";
+import LapHeader from "@/components/fx/LapHeader";
 
 const LEVEL_COLORS = [
   "var(--gh-level-0)",
@@ -285,18 +286,18 @@ function LanguageBar({
 
 export default function GitHubActivityClient({ data }: { data: GitHubActivityData }) {
   return (
-    <section id="github" className="github-section">
+    <section id="github" className="lap github-section">
       <div className="wrap">
-        <header className="github-header">
-          <p className="section-eyebrow">Open Source Activity</p>
-          <h2 className="section-title">
-            GitHub <span className="gradient-text">Activity</span>
-          </h2>
-          <p className="section-subtitle">
-            {data.totalRepos} repositories, {data.totalContributions.toLocaleString()} contributions
-            this year, and code across the full stack — pulled live from my GitHub.
-          </p>
-
+        <LapHeader
+          lap="09"
+          eyebrow="Open source activity"
+          title={
+            <>
+              Code, <em>in public</em>
+            </>
+          }
+          lede={`${data.totalRepos} repositories and ${data.totalContributions.toLocaleString()} contributions this year — pulled live from my GitHub.`}
+        >
           <div className="github-profile-meta">
             <a
               href={data.profileUrl}
@@ -312,9 +313,7 @@ export default function GitHubActivityClient({ data }: { data: GitHubActivityDat
               {data.achievement}
             </span>
           </div>
-
-          {data.bio && <p className="github-bio">{data.bio}</p>}
-        </header>
+        </LapHeader>
 
         <div className="github-stats">
           <div className="github-stat-card">
