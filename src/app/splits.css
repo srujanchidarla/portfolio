@@ -585,8 +585,7 @@ html[data-theme="light"] .nv__theme-moon {
 }
 
 @media (max-width: 520px) {
-  .nv__resume,
-  .nv__icon {
+  .nv__resume {
     display: none;
   }
 
