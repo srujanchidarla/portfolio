@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { ALGOCHRONICLE, fetchDSAActivity } from "@/lib/algochronicle";
@@ -76,7 +77,10 @@ export default async function DailyDSA() {
           <div className="dsa__meter" data-reveal suppressHydrationWarning>
             <p className="dsa__kicker">{hasProblems ? "Practice days logged" : "Days on the badge"}</p>
             <p className="dsa__big">
-              {days}
+              {/* Counts up from 0 in CSS when revealed; the real number stays in the DOM. */}
+              <span className="dsa__count" style={{ "--to": days } as CSSProperties}>
+                {days}
+              </span>
               <span>days</span>
             </p>
             <ol className="dsa__days" aria-label={`${days} practice days`}>
@@ -143,6 +147,9 @@ export default async function DailyDSA() {
               <p className="dsa__kicker">
                 Latest solved · <span>Day {latest.dayNumber}</span>
               </p>
+              <span className="dsa__stamp" aria-hidden="true">
+                Accepted
+              </span>
               <h3>{latest.title}</h3>
               <p className="dsa__latest-meta">
                 {latest.difficulty ? (

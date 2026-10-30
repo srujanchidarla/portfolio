@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Calendar, Check, Copy, Download, Mail, MessageCircle, Share2 } from "lucide-react";
 import { getScheduleHref, SITE } from "@/lib/site";
 import { RECRUITER_CONTACT } from "@/lib/recruiter-home";
@@ -14,11 +14,44 @@ const PROFILES = [
   { href: RECRUITER_CONTACT.leetcode, label: "LeetCode", handle: "u/srujanchidarla", Logo: LeetCodeLogo },
 ];
 
+const CONFETTI = ["var(--c-primary)", "var(--c-field)", "#f5c542", "var(--c-text)"];
+
+/** Small burst of confetti from an element (skipped when the visitor prefers less motion). */
+function burst(from: HTMLElement) {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const rect = from.getBoundingClientRect();
+  for (let i = 0; i < 18; i++) {
+    const bit = document.createElement("span");
+    bit.className = "fin__confetti";
+    bit.style.left = `${rect.left + rect.width / 2}px`;
+    bit.style.top = `${rect.top + rect.height / 2}px`;
+    bit.style.background = CONFETTI[i % CONFETTI.length];
+    document.body.appendChild(bit);
+    const angle = (i / 18) * Math.PI * 2 + Math.random() * 0.4;
+    const dist = 60 + Math.random() * 70;
+    bit
+      .animate(
+        [
+          { transform: "translate(-50%, -50%) rotate(0deg)", opacity: 1 },
+          {
+            transform: `translate(calc(-50% + ${Math.cos(angle) * dist}px), calc(-50% + ${
+              Math.sin(angle) * dist + 40
+            }px)) rotate(${Math.random() * 540}deg)`,
+            opacity: 0,
+          },
+        ],
+        { duration: 800 + Math.random() * 400, easing: "cubic-bezier(0.2, 0.7, 0.3, 1)" }
+      )
+      .finished.finally(() => bit.remove());
+  }
+}
+
 export default function RecruiterCTA() {
   const { openContact, openAvatarChat } = useContact();
   const scheduleHref = getScheduleHref();
   const [canShare, setCanShare] = useState(false);
   const [copied, setCopied] = useState(false);
+  const copyRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     setCanShare(canSharePortfolio());
@@ -34,6 +67,7 @@ export default function RecruiterCTA() {
     try {
       await navigator.clipboard.writeText(RECRUITER_CONTACT.email);
       setCopied(true);
+      if (copyRef.current) burst(copyRef.current);
     } catch {
       window.location.href = `mailto:${RECRUITER_CONTACT.email}`;
     }
@@ -43,6 +77,15 @@ export default function RecruiterCTA() {
     <section id="contact" className="lap fin">
       <div className="fin__checker" aria-hidden="true" />
       <div className="wrap fin__inner">
+        {/* Finish tape: snaps in two when the section arrives. */}
+        <div className="fin__tape" data-cue aria-hidden="true">
+          <span className="fin__tape-half fin__tape-half--l">
+            <span>Finish · Finish · Finish · Finish · Finish ·</span>
+          </span>
+          <span className="fin__tape-half fin__tape-half--r">
+            <span>Finish · Finish · Finish · Finish · Finish ·</span>
+          </span>
+        </div>
         <p className="lap-head__eyebrow fin__eyebrow" data-reveal>
           <span className="lap-head__lap">Lap 10</span>
           <span className="lap-head__rule" aria-hidden="true" />
@@ -61,6 +104,7 @@ export default function RecruiterCTA() {
             {RECRUITER_CONTACT.email}
           </a>
           <button
+            ref={copyRef}
             type="button"
             className="fin__copy"
             onClick={copyEmail}

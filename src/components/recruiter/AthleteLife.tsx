@@ -8,6 +8,39 @@ import { X, ChevronLeft, ChevronRight, Medal } from "lucide-react";
 import { ATHLETE_MEDIA, SPORTS_CERTIFICATES } from "@/lib/site";
 import { SPORTS } from "@/lib/recruiter-home";
 import LapHeader from "@/components/fx/LapHeader";
+import { useKickoff } from "@/components/recruiter/useKickoff";
+
+/** Classic black-and-white ball: a center pentagon with five panels around it. */
+function Ball({ className }: { className?: string }) {
+  const pent = (cx: number, cy: number, r: number, rot = -90) =>
+    Array.from({ length: 5 }, (_, i) => {
+      const a = ((rot + i * 72) * Math.PI) / 180;
+      return `${(cx + Math.cos(a) * r).toFixed(2)},${(cy + Math.sin(a) * r).toFixed(2)}`;
+    }).join(" ");
+  const outer = Array.from({ length: 5 }, (_, i) => {
+    const a = ((-90 + i * 72) * Math.PI) / 180;
+    return { x: 22 + Math.cos(a) * 17, y: 22 + Math.sin(a) * 17, a: -90 + i * 72 };
+  });
+  return (
+    <svg viewBox="0 0 44 44" className={className} aria-hidden="true">
+      <circle cx="22" cy="22" r="20.5" fill="#fbf7f0" stroke="#17130f" strokeWidth="1.6" />
+      <polygon points={pent(22, 22, 7)} fill="#17130f" />
+      {outer.map((o) => (
+        <g key={o.a}>
+          <line
+            x1={22 + Math.cos((o.a * Math.PI) / 180) * 7}
+            y1={22 + Math.sin((o.a * Math.PI) / 180) * 7}
+            x2={o.x}
+            y2={o.y}
+            stroke="#17130f"
+            strokeWidth="1.3"
+          />
+          <polygon points={pent(o.x, o.y, 4.6, o.a + 90)} fill="#17130f" />
+        </g>
+      ))}
+    </svg>
+  );
+}
 
 const VIDEO = ATHLETE_MEDIA.find((item) => item.type === "video")!;
 const STILLS = ATHLETE_MEDIA.filter((item) => item.type === "image");
@@ -19,6 +52,9 @@ export default function AthleteLife() {
   const dialogRef = useRef<HTMLDivElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
   const titleId = useId();
+  const stageRef = useRef<HTMLDivElement>(null);
+  const ballRef = useRef<HTMLSpanElement>(null);
+  const kick = useKickoff(stageRef, ballRef);
   const active = activeIndex === null ? null : CERTS[activeIndex];
 
   useEffect(() => setMounted(true), []);
@@ -100,10 +136,18 @@ export default function AthleteLife() {
             </>
           }
           lede="Same daily reps that ship products — track, gym, and multi-sport since school."
-        />
+        >
+          <button type="button" className="ot__kick" onClick={kick}>
+            <Ball className="ot__kick-ball" />
+            Kick it again
+          </button>
+        </LapHeader>
 
-        <div className="ot__stage">
-          <figure className="ot__shot ot__shot--video" data-reveal>
+        <div className="ot__stage" ref={stageRef}>
+          <span ref={ballRef} className="ot__ball" aria-hidden="true">
+            <Ball />
+          </span>
+          <figure className="ot__shot ot__shot--video" data-kick>
             <video
               className="ot__media"
               src={VIDEO.src}
@@ -121,7 +165,7 @@ export default function AthleteLife() {
           </figure>
 
           {STILLS.map((item) => (
-            <figure key={item.id} className={`ot__shot ot__shot--${item.id}`} data-reveal>
+            <figure key={item.id} className={`ot__shot ot__shot--${item.id}`} data-kick>
               <Image
                 src={item.src}
                 alt={item.alt}
@@ -136,7 +180,7 @@ export default function AthleteLife() {
             </figure>
           ))}
 
-          <div className="ot__medals" data-reveal>
+          <div className="ot__medals" data-kick>
             <p className="ot__medals-head">
               <Medal size={15} aria-hidden="true" />
               State &amp; district certificates

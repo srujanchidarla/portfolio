@@ -86,7 +86,7 @@ export default function Footer() {
           </nav>
         </div>
 
-        <p className="ft__wordmark" aria-hidden="true">
+        <p className="ft__wordmark" aria-hidden="true" data-cue>
           Srujan Chidarla
         </p>
 

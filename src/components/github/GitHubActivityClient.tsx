@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { ExternalLink, Star, GitFork, HelpCircle, Lock, Award, BarChart3 } from "lucide-react";
 import type { ContributionDay, GitHubActivityData } from "@/lib/github";
 import LapHeader from "@/components/fx/LapHeader";
@@ -154,6 +154,7 @@ function ContributionGraph({
           <div
             className="gh-graph__grid"
             style={{ gap: CELL_GAP }}
+            data-cue
             role="img"
             aria-label={`${total} GitHub contributions in the last year`}
           >
@@ -163,11 +164,14 @@ function ContributionGraph({
                   <div
                     key={`${wi}-${di}`}
                     className="gh-graph__cell"
-                    style={{
-                      width: CELL_PX,
-                      height: CELL_PX,
-                      background: LEVEL_COLORS[day.level] ?? LEVEL_COLORS[0],
-                    }}
+                    style={
+                      {
+                        width: CELL_PX,
+                        height: CELL_PX,
+                        background: LEVEL_COLORS[day.level] ?? LEVEL_COLORS[0],
+                        "--wave": wi + di,
+                      } as CSSProperties
+                    }
                     onMouseEnter={() => day.date && setHovered(day)}
                     onMouseLeave={() => setHovered(null)}
                   />

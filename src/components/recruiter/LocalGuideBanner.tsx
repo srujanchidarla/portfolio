@@ -1,5 +1,12 @@
 import Image from "next/image";
 import { ArrowUpRight, MapPin } from "lucide-react";
+
+/** Three stops in the empty lower-right of the card (viewBox units, 600×300, sliced). */
+const PINS = [
+  { x: 470, y: 236 },
+  { x: 528, y: 196 },
+  { x: 578, y: 228 },
+];
 import { LOCAL_GUIDE, SITE, SITE_IMAGES } from "@/lib/site";
 
 /** Topographic contour lines for the card background. */
@@ -9,6 +16,21 @@ function Contours() {
       {Array.from({ length: 9 }, (_, i) => (
         <ellipse key={i} cx={470} cy={150} rx={40 + i * 46} ry={26 + i * 30} transform={`rotate(${-12 + i * 2} 470 150)`} />
       ))}
+      <path
+        className="lg__route"
+        d={`M${PINS[0].x} ${PINS[0].y} Q 492 192 ${PINS[1].x} ${PINS[1].y} T ${PINS[2].x} ${PINS[2].y}`}
+        pathLength={1}
+      />
+      {PINS.map((pin, i) => (
+        <g key={i} className="lg__pin" style={{ animationDelay: `${0.25 + i * 0.35}s` }}>
+          <ellipse cx={pin.x} cy={pin.y + 1} rx="4" ry="1.5" className="lg__pin-shadow" />
+          <path
+            d={`M${pin.x} ${pin.y} c-5 -6 -7 -9.5 -7 -13 a7 7 0 1 1 14 0 c0 3.5 -2 7 -7 13z`}
+            className="lg__pin-body"
+          />
+          <circle cx={pin.x} cy={pin.y - 13} r="2.5" className="lg__pin-dot" />
+        </g>
+      ))}
     </svg>
   );
 }
@@ -17,7 +39,7 @@ export default function LocalGuideBanner() {
   return (
     <section id="local-guide" className="lg" aria-label={`Google Local Guide Level ${LOCAL_GUIDE.level}`}>
       <div className="wrap">
-        <a href={SITE.localGuide} target="_blank" rel="noopener noreferrer" className="lg__card" data-spot>
+        <a href={SITE.localGuide} target="_blank" rel="noopener noreferrer" className="lg__card" data-spot data-cue>
           <Contours />
 
           <span className="lg__media">

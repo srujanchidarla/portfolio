@@ -62,7 +62,16 @@ export default function SkillsImpact() {
           {TOOLS.map((icon, i) => (
             <li
               key={icon.slug}
-              style={{ "--tool": `#${icon.hex}`, "--d": `${i * 0.03}s` } as CSSProperties}
+              style={
+                {
+                  "--tool": `#${icon.hex}`,
+                  "--d": `${i * 0.035}s`,
+                  // Deterministic "scatter" start positions; the logos magnet into place.
+                  "--sx": `${((i * 137) % 260) - 130}px`,
+                  "--sy": `${((i * 71) % 140) - 70}px`,
+                  "--sr": `${((i * 53) % 70) - 35}deg`,
+                } as CSSProperties
+              }
               data-reveal
             >
               <svg viewBox="0 0 24 24" aria-hidden="true">

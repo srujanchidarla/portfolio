@@ -1,0 +1,1312 @@
+/* ══════════════════════════════════════════════════════════════════
+   Moves — one signature animation per lap, themed to its content.
+   Triggers: `.is-in` (from [data-reveal]) and `.is-cued` (from [data-cue]),
+   both set once by MotionFX. Everything here is off under reduced motion.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Every lap: the outlined lap number fills like a progress bar ── */
+
+.lap-head__num {
+  background: linear-gradient(to top, rgba(var(--c-primary-rgb), 0.1) 50%, transparent 50%) 0 0 / 100% 200%
+    no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition: background-position 1.8s var(--ease-out) 0.35s;
+}
+
+.lap-head.is-in .lap-head__num,
+html:not(.js) .lap-head__num {
+  background-position: 0 100%;
+}
+
+/* ── Work: browsers boot, project stickers ── */
+
+.bframe__chrome {
+  position: relative;
+}
+
+.bframe__chrome::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--proj-color, var(--c-primary));
+  box-shadow: 0 0 10px var(--proj-color, var(--c-primary));
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.is-in .bframe__chrome::after {
+  animation: frame-load 1.15s var(--ease-out) 0.3s both;
+}
+
+.is-in .bframe__url {
+  animation: url-type 0.7s steps(18, end) 0.1s both;
+}
+
+.is-in .bframe__view > * {
+  animation: frame-render 1.05s var(--ease-out) 0.85s both;
+}
+
+@keyframes frame-load {
+  0% {
+    opacity: 1;
+    transform: scaleX(0);
+  }
+  72% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes url-type {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+
+@keyframes frame-render {
+  from {
+    clip-path: inset(0 0 100% 0);
+    filter: blur(8px);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    filter: none;
+  }
+}
+
+.wk-tile__media {
+  position: relative;
+  display: block;
+}
+
+.cs-cover {
+  position: relative;
+}
+
+.glyph {
+  position: absolute;
+  top: -18px;
+  right: -12px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 5px 14px 5px 5px;
+  border: 1px solid color-mix(in srgb, var(--proj-color) 45%, var(--c-border));
+  border-radius: 999px;
+  background: var(--c-bg-elevated);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.35);
+  transform: rotate(4deg);
+  pointer-events: none;
+}
+
+.glyph__icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--proj-color) 22%, var(--c-surface));
+  color: color-mix(in srgb, var(--proj-color) 70%, var(--c-text));
+}
+
+.glyph__icon svg {
+  transform-origin: 50% 50%;
+}
+
+.glyph--flicker .glyph__icon svg,
+.glyph--grow .glyph__icon svg {
+  transform-origin: 50% 100%;
+}
+
+.glyph__label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--c-text-secondary);
+}
+
+.wk-tile .glyph {
+  top: -14px;
+  right: -6px;
+}
+
+.is-in .glyph,
+.cs-cover .glyph {
+  animation: glyph-pop 0.75s cubic-bezier(0.3, 1.6, 0.5, 1) 1.35s both;
+}
+
+/* Each icon plays its move once on reveal, then loops while the card is hovered. */
+.is-in .glyph--flicker svg,
+.cs-cover .glyph--flicker svg,
+a:hover .glyph--flicker svg {
+  animation: g-flicker 1.1s ease-in-out 1.9s 2;
+}
+
+.is-in .glyph--swing svg,
+.cs-cover .glyph--swing svg,
+a:hover .glyph--swing svg {
+  animation: g-swing 1.6s var(--ease-out) 1.9s;
+}
+
+.is-in .glyph--fly svg,
+.cs-cover .glyph--fly svg,
+a:hover .glyph--fly svg {
+  animation: g-fly 1.3s var(--ease-out) 1.9s;
+}
+
+.is-in .glyph--pulse svg,
+.cs-cover .glyph--pulse svg,
+a:hover .glyph--pulse svg {
+  animation: g-pulse 1.3s ease-in-out 1.9s 2;
+}
+
+.is-in .glyph--grow svg,
+.cs-cover .glyph--grow svg,
+a:hover .glyph--grow svg {
+  animation: g-grow 1.2s cubic-bezier(0.3, 1.5, 0.5, 1) 1.9s;
+}
+
+.is-in .glyph--spin svg,
+.cs-cover .glyph--spin svg,
+a:hover .glyph--spin svg {
+  animation: g-spin 1.6s var(--ease-out) 1.9s;
+}
+
+a:hover .glyph svg {
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes glyph-pop {
+  from {
+    opacity: 0;
+    transform: scale(0) rotate(-40deg);
+  }
+}
+
+@keyframes g-flicker {
+  0%,
+  100% {
+    transform: none;
+  }
+  25% {
+    transform: scale(1.14, 0.92) skewX(-7deg);
+  }
+  50% {
+    transform: scale(0.94, 1.12) skewX(6deg);
+  }
+  75% {
+    transform: scale(1.08, 0.96) skewX(-3deg);
+  }
+}
+
+@keyframes g-swing {
+  0%,
+  100% {
+    transform: none;
+  }
+  20% {
+    transform: rotate(48deg);
+  }
+  45% {
+    transform: rotate(-26deg);
+  }
+  65% {
+    transform: rotate(12deg);
+  }
+  82% {
+    transform: rotate(-5deg);
+  }
+}
+
+@keyframes g-fly {
+  0%,
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+  38% {
+    opacity: 0;
+    transform: translate(28px, -28px) scale(0.5) rotate(10deg);
+  }
+  39% {
+    opacity: 0;
+    transform: translate(-28px, 28px) scale(0.5);
+  }
+  75% {
+    opacity: 1;
+    transform: translate(2px, -2px);
+  }
+}
+
+@keyframes g-pulse {
+  0%,
+  100% {
+    transform: none;
+    filter: none;
+  }
+  20% {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 6px var(--proj-color));
+  }
+  40% {
+    transform: scale(0.96);
+  }
+  60% {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 4px var(--proj-color));
+  }
+}
+
+@keyframes g-grow {
+  0% {
+    transform: scaleY(0.15) scaleX(0.6);
+  }
+  60% {
+    transform: scaleY(1.18);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes g-spin {
+  from {
+    transform: perspective(80px) rotateY(0deg);
+  }
+  to {
+    transform: perspective(80px) rotateY(360deg);
+  }
+}
+
+@media (max-width: 520px) {
+  .glyph__label {
+    display: none;
+  }
+
+  .glyph {
+    padding-right: 5px;
+  }
+}
+
+/* ── Disciplines: live mini-diagrams ── */
+
+.dz__diagram {
+  margin: -6px 0 24px;
+  padding: 12px 14px;
+  border: 1px solid var(--c-border);
+  border-radius: 14px;
+  background:
+    radial-gradient(var(--c-border) 1px, transparent 1px) 0 0 / 14px 14px,
+    color-mix(in srgb, var(--c-surface) 60%, transparent);
+}
+
+.dd {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.dd__wire {
+  stroke: color-mix(in srgb, var(--dz-color) 40%, transparent);
+  stroke-width: 1.2;
+}
+
+.dd__wire--dash {
+  stroke-dasharray: 3 4;
+}
+
+.dd__node {
+  fill: var(--c-surface2);
+  stroke: color-mix(in srgb, var(--dz-color) 50%, var(--c-border));
+  stroke-width: 1.2;
+}
+
+.dd__node--main {
+  fill: color-mix(in srgb, var(--dz-color) 24%, var(--c-surface2));
+}
+
+.dd__tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-anchor: middle;
+  fill: var(--c-text-secondary);
+}
+
+.dd__tag--start {
+  text-anchor: start;
+}
+
+.dd__slot {
+  stroke: color-mix(in srgb, var(--c-text) 16%, transparent);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.dd__led {
+  fill: var(--c-muted);
+}
+
+.dd__packet {
+  fill: var(--dz-color);
+  filter: drop-shadow(0 0 4px var(--dz-color));
+}
+
+.dd__life {
+  stroke: var(--c-border);
+  stroke-dasharray: 2 4;
+}
+
+.dd-lb__packet {
+  opacity: 0;
+}
+
+.dz__col.is-in .dd-lb__packet {
+  animation: lb-send 1.8s ease-in-out infinite;
+}
+
+.dz__col.is-in .dd__led {
+  animation: led-hit 1.8s linear infinite;
+}
+
+@keyframes lb-send {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+    transform: translate(var(--dx), var(--dy));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy));
+  }
+}
+
+@keyframes led-hit {
+  0%,
+  14% {
+    fill: var(--c-field);
+  }
+  22%,
+  100% {
+    fill: var(--c-muted);
+  }
+}
+
+.dz__col.is-in .dd-stack__layer {
+  animation: layer-drop 0.75s cubic-bezier(0.3, 1.45, 0.5, 1) both;
+}
+
+.dz__col.is-in .dd-stack__trip {
+  animation: stack-trip 2.4s ease-in-out 1.1s infinite;
+}
+
+@keyframes layer-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-46px);
+  }
+}
+
+@keyframes stack-trip {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  45%,
+  55% {
+    transform: translateY(60px);
+  }
+}
+
+.dd-tcp__arrow {
+  stroke: var(--dz-color);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.dd-tcp__label {
+  font-size: 9.5px;
+  fill: color-mix(in srgb, var(--dz-color) 70%, var(--c-text));
+  opacity: 0;
+}
+
+.dz__col.is-in .dd-tcp__leg--0 .dd-tcp__arrow {
+  animation: tcp-0 4.8s ease-in-out infinite;
+}
+
+.dz__col.is-in .dd-tcp__leg--1 .dd-tcp__arrow {
+  animation: tcp-1 4.8s ease-in-out infinite;
+}
+
+.dz__col.is-in .dd-tcp__leg--2 .dd-tcp__arrow {
+  animation: tcp-2 4.8s ease-in-out infinite;
+}
+
+.dz__col.is-in .dd-tcp__leg--0 .dd-tcp__label {
+  animation: tcp-label-0 4.8s ease-in-out infinite;
+}
+
+.dz__col.is-in .dd-tcp__leg--1 .dd-tcp__label {
+  animation: tcp-label-1 4.8s ease-in-out infinite;
+}
+
+.dz__col.is-in .dd-tcp__leg--2 .dd-tcp__label {
+  animation: tcp-label-2 4.8s ease-in-out infinite;
+}
+
+/* SYN, then SYN-ACK, then ACK; all three hold together, fade, repeat. */
+@keyframes tcp-0 {
+  0% {
+    opacity: 1;
+    stroke-dashoffset: 1;
+  }
+  12%,
+  78% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+  88%,
+  100% {
+    opacity: 0;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes tcp-1 {
+  0%,
+  20% {
+    opacity: 1;
+    stroke-dashoffset: 1;
+  }
+  32%,
+  78% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+  88%,
+  100% {
+    opacity: 0;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes tcp-2 {
+  0%,
+  40% {
+    opacity: 1;
+    stroke-dashoffset: 1;
+  }
+  52%,
+  78% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+  88%,
+  100% {
+    opacity: 0;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes tcp-label-0 {
+  0%,
+  8% {
+    opacity: 0;
+  }
+  14%,
+  78% {
+    opacity: 1;
+  }
+  88%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes tcp-label-1 {
+  0%,
+  28% {
+    opacity: 0;
+  }
+  34%,
+  78% {
+    opacity: 1;
+  }
+  88%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes tcp-label-2 {
+  0%,
+  48% {
+    opacity: 0;
+  }
+  54%,
+  78% {
+    opacity: 1;
+  }
+  88%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ── Experience: relay baton runs the track ── */
+
+.relay-fill {
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  left: 169px;
+  z-index: 0;
+  width: 2px;
+  background: var(--c-primary);
+  box-shadow: 0 0 12px rgba(var(--c-primary-rgb), 0.55);
+  transform: scaleY(0);
+  transform-origin: top;
+}
+
+.relay-baton {
+  position: absolute;
+  top: 9px;
+  left: 170px;
+  z-index: 2;
+  width: 10px;
+  height: 30px;
+  border-radius: 6px;
+  background: linear-gradient(var(--c-primary-light), var(--c-primary));
+  box-shadow:
+    0 0 0 4px rgba(var(--c-primary-rgb), 0.16),
+    0 0 18px rgba(var(--c-primary-rgb), 0.7);
+  transform: translate(-50%, 0);
+}
+
+.xp__baton {
+  position: relative;
+  z-index: 1;
+  transition:
+    background 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.45s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.xp__baton.is-lit {
+  background: var(--exp-color);
+  box-shadow:
+    0 0 0 7px color-mix(in srgb, var(--exp-color) 22%, transparent),
+    0 0 22px var(--exp-color);
+  transform: scale(1.25);
+}
+
+html.js .xps__relay > [data-reveal]:not(.is-in) {
+  transform: translateX(48px);
+}
+
+@media (max-width: 760px) {
+  .relay-fill,
+  .relay-baton {
+    display: none;
+  }
+}
+
+/* ── DSA: counter counts up, "Accepted" stamp ── */
+
+@property --n {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+
+/* Undo the "days" suffix styling (`.dsa__big span`) for the number itself. */
+.dsa__big .dsa__count {
+  font-family: inherit;
+  font-size: 1em;
+  font-style: normal;
+  color: var(--c-text);
+}
+
+.dsa__count {
+  --n: var(--to);
+  counter-reset: n var(--n);
+  font-variant-numeric: tabular-nums;
+}
+
+html.js .dsa__count {
+  position: relative;
+  color: transparent;
+}
+
+html.js .dsa__count::after {
+  content: counter(n);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--c-text);
+}
+
+html.js .dsa__meter:not(.is-in) .dsa__count {
+  --n: 0;
+}
+
+.dsa__meter.is-in .dsa__count {
+  animation: count-up 1.7s var(--ease-out) 0.25s both;
+}
+
+@keyframes count-up {
+  from {
+    --n: 0;
+  }
+  to {
+    --n: var(--to);
+  }
+}
+
+.dsa__latest {
+  position: relative;
+}
+
+.dsa__stamp {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  padding: 5px 12px;
+  border: 2px solid var(--c-field);
+  border-radius: 8px;
+  font-family: var(--font-athletic);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-field);
+  opacity: 0.92;
+  transform: rotate(-9deg);
+  pointer-events: none;
+}
+
+@media (max-width: 520px) {
+  .dsa__stamp {
+    position: static;
+    display: inline-block;
+    margin-top: 16px;
+  }
+}
+
+.dsa__stamp::before {
+  content: "✓ ";
+}
+
+.dsa__log.is-in .dsa__stamp {
+  animation: stamp-slam 0.55s cubic-bezier(0.2, 1.4, 0.4, 1) 0.7s both;
+}
+
+.dsa__log.is-in .dsa__latest {
+  animation: stamp-thud 0.35s ease-out 0.98s;
+}
+
+.dsa__log.is-in .dsa__row {
+  animation: row-in 0.55s var(--ease-out) both;
+}
+
+.dsa__row:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.dsa__row:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.dsa__row:nth-child(4) {
+  animation-delay: 0.24s;
+}
+
+@keyframes stamp-slam {
+  0% {
+    opacity: 0;
+    transform: rotate(-9deg) scale(2.8);
+  }
+  60% {
+    opacity: 1;
+    transform: rotate(-9deg) scale(0.9);
+  }
+  100% {
+    opacity: 0.92;
+    transform: rotate(-9deg) scale(1);
+  }
+}
+
+@keyframes stamp-thud {
+  30% {
+    transform: translateY(3px) scale(0.995);
+  }
+}
+
+@keyframes row-in {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+}
+
+/* ── Stack: logos fly in from scattered spots and snap together ── */
+
+.stk__tools li {
+  transition:
+    border-color 0.25s ease,
+    color 0.25s ease,
+    opacity 0.7s ease var(--d, 0s),
+    transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) var(--d, 0s);
+}
+
+html.js .stk__tools li[data-reveal]:not(.is-in) {
+  opacity: 0;
+  transform: translate(var(--sx), var(--sy)) rotate(var(--sr)) scale(0.6);
+}
+
+.stk__tools svg {
+  transition: transform 0.6s var(--ease-out);
+}
+
+.stk__tools li:hover svg {
+  transform: rotate(360deg) scale(1.15);
+}
+
+/* ── Credentials: badges flip in as if awarded ── */
+
+.cred__grid {
+  perspective: 1200px;
+}
+
+html.js .cred__grid[data-reveal] {
+  transform: none;
+}
+
+.cred__grid.is-in .cred__item.is-featured {
+  animation: badge-flip 0.85s var(--ease-out) both;
+  animation-delay: calc(var(--i) * 90ms + 0.1s);
+}
+
+@keyframes badge-flip {
+  from {
+    opacity: 0;
+    transform: rotateX(-95deg);
+    transform-origin: 50% 0;
+  }
+}
+
+.cred__link {
+  overflow: hidden;
+}
+
+.cred__link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.13) 50%, transparent 62%) 160% 0 /
+    250% 100% no-repeat;
+  pointer-events: none;
+  transition: background-position 0.9s var(--ease-out);
+}
+
+.cred__link:hover::before {
+  background-position: -60% 0;
+}
+
+.cred__link:hover .cred__icon {
+  animation: medal-swing 0.8s var(--ease-out);
+}
+
+@keyframes medal-swing {
+  0%,
+  100% {
+    transform: none;
+  }
+  25% {
+    transform: rotate(-14deg) scale(1.08);
+  }
+  55% {
+    transform: rotate(9deg);
+  }
+  80% {
+    transform: rotate(-3deg);
+  }
+}
+
+/* ── Writing: highlighter and pen ── */
+
+.wr .lap-head__title em {
+  background: linear-gradient(
+      transparent 60%,
+      rgba(var(--c-primary-rgb), 0.26) 60%,
+      rgba(var(--c-primary-rgb), 0.26) 90%,
+      transparent 90%
+    )
+    0 0 / 0% 100% no-repeat;
+  transition: background-size 1.1s var(--ease-out) 0.55s;
+}
+
+.wr .lap-head.is-in .lap-head__title em,
+html:not(.js) .wr .lap-head__title em {
+  background-size: 100% 100%;
+}
+
+.wr-essay__squiggle {
+  display: block;
+  width: min(230px, 62%);
+  height: 14px;
+  margin: -4px 0 16px;
+  overflow: visible;
+}
+
+.wr-essay__squiggle path {
+  fill: none;
+  stroke: var(--c-primary);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.wr-essay.is-in .wr-essay__squiggle path,
+html:not(.js) .wr-essay__squiggle path {
+  animation: hx-draw 1.2s var(--ease-out) 0.55s forwards;
+}
+
+.wr-list li.is-in .wr-row {
+  animation: row-in 0.6s var(--ease-out) both;
+}
+
+/* ── Athlete: sprint in, kick the ball ── */
+
+.ot__stage {
+  position: relative;
+}
+
+.ot__stage.is-armed [data-kick] {
+  opacity: 0;
+}
+
+.ot__ball {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 44px;
+  height: 44px;
+  opacity: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.45));
+  will-change: transform;
+}
+
+.ot__ball svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ot__impact {
+  position: absolute;
+  z-index: 4;
+  width: 60px;
+  height: 60px;
+  border: 2px solid var(--c-primary);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Speed lines while the cards sprint in. */
+.ot__stage::before {
+  content: "";
+  position: absolute;
+  inset: 0 -12%;
+  z-index: 6;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0 36px,
+    color-mix(in srgb, var(--c-text) 22%, transparent) 36px 37px
+  );
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 30%, #000 45%, transparent 75%);
+  mask-image: linear-gradient(90deg, transparent, #000 30%, #000 45%, transparent 75%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ot__stage.is-sprinting::before {
+  animation: speed-lines 1.2s ease-out;
+}
+
+@keyframes speed-lines {
+  0% {
+    opacity: 0;
+    transform: translateX(-40%);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(40%);
+  }
+}
+
+.ot__kick {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  padding: 7px 16px 7px 7px;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+  background: var(--c-surface);
+  color: var(--c-text);
+  font: 600 13.5px var(--font-inter);
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.ot__kick:hover {
+  border-color: var(--c-border-hover);
+}
+
+.ot__kick-ball {
+  width: 28px;
+  height: 28px;
+  transition: transform 0.7s var(--ease-out);
+}
+
+.ot__kick:hover .ot__kick-ball {
+  transform: translateX(4px) rotate(220deg);
+}
+
+.ot__kick:active .ot__kick-ball {
+  transform: translateX(14px) rotate(400deg) scale(0.9);
+}
+
+.ot__thumb {
+  transition:
+    transform 0.45s cubic-bezier(0.3, 1.5, 0.5, 1),
+    box-shadow 0.3s ease;
+}
+
+.ot__thumb:hover {
+  z-index: 1;
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.35);
+  transform: translateY(-6px) rotate(-2deg);
+}
+
+.ot__thumb:nth-child(even):hover {
+  transform: translateY(-6px) rotate(2deg);
+}
+
+/* ── Local Guide: pins drop, the route draws ── */
+
+.lg__route {
+  fill: none;
+  stroke: var(--c-field);
+  stroke-width: 2;
+  stroke-opacity: 0.55;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.lg__card.is-cued .lg__route,
+html:not(.js) .lg__route {
+  animation: hx-draw 1.6s var(--ease-out) 1.2s forwards;
+}
+
+.lg__pin-body {
+  fill: #ea4335;
+  stroke: rgba(0, 0, 0, 0.25);
+}
+
+.lg__pin-dot {
+  fill: #fff;
+}
+
+.lg__pin-shadow {
+  fill: rgba(0, 0, 0, 0.28);
+}
+
+html.js .lg__pin {
+  opacity: 0;
+}
+
+.lg__card.is-cued .lg__pin {
+  animation: pin-drop 0.75s cubic-bezier(0.3, 1.55, 0.5, 1) both;
+}
+
+@keyframes pin-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-70px);
+  }
+  to {
+    opacity: 0.9;
+    transform: none;
+  }
+}
+
+.lg__card:hover .lg__pin-body {
+  animation: pin-hop 0.6s ease-in-out;
+}
+
+@keyframes pin-hop {
+  40% {
+    transform: translateY(-6px);
+  }
+}
+
+/* ── GitHub: contribution graph lights up in a wave ── */
+
+html.js .gh-graph__grid .gh-graph__cell {
+  opacity: 0;
+  transform: scale(0.3);
+}
+
+.gh-graph__grid.is-cued .gh-graph__cell {
+  animation: cell-in 0.45s var(--ease-out) forwards;
+  animation-delay: calc(var(--wave, 0) * 14ms);
+}
+
+@keyframes cell-in {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── Contact: the finish tape snaps ── */
+
+.fin__tape {
+  position: absolute;
+  z-index: 0;
+  top: clamp(56px, 6.6vw, 86px);
+  right: 0;
+  left: 0;
+  display: flex;
+  width: min(100% - 32px, 1040px);
+  height: 30px;
+  margin: 0 auto;
+  pointer-events: none;
+}
+
+.fin__tape-half {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  overflow: hidden;
+  background: var(--c-primary);
+  box-shadow: 0 10px 24px rgba(var(--c-primary-rgb), 0.25);
+  font-family: var(--font-athletic);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--c-ink);
+}
+
+.fin__tape-half--l {
+  justify-content: flex-end;
+  transform-origin: 0 50%;
+}
+
+.fin__tape-half--r {
+  transform-origin: 100% 50%;
+}
+
+.fin__tape.is-cued .fin__tape-half--l {
+  animation: tape-l 1.1s cubic-bezier(0.3, 0.6, 0.4, 1) 0.4s forwards;
+}
+
+.fin__tape.is-cued .fin__tape-half--r {
+  animation: tape-r 1.1s cubic-bezier(0.3, 0.6, 0.4, 1) 0.4s forwards;
+}
+
+/* Tension, snap, swing down from the posts, fade before reaching the headline. */
+@keyframes tape-l {
+  0% {
+    transform: none;
+  }
+  14%,
+  20% {
+    transform: scaleX(1.03);
+  }
+  30% {
+    transform: rotate(14deg) scaleX(0.95);
+  }
+  55% {
+    opacity: 0.85;
+    transform: rotate(48deg) scaleX(0.6);
+  }
+  72%,
+  100% {
+    opacity: 0;
+    transform: rotate(60deg) scaleX(0.45);
+  }
+}
+
+@keyframes tape-r {
+  0% {
+    transform: none;
+  }
+  14%,
+  20% {
+    transform: scaleX(1.03);
+  }
+  30% {
+    transform: rotate(-14deg) scaleX(0.95);
+  }
+  55% {
+    opacity: 0.85;
+    transform: rotate(-48deg) scaleX(0.6);
+  }
+  72%,
+  100% {
+    opacity: 0;
+    transform: rotate(-60deg) scaleX(0.45);
+  }
+}
+
+.fin__inner > :not(.fin__tape) {
+  position: relative;
+  z-index: 1;
+}
+
+.fin__confetti {
+  position: fixed;
+  z-index: 9999;
+  width: 8px;
+  height: 12px;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+/* ── Footer: wordmark fills left to right ── */
+
+.ft__wordmark {
+  background: linear-gradient(90deg, rgba(var(--c-primary-rgb), 0.16) 50%, transparent 50%) 100% 0 / 200% 100%
+    no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition: background-position 2.2s var(--ease-out) 0.2s;
+}
+
+.ft__wordmark.is-cued,
+html:not(.js) .ft__wordmark {
+  background-position: 0 0;
+}
+
+/* ── Reduced motion: final states, no movement ── */
+
+@media (prefers-reduced-motion: reduce) {
+  .lap-head__num,
+  .ft__wordmark,
+  .wr .lap-head__title em {
+    transition: none;
+  }
+
+  .bframe__chrome::after,
+  .is-in .bframe__url,
+  .is-in .bframe__view > *,
+  .glyph,
+  .glyph svg,
+  a:hover .glyph svg,
+  .dd-lb__packet,
+  .dz__col.is-in .dd-lb__packet,
+  .dz__col.is-in .dd__led,
+  .dz__col.is-in .dd-stack__layer,
+  .dz__col.is-in .dd-stack__trip,
+  .dsa__meter.is-in .dsa__count,
+  .dsa__log.is-in .dsa__stamp,
+  .dsa__log.is-in .dsa__latest,
+  .dsa__log.is-in .dsa__row,
+  .cred__grid.is-in .cred__item.is-featured,
+  .cred__link:hover .cred__icon,
+  .wr-list li.is-in .wr-row,
+  .lg__card:hover .lg__pin-body,
+  .gh-graph__grid.is-cued .gh-graph__cell,
+  .fin__tape.is-cued .fin__tape-half {
+    animation: none;
+  }
+
+  .dd-lb__packet {
+    opacity: 0;
+  }
+
+  .dz__col.is-in [class*="dd-tcp__leg"] .dd-tcp__arrow {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .dz__col.is-in [class*="dd-tcp__leg"] .dd-tcp__label {
+    animation: none;
+    opacity: 1;
+  }
+
+  html.js .dsa__count,
+  html.js .dsa__meter:not(.is-in) .dsa__count {
+    --n: var(--to);
+  }
+
+  .wr-essay__squiggle path,
+  .lg__route {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+
+  html.js .lg__pin {
+    opacity: 0.9;
+    animation: none;
+  }
+
+  html.js .gh-graph__grid .gh-graph__cell {
+    opacity: 1;
+    transform: none;
+  }
+
+  html.js .stk__tools li[data-reveal]:not(.is-in),
+  html.js .xps__relay > [data-reveal]:not(.is-in) {
+    opacity: 1;
+    transform: none;
+  }
+
+  .relay-baton,
+  .relay-fill,
+  .ot__kick,
+  .ot__ball,
+  .ot__stage::before {
+    display: none;
+  }
+
+  .stk__tools li:hover svg,
+  .ot__thumb:hover {
+    transform: none;
+  }
+}

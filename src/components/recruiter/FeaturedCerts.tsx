@@ -12,9 +12,12 @@ const featuredSet = new Set<string>(FEATURED_IDS);
 
 type Cert = (typeof CERTIFICATIONS)[number];
 
-function CertItem({ cert, featured = false }: { cert: Cert; featured?: boolean }) {
+function CertItem({ cert, featured = false, index = 0 }: { cert: Cert; featured?: boolean; index?: number }) {
   return (
-    <li className={featured ? "cred__item is-featured" : "cred__item"}>
+    <li
+      className={featured ? "cred__item is-featured" : "cred__item"}
+      style={{ "--i": index } as CSSProperties}
+    >
       <a
         href={cert.url}
         target="_blank"
@@ -64,8 +67,8 @@ export default function FeaturedCerts() {
         />
 
         <ul className="cred__grid" id="cred-list" data-reveal>
-          {featured.map((cert) => (
-            <CertItem key={cert.id} cert={cert} featured />
+          {featured.map((cert, i) => (
+            <CertItem key={cert.id} cert={cert} featured index={i} />
           ))}
           {expanded ? rest.map((cert) => <CertItem key={cert.id} cert={cert} />) : null}
         </ul>

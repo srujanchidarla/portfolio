@@ -5,12 +5,15 @@ import { useEffect } from "react";
 /**
  * Site-wide motion layer.
  * - `[data-reveal]` elements get `is-in` when they scroll into view (works for server components).
+ * - `[data-cue]` elements get `is-cued` once their top passes 70% of the viewport. Unlike
+ *   `[data-reveal]` they are never hidden, so they can host a section's signature animation.
  * - `[data-spot]` elements track the pointer in `--mx` / `--my` for the spotlight hover.
  */
 export default function MotionFX() {
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.add("fx-ready");
+    // The pre-paint script adds `js`; re-add it if a root re-render reset <html>'s classes.
+    root.classList.add("js", "fx-ready");
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -23,6 +26,17 @@ export default function MotionFX() {
       { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
     );
 
+    const cueIo = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add("is-cued");
+          cueIo.unobserve(entry.target);
+        }
+      },
+      { rootMargin: "0px 0px -30% 0px" }
+    );
+
     // Tracked in memory: attributes added here would trip hydration of streamed sections.
     const seen = new WeakSet<Element>();
     const scan = () => {
@@ -30,6 +44,11 @@ export default function MotionFX() {
         if (seen.has(el)) return;
         seen.add(el);
         io.observe(el);
+      });
+      document.querySelectorAll<HTMLElement>("[data-cue]:not(.is-cued)").forEach((el) => {
+        if (seen.has(el)) return;
+        seen.add(el);
+        cueIo.observe(el);
       });
     };
     scan();
@@ -63,6 +82,7 @@ export default function MotionFX() {
 
     return () => {
       io.disconnect();
+      cueIo.disconnect();
       mo.disconnect();
       window.removeEventListener("pointermove", onMove);
       cancelAnimationFrame(frame);

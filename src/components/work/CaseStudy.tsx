@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import BrowserFrame from "@/components/work/BrowserFrame";
 import CaseToc from "@/components/work/CaseToc";
+import ProjectGlyph from "@/components/work/ProjectGlyph";
 import { coverLabel, explorePages, type CaseStudy as CaseStudyContent } from "@/lib/case-studies";
 import { PROJECTS } from "@/lib/projects";
 import { IMPACT_PROJECTS } from "@/lib/recruiter-home";
@@ -142,6 +143,7 @@ export default function CaseStudy({
 
           <div className="cs-cover hx-in" style={{ animationDelay: "0.4s" }}>
             <BrowserFrame project={project} sizes="(max-width: 1200px) 100vw, 1180px" />
+            <ProjectGlyph id={project.id} color={project.color} />
           </div>
         </div>
       </div>

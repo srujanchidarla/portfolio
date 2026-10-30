@@ -4,6 +4,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { coverLabel, getCaseStudy } from "@/lib/case-studies";
 import { CURATED_PROJECTS, IMPACT_PROJECTS } from "@/lib/recruiter-home";
 import BrowserFrame from "@/components/work/BrowserFrame";
+import ProjectGlyph from "@/components/work/ProjectGlyph";
 import LapHeader from "@/components/fx/LapHeader";
 
 type Project = (typeof IMPACT_PROJECTS)[number];
@@ -33,6 +34,7 @@ function Feature({ project, index }: { project: Project; index: number }) {
         data-spot
       >
         <BrowserFrame project={project} sizes="(max-width: 960px) 100vw, 680px" />
+        <ProjectGlyph id={project.id} color={project.color} />
       </Link>
 
       <div className="wk-feature__body">
@@ -87,7 +89,10 @@ function Tile({ project, index }: { project: Project; index: number }) {
       data-reveal
       data-spot
     >
-      <BrowserFrame project={project} sizes="(max-width: 720px) 100vw, 560px" />
+      <span className="wk-tile__media">
+        <BrowserFrame project={project} sizes="(max-width: 720px) 100vw, 560px" />
+        <ProjectGlyph id={project.id} color={project.color} />
+      </span>
       <span className="wk-tile__body">
         <span className="wk-tile__meta">
           <span className="wk-tile__num">{num(index)}</span>

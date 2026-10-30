@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Big_Shoulders, Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import "./splits.css";
+import "./moves.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { BootProvider } from "@/components/BootProvider";
 import BootLoader from "@/components/BootLoader";

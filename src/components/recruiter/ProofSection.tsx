@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import { BarChart3, Layers, Server } from "lucide-react";
 import { PROOF_CARDS } from "@/lib/recruiter-home";
 import LapHeader from "@/components/fx/LapHeader";
+import DisciplineDiagram from "@/components/recruiter/DisciplineDiagram";
 
 const ICONS = {
   scale: BarChart3,
@@ -48,6 +49,9 @@ export default function ProofSection() {
                     <Icon size={17} />
                   </span>
                   <span className="dz__label">{card.label}</span>
+                </div>
+                <div className="dz__diagram">
+                  <DisciplineDiagram id={card.id} />
                 </div>
                 {stat ? (
                   <p className="dz__stat">

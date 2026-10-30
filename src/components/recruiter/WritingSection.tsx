@@ -60,6 +60,12 @@ export default function WritingSection() {
               Featured essay · {SYSTEM_DESIGN_ESSAY.readingMinutes} min read
             </p>
             <h3 className="wr-essay__title">{SYSTEM_DESIGN_ESSAY.title}</h3>
+            <svg className="wr-essay__squiggle" viewBox="0 0 220 14" aria-hidden="true">
+              <path
+                d="M2 9 C 20 2, 34 13, 52 7 S 86 2, 104 8 S 140 13, 158 6 S 196 3, 218 8"
+                pathLength={1}
+              />
+            </svg>
             <p className="wr-essay__summary">{SYSTEM_DESIGN_ESSAY.summary}</p>
             <div className="wr-essay__actions">
               <Link href={SYSTEM_DESIGN_ESSAY.href} className="btn-primary">

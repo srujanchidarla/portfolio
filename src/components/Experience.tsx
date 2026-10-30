@@ -1,6 +1,7 @@
 import { GraduationCap } from "lucide-react";
 import { EDUCATION, EXPERIENCES } from "@/lib/experience";
 import ExperienceCard from "./experience/ExperienceCard";
+import RelayBaton from "./experience/RelayBaton";
 import LapHeader from "@/components/fx/LapHeader";
 
 function gpa(detail: string) {
@@ -25,6 +26,7 @@ export default function Experience() {
         />
 
         <div className="xps__relay">
+          <RelayBaton />
           {EXPERIENCES.map((exp) => (
             <div key={exp.id} data-reveal>
               <ExperienceCard exp={exp} />
