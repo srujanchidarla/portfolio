@@ -2349,6 +2349,11 @@ html:not(.js) .dz__col::before {
   background: var(--c-surface);
 }
 
+.dsa__meter {
+  display: flex;
+  flex-direction: column;
+}
+
 .dsa__kicker {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -2426,7 +2431,8 @@ html:not(.js) .dz__col::before {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 24px;
-  margin-top: 22px;
+  margin-top: auto;
+  padding-top: 22px;
   font-size: 13.5px;
   color: var(--c-muted);
 }
