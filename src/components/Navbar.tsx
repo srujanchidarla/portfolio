@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Moon, Sun } from "lucide-react";
 import { SITE } from "@/lib/site";
@@ -18,6 +19,16 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { toggle } = useTheme();
+  const pathname = usePathname();
+
+  const handleBrandClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname !== "/") return;
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (window.location.hash) {
+      window.history.replaceState(null, "", "/");
+    }
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -40,7 +51,12 @@ export default function Navbar() {
   return (
     <header className={`nv${scrolled ? " nv--scrolled" : ""}${menuOpen ? " nv--open" : ""}`}>
       <div className="nv__bar">
-        <Link href="/" className="nv__brand" aria-label={`${SITE.name}, home`}>
+        <Link
+          href="/"
+          className="nv__brand"
+          aria-label={`${SITE.name}, home`}
+          onClick={handleBrandClick}
+        >
           <span className="nv__mark" aria-hidden="true">
             SC
           </span>
