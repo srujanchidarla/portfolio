@@ -9,7 +9,13 @@ import MobileShell from "@/components/MobileShell";
 import CookieConsentProvider from "@/components/CookieConsentProvider";
 import MotionFX from "@/components/fx/MotionFX";
 import InlineScript from "@/components/fx/InlineScript";
-import { PRIMARY_ROLE, SITE } from "@/lib/site";
+import { SITE } from "@/lib/site";
+import {
+  NAME_VARIANTS,
+  PERSON_DESCRIPTION,
+  serializeJsonLd,
+  siteJsonLd,
+} from "@/lib/structured-data";
 
 const sans = Geist({
   subsets: ["latin"],
@@ -36,9 +42,15 @@ const mono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.website),
   title: `${SITE.name} | Software Engineer · Aug 2026`,
-  description: PRIMARY_ROLE.headline,
+  description: PERSON_DESCRIPTION,
+  applicationName: SITE.name,
+  authors: [{ name: SITE.name, url: SITE.website }],
+  creator: SITE.name,
+  publisher: SITE.name,
   keywords: [
-    "Srujan Chidarla",
+    ...NAME_VARIANTS,
+    "Srujan Chidarla portfolio",
+    "Srujan Chidarla software engineer",
     "software engineer",
     "full-stack developer",
     "system design",
@@ -50,17 +62,29 @@ export const metadata: Metadata = {
     "AgriWise",
     "STEM OPT",
   ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
+  // Set GOOGLE_SITE_VERIFICATION to the token from Google Search Console.
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
   openGraph: {
     title: `${SITE.name} — Full-stack · System design · 2M+ req/day`,
-    description: PRIMARY_ROLE.headline,
-    type: "website",
+    description: PERSON_DESCRIPTION,
+    type: "profile",
+    firstName: "Srujan",
+    lastName: "Chidarla",
     url: SITE.website,
     siteName: SITE.name,
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE.name} — Software Engineer · Aug 2026`,
-    description: PRIMARY_ROLE.headline,
+    description: PERSON_DESCRIPTION,
   },
 };
 
@@ -81,6 +105,10 @@ export default function RootLayout({
       <head>
         {/* Set theme and reveal state before first paint so nothing flashes. */}
         <InlineScript html={PRE_PAINT} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(siteJsonLd()) }}
+        />
       </head>
       <body
         className={`${sans.className} min-h-full flex flex-col antialiased`}

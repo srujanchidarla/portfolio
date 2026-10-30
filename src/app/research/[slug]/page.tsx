@@ -24,6 +24,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${item.title} | ${SITE.name}`,
     description: item.abstract,
+    alternates: { canonical: researchHref(item) },
+    authors: [{ name: SITE.name, url: SITE.website }],
     openGraph: {
       title: item.title,
       description: item.abstract,

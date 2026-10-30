@@ -5,6 +5,7 @@ import ResumeDocument from "@/components/resume/ResumeDocument";
 
 export const metadata: Metadata = {
   title: `Resume | ${SITE.name}`,
+  alternates: { canonical: "/resume" },
   description: `Resume for ${SITE.name} — Software Engineer · System Design · Networks · AI Systems · MS CS Aug 2026`,
   robots: { index: true, follow: true },
 };

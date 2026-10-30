@@ -833,6 +833,7 @@ export function getLegalMetadata(slug: LegalSlug): Metadata {
   return {
     title: `${page.title} | ${SITE.name}`,
     description: page.description,
+    alternates: { canonical: `/${slug}` },
     openGraph: {
       title: page.title,
       description: page.description,

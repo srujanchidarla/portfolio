@@ -4,6 +4,7 @@ import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `Legal | ${SITE.name}`,
+  alternates: { canonical: "/legal" },
   description:
     "Privacy, terms, cookies, data storage, disclaimer, accessibility, and license for the portfolio website and mobile app.",
 };

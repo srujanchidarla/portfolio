@@ -9,6 +9,7 @@ import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `About | ${SITE.name}`,
+  alternates: { canonical: "/about" },
   description:
     "Beyond code — athlete discipline, learning journey, and what drives Srujan Chidarla.",
 };

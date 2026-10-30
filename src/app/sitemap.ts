@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllLegalSlugs } from "@/lib/legal";
+import { IMPACT_PROJECTS } from "@/lib/recruiter-home";
 import { RESEARCH_ITEMS } from "@/lib/research";
 import { SITE } from "@/lib/site";
 
@@ -39,6 +40,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.4,
     },
+    ...IMPACT_PROJECTS.map((project) => ({
+      url: `${base}/work/${project.id}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
     ...legalPages,
     ...RESEARCH_ITEMS.map((item) => ({
       url: `${base}/research/${item.slug}`,

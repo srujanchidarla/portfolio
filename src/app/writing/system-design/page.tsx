@@ -8,6 +8,8 @@ import { ContactProvider } from "@/components/ContactProvider";
 export const metadata: Metadata = {
   title: `${SYSTEM_DESIGN_ESSAY.title} | Srujan Chidarla`,
   description: SYSTEM_DESIGN_ESSAY.summary,
+  alternates: { canonical: SYSTEM_DESIGN_ESSAY.href },
+  authors: [{ name: "Srujan Chidarla", url: "https://srujanchidarla.com" }],
   openGraph: {
     title: SYSTEM_DESIGN_ESSAY.title,
     description: SYSTEM_DESIGN_ESSAY.summary,

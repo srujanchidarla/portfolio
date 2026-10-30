@@ -7,6 +7,7 @@ import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `Research | ${SITE.name}`,
+  alternates: { canonical: "/research" },
   description:
     "Papers, preprints, and working research ideas from Srujan Chidarla — labeled honestly, not padded.",
   openGraph: {
