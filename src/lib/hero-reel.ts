@@ -35,7 +35,7 @@ export const HERO_PRODUCT_LOGOS = [
     href: "/work/algochronicle",
     liveUrl: "https://www.algochronicle.com/",
     title: "AlgoChronicle",
-    blurb: "Daily DSA journal with reminders that stick",
+    blurb: "A free DSA course that remembers what you solved",
     image: "/project-logos/algochronicle.png",
   },
   {

@@ -130,7 +130,7 @@ export const PROJECTS: Project[] = [
   {
     id: "algochronicle",
     title: "Algo Chronicle",
-    period: "Nov 2025 – Apr 2026",
+    period: "Oct 2025 – Present",
     tagline: "Automated DSA progress tracker with push-to-publish CI/CD",
     description:
       "A serverless learning journal that triggers a live website update on every GitHub commit — parsing code folder metadata into structured progress records with zero manual intervention.",

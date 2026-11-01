@@ -10,6 +10,11 @@ export type ExplorePage = {
   image: string;
 };
 
+export type CaseStat = {
+  value: string;
+  label: string;
+};
+
 export type CaseStudy = {
   id: string;
   summary: string;
@@ -17,6 +22,7 @@ export type CaseStudy = {
   aspects: readonly CaseAspect[];
   workflow: readonly string[];
   challenges: readonly CaseAspect[];
+  stats?: readonly CaseStat[];
 };
 
 export const CASE_STUDIES: readonly CaseStudy[] = [
@@ -25,39 +31,48 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     summary:
       "A free DSA path that remembers what you solved and builds a plan around the interview you actually have.",
     product:
-      "AlgoChronicle is for people who start strong and quit by week two. The homepage, the plan, and the reminders change depending on whether someone is new, practicing casually, or interviewing in a few weeks.",
+      "AlgoChronicle is for people who start strong and quit by week two. One product adapts to three different learners — a complete beginner, someone practicing casually, and someone interviewing in three weeks — changing the homepage, the plan, and the reminders depending on who's looking at it. It runs in the browser with no setup, and as native apps on Android and iPhone.",
     aspects: [
       {
         title: "The path",
-        text: "159 hand-picked problems across 13 levels, each with a checklist, plus a daily problem, step-by-step visualizers, and spaced reviews.",
+        text: "A 13-level roadmap of 159 hand-picked problems, starting from coding basics for complete beginners, with a concept lesson and an animated visualizer before every pattern.",
+      },
+      {
+        title: "The practice",
+        text: "An in-browser code editor that runs Python, Java, and C++ against real test cases, a LeetCode 75 track, short step-through video reels, and quizzes — all built by hand rather than bolted on.",
       },
       {
         title: "The interview",
-        text: "Interview tags come from real reports across 419 companies. A study plan turns the target companies, the interview date, and the daily time into a day-by-day schedule.",
-      },
-      {
-        title: "The streak",
-        text: "223+ hand-checked walkthroughs sit on the schedule. Connect LeetCode and solved problems tick themselves. Reviews come back after 1 day, 1 week, and 1 month.",
+        text: "Interview tags come from real reports across 126 companies. A study plan turns the target companies, the interview date, and the daily time into a day-by-day schedule, with mock interviews.",
       },
     ],
     workflow: [
-      "Started from the learner, not the content list: a first-timer, a casual practicer, and someone with an interview in three weeks.",
-      "Built the roadmap and the company question set so a plan could be generated, not just browsed.",
-      "Added hourly jobs for reminders and LeetCode sync, then web push, an installable PWA, and native app shells.",
+      "Started as a personal DSA journal — a GitHub webhook pushed every problem I solved into Firestore and onto the site.",
+      "Turned it into a course: a 13-level roadmap, concept lessons, optimal solutions, and an animated visualizer for every pattern.",
+      "Added accounts with synced progress, push reminders, a company-and-date study planner, and native Android and iOS apps.",
+      "Layered in the learning science — spaced-repetition reviews, a personal memory curve, concept drills before problems — then rebuilt the backend for scale after a production incident forced the issue.",
     ],
     challenges: [
       {
-        title: "Three users, one product",
-        text: "The entry point, the plan, and the reminders had to change for each kind of learner without becoming three separate products.",
+        title: "Paused by Vercel",
+        text: "The site hit the free plan's 4-hour server-CPU limit and got paused. I traced it to pages rendered on every request, a live listener on every open tab, and a cron job doing its full run four times an hour — then moved to time-based page caching, made the background jobs idempotent, and stored the leaderboard as one document. Repeat page views went from ~290ms of server work to ~2ms served from the edge.",
       },
       {
-        title: "Progress that is true",
-        text: "A lot of the solving happens on LeetCode. The product had to notice that and stay in sync across devices.",
+        title: "Caching versus personalization",
+        text: "A page that's different for everyone can't be cached; a cached page can't be personal. The fix was serving the identical page to every visitor and filling in streaks, due reviews, and plan status in the browser after it loads.",
       },
       {
-        title: "A reminder that arrives",
-        text: "A page does not bring someone back. That took server jobs, web push, and an installable app.",
+        title: "LeetCode blocks browsers",
+        text: "LeetCode's public API rejects requests from a browser, so syncing has to run on a server, and checking every linked account live would never keep up. A proxy route caches results for five minutes, and a background job checks each learner on a staggered schedule instead of all at once.",
       },
+    ],
+    stats: [
+      { value: "159", label: "Problems across 13 levels" },
+      { value: "126", label: "Companies' interview question lists" },
+      { value: "17", label: "Visualizer pattern families" },
+      { value: "21", label: "API routes" },
+      { value: "94", label: "Automated tests, 21 files" },
+      { value: "74k+", label: "Lines of TypeScript" },
     ],
   },
   {

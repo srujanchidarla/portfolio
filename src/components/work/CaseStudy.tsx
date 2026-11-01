@@ -69,6 +69,7 @@ export default function CaseStudy({
     { id: "product", label: "What it does" },
     { id: "process", label: "How I worked" },
     { id: "challenges", label: "Challenges" },
+    ...(study.stats?.length ? [{ id: "numbers", label: "By the numbers" }] : []),
     { id: "shipped", label: "What shipped" },
   ];
   const n = (id: string) => String(toc.findIndex((item) => item.id === id) + 1).padStart(2, "0");
@@ -253,6 +254,20 @@ export default function CaseStudy({
               ))}
             </div>
           </section>
+
+          {study.stats?.length ? (
+            <section id="numbers" className="cs-sec">
+              <SectionHead num={n("numbers")} title="By the numbers" />
+              <div className="cs-stats" data-reveal>
+                {study.stats.map((stat) => (
+                  <div key={stat.label} className="cs-stat">
+                    <p className="cs-stat__value">{stat.value}</p>
+                    <p className="cs-stat__label">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null}
 
           <section id="shipped" className="cs-sec">
             <SectionHead num={n("shipped")} title="What shipped" />

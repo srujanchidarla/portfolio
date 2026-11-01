@@ -4558,6 +4558,36 @@ html:not(.js) .dz__col::before {
   transform: rotate(45deg);
 }
 
+.cs-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--c-border);
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--c-border);
+}
+
+.cs-stat {
+  padding: 24px 20px;
+  background: var(--c-surface);
+}
+
+.cs-stat__value {
+  font-family: var(--font-athletic);
+  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--proj-color);
+}
+
+.cs-stat__label {
+  margin-top: 10px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--c-muted);
+}
+
 .cs-aspects,
 .cs-challenges {
   display: grid;
@@ -4830,6 +4860,10 @@ html:not(.js) .dz__col::before {
   .cs-aspects,
   .cs-challenges {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cs-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .cs-next {
