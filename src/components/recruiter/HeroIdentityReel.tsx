@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { usePrefersReducedMotion } from "@/components/fx/usePrefersReducedMotion";
 import {
   HERO_REEL_CERT_INTERVAL_MS,
   HERO_REEL_INTERVAL_MS,
@@ -84,7 +85,7 @@ function ReelCard({ item, certIndex }: { item: HeroReelItem; certIndex: number }
 }
 
 export default function HeroIdentityReel({ compact = false }: { compact?: boolean }) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const [index, setIndex] = useState(0);
   const [certIndex, setCertIndex] = useState(0);
   const [paused, setPaused] = useState(false);

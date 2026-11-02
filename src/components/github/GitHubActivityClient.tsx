@@ -4,6 +4,7 @@ import { useState, type CSSProperties } from "react";
 import { ExternalLink, Star, GitFork, HelpCircle, Lock, Award, BarChart3 } from "lucide-react";
 import type { ContributionDay, GitHubActivityData } from "@/lib/github";
 import LapHeader from "@/components/fx/LapHeader";
+import WeeklyRhythm from "@/components/github/WeeklyRhythm";
 
 const LEVEL_COLORS = [
   "var(--gh-level-0)",
@@ -115,6 +116,8 @@ function ContributionGraph({
           </button>
         </Tooltip>
       </div>
+
+      <WeeklyRhythm weeks={weeks} />
 
       <p className="gh-graph__hover">
         {hovered && hovered.date ? (

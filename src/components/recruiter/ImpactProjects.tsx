@@ -5,6 +5,7 @@ import { coverLabel, getCaseStudy } from "@/lib/case-studies";
 import { CURATED_PROJECTS, IMPACT_PROJECTS } from "@/lib/recruiter-home";
 import BrowserFrame from "@/components/work/BrowserFrame";
 import ProjectGlyph from "@/components/work/ProjectGlyph";
+import FilmStrip from "@/components/work/FilmStrip";
 import LapHeader from "@/components/fx/LapHeader";
 
 type Project = (typeof IMPACT_PROJECTS)[number];
@@ -135,13 +136,13 @@ export default function ImpactProjects() {
             <Feature key={project.id} project={project} index={index} />
           ))}
         </div>
-
-        <div className="wk-grid">
-          {rest.map((project, index) => (
-            <Tile key={project.id} project={project} index={index + features.length} />
-          ))}
-        </div>
       </div>
+
+      <FilmStrip count={rest.length}>
+        {rest.map((project, index) => (
+          <Tile key={project.id} project={project} index={index + features.length} />
+        ))}
+      </FilmStrip>
     </section>
   );
 }

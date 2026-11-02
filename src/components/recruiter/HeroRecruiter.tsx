@@ -39,7 +39,8 @@ function CountUp({
   decimals?: number;
 }) {
   const reduce = useReducedMotion();
-  const [value, setValue] = useState(reduce ? to : 0);
+  // Start at 0 on both server and client; the effect jumps straight to `to` under reduced motion.
+  const [value, setValue] = useState(0);
 
   useEffect(() => {
     if (reduce) {

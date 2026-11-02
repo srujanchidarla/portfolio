@@ -781,7 +781,13 @@ html.js .dsa__meter:not(.is-in) .dsa__count {
     transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) var(--d, 0s);
 }
 
-html.js .stk__tools li[data-reveal]:not(.is-in) {
+/* The list is what reveals, so a chip scattered off-screen on a phone still lands. */
+html.js .stk__tools[data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+html.js .stk__tools[data-reveal]:not(.is-in) li {
   opacity: 0;
   transform: translate(var(--sx), var(--sy)) rotate(var(--sr)) scale(0.6);
 }
@@ -1291,7 +1297,7 @@ html:not(.js) .ft__wordmark {
     transform: none;
   }
 
-  html.js .stk__tools li[data-reveal]:not(.is-in),
+  html.js .stk__tools[data-reveal]:not(.is-in) li,
   html.js .xps__relay > [data-reveal]:not(.is-in) {
     opacity: 1;
     transform: none;
@@ -1309,4 +1315,640 @@ html:not(.js) .ft__wordmark {
   .ot__thumb:hover {
     transform: none;
   }
+}
+
+/* ══ Pass 2 · film strip, map route, weekly chart, teardown ══ */
+
+/* ── Work: the rest of the projects as a strip of film ── */
+
+.wk-strip {
+  position: relative;
+  margin-top: clamp(80px, 10vw, 130px);
+}
+
+.wk-strip__gate {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 26px;
+}
+
+.wk-strip.is-pinned .wk-strip__gate {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.wk-strip.is-pinned .wk-strip__track {
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.wk-strip__head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+.wk-strip__count {
+  color: var(--c-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.wk-strip__count span {
+  color: var(--c-primary);
+}
+
+.wk-strip__bar {
+  flex: 1;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--c-border);
+  overflow: hidden;
+}
+
+.wk-strip__bar span {
+  display: block;
+  height: 100%;
+  background: var(--c-primary);
+  transform-origin: left;
+  transform: scaleX(max(0.04, var(--strip, 0)));
+}
+
+/* The track is the film: sprocket holes run along both edges. */
+.wk-strip__track {
+  --gutter: max(20px, calc((100vw - 1180px) / 2 + 40px));
+  --hole: color-mix(in srgb, var(--c-text) 14%, transparent);
+  display: flex;
+  gap: 26px;
+  width: max-content;
+  padding: 34px var(--gutter);
+  background:
+    radial-gradient(circle, var(--hole) 0 3px, transparent 3.5px) 0 12px / 22px 22px repeat-x,
+    radial-gradient(circle, var(--hole) 0 3px, transparent 3.5px) 0 calc(100% - 12px) / 22px 22px repeat-x;
+  will-change: transform;
+}
+
+.wk-strip .wk-tile {
+  flex: 0 0 auto;
+  width: min(540px, 44vw);
+}
+
+.wk-strip.is-pinned .wk-tile {
+  transform: perspective(1400px) rotateY(calc(var(--lean, 0) * -14deg)) scale(calc(1 - var(--lean-abs, 0) * 0.06));
+  transition: border-color 0.3s ease;
+}
+
+.wk-strip.is-pinned .wk-tile .bframe {
+  filter: saturate(calc(1 - var(--lean-abs, 0) * 0.6));
+}
+
+/* Phones and reduced motion: a swipeable row that snaps frame by frame. */
+.wk-strip:not(.is-pinned) .wk-strip__track {
+  width: auto;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  scrollbar-width: none;
+}
+
+.wk-strip:not(.is-pinned) .wk-strip__track::-webkit-scrollbar {
+  display: none;
+}
+
+.wk-strip:not(.is-pinned) .wk-tile {
+  scroll-snap-align: start;
+}
+
+@media (max-width: 960px) {
+  .wk-strip .wk-tile {
+    width: min(460px, 78vw);
+  }
+
+  .wk-strip__track {
+    gap: 16px;
+  }
+}
+
+/* ── Local Guide: scroll walks the route ── */
+
+.lg__card.is-walking .lg__route {
+  animation: none;
+  transition: stroke-dashoffset 0.12s linear;
+}
+
+.lg__walker {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.lg__walker-ring {
+  fill: color-mix(in srgb, #4285f4 22%, transparent);
+  stroke: #4285f4;
+  stroke-opacity: 0.5;
+  animation: walker-pulse 1.6s ease-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.lg__walker-dot {
+  fill: #4285f4;
+  stroke: #fff;
+  stroke-width: 1.5;
+}
+
+@keyframes walker-pulse {
+  from {
+    transform: scale(0.7);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.lg__pin-halo {
+  fill: #ea4335;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.lg__card.is-walking .lg__pin:not(.is-reached) .lg__pin-body {
+  fill: color-mix(in srgb, #ea4335 35%, var(--c-muted));
+}
+
+.lg__pin.is-reached .lg__pin-halo {
+  animation: pin-reach 0.7s var(--ease-out);
+}
+
+@keyframes pin-reach {
+  from {
+    opacity: 0.45;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+/* ── GitHub: weekly rhythm line traces itself in ── */
+
+.gh-rhythm {
+  margin: 18px 0 6px;
+}
+
+.gh-rhythm__cap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 16px;
+  margin-bottom: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+.gh-rhythm__read {
+  text-transform: none;
+  letter-spacing: 0.02em;
+  color: var(--c-text-secondary);
+}
+
+.gh-rhythm__read strong {
+  color: var(--c-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.gh-rhythm__frame {
+  position: relative;
+}
+
+.gh-rhythm__plot {
+  display: block;
+  width: 100%;
+  height: 92px;
+  overflow: visible;
+  cursor: crosshair;
+  touch-action: pan-y;
+}
+
+.gh-rhythm__base {
+  stroke: var(--c-border);
+}
+
+.gh-rhythm__area {
+  fill: color-mix(in srgb, var(--gh-level-3) 16%, transparent);
+}
+
+.gh-rhythm__line {
+  fill: none;
+  stroke: var(--gh-level-3);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.gh-rhythm__cross {
+  stroke: var(--c-text);
+  stroke-opacity: 0.25;
+  stroke-dasharray: 3 3;
+}
+
+.gh-rhythm__dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--c-surface);
+  border-radius: 50%;
+  background: var(--gh-level-4);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+html.js .gh-rhythm .gh-rhythm__line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+html.js .gh-rhythm .gh-rhythm__area,
+html.js .gh-rhythm .gh-rhythm__dot,
+html.js .gh-rhythm .gh-rhythm__cross {
+  opacity: 0;
+}
+
+.gh-rhythm.is-cued .gh-rhythm__line {
+  animation: hx-draw 1.8s var(--ease-out) 0.2s forwards;
+}
+
+.gh-rhythm.is-cued .gh-rhythm__area {
+  animation: rhythm-fill 0.9s ease 1.4s forwards;
+}
+
+.gh-rhythm.is-cued .gh-rhythm__dot,
+.gh-rhythm.is-cued .gh-rhythm__cross {
+  animation: rhythm-fill 0.4s ease 1.9s forwards;
+}
+
+@keyframes rhythm-fill {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ── Case study: teardown, the product pulled apart into its layers ── */
+
+.td {
+  /* 0 = assembled, 1 = fully exploded; scrubbed by scroll, exploded without JS. */
+  --spread: clamp(0, (var(--p, 1) - 0.2) / 0.45, 1);
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 56px);
+}
+
+.td__stage {
+  position: relative;
+  height: 540px;
+}
+
+.td__stage::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  width: 300px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--proj-color) 30%, transparent), transparent);
+  transform: translateX(-50%);
+  filter: blur(6px);
+}
+
+.td__stack {
+  position: absolute;
+  left: 50%;
+  bottom: 40px;
+  width: 196px;
+  height: 196px;
+  margin-left: -98px;
+  transform-style: preserve-3d;
+  transform: rotateX(56deg) rotateZ(-42deg);
+  transform-origin: 50% 50%;
+}
+
+.td__slab {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 16px;
+  border: 1px solid color-mix(in srgb, var(--proj-color) 55%, var(--c-border));
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, #fff 9%, transparent), transparent 55%),
+    color-mix(in srgb, var(--proj-color) calc(16% + var(--i) * 9%), var(--c-surface));
+  box-shadow:
+    0 1px 0 color-mix(in srgb, #fff 18%, transparent) inset,
+    -14px 14px 26px rgba(0, 0, 0, calc(0.18 + var(--spread) * 0.2));
+  transform: translateZ(calc(var(--z) * (10px + var(--spread) * 104px) + var(--lift, 0px)));
+  transition:
+    transform 0.45s var(--ease-out),
+    border-color 0.3s ease;
+}
+
+.td__slab-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: color-mix(in srgb, var(--proj-color) 60%, var(--c-text));
+}
+
+.td__slab-name {
+  align-self: end;
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1;
+  color: var(--c-text);
+}
+
+.td__slab-parts {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.td__slab-parts i {
+  flex: 1;
+  height: 16px;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--c-text) 14%, transparent);
+}
+
+.td__legend {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.td__item {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 12px;
+  padding: 16px 14px;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  opacity: clamp(0.35, var(--spread) * var(--count) - var(--i) + 0.35, 1);
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.td__item:hover {
+  border-color: color-mix(in srgb, var(--proj-color) 40%, var(--c-border));
+  background: color-mix(in srgb, var(--proj-color) 7%, transparent);
+}
+
+.td__item-num {
+  padding-top: 3px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: color-mix(in srgb, var(--proj-color) 70%, var(--c-text));
+}
+
+.td__item h3 {
+  margin: 0 0 4px;
+  font-size: 17px;
+  color: var(--c-text);
+}
+
+.td__item p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--c-text-secondary);
+}
+
+.td__parts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.td__parts li {
+  padding: 3px 9px;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--c-text-secondary);
+}
+
+/* Hovering a legend row lifts its slab out of the stack. */
+.td:has(.td__item:nth-child(1):hover) .td__slab:nth-child(1),
+.td:has(.td__item:nth-child(2):hover) .td__slab:nth-child(2),
+.td:has(.td__item:nth-child(3):hover) .td__slab:nth-child(3),
+.td:has(.td__item:nth-child(4):hover) .td__slab:nth-child(4),
+.td:has(.td__item:nth-child(5):hover) .td__slab:nth-child(5) {
+  --lift: 30px;
+  border-color: var(--proj-color);
+}
+
+@media (max-width: 900px) {
+  .td {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .td__stage {
+    height: 460px;
+  }
+
+  .td__stack {
+    scale: 0.82;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .td {
+    --spread: 1;
+  }
+
+  .wk-strip .wk-tile {
+    transform: none;
+  }
+}
+
+/* ── Skills: tool chips explain themselves ── */
+
+.stk__tools li {
+  position: relative;
+  padding: 0;
+}
+
+.stk__tools li.is-open {
+  z-index: 20;
+  border-color: color-mix(in srgb, var(--tool) 60%, var(--c-border));
+  color: var(--c-text);
+}
+
+.stk__tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 15px 9px 12px;
+  border: 0;
+  border-radius: inherit;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: help;
+}
+
+.stk__tool:focus-visible {
+  outline: 2px solid var(--c-primary);
+  outline-offset: 3px;
+}
+
+.tool-card {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 12px);
+  display: grid;
+  gap: 10px;
+  width: min(310px, calc(100vw - 32px));
+  padding: 16px;
+  border: 1px solid color-mix(in srgb, var(--tool) 45%, var(--c-border));
+  border-radius: 18px;
+  background: var(--c-bg-elevated);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.35);
+  text-align: left;
+  transform: translateX(var(--card-x, 0px));
+  animation: tool-card-in 0.28s var(--ease-out);
+}
+
+.tool-card[hidden] {
+  display: none;
+}
+
+/* Bridges the gap to the chip so the pointer can travel onto the card. */
+.tool-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 14px;
+}
+
+@keyframes tool-card-in {
+  from {
+    opacity: 0;
+    translate: 0 8px;
+  }
+}
+
+.tool-card__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tool-card__head strong {
+  display: block;
+  font-size: 15px;
+  color: var(--c-text);
+}
+
+.tool-card__icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--tool) 18%, var(--c-surface));
+  color: color-mix(in srgb, var(--tool) 55%, var(--c-text));
+}
+
+.tool-card__icon svg {
+  width: 19px;
+  height: 19px;
+  fill: currentColor;
+}
+
+.stk__tools li:hover .tool-card__icon svg {
+  transform: none;
+}
+
+.tool-card__kind {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+.tool-card__what {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--c-text-secondary);
+}
+
+.tool-card__used {
+  margin: 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--c-border);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--c-text);
+}
+
+.tool-card__used span {
+  display: block;
+  margin-bottom: 3px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--tool) 65%, var(--c-text));
+}
+
+@media (max-width: 720px) {
+  .stk__tool {
+    padding: 7px 12px 7px 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool-card {
+    animation: none;
+  }
+}
+
+.tool-card.is-below {
+  top: calc(100% + 12px);
+  bottom: auto;
+}
+
+.tool-card.is-below::after {
+  top: auto;
+  bottom: 100%;
 }

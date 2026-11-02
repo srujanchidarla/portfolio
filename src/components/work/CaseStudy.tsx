@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import BrowserFrame from "@/components/work/BrowserFrame";
 import CaseToc from "@/components/work/CaseToc";
 import ProjectGlyph from "@/components/work/ProjectGlyph";
+import Teardown from "@/components/work/Teardown";
 import { coverLabel, explorePages, type CaseStudy as CaseStudyContent } from "@/lib/case-studies";
 import { PROJECTS } from "@/lib/projects";
 import { IMPACT_PROJECTS } from "@/lib/recruiter-home";
@@ -67,6 +68,7 @@ export default function CaseStudy({
     { id: "overview", label: "Overview" },
     ...(pages.length ? [{ id: "explore", label: "The product, live" }] : []),
     { id: "product", label: "What it does" },
+    ...(study.layers.length ? [{ id: "teardown", label: "Under the hood" }] : []),
     { id: "process", label: "How I worked" },
     { id: "challenges", label: "Challenges" },
     ...(study.stats?.length ? [{ id: "numbers", label: "By the numbers" }] : []),
@@ -227,6 +229,17 @@ export default function CaseStudy({
               ))}
             </div>
           </section>
+
+          {study.layers.length ? (
+            <section id="teardown" className="cs-sec">
+              <SectionHead
+                num={n("teardown")}
+                title="Under the hood"
+                lede="The product pulled apart, from what you touch down to where the data lives."
+              />
+              <Teardown layers={study.layers} />
+            </section>
+          ) : null}
 
           <section id="process" className="cs-sec">
             <SectionHead num={n("process")} title="How I worked" />

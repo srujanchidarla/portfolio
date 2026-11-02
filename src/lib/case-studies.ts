@@ -15,6 +15,13 @@ export type CaseStat = {
   label: string;
 };
 
+/** One layer of a project's exploded view, listed from what the user touches down to the data. */
+export type TeardownLayer = {
+  name: string;
+  parts: readonly string[];
+  note: string;
+};
+
 export type CaseStudy = {
   id: string;
   summary: string;
@@ -23,6 +30,7 @@ export type CaseStudy = {
   workflow: readonly string[];
   challenges: readonly CaseAspect[];
   stats?: readonly CaseStat[];
+  layers: readonly TeardownLayer[];
 };
 
 export const CASE_STUDIES: readonly CaseStudy[] = [
@@ -74,6 +82,12 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       { value: "94", label: "Automated tests, 21 files" },
       { value: "74k+", label: "Lines of TypeScript" },
     ],
+    layers: [
+      { name: "Clients", parts: ["Next.js web", "Android (TWA)", "iOS (Capacitor)"], note: "One product on the web, Android, and iPhone." },
+      { name: "Practice engine", parts: ["Code editor", "Pyodide (WASM)", "17 visualizer families"], note: "Code runs against real test cases in the browser." },
+      { name: "Edge & API", parts: ["Time-based page caching", "21 API routes", "LeetCode proxy"], note: "Repeat page views served from the edge in ~2ms." },
+      { name: "Data & jobs", parts: ["Firebase", "Firestore", "GitHub Actions"], note: "A webhook pushes every solve in; background jobs are idempotent." },
+    ],
   },
   {
     id: "campfirechai",
@@ -114,6 +128,12 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         text: "This was the first product I took from the data model through a public deploy, then changed because people used it.",
       },
     ],
+    layers: [
+      { name: "Client", parts: ["React 19", "Vite"], note: "Trip discovery, crews, and member approvals." },
+      { name: "Real-time", parts: ["Socket.io"], note: "Chat and logistics live on the same trip." },
+      { name: "API", parts: ["Node.js", "Express 5", "Magic Paste"], note: "Messy notes in, geocoded itinerary out, with a model fallback chain." },
+      { name: "Data", parts: ["MongoDB"], note: "The trip is the object everything hangs on." },
+    ],
   },
   {
     id: "jobhuntos",
@@ -152,6 +172,12 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         title: "A stranger has to install it",
         text: "The useful version was the one on the Chrome Web Store, not a demo that only ran on my machine.",
       },
+    ],
+    layers: [
+      { name: "In the page", parts: ["Content scripts", "Shadow-DOM scanning", "Autofill"], note: "Fills LinkedIn, Greenhouse, Workday, Lever, and more." },
+      { name: "Extension core", parts: ["Chrome MV3", "Service worker"], note: "Kept thin on purpose." },
+      { name: "Streaming API", parts: ["Node.js", "SSE"], note: "Fit analysis streams back while you read the posting." },
+      { name: "Models", parts: ["LLM router", "Bring your own key"], note: "The model key stays with the person using it." },
     ],
   },
   {
@@ -192,6 +218,12 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         text: "A long side project dies when the next idea is more interesting than the last one working. The work is keeping the current loop finished.",
       },
     ],
+    layers: [
+      { name: "Surfaces", parts: ["Next.js command center", "Expo phone HUD"], note: "Web and phone on the same local data." },
+      { name: "Agents", parts: ["15 agents", "Kill switch per agent"], note: "Jarvis, Stark, Hercules, Turing, Cicero — one domain each." },
+      { name: "Backend", parts: ["FastAPI", "Python", "n8n"], note: "Local-first orchestration for the whole day." },
+      { name: "Models & data", parts: ["6-provider chain", "Groq · Gemini", "SQLite write queue"], note: "A failed provider is not a failed day." },
+    ],
   },
   {
     id: "agriwise",
@@ -231,6 +263,11 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         text: "The hard call was where a model added signal and where it was noise on top of data that was already enough.",
       },
     ],
+    layers: [
+      { name: "Interface", parts: ["Next.js", "Tailwind CSS", "22 languages"], note: "One navigation across every module." },
+      { name: "Modules", parts: ["Soil & crops", "Mandi prices", "Calendar", "Marketplace", "Schemes"], note: "Eight modules that read as one product." },
+      { name: "Intelligence", parts: ["Crop recommendations", "30-day price forecasts"], note: "A model only where it changes a recommendation." },
+    ],
   },
   {
     id: "studyglobal",
@@ -269,6 +306,11 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         title: "Discounts go stale",
         text: "Student offers change and some are scams. Each card had to send people to the official page instead of a code from a stranger.",
       },
+    ],
+    layers: [
+      { name: "Interface", parts: ["Next.js", "TypeScript"], note: "Explore destinations before a country is chosen." },
+      { name: "Planning tools", parts: ["Destination shortlist", "Year-one cost calculator", "Application steps"], note: "Shortlists, then gets out of the way." },
+      { name: "Sources", parts: ["API integration", "Official pages"], note: "Every discount points back to its official page." },
     ],
   },
 ];
