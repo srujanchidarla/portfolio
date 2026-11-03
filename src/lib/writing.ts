@@ -70,10 +70,10 @@ export function formatWritingDate(iso: string): string {
 
 /** Deep dive: what happens between typing "google.com" and seeing the page. */
 export const NETWORK_JOURNEY = {
+  title: "What really happens when you type google.com and hit Enter",
   summary:
     "I mapped the whole trip — every packet, protocol, and process — into a flowchart with the right shape for every step, phases colored by OSI layer, and the background work most diagrams leave out.",
-  artifactHref: "https://claude.ai/public/artifacts/245d9ae8-d2f9-43f4-8f6c-bbaf34597e2f",
-  flowchartHref: "https://lnkd.in/eGaW8yTh",
+  href: "/writing/google-com",
   stats: [
     { value: "29+", label: "distinct steps" },
     { value: "6", label: "network layers" },

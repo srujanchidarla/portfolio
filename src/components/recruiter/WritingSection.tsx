@@ -80,14 +80,14 @@ function PacketJourney() {
           ))}
         </dl>
         <div className="wr-essay__actions">
-          <a href={NETWORK_JOURNEY.artifactHref} target="_blank" rel="noopener noreferrer" className="btn-primary">
+          <Link href={`${NETWORK_JOURNEY.href}#map`} className="btn-primary">
             Open the interactive map
             <ArrowUpRight size={14} aria-hidden="true" />
-          </a>
-          <a href={NETWORK_JOURNEY.flowchartHref} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+          </Link>
+          <Link href={`${NETWORK_JOURNEY.href}#flowchart`} className="btn-secondary">
             Flowchart
             <ArrowUpRight size={14} aria-hidden="true" />
-          </a>
+          </Link>
         </div>
       </div>
 
