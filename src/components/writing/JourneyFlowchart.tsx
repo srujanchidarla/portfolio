@@ -1,29 +1,36 @@
 "use client";
 
 import { useState, type CSSProperties } from "react";
-import { ArrowUp, Sparkles } from "lucide-react";
+import { ArrowUp, Play, Sparkles } from "lucide-react";
 import {
+  EXIT_KINDS,
   JOURNEY_LAYERS,
   JOURNEY_PHASES,
   JOURNEY_STEPS,
   SHAPE_NAMES,
   layerOf,
+  scenarioForExit,
+  type ExitKind,
   type StepShape,
 } from "@/lib/network-journey";
 
 const SHAPES = Object.keys(SHAPE_NAMES) as StepShape[];
+const KINDS = Object.keys(EXIT_KINDS) as ExitKind[];
 
 type Props = {
   /** The step the packet map is on, outlined here too */
   active: number;
   onSelect: (index: number) => void;
+  /** Replay the map down one of a step's exits */
+  onPlayExit: (step: number, exit: number) => void;
 };
 
 /**
  * The full flowchart: one lane per phase, a proper shape for every kind of step,
- * colored by OSI layer, with the background work running alongside each phase.
+ * colored by OSI layer. Decisions label the answer that continues down the main line and
+ * branch out to every other outcome; the background work runs alongside each phase.
  */
-export default function JourneyFlowchart({ active, onSelect }: Props) {
+export default function JourneyFlowchart({ active, onSelect, onPlayExit }: Props) {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
@@ -51,6 +58,21 @@ export default function JourneyFlowchart({ active, onSelect }: Props) {
             ))}
           </ul>
         </div>
+        <div className="fc__legend-exits">
+          <p className="fc__legend-title">Every exit, labelled</p>
+          <ul>
+            <li>
+              <b className="fc__sym fc__sym--pass">✓</b>
+              Continues down the main line
+            </li>
+            {KINDS.map((kind) => (
+              <li key={kind} style={{ "--kind": EXIT_KINDS[kind].color } as CSSProperties}>
+                <b className="fc__sym">{EXIT_KINDS[kind].symbol}</b>
+                {EXIT_KINDS[kind].name}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       {JOURNEY_PHASES.map((phase, p) => (
@@ -71,8 +93,8 @@ export default function JourneyFlowchart({ active, onSelect }: Props) {
                 const isOpen = open === i;
                 return (
                   <li
-                    key={step.title}
-                    className={`fc-step${active === i ? " is-current" : ""}`}
+                    key={step.id}
+                    className={`fc-step${active === i ? " is-current" : ""}${step.pass ? " has-pass" : ""}`}
                     style={{ "--layer": layer.color } as CSSProperties}
                   >
                     <div className="fc-step__row">
@@ -91,8 +113,33 @@ export default function JourneyFlowchart({ active, onSelect }: Props) {
                         <span className="fc-node__title">{step.title}</span>
                         <span className="fc-node__layer">{layer.short}</span>
                       </button>
-                      {step.branch ? <span className="fc-branch">{step.branch}</span> : null}
+
+                      {step.exits ? (
+                        <ul className="fc-exits" aria-label={`Other outcomes of “${step.title}”`}>
+                          {step.exits.map((exit, e) => {
+                            const kind = EXIT_KINDS[exit.kind];
+                            const replay = scenarioForExit(i, e);
+                            return (
+                              <li key={exit.when} className="fc-exit" style={{ "--kind": kind.color } as CSSProperties}>
+                                <p className="fc-exit__head">
+                                  <b className="fc__sym">{kind.symbol}</b>
+                                  <strong>{exit.when}</strong>
+                                  <span>{kind.name}</span>
+                                </p>
+                                <p className="fc-exit__then">{exit.then}</p>
+                                {replay ? (
+                                  <button type="button" className="fc-exit__play" onClick={() => onPlayExit(i, e)}>
+                                    <Play size={11} aria-hidden="true" />
+                                    Play it on the map
+                                  </button>
+                                ) : null}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      ) : null}
                     </div>
+
                     <div id={`fc-detail-${i}`} className="fc-step__detail" hidden={!isOpen}>
                       <p>{step.detail}</p>
                       <a href="#map" className="fc-step__map">
@@ -100,6 +147,12 @@ export default function JourneyFlowchart({ active, onSelect }: Props) {
                         See it on the map
                       </a>
                     </div>
+
+                    {step.pass ? (
+                      <span className="fc-pass">
+                        <b>✓</b> {step.pass}
+                      </span>
+                    ) : null}
                   </li>
                 );
               })}

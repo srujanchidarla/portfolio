@@ -1,11 +1,14 @@
 /**
  * Every step between typing "google.com" and seeing the page, as data for the packet map
- * and the flowchart on /writing/google-com.
+ * and the flowchart on /writing/google-com. Decisions carry both exits: the answer that
+ * keeps the trip on its main line (`pass`) and every way out of it (`exits`).
  */
 
 export type LayerId = "l7" | "l6" | "l4" | "l3" | "l2" | "l1";
 export type StepShape = "terminal" | "process" | "decision" | "io" | "data";
 export type ActorId = "browser" | "os" | "router" | "isp" | "dns" | "backbone" | "edge" | "server";
+/** error: the trip ends · retry: try again · skip: jump ahead · loop: start over */
+export type ExitKind = "error" | "retry" | "skip" | "loop";
 
 export type JourneyLayer = { id: LayerId; name: string; short: string; color: string };
 export type JourneyActor = {
@@ -20,7 +23,15 @@ export type JourneyActor = {
   my: number;
 };
 export type JourneyPhase = { name: string; blurb: string; background: readonly string[] };
+export type StepExit = {
+  when: string;
+  then: string;
+  kind: ExitKind;
+  /** Extra time this exit costs, for the running clock */
+  ms?: number;
+};
 export type JourneyStep = {
+  id: string;
   phase: number;
   layer: LayerId;
   shape: StepShape;
@@ -32,8 +43,9 @@ export type JourneyStep = {
   ms: number;
   /** What rides on the packet dot while this step plays */
   packet?: string;
-  /** The other way out of a decision */
-  branch?: string;
+  /** The answer that keeps the trip on the main line */
+  pass?: string;
+  exits?: readonly StepExit[];
 };
 
 export const JOURNEY_LAYERS: readonly JourneyLayer[] = [
@@ -51,6 +63,13 @@ export const SHAPE_NAMES: Record<StepShape, string> = {
   decision: "Decision",
   io: "Message on the wire",
   data: "Cache / lookup",
+};
+
+export const EXIT_KINDS: Record<ExitKind, { name: string; symbol: string; color: string }> = {
+  error: { name: "Fails", symbol: "✗", color: "#ef4444" },
+  retry: { name: "Retries", symbol: "↻", color: "#f59e0b" },
+  skip: { name: "Skips ahead", symbol: "»", color: "#22c55e" },
+  loop: { name: "Starts over", symbol: "↺", color: "#38bdf8" },
 };
 
 export const JOURNEY_ACTORS: readonly JourneyActor[] = [
@@ -73,8 +92,8 @@ export const JOURNEY_PHASES: readonly JourneyPhase[] = [
     blurb: "Turn what you typed into an address the network understands.",
     background: [
       "The omnibox may have pre-resolved DNS and pre-opened a connection while you were still typing.",
-      "A registered service worker for the origin gets first look at the request.",
       "Happy Eyeballs races IPv6 against IPv4 so one broken path never stalls the load.",
+      "If the system resolver is slow, Chrome's own async DNS client may answer instead.",
     ],
   },
   {
@@ -100,7 +119,7 @@ export const JOURNEY_PHASES: readonly JourneyPhase[] = [
     blurb: "Cross 10–20 independent networks to reach Google.",
     background: [
       "TTL counts down at every hop so a routing loop can't circulate a packet forever.",
-      "Congested routers queue, mark (ECN) or drop packets; TCP retransmits the drops.",
+      "Congested routers queue, mark (ECN) or drop packets; TCP notices and slows down.",
       "BGP sessions keep updating routes underneath you as links fail and recover.",
     ],
   },
@@ -127,6 +146,7 @@ export const JOURNEY_PHASES: readonly JourneyPhase[] = [
 export const JOURNEY_STEPS: readonly JourneyStep[] = [
   // ── Application
   {
+    id: "enter",
     phase: 0,
     layer: "l7",
     shape: "terminal",
@@ -138,6 +158,7 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     ms: 0,
   },
   {
+    id: "url-or-search",
     phase: 0,
     layer: "l7",
     shape: "decision",
@@ -147,9 +168,11 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     from: "browser",
     to: "browser",
     ms: 1,
-    branch: "Search term → send it to the default search engine",
+    pass: "URL",
+    exits: [{ when: "Search term", then: "Send the text to the default search engine instead.", kind: "skip" }],
   },
   {
+    id: "hsts",
     phase: 0,
     layer: "l7",
     shape: "decision",
@@ -159,21 +182,52 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     from: "browser",
     to: "browser",
     ms: 0,
-    branch: "Not listed → may try http:// first and follow a 301",
+    pass: "Yes: HTTPS only",
+    exits: [
+      {
+        when: "Not listed",
+        then: "Try http:// first, get a 301 to https://, and start the request again.",
+        kind: "loop",
+        ms: 60,
+      },
+    ],
   },
   {
+    id: "service-worker",
+    phase: 0,
+    layer: "l7",
+    shape: "decision",
+    title: "Service worker answers?",
+    detail:
+      "If the site registered a service worker, it intercepts the request first and may answer from its own cache.",
+    from: "browser",
+    to: "browser",
+    ms: 0,
+    pass: "No match: use the network",
+    exits: [
+      {
+        when: "Cached response",
+        then: "The worker answers from Cache Storage and the network is never touched.",
+        kind: "skip",
+      },
+    ],
+  },
+  {
+    id: "dns-cache",
     phase: 0,
     layer: "l7",
     shape: "data",
     title: "Check the DNS caches",
     detail:
-      "Browser host cache, then the OS resolver cache and the hosts file. A warm cache answers in microseconds and skips the next three steps.",
+      "Browser host cache, then the OS resolver cache and the hosts file. A warm cache answers in microseconds.",
     from: "browser",
     to: "os",
     ms: 1,
-    branch: "Cache hit → jump straight to the TCP handshake",
+    pass: "Miss",
+    exits: [{ when: "Hit", then: "Use the cached IP and skip the whole DNS lookup.", kind: "skip" }],
   },
   {
+    id: "dns-query",
     phase: 0,
     layer: "l7",
     shape: "io",
@@ -186,6 +240,7 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     packet: "A? google.com",
   },
   {
+    id: "dns-walk",
     phase: 0,
     layer: "l7",
     shape: "process",
@@ -197,6 +252,32 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     ms: 20,
   },
   {
+    id: "dns-ok",
+    phase: 0,
+    layer: "l7",
+    shape: "decision",
+    title: "Did DNS answer?",
+    detail: "The resolver either returns records (NOERROR), says the name doesn't exist, or never replies.",
+    from: "dns",
+    to: "dns",
+    ms: 0,
+    pass: "NOERROR",
+    exits: [
+      {
+        when: "NXDOMAIN",
+        then: "The name doesn't exist. The browser shows DNS_PROBE_FINISHED_NXDOMAIN and the trip ends.",
+        kind: "error",
+      },
+      {
+        when: "Timeout",
+        then: "Retry after a second, then try the next configured resolver before giving up.",
+        kind: "retry",
+        ms: 1000,
+      },
+    ],
+  },
+  {
+    id: "dns-answer",
     phase: 0,
     layer: "l7",
     shape: "io",
@@ -211,6 +292,47 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
 
   // ── Transport
   {
+    id: "reuse",
+    phase: 1,
+    layer: "l4",
+    shape: "decision",
+    title: "Connection already open?",
+    detail:
+      "Browsers keep connections alive and pool them per origin. A warm one means no handshakes at all.",
+    from: "browser",
+    to: "browser",
+    ms: 0,
+    pass: "No: first visit",
+    exits: [
+      {
+        when: "Yes",
+        then: "Skip TCP and TLS entirely and send the request on the open HTTP/2 connection.",
+        kind: "skip",
+      },
+    ],
+  },
+  {
+    id: "h3",
+    phase: 1,
+    layer: "l4",
+    shape: "decision",
+    title: "HTTP/3 available?",
+    detail:
+      "If a previous response (or a DNS HTTPS record) advertised HTTP/3 via Alt-Svc, the browser can use QUIC instead of TCP.",
+    from: "browser",
+    to: "browser",
+    ms: 0,
+    pass: "No: use TCP",
+    exits: [
+      {
+        when: "Yes (Alt-Svc)",
+        then: "QUIC over UDP: transport and TLS 1.3 set up together in one round trip, with no TCP handshake.",
+        kind: "skip",
+      },
+    ],
+  },
+  {
+    id: "socket",
     phase: 1,
     layer: "l4",
     shape: "process",
@@ -222,6 +344,7 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     ms: 0,
   },
   {
+    id: "syn",
     phase: 1,
     layer: "l4",
     shape: "io",
@@ -234,6 +357,32 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     packet: "SYN",
   },
   {
+    id: "synack-ok",
+    phase: 1,
+    layer: "l4",
+    shape: "decision",
+    title: "Did the SYN-ACK come back?",
+    detail: "The client waits on a retransmission timer for the server's reply.",
+    from: "os",
+    to: "os",
+    ms: 0,
+    pass: "Yes",
+    exits: [
+      {
+        when: "No reply",
+        then: "Resend the SYN after ~1 s, then 2 s, 4 s… and finally show ERR_CONNECTION_TIMED_OUT.",
+        kind: "retry",
+        ms: 1000,
+      },
+      {
+        when: "RST",
+        then: "Nothing is listening on that port: ERR_CONNECTION_REFUSED.",
+        kind: "error",
+      },
+    ],
+  },
+  {
+    id: "synack",
     phase: 1,
     layer: "l4",
     shape: "io",
@@ -245,6 +394,7 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     packet: "SYN-ACK",
   },
   {
+    id: "ack",
     phase: 1,
     layer: "l4",
     shape: "io",
@@ -257,6 +407,7 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     packet: "ACK",
   },
   {
+    id: "client-hello",
     phase: 1,
     layer: "l6",
     shape: "io",
@@ -269,6 +420,7 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     packet: "ClientHello",
   },
   {
+    id: "server-hello",
     phase: 1,
     layer: "l6",
     shape: "io",
@@ -281,6 +433,7 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     packet: "ServerHello",
   },
   {
+    id: "cert",
     phase: 1,
     layer: "l6",
     shape: "decision",
@@ -290,9 +443,22 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     from: "browser",
     to: "browser",
     ms: 2,
-    branch: "Untrusted → full-page warning, nothing is sent",
+    pass: "Valid chain and hostname",
+    exits: [
+      {
+        when: "Untrusted or expired",
+        then: "A full-page NET::ERR_CERT_* warning. No request is sent.",
+        kind: "error",
+      },
+      {
+        when: "No shared cipher",
+        then: "The handshake aborts with ERR_SSL_VERSION_OR_CIPHER_MISMATCH.",
+        kind: "error",
+      },
+    ],
   },
   {
+    id: "keys",
     phase: 1,
     layer: "l6",
     shape: "process",
@@ -306,6 +472,7 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
 
   // ── Network
   {
+    id: "http-request",
     phase: 2,
     layer: "l7",
     shape: "process",
@@ -318,6 +485,7 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     packet: "GET /",
   },
   {
+    id: "tcp-wrap",
     phase: 2,
     layer: "l4",
     shape: "process",
@@ -329,6 +497,7 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     ms: 0,
   },
   {
+    id: "ip-wrap",
     phase: 2,
     layer: "l3",
     shape: "process",
@@ -339,6 +508,7 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     ms: 0,
   },
   {
+    id: "subnet",
     phase: 2,
     layer: "l3",
     shape: "decision",
@@ -348,21 +518,26 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     from: "os",
     to: "os",
     ms: 0,
-    branch: "Same subnet → ARP for that host directly",
+    pass: "No: send to the gateway",
+    exits: [{ when: "Yes", then: "ARP for that host directly and deliver it on the local network.", kind: "skip" }],
   },
   {
+    id: "arp",
     phase: 2,
     layer: "l2",
     shape: "data",
     title: "ARP: who has 192.168.1.1?",
     detail:
-      "To build a frame the OS needs the router's MAC address. It checks the ARP cache; on a miss it broadcasts the question and the router replies with its MAC.",
+      "To build a frame the OS needs the router's MAC address. On a cache miss it broadcasts the question and the router replies with its MAC.",
     from: "os",
     to: "router",
     ms: 1,
     packet: "ARP who-has",
+    pass: "Miss: broadcast",
+    exits: [{ when: "Cached", then: "Use the stored MAC address; no broadcast needed.", kind: "skip" }],
   },
   {
+    id: "frame",
     phase: 2,
     layer: "l1",
     shape: "io",
@@ -377,6 +552,7 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
 
   // ── Internet
   {
+    id: "nat",
     phase: 3,
     layer: "l3",
     shape: "process",
@@ -388,6 +564,7 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     ms: 0,
   },
   {
+    id: "isp",
     phase: 3,
     layer: "l3",
     shape: "io",
@@ -399,6 +576,7 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     packet: "IP packet",
   },
   {
+    id: "bgp",
     phase: 3,
     layer: "l3",
     shape: "process",
@@ -410,6 +588,7 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     ms: 20,
   },
   {
+    id: "hops",
     phase: 3,
     layer: "l3",
     shape: "process",
@@ -417,35 +596,71 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     detail:
       "Every router decrements the TTL, does a longest-prefix match in its forwarding table and sends the packet out the next interface. The frame is rebuilt each hop; the IP packet stays the same.",
     from: "backbone",
-    to: "backbone",
+    to: "edge",
     ms: 15,
+    packet: "TTL 64 → 52",
+  },
+  {
+    id: "delivered",
+    phase: 3,
+    layer: "l4",
+    shape: "decision",
+    title: "Did it arrive?",
+    detail: "Nothing in IP guarantees delivery. TCP finds out from the acknowledgements that do, or don't, come back.",
+    from: "edge",
+    to: "edge",
+    ms: 0,
+    pass: "ACKed",
+    exits: [
+      {
+        when: "Lost on a busy hop",
+        then: "Duplicate ACKs (or a timeout) trigger a retransmit, and TCP halves its congestion window.",
+        kind: "retry",
+        ms: 30,
+      },
+      {
+        when: "TTL hit 0",
+        then: "A router drops it and sends back ICMP Time Exceeded. That's exactly what traceroute uses.",
+        kind: "error",
+      },
+    ],
   },
 
   // ── Server
   {
+    id: "anycast",
     phase: 4,
     layer: "l3",
     shape: "process",
     title: "Anycast lands at the nearest edge",
     detail:
       "Because the same IP is announced from many points of presence, BGP naturally delivers you to the closest one, often in your own metro area.",
-    from: "backbone",
+    from: "edge",
     to: "edge",
     ms: 5,
   },
   {
+    id: "maglev",
     phase: 4,
     layer: "l4",
     shape: "decision",
     title: "Maglev picks a backend",
     detail:
-      "Google's Maglev load balancer hashes the connection's 5-tuple with consistent hashing, so every packet of this connection reaches the same healthy frontend.",
+      "Google's Maglev load balancer hashes the connection's 5-tuple with consistent hashing, so every packet of this connection reaches the same frontend.",
     from: "edge",
     to: "edge",
     ms: 1,
-    branch: "Backend unhealthy → it's already out of the hash ring",
+    pass: "Healthy backend",
+    exits: [
+      {
+        when: "Backend down",
+        then: "Health checks already pulled it from the hash ring; the next healthy one takes the connection.",
+        kind: "retry",
+      },
+    ],
   },
   {
+    id: "gfe",
     phase: 4,
     layer: "l7",
     shape: "process",
@@ -458,6 +673,7 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     packet: "GET /",
   },
   {
+    id: "build",
     phase: 4,
     layer: "l7",
     shape: "process",
@@ -468,9 +684,35 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     to: "server",
     ms: 30,
   },
+  {
+    id: "status",
+    phase: 4,
+    layer: "l7",
+    shape: "decision",
+    title: "What status comes back?",
+    detail: "The status line decides what the browser does next.",
+    from: "server",
+    to: "server",
+    ms: 0,
+    pass: "200 OK",
+    exits: [
+      {
+        when: "301 / 302",
+        then: "Follow the Location header and start over from DNS for the new host (for example www.google.com).",
+        kind: "loop",
+      },
+      { when: "304", then: "Not Modified: reuse the cached copy, no body is sent.", kind: "skip" },
+      {
+        when: "5xx",
+        then: "Retry if the request is safe to repeat; otherwise show the server's error page.",
+        kind: "error",
+      },
+    ],
+  },
 
   // ── Return
   {
+    id: "response",
     phase: 5,
     layer: "l7",
     shape: "io",
@@ -483,6 +725,7 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     packet: "200 OK",
   },
   {
+    id: "dom",
     phase: 5,
     layer: "l7",
     shape: "process",
@@ -494,6 +737,7 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     ms: 10,
   },
   {
+    id: "cssom",
     phase: 5,
     layer: "l7",
     shape: "process",
@@ -504,6 +748,7 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     ms: 5,
   },
   {
+    id: "paint",
     phase: 5,
     layer: "l7",
     shape: "process",
@@ -515,6 +760,7 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     ms: 15,
   },
   {
+    id: "done",
     phase: 5,
     layer: "l7",
     shape: "terminal",
@@ -529,3 +775,139 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
 
 export const layerOf = (id: LayerId) => JOURNEY_LAYERS.find((l) => l.id === id)!;
 export const actorOf = (id: ActorId) => JOURNEY_ACTORS.find((a) => a.id === id)!;
+
+// ── Scenarios: the same steps replayed down different exits
+
+/** One beat of a scenario: a step, optionally taking one of its exits, or lost in flight. */
+export type JourneyFrame = { step: number; exit?: number; drop?: boolean };
+export type JourneyScenario = {
+  id: string;
+  label: string;
+  group: "path" | "failure";
+  blurb: string;
+  frames: readonly JourneyFrame[];
+};
+
+const indexOf = (id: string) => {
+  const i = JOURNEY_STEPS.findIndex((s) => s.id === id);
+  if (i < 0) throw new Error(`Unknown journey step: ${id}`);
+  return i;
+};
+
+/** Frames for every step from `from` to `to`, minus `skip`, taking the exits in `take`. */
+function span(
+  from: string,
+  to: string,
+  { skip = [], take = {} }: { skip?: string[]; take?: Record<string, number> } = {}
+): JourneyFrame[] {
+  const frames: JourneyFrame[] = [];
+  for (let i = indexOf(from); i <= indexOf(to); i++) {
+    const { id } = JOURNEY_STEPS[i];
+    if (skip.includes(id)) continue;
+    frames.push(id in take ? { step: i, exit: take[id] } : { step: i });
+  }
+  return frames;
+}
+
+const exitAt = (id: string, exit: number): JourneyFrame => ({ step: indexOf(id), exit });
+const lostAt = (id: string): JourneyFrame => ({ step: indexOf(id), drop: true });
+
+const HANDSHAKE = ["socket", "syn", "synack-ok", "synack", "ack", "client-hello", "server-hello", "cert", "keys"];
+const DNS_LOOKUP = ["dns-query", "dns-walk", "dns-ok", "dns-answer"];
+
+export const JOURNEY_SCENARIOS: readonly JourneyScenario[] = [
+  {
+    id: "happy",
+    label: "First visit",
+    group: "path",
+    blurb: "Cold caches, every step runs once and everything works.",
+    frames: span("enter", "done"),
+  },
+  {
+    id: "repeat",
+    label: "Repeat visit",
+    group: "path",
+    blurb: "DNS, ARP and the connection are all warm, so whole phases disappear.",
+    frames: span("enter", "done", {
+      skip: [...DNS_LOOKUP, "h3", ...HANDSHAKE],
+      take: { "dns-cache": 0, reuse: 0, arp: 0 },
+    }),
+  },
+  {
+    id: "http3",
+    label: "HTTP/3 (QUIC)",
+    group: "path",
+    blurb: "UDP instead of TCP: no three-way handshake, TLS built into the transport.",
+    frames: span("enter", "done", {
+      skip: ["socket", "syn", "synack-ok", "synack", "ack", "client-hello", "server-hello", "tcp-wrap"],
+      take: { h3: 0 },
+    }),
+  },
+  {
+    id: "nxdomain",
+    label: "DNS: no such name",
+    group: "failure",
+    blurb: "A typo like goggle.cm: the resolver says the name doesn't exist.",
+    frames: [...span("enter", "dns-walk"), exitAt("dns-ok", 0)],
+  },
+  {
+    id: "syn-lost",
+    label: "SYN lost",
+    group: "failure",
+    blurb: "The first SYN vanishes; the client waits a second and tries again.",
+    frames: [...span("enter", "socket"), lostAt("syn"), exitAt("synack-ok", 0), ...span("syn", "done")],
+  },
+  {
+    id: "bad-cert",
+    label: "Bad certificate",
+    group: "failure",
+    blurb: "The handshake reaches the certificate check and stops cold.",
+    frames: [...span("enter", "server-hello"), exitAt("cert", 0)],
+  },
+  {
+    id: "packet-loss",
+    label: "Packet loss",
+    group: "failure",
+    blurb: "A congested router drops the request mid-route; TCP resends it.",
+    frames: [...span("enter", "bgp"), lostAt("hops"), exitAt("delivered", 0), ...span("hops", "done")],
+  },
+  {
+    id: "redirect",
+    label: "301 redirect",
+    group: "failure",
+    blurb: "The server answers “moved”, and the whole trip starts over for the new host.",
+    frames: [...span("enter", "build"), exitAt("status", 0), ...span("dns-cache", "done")],
+  },
+  {
+    id: "server-error",
+    label: "500 error",
+    group: "failure",
+    blurb: "Everything on the network works, then the server itself fails.",
+    frames: [...span("enter", "build"), exitAt("status", 2)],
+  },
+];
+
+/** Where a scenario first leaves the main path, so picking one starts near the interesting part. */
+export function scenarioStart(scenario: JourneyScenario) {
+  const first = scenario.frames.findIndex((f) => f.exit !== undefined || f.drop);
+  return first <= 0 ? 0 : Math.max(0, first - 2);
+}
+
+/** Total time up to and including a frame. */
+export function elapsedAt(frames: readonly JourneyFrame[], index: number) {
+  let total = 0;
+  for (const frame of frames.slice(0, index + 1)) {
+    const step = JOURNEY_STEPS[frame.step];
+    total += frame.exit !== undefined ? step.exits![frame.exit].ms ?? 0 : frame.drop ? 0 : step.ms;
+  }
+  return total;
+}
+
+/** For the flowchart's "play this" buttons: the scenario (and frame) that takes a given exit. */
+export function scenarioForExit(step: number, exit: number) {
+  for (const scenario of JOURNEY_SCENARIOS) {
+    const frame = scenario.frames.findIndex((f) => f.step === step && f.exit === exit);
+    if (frame >= 0) return { scenario, frame };
+  }
+  return null;
+}

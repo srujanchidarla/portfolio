@@ -417,6 +417,166 @@
   border: 3px solid var(--c-field);
 }
 
+/* Scenario picker: routes and failures */
+.nm__scenarios {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 16px 14px;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.nm__scenario-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nm__scenario-label {
+  flex: none;
+  width: 132px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+.nm__scenario-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.nm__scenario {
+  flex: none;
+  padding: 6px 12px;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--c-text-secondary);
+  cursor: pointer;
+}
+
+.nm__scenario--failure::before {
+  content: "✗ ";
+  color: #ef4444;
+}
+
+.nm__scenario:hover {
+  border-color: var(--c-text-secondary);
+  color: var(--c-text);
+}
+
+.nm__scenario.is-on {
+  border-color: var(--c-text);
+  background: var(--c-text);
+  color: var(--c-bg);
+}
+
+.nm__scenario.is-on::before {
+  color: inherit;
+}
+
+.nm__scenario-blurb {
+  margin: 0;
+  font-size: 13px;
+  color: var(--c-text-secondary);
+}
+
+.nm__phases button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* Lost packet: flies halfway, then vanishes. */
+.nm-packet.is-drop {
+  animation-name: nm-drop;
+  animation-duration: 1.3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes nm-drop {
+  from {
+    left: var(--fx0);
+    top: var(--fy0);
+    opacity: 1;
+  }
+  55% {
+    left: calc((var(--fx0) + var(--fx1)) / 2);
+    top: calc((var(--fy0) + var(--fy1)) / 2);
+    opacity: 1;
+  }
+  to {
+    left: calc((var(--fx0) + var(--fx1)) / 2);
+    top: calc((var(--fy0) + var(--fy1)) / 2 + 3%);
+    opacity: 0.15;
+  }
+}
+
+.nm-packet.is-exit b {
+  border-color: var(--layer);
+  color: var(--layer);
+}
+
+.nm__outcome {
+  max-width: 760px;
+  margin: 0 0 12px;
+  padding: 10px 14px;
+  border-left: 3px solid var(--kind);
+  border-radius: 0 10px 10px 0;
+  background: color-mix(in srgb, var(--kind) 9%, transparent);
+}
+
+.nm__outcome p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--c-text-secondary);
+}
+
+.nm__outcome .nm__outcome-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 3px;
+  font-weight: 800;
+  color: var(--c-text);
+}
+
+.nm__outcome-head span {
+  color: var(--kind);
+}
+
+.nm__outcome-head em {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-style: normal;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+.nm__outcome .nm__outcome-end {
+  margin-top: 6px;
+  font-weight: 700;
+  color: var(--kind);
+}
+
+.nm__pass {
+  margin: 0 0 12px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--c-text);
+}
+
+.nm__pass span {
+  color: var(--c-field);
+}
+
 /* ── Flowchart ── */
 
 .fc {
@@ -425,7 +585,7 @@
 
 .fc__legend {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 18px 32px;
   margin-bottom: 28px;
   padding: 18px 20px;
@@ -565,9 +725,9 @@
   content: "";
   position: absolute;
   left: 130px;
+  top: 20px;
   bottom: 4px;
   width: 2px;
-  height: 18px;
   background: color-mix(in srgb, var(--c-text) 24%, transparent);
 }
 
@@ -581,10 +741,30 @@
   border-bottom: 0;
 }
 
+.fc-step.has-pass {
+  padding-bottom: 40px;
+}
+
 .fc-step__row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0;
+}
+
+/* The answer that continues down the main line, written beside the arrow. */
+.fc-pass {
+  position: absolute;
+  left: 142px;
+  bottom: 9px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--c-text-secondary);
+}
+
+.fc-pass b,
+.fc__sym--pass {
+  color: var(--c-field);
 }
 
 /* Each node paints its outline and fill on pseudo-elements so clip-path shapes keep a border. */
@@ -592,6 +772,7 @@
   --stroke: color-mix(in srgb, var(--layer) 70%, var(--c-border));
   --fill: color-mix(in srgb, var(--layer) 9%, var(--c-surface));
   position: relative;
+  z-index: 1;
   flex: none;
   display: flex;
   align-items: center;
@@ -719,29 +900,100 @@
   display: none;
 }
 
-/* A decision's other exit, drawn as a dashed arm off to the side. */
-.fc-branch {
+/* Every other way out of a step, branching off to the side on a dashed arm. */
+.fc-exits {
   position: relative;
-  max-width: 260px;
-  margin-left: 40px;
-  padding: 7px 11px;
-  border: 1px dashed color-mix(in srgb, var(--c-text) 30%, transparent);
-  border-radius: 8px;
-  font-size: 12px;
-  line-height: 1.4;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 400px;
+  margin: 0 0 0 40px;
+  padding: 0 0 0 14px;
+  border-left: 1.5px dashed color-mix(in srgb, var(--c-text) 28%, transparent);
+  list-style: none;
+}
+
+.fc-exits::before {
+  content: "";
+  position: absolute;
+  right: calc(100% + 1.5px);
+  top: 27px;
+  width: 40px;
+  border-top: 1.5px dashed color-mix(in srgb, var(--c-text) 28%, transparent);
+}
+
+.fc-node--decision + .fc-exits::before {
+  top: 60px;
+}
+
+.fc-exit {
+  padding: 9px 12px 10px;
+  border: 1px solid color-mix(in srgb, var(--kind) 40%, var(--c-border));
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--kind) 7%, var(--c-surface));
+}
+
+.fc-exit__head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 3px;
+  font-size: 12.5px;
+  color: var(--c-text);
+}
+
+.fc-exit__head span {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+.fc__sym {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--kind, var(--c-field));
+  background: color-mix(in srgb, var(--kind, var(--c-field)) 16%, transparent);
+}
+
+.fc-exit__then {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.5;
   color: var(--c-text-secondary);
 }
 
-.fc-branch::before {
-  content: "";
-  position: absolute;
-  right: 100%;
-  top: 50%;
-  width: 36px;
-  border-top: 1.5px dashed color-mix(in srgb, var(--c-text) 30%, transparent);
+.fc-exit__play {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 7px;
+  padding: 3px 9px;
+  border: 1px solid color-mix(in srgb, var(--kind) 50%, var(--c-border));
+  border-radius: 999px;
+  background: transparent;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--c-text);
+  cursor: pointer;
+}
+
+.fc-exit__play:hover {
+  background: color-mix(in srgb, var(--kind) 14%, transparent);
 }
 
 .fc-step__detail {
+  position: relative;
+  z-index: 1;
   max-width: 560px;
   margin: 10px 0 0;
   padding: 12px 14px;
@@ -904,18 +1156,32 @@
     align-items: flex-start;
   }
 
-  .fc-branch {
-    margin: 8px 0 0 24px;
+  .fc-exits {
+    max-width: none;
+    margin: 10px 0 0 24px;
   }
 
-  .fc-branch::before {
+  .fc-exits::before,
+  .fc-node--decision + .fc-exits::before {
     right: auto;
-    left: -16px;
-    top: -8px;
+    left: -1.5px;
+    top: -10px;
     width: 0;
-    height: calc(50% + 8px);
+    height: 10px;
     border-top: 0;
-    border-left: 1.5px dashed color-mix(in srgb, var(--c-text) 30%, transparent);
+    border-left: 1.5px dashed color-mix(in srgb, var(--c-text) 28%, transparent);
+  }
+
+  .nm__scenario-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nm__scenario-chips {
+    flex-wrap: nowrap;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
 }
 
