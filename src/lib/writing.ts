@@ -67,3 +67,25 @@ export function formatWritingDate(iso: string): string {
     year: "numeric",
   });
 }
+
+/** Deep dive: what happens between typing "google.com" and seeing the page. */
+export const NETWORK_JOURNEY = {
+  summary:
+    "I mapped the whole trip — every packet, protocol, and process — into a flowchart with the right shape for every step, phases colored by OSI layer, and the background work most diagrams leave out.",
+  artifactHref: "https://claude.ai/public/artifacts/245d9ae8-d2f9-43f4-8f6c-bbaf34597e2f",
+  flowchartHref: "https://lnkd.in/eGaW8yTh",
+  stats: [
+    { value: "29+", label: "distinct steps" },
+    { value: "6", label: "network layers" },
+    { value: "70k+", label: "autonomous systems" },
+    { value: "100–500", unit: "ms", label: "end to end" },
+  ],
+  phases: [
+    { name: "Application", detail: "URL parsing, HSTS check, DNS resolution" },
+    { name: "Transport", detail: "TCP SYN → SYN-ACK → ACK, then TLS 1.3 in one round trip" },
+    { name: "Network", detail: "HTTP → segment → packet → frame; ARP finds the router" },
+    { name: "Internet", detail: "NAT, then BGP across 10–20 networks" },
+    { name: "Server", detail: "Anycast to the nearest edge; Maglev picks a healthy server" },
+    { name: "Return", detail: "Back by maybe another route; DOM + CSSOM become pixels" },
+  ],
+} as const;

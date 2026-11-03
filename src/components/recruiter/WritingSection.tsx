@@ -2,9 +2,26 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Activity, ArrowUpRight, BookOpen, Bot, Database, Newspaper, Server, Users, Zap } from "lucide-react";
+import type { CSSProperties } from "react";
+import {
+  Activity,
+  ArrowUpRight,
+  BookOpen,
+  Bot,
+  Database,
+  Globe,
+  Handshake,
+  Layers,
+  MonitorSmartphone,
+  Newspaper,
+  Route,
+  Server,
+  Users,
+  Workflow,
+  Zap,
+} from "lucide-react";
 import { SITE } from "@/lib/site";
-import { WRITING_POSTS, formatWritingDate } from "@/lib/writing";
+import { NETWORK_JOURNEY, WRITING_POSTS, formatWritingDate } from "@/lib/writing";
 import { SYSTEM_DESIGN_ESSAY } from "@/lib/system-design";
 import SystemDesignModal from "@/components/writing/SystemDesignModal";
 import LapHeader from "@/components/fx/LapHeader";
@@ -33,6 +50,73 @@ function MiniArchitecture() {
         </li>
       ))}
     </ol>
+  );
+}
+
+const PHASE_ICONS = [Globe, Handshake, Layers, Route, Server, MonitorSmartphone];
+
+/** A packet runs the six phases of a page load; each stop lights as it passes. */
+function PacketJourney() {
+  return (
+    <article className="wr-trip" data-reveal data-spot>
+      <div className="wr-trip__copy">
+        <p className="wr-essay__eyebrow">
+          <Workflow size={14} aria-hidden="true" />
+          Deep dive · interactive flowchart
+        </p>
+        <h3 className="wr-trip__title">
+          What really happens when you type <code>google.com</code> and hit Enter
+        </h3>
+        <p className="wr-trip__summary">{NETWORK_JOURNEY.summary}</p>
+        <dl className="wr-trip__stats">
+          {NETWORK_JOURNEY.stats.map((stat) => (
+            <div key={stat.label}>
+              <dt>{stat.label}</dt>
+              <dd>
+                {stat.value}
+                {"unit" in stat ? <small>{stat.unit}</small> : null}
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <div className="wr-essay__actions">
+          <a href={NETWORK_JOURNEY.artifactHref} target="_blank" rel="noopener noreferrer" className="btn-primary">
+            Open the interactive map
+            <ArrowUpRight size={14} aria-hidden="true" />
+          </a>
+          <a href={NETWORK_JOURNEY.flowchartHref} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+            Flowchart
+            <ArrowUpRight size={14} aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+
+      <div className="wr-trip__route" data-cue>
+        <p className="wr-trip__url" aria-hidden="true">
+          <span>https://</span>google.com<i />
+        </p>
+        <ol className="wr-trip__phases" aria-label="The six phases of a page load">
+          {NETWORK_JOURNEY.phases.map((phase, i) => {
+            const Icon = PHASE_ICONS[i];
+            return (
+              <li key={phase.name} style={{ "--i": i } as CSSProperties}>
+                <span className="wr-trip__node">
+                  <Icon size={16} aria-hidden="true" />
+                </span>
+                <span className="wr-trip__phase">
+                  <span className="wr-trip__num">{String(i + 1).padStart(2, "0")}</span>
+                  <strong>{phase.name}</strong>
+                  <span>{phase.detail}</span>
+                </span>
+              </li>
+            );
+          })}
+        </ol>
+        <p className="wr-trip__done" aria-hidden="true">
+          200 OK · page painted
+        </p>
+      </div>
+    </article>
   );
 }
 
@@ -85,6 +169,8 @@ export default function WritingSection() {
             </span>
           </Link>
         </article>
+
+        <PacketJourney />
 
         <ol className="wr-list">
           {FEATURED.map((post) => {

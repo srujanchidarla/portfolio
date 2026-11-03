@@ -1952,3 +1952,334 @@ html.js .gh-rhythm .gh-rhythm__cross {
   top: auto;
   bottom: 100%;
 }
+
+/* ── Writing: a packet runs the six phases of a page load ── */
+
+.wr-trip {
+  --hop: 1.12s;
+  --cycle: 7s;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+  gap: clamp(24px, 4vw, 52px);
+  align-items: center;
+  margin-top: 22px;
+  padding: clamp(22px, 4vw, 44px);
+  border: 1px solid var(--c-border);
+  border-radius: 28px;
+  background:
+    radial-gradient(110% 120% at 100% 0%, rgba(var(--c-field-rgb), 0.12), transparent 52%),
+    var(--c-surface);
+}
+
+.wr-trip .wr-essay__eyebrow {
+  color: var(--c-field);
+}
+
+.wr-trip__title {
+  margin: 0 0 16px;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--c-text);
+}
+
+.wr-trip__title code {
+  padding: 0 0.18em;
+  border-radius: 8px;
+  background: rgba(var(--c-field-rgb), 0.14);
+  font-family: var(--font-mono);
+  font-size: 0.78em;
+  letter-spacing: -0.04em;
+  color: var(--c-field);
+}
+
+.wr-trip__summary {
+  margin: 0 0 22px;
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--c-text-secondary);
+}
+
+.wr-trip__stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0 0 26px;
+  border-block: 1px solid var(--c-border);
+}
+
+.wr-trip__stats div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+  padding: 14px 12px 14px 0;
+}
+
+.wr-trip__stats div + div {
+  padding-left: 14px;
+  border-left: 1px solid var(--c-border);
+}
+
+.wr-trip__stats dd {
+  margin: 0;
+  font-family: var(--font-athletic);
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  white-space: nowrap;
+  line-height: 1;
+  color: var(--c-text);
+}
+
+.wr-trip__stats small {
+  margin-left: 2px;
+  font-size: 0.55em;
+  color: var(--c-muted);
+}
+
+.wr-trip__stats dt {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+/* The route: browser bar on top, six stops below. */
+.wr-trip__route {
+  position: relative;
+  padding: 18px 20px 20px;
+  border: 1px solid var(--c-border);
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--c-bg) 55%, transparent);
+}
+
+.wr-trip__url {
+  display: flex;
+  align-items: center;
+  margin: 0 0 16px;
+  padding: 9px 14px;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+  background: var(--c-surface);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--c-text);
+}
+
+.wr-trip__url span {
+  color: var(--c-muted);
+}
+
+.wr-trip__url i {
+  width: 1.5px;
+  height: 15px;
+  margin-left: 2px;
+  background: var(--c-field);
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.wr-trip__phases {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wr-trip__phases li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 14px;
+  padding-bottom: 14px;
+}
+
+.wr-trip__phases li:last-child {
+  padding-bottom: 0;
+}
+
+/* Wire to the next stop, and the packet that runs along it. */
+.wr-trip__phases li:not(:last-child)::before,
+.wr-trip__phases li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+}
+
+.wr-trip__phases li:not(:last-child)::before {
+  top: 34px;
+  bottom: 0;
+  width: 2px;
+  background: repeating-linear-gradient(var(--c-border) 0 4px, transparent 4px 8px);
+}
+
+.wr-trip__phases li:not(:last-child)::after {
+  top: 17px;
+  width: 10px;
+  height: 10px;
+  margin-left: -4px;
+  border-radius: 50%;
+  background: var(--c-field);
+  box-shadow: 0 0 0 4px rgba(var(--c-field-rgb), 0.2), 0 0 16px rgba(var(--c-field-rgb), 0.8);
+  opacity: 0;
+}
+
+.wr-trip__node {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--c-border);
+  border-radius: 11px;
+  background: var(--c-surface);
+  color: var(--c-muted);
+}
+
+.wr-trip__phase {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 8px;
+  align-content: center;
+  min-height: 34px;
+}
+
+.wr-trip__num {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  line-height: 20px;
+  color: var(--c-muted);
+}
+
+.wr-trip__phase strong {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--c-text);
+}
+
+.wr-trip__phase > span:last-child {
+  grid-column: 2;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--c-text-secondary);
+}
+
+.wr-trip__done {
+  margin: 14px 0 0 48px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-field);
+}
+
+/* Once on screen: each stop lights as the packet reaches it, then the page "paints". */
+html.js .wr-trip__route .wr-trip__done {
+  opacity: 0;
+}
+
+.wr-trip__route.is-cued .wr-trip__node {
+  animation: trip-stop var(--cycle) ease-out calc(var(--i) * var(--hop)) infinite;
+}
+
+.wr-trip__route.is-cued .wr-trip__phases li:not(:last-child)::after {
+  animation: trip-hop var(--cycle) linear calc(var(--i) * var(--hop)) infinite;
+}
+
+.wr-trip__route.is-cued .wr-trip__done {
+  animation: trip-done var(--cycle) ease calc(5 * var(--hop)) infinite;
+}
+
+@keyframes trip-stop {
+  0%,
+  22% {
+    border-color: var(--c-field);
+    background: rgba(var(--c-field-rgb), 0.16);
+    color: var(--c-field);
+    transform: scale(1.08);
+  }
+  32%,
+  100% {
+    transform: none;
+  }
+}
+
+/* One hop is 1.12s of a 7s cycle: 16% of the timeline. */
+@keyframes trip-hop {
+  0% {
+    opacity: 1;
+    top: 17px;
+  }
+  16% {
+    opacity: 1;
+    top: calc(100% + 17px);
+  }
+  16.1%,
+  100% {
+    opacity: 0;
+    top: calc(100% + 17px);
+  }
+}
+
+@keyframes trip-done {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  4%,
+  18% {
+    opacity: 1;
+    transform: none;
+  }
+  24%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .wr-trip {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .wr-trip__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .wr-trip__stats div:nth-child(3) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .wr-trip__stats div:nth-child(n + 3) {
+    border-top: 1px solid var(--c-border);
+  }
+
+  .wr-trip__route {
+    padding: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wr-trip__url i,
+  .wr-trip__route.is-cued .wr-trip__node,
+  .wr-trip__route.is-cued .wr-trip__phases li::after,
+  .wr-trip__route.is-cued .wr-trip__done {
+    animation: none;
+  }
+
+  html.js .wr-trip__route .wr-trip__done {
+    opacity: 1;
+  }
+
+  .wr-trip__node {
+    color: var(--c-field);
+  }
+}
