@@ -153,7 +153,7 @@ export default function ResumeDocument() {
           </div>
           <ul>
             <li>
-              Free DSA platform: 159-problem roadmap, interview prep for 126 companies, adaptive
+              Free DSA platform: 198-problem roadmap, interview prep for 419 companies, adaptive
               study plans, and spaced reviews
             </li>
             <li>

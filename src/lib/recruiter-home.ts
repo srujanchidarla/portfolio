@@ -138,12 +138,12 @@ export const IMPACT_PROJECTS = [
     problem:
       "DSA prep is scattered across platforms, hard to sustain without a plan, and progress doesn't carry over — so people start strong and quit by week two.",
     solution:
-      "A free roadmap of 159 hand-picked problems across 13 levels, each with a concept lesson, an animated visualizer, and an in-browser code editor for Python, Java, and C++. Interview tags cover 126 companies, and a study plan turns your target companies, interview date, and daily time into a day-by-day schedule. Connect LeetCode and solved problems tick themselves, and spaced-repetition reviews — plus a personal memory curve — keep what you learn from fading.",
+      "A free roadmap of 198 hand-picked problems across 16 levels, each with a concept lesson, an animated visualizer, and an in-browser code editor for Python, Java, and C++. Interview tags cover 419 companies, and a study plan turns your target companies, interview date, and daily time into a day-by-day schedule. Connect LeetCode and solved problems tick themselves, and spaced-repetition reviews — plus a personal memory curve — keep what you learn from fading.",
     learned:
       "Designing one product for very different users — first-timers, casual practicers, and people with interviews in three weeks — so the homepage, plans, and reminders adapt to each. Also real production engineering: the site was paused for exceeding Vercel's free-tier CPU limit, which forced a rebuild around page caching, idempotent background jobs, and a single-document leaderboard — repeat page loads went from ~290ms of server work to ~2ms.",
     result: "Live at algochronicle.com",
     resultDetail:
-      "159 problems in 13 levels, interview tags for 126 companies, reviews at 1 day/1 week/1 month, and native Android & iOS apps in testing.",
+      "198 problems in 16 levels, 379 tested optimal solutions, interview tags for 419 companies, and native Android & iOS apps in testing.",
     stack: [
       "Next.js",
       "TypeScript",

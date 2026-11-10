@@ -39,25 +39,25 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     summary:
       "A free DSA path that remembers what you solved and builds a plan around the interview you actually have.",
     product:
-      "AlgoChronicle is for people who start strong and quit by week two. One product adapts to three different learners — a complete beginner, someone practicing casually, and someone interviewing in three weeks — changing the homepage, the plan, and the reminders depending on who's looking at it. It runs in the browser with no setup, and as native apps on Android and iPhone.",
+      "AlgoChronicle is for people who start strong and quit by week two. One product adapts to three different learners — a complete beginner, someone practicing casually, and someone interviewing in three weeks — changing the homepage, the plan, and the reminders depending on who's looking at it. It runs in the browser with no setup, with native Android and iPhone apps in testing.",
     aspects: [
       {
         title: "The path",
-        text: "A 13-level roadmap of 159 hand-picked problems, starting from coding basics for complete beginners, with a concept lesson and an animated visualizer before every pattern.",
+        text: "A 16-level roadmap of 198 hand-picked problems, after a basics track for complete beginners, with all 31 patterns taught in order and a visualizer that plays beside the solution code.",
       },
       {
         title: "The practice",
-        text: "An in-browser code editor that runs Python, Java, and C++ against real test cases, a LeetCode 75 track, short step-through video reels, and quizzes — all built by hand rather than bolted on.",
+        text: "An in-browser code editor that runs Python, Java, and C++ against real test cases, 379 optimal solutions each tested in all three languages, a LeetCode 75 track, short step-through video reels, and quizzes — all built by hand rather than bolted on.",
       },
       {
         title: "The interview",
-        text: "Interview tags come from real reports across 126 companies. A study plan turns the target companies, the interview date, and the daily time into a day-by-day schedule, with mock interviews.",
+        text: "Interview tags cover LeetCode questions asked at 419 companies. A study plan turns the target companies, the interview date, and the daily time into a day-by-day schedule, with mock interviews.",
       },
     ],
     workflow: [
       "Started as a personal DSA journal — a GitHub webhook pushed every problem I solved into Firestore and onto the site.",
-      "Turned it into a course: a 13-level roadmap, concept lessons, optimal solutions, and an animated visualizer for every pattern.",
-      "Added accounts with synced progress, push reminders, a company-and-date study planner, and native Android and iOS apps.",
+      "Turned it into a course: a 16-level roadmap, concept lessons, optimal solutions, and an animated visualizer for every pattern.",
+      "Added accounts with synced progress, push reminders, a company-and-date study planner, and Android and iOS apps (now in closed testing and TestFlight).",
       "Layered in the learning science — spaced-repetition reviews, a personal memory curve, concept drills before problems — then rebuilt the backend for scale after a production incident forced the issue.",
     ],
     challenges: [
@@ -75,8 +75,8 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       },
     ],
     stats: [
-      { value: "159", label: "Problems across 13 levels" },
-      { value: "126", label: "Companies' interview question lists" },
+      { value: "198", label: "Problems across 16 levels" },
+      { value: "419", label: "Companies' interview question lists" },
       { value: "17", label: "Visualizer pattern families" },
       { value: "21", label: "API routes" },
       { value: "94", label: "Automated tests, 21 files" },
@@ -325,7 +325,7 @@ export const EXPLORE_PAGES: Record<string, readonly ExplorePage[]> = {
     },
     {
       title: "Learn",
-      note: "The roadmap: basics, then 13 levels from arrays to DP.",
+      note: "The roadmap: basics, then 16 levels from arrays to DP.",
       href: "https://www.algochronicle.com/learn",
       image: "/project-pages/algochronicle-learn.jpg",
     },

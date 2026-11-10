@@ -55,10 +55,10 @@ export const CERTIFICATIONS: Certification[] = [
   },
   {
     id: "databricks-genai",
-    title: "Generative AI Fundamentals",
+    title: "Get Started with Databricks for Generative AI",
     issuer: "Databricks",
     issued: "Jan 2026",
-    url: "https://www.linkedin.com/in/srujan-chidarla/",
+    url: "https://www.linkedin.com/posts/srujan-chidarla_get-started-with-databricks-for-generative-ugcPost-7425924969483640832-hNtd/",
     category: "ai",
   },
   {
