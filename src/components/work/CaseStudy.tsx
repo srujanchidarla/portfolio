@@ -6,6 +6,8 @@ import BrowserFrame from "@/components/work/BrowserFrame";
 import CaseToc from "@/components/work/CaseToc";
 import ProjectGlyph from "@/components/work/ProjectGlyph";
 import Teardown from "@/components/work/Teardown";
+import ProjectStory from "@/components/work/stories/ProjectStory";
+import { STORY_TITLES } from "@/lib/case-stories";
 import { coverLabel, explorePages, type CaseStudy as CaseStudyContent } from "@/lib/case-studies";
 import { PROJECTS } from "@/lib/projects";
 import { IMPACT_PROJECTS } from "@/lib/recruiter-home";
@@ -63,9 +65,11 @@ export default function CaseStudy({
   const status = statusOf(project);
   const period = PROJECTS.find((item) => item.id === project.id)?.period;
   const [leadPage, ...restPages] = pages;
+  const storyTitle = STORY_TITLES[project.id];
 
   const toc = [
     { id: "overview", label: "Overview" },
+    ...(storyTitle ? [{ id: "in-motion", label: "In motion" }] : []),
     ...(pages.length ? [{ id: "explore", label: "The product, live" }] : []),
     { id: "product", label: "What it does" },
     ...(study.layers.length ? [{ id: "teardown", label: "Under the hood" }] : []),
@@ -176,6 +180,17 @@ export default function CaseStudy({
               </div>
             </div>
           </section>
+
+          {storyTitle ? (
+            <section id="in-motion" className="cs-sec cs-sec--story">
+              <SectionHead
+                num={n("in-motion")}
+                title="In motion"
+                lede="Keep scrolling: the part of this project that is easier to watch than to read."
+              />
+              <ProjectStory id={project.id} />
+            </section>
+          ) : null}
 
           {leadPage ? (
             <section id="explore" className="cs-sec">

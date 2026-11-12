@@ -7,6 +7,7 @@ import { ContactProvider } from "@/components/ContactProvider";
 import { getCaseStudy } from "@/lib/case-studies";
 import { CURATED_PROJECTS, IMPACT_PROJECTS } from "@/lib/recruiter-home";
 import { SITE } from "@/lib/site";
+import "../stories.css";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
