@@ -264,7 +264,7 @@ export default function HeroRecruiter() {
   const { openContact } = useContact();
 
   return (
-    <section id="hero" className="hx">
+    <section id="hero" className="hx" data-exit>
       <div className="hx__bg" aria-hidden="true">
         <span className="hx__glow" />
         <span className="hx__grid-lines" />

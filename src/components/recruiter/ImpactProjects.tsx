@@ -2,10 +2,10 @@ import type { CSSProperties } from "react";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { coverLabel, getCaseStudy } from "@/lib/case-studies";
-import { CURATED_PROJECTS, IMPACT_PROJECTS } from "@/lib/recruiter-home";
+import { CURATED_PROJECTS, IMPACT_PROJECTS, SHOWCASE_METRICS } from "@/lib/recruiter-home";
 import BrowserFrame from "@/components/work/BrowserFrame";
 import ProjectGlyph from "@/components/work/ProjectGlyph";
-import FilmStrip from "@/components/work/FilmStrip";
+import ProjectShowcase from "@/components/work/ProjectShowcase";
 import LapHeader from "@/components/fx/LapHeader";
 
 type Project = (typeof IMPACT_PROJECTS)[number];
@@ -18,45 +18,41 @@ function num(index: number) {
   return String(index + 1).padStart(2, "0");
 }
 
-function Feature({ project, index }: { project: Project; index: number }) {
+/** One project on the pinned showcase stage. */
+function Slide({ project, index, total }: { project: Project; index: number; total: number }) {
   const study = getCaseStudy(project.id);
   const live = liveSite(project);
+  const metrics = SHOWCASE_METRICS[project.id] ?? [];
 
   return (
     <article
-      className={`wk-feature${index % 2 ? " wk-feature--flip" : ""}`}
-      style={{ "--proj-color": project.color } as CSSProperties}
-      data-reveal
+      className="ps-slide"
+      style={{ "--proj-color": project.color, "--i": index } as CSSProperties}
+      aria-label={`${project.title}, project ${index + 1} of ${total}`}
     >
-      <Link
-        href={`/work/${project.id}`}
-        className="wk-feature__media"
-        aria-label={`${project.title} case study`}
-        data-spot
-      >
-        <BrowserFrame project={project} sizes="(max-width: 960px) 100vw, 680px" />
-        <ProjectGlyph id={project.id} color={project.color} />
-      </Link>
+      <span className="ps-slide__ghost" aria-hidden="true">
+        {num(index)}
+      </span>
 
-      <div className="wk-feature__body">
+      <div className="ps-slide__copy">
         <p className="wk-feature__index">
           <span>{num(index)}</span>
           {coverLabel(project.id)}
           {live ? <em className="wk-live">Live</em> : null}
         </p>
-        <h3 className="wk-feature__title">{project.title}</h3>
-        <p className="wk-feature__summary">{study?.summary ?? project.solution}</p>
+        <h3 className="ps-slide__title">{project.title}</h3>
+        <p className="ps-slide__summary">{study?.summary ?? project.solution}</p>
 
-        <dl className="wk-feature__facts">
-          <div>
-            <dt>Role</dt>
-            <dd>{project.role.split(" · ")[0]}</dd>
-          </div>
-          <div>
-            <dt>Shipped</dt>
-            <dd>{project.resultDetail}</dd>
-          </div>
-        </dl>
+        {metrics.length ? (
+          <dl className="ps-slide__metrics">
+            {metrics.map((metric) => (
+              <div key={metric.label}>
+                <dt>{metric.label}</dt>
+                <dd>{metric.value}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : null}
 
         <ul className="wk-stack" aria-label="Stack">
           {project.stack.slice(0, 5).map((item) => (
@@ -77,6 +73,18 @@ function Feature({ project, index }: { project: Project; index: number }) {
           ) : null}
         </div>
       </div>
+
+      <Link
+        href={`/work/${project.id}`}
+        className="ps-slide__media"
+        aria-label={`${project.title} case study`}
+        tabIndex={-1}
+      >
+        <span className="ps-slide__float">
+          <BrowserFrame project={project} sizes="(max-width: 960px) 100vw, 720px" />
+          <ProjectGlyph id={project.id} color={project.color} />
+        </span>
+      </Link>
     </article>
   );
 }
@@ -113,9 +121,11 @@ function Tile({ project, index }: { project: Project; index: number }) {
   );
 }
 
+const SHOWCASE_COUNT = 4;
+
 export default function ImpactProjects() {
-  const features = CURATED_PROJECTS.slice(0, 2);
-  const rest = CURATED_PROJECTS.slice(2);
+  const lead = CURATED_PROJECTS.slice(0, SHOWCASE_COUNT);
+  const rest = CURATED_PROJECTS.slice(SHOWCASE_COUNT);
 
   return (
     <section id="projects" className="lap wk">
@@ -128,21 +138,23 @@ export default function ImpactProjects() {
               Products with <em>real decisions</em> behind them
             </>
           }
-          lede="Six products, from the data model to the deploy. Open one for how it was built, the workflow, and what got in the way."
+          lede="Six products, from the data model to the deploy. Keep scrolling and each one takes the stage; open any for how it was built and what got in the way."
         />
+      </div>
 
-        <div className="wk-features">
-          {features.map((project, index) => (
-            <Feature key={project.id} project={project} index={index} />
+      <ProjectShowcase items={lead.map(({ id, title, color }) => ({ id, title, color }))}>
+        {lead.map((project, index) => (
+          <Slide key={project.id} project={project} index={index} total={lead.length} />
+        ))}
+      </ProjectShowcase>
+
+      <div className="wrap">
+        <div className="wk-grid">
+          {rest.map((project, index) => (
+            <Tile key={project.id} project={project} index={index + lead.length} />
           ))}
         </div>
       </div>
-
-      <FilmStrip count={rest.length}>
-        {rest.map((project, index) => (
-          <Tile key={project.id} project={project} index={index + features.length} />
-        ))}
-      </FilmStrip>
     </section>
   );
 }

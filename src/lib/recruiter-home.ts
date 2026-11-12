@@ -195,6 +195,30 @@ export const CURATED_PROJECTS = [...IMPACT_PROJECTS].sort(
   (a, b) => PROJECT_ORDER.indexOf(a.id) - PROJECT_ORDER.indexOf(b.id)
 );
 
+/** Headline numbers for the pinned project showcase on the home page. */
+export const SHOWCASE_METRICS: Record<string, { value: string; label: string }[]> = {
+  algochronicle: [
+    { value: "198", label: "problems in 16 levels" },
+    { value: "~2 ms", label: "server time, from ~290 ms" },
+    { value: "419", label: "companies tagged" },
+  ],
+  campfirechai: [
+    { value: "15+", label: "US metro hubs" },
+    { value: "Live", label: "Socket.io trip chat" },
+    { value: "AI", label: "Magic Paste itineraries" },
+  ],
+  jobhuntos: [
+    { value: "100+", label: "ATS formats" },
+    { value: "~2 min", label: "per application" },
+    { value: "3", label: "LLM providers with failover" },
+  ],
+  neocortex: [
+    { value: "15", label: "specialized agents" },
+    { value: "6", label: "provider failover chain" },
+    { value: "37+", label: "backend test suites" },
+  ],
+};
+
 export type SkillStrength = "Strong" | "Comfortable" | "Foundational";
 
 export const SKILL_CLUSTERS = [

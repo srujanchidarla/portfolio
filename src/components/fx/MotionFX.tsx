@@ -10,6 +10,8 @@ import { useEffect } from "react";
  * - `[data-spot]` elements track the pointer in `--mx` / `--my` for the spotlight hover.
  * - `[data-progress]` elements get `--p`, 0 → 1 as they travel from the bottom of the
  *   viewport to its middle, for scroll-scrubbed effects. Only on-screen ones are updated.
+ * - `[data-exit]` elements get `--out`, 0 → 1 as they scroll off the top of the viewport
+ *   (the hero's scroll-out). Also only updated while on screen.
  */
 export default function MotionFX() {
   useEffect(() => {
@@ -40,12 +42,18 @@ export default function MotionFX() {
     );
 
     const live = new Set<HTMLElement>();
+    const exits = new WeakSet<Element>();
     let tick = 0;
     const scrub = () => {
       tick = 0;
       const vh = window.innerHeight;
       for (const el of live) {
         const rect = el.getBoundingClientRect();
+        if (exits.has(el)) {
+          const out = Math.min(1, Math.max(0, -rect.top / Math.max(1, rect.height * 0.85)));
+          el.style.setProperty("--out", out.toFixed(4));
+          continue;
+        }
         const p = Math.min(1, Math.max(0, (vh - rect.top) / (vh * 0.5 + rect.height * 0.5)));
         el.style.setProperty("--p", p.toFixed(3));
       }
@@ -81,6 +89,12 @@ export default function MotionFX() {
       document.querySelectorAll<HTMLElement>("[data-progress]").forEach((el) => {
         if (scrubbed.has(el)) return;
         scrubbed.add(el);
+        progressIo.observe(el);
+      });
+      document.querySelectorAll<HTMLElement>("[data-exit]").forEach((el) => {
+        if (scrubbed.has(el)) return;
+        scrubbed.add(el);
+        exits.add(el);
         progressIo.observe(el);
       });
     };

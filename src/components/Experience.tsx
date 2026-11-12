@@ -2,6 +2,7 @@ import { GraduationCap } from "lucide-react";
 import { EDUCATION, EXPERIENCES } from "@/lib/experience";
 import ExperienceCard from "./experience/ExperienceCard";
 import RelayBaton from "./experience/RelayBaton";
+import CareerTrack from "./experience/CareerTrack";
 import LapHeader from "@/components/fx/LapHeader";
 
 function gpa(detail: string) {
@@ -24,7 +25,11 @@ export default function Experience() {
           }
           lede="Production engineering at Cognizant, then a fintech internship during my MS — the work that sits behind the degree."
         />
+      </div>
 
+      <CareerTrack />
+
+      <div className="wrap">
         <div className="xps__relay">
           <RelayBaton />
           {EXPERIENCES.map((exp) => (

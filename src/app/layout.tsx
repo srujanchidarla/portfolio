@@ -3,6 +3,7 @@ import { Big_Shoulders, Geist, Geist_Mono, Instrument_Serif } from "next/font/go
 import "./globals.css";
 import "./splits.css";
 import "./moves.css";
+import "./scroll.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { BootProvider } from "@/components/BootProvider";
 import BootLoader from "@/components/BootLoader";
