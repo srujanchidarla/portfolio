@@ -6,6 +6,7 @@ import { CURATED_PROJECTS, IMPACT_PROJECTS, SHOWCASE_METRICS } from "@/lib/recru
 import BrowserFrame from "@/components/work/BrowserFrame";
 import ProjectGlyph from "@/components/work/ProjectGlyph";
 import ProjectShowcase from "@/components/work/ProjectShowcase";
+import CountValue from "@/components/fx/CountValue";
 import LapHeader from "@/components/fx/LapHeader";
 
 type Project = (typeof IMPACT_PROJECTS)[number];
@@ -27,6 +28,7 @@ function Slide({ project, index, total }: { project: Project; index: number; tot
   return (
     <article
       className="ps-slide"
+      data-count-gate
       style={{ "--proj-color": project.color, "--i": index } as CSSProperties}
       aria-label={`${project.title}, project ${index + 1} of ${total}`}
     >
@@ -48,7 +50,9 @@ function Slide({ project, index, total }: { project: Project; index: number; tot
             {metrics.map((metric) => (
               <div key={metric.label}>
                 <dt>{metric.label}</dt>
-                <dd>{metric.value}</dd>
+                <dd>
+                  <CountValue value={metric.value} />
+                </dd>
               </div>
             ))}
           </dl>

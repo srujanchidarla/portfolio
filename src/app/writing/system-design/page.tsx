@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ReadProgress from "@/components/fx/ReadProgress";
 import SystemDesignArticle from "@/components/writing/SystemDesignArticle";
 import { SYSTEM_DESIGN_ESSAY } from "@/lib/system-design";
 import { ContactProvider } from "@/components/ContactProvider";
@@ -22,6 +23,7 @@ export default function SystemDesignPage() {
   return (
     <ContactProvider>
       <Navbar />
+      <ReadProgress />
       <main className="site-main sd-page">
         <div className="wrap sd-page__wrap">
           <SystemDesignArticle />

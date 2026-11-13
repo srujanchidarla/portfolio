@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ReadProgress from "@/components/fx/ReadProgress";
 import ResearchNote from "@/components/research/ResearchNote";
 import { ContactProvider } from "@/components/ContactProvider";
 import { RESEARCH_ITEMS, getResearchItem, researchHref } from "@/lib/research";
@@ -43,6 +44,7 @@ export default async function ResearchItemPage({ params }: PageProps) {
   return (
     <ContactProvider>
       <Navbar />
+      <ReadProgress />
       <main id="main-content" className="site-main sd-page" tabIndex={-1}>
         <div className="wrap sd-page__wrap">
           <ResearchNote item={item} />

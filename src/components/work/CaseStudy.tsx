@@ -6,6 +6,8 @@ import BrowserFrame from "@/components/work/BrowserFrame";
 import CaseToc from "@/components/work/CaseToc";
 import ProjectGlyph from "@/components/work/ProjectGlyph";
 import Teardown from "@/components/work/Teardown";
+import CountValue from "@/components/fx/CountValue";
+import ReadProgress from "@/components/fx/ReadProgress";
 import ProjectStory from "@/components/work/stories/ProjectStory";
 import { STORY_TITLES } from "@/lib/case-stories";
 import { coverLabel, explorePages, type CaseStudy as CaseStudyContent } from "@/lib/case-studies";
@@ -82,7 +84,8 @@ export default function CaseStudy({
 
   return (
     <article className="cs" style={{ "--proj-color": project.color } as CSSProperties}>
-      <div className="cs-hero">
+      <ReadProgress color={project.color} />
+      <div className="cs-hero" data-exit>
         <div className="cs-hero__glow" aria-hidden="true" />
         <div className="wrap">
           <div className="cs-hero__top">
@@ -163,8 +166,8 @@ export default function CaseStudy({
         <div className="cs-body__main">
           <section id="overview" className="cs-sec">
             <SectionHead num={n("overview")} title="Overview" />
-            <p className="cs-lead" data-reveal>
-              {study.product}
+            <p className="cs-lead" data-reveal data-progress>
+              <span className="fill-text">{study.product}</span>
             </p>
             <div className="cs-split">
               <div className="cs-split__card" data-reveal>
@@ -199,7 +202,7 @@ export default function CaseStudy({
                 title="The product, live"
                 lede="The pages worth opening. Each one is the real product — click through."
               />
-              <div className="cs-gallery">
+              <div className="cs-gallery" data-reveal data-stagger>
                 {[leadPage, ...restPages].map((page, i) => (
                   <a
                     key={page.href}
@@ -207,7 +210,6 @@ export default function CaseStudy({
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`cs-shot${i === 0 ? " cs-shot--lead" : ""}`}
-                    data-reveal
                     data-spot
                   >
                     <span className="cs-shot__media">
@@ -234,9 +236,9 @@ export default function CaseStudy({
 
           <section id="product" className="cs-sec">
             <SectionHead num={n("product")} title="What it does" />
-            <div className="cs-aspects">
+            <div className="cs-aspects" data-reveal data-stagger>
               {study.aspects.map((aspect, i) => (
-                <div key={aspect.title} className="cs-aspect" data-reveal data-spot>
+                <div key={aspect.title} className="cs-aspect" data-spot>
                   <span className="cs-aspect__num">{String(i + 1).padStart(2, "0")}</span>
                   <h3>{aspect.title}</h3>
                   <p>{aspect.text}</p>
@@ -272,9 +274,9 @@ export default function CaseStudy({
 
           <section id="challenges" className="cs-sec">
             <SectionHead num={n("challenges")} title="Challenges" />
-            <div className="cs-challenges">
+            <div className="cs-challenges" data-reveal data-stagger>
               {study.challenges.map((item, i) => (
-                <div key={item.title} className="cs-challenge" data-reveal>
+                <div key={item.title} className="cs-challenge">
                   <span className="cs-challenge__tag">Challenge {String(i + 1).padStart(2, "0")}</span>
                   <h3>{item.title}</h3>
                   <p>{item.text}</p>
@@ -286,10 +288,12 @@ export default function CaseStudy({
           {study.stats?.length ? (
             <section id="numbers" className="cs-sec">
               <SectionHead num={n("numbers")} title="By the numbers" />
-              <div className="cs-stats" data-reveal>
+              <div className="cs-stats" data-reveal data-stagger>
                 {study.stats.map((stat) => (
                   <div key={stat.label} className="cs-stat">
-                    <p className="cs-stat__value">{stat.value}</p>
+                    <p className="cs-stat__value">
+                      <CountValue value={stat.value} />
+                    </p>
                     <p className="cs-stat__label">{stat.label}</p>
                   </div>
                 ))}
@@ -308,9 +312,11 @@ export default function CaseStudy({
                 ))}
               </ul>
             </div>
-            <blockquote className="cs-learned" data-reveal>
+            <blockquote className="cs-learned" data-reveal data-progress>
               <p className="cs-learned__label">What I learned</p>
-              <p>{project.learned}</p>
+              <p>
+                <span className="fill-text">{project.learned}</span>
+              </p>
             </blockquote>
           </section>
         </div>
@@ -322,6 +328,7 @@ export default function CaseStudy({
           className="cs-next"
           style={{ "--proj-color": next.color } as CSSProperties}
           data-reveal
+          data-progress
           data-spot
         >
           <span className="cs-next__copy">

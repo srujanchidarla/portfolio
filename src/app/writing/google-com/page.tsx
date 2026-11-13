@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ReadProgress from "@/components/fx/ReadProgress";
 import NetworkJourneyArticle from "@/components/writing/NetworkJourneyArticle";
 import { NETWORK_JOURNEY } from "@/lib/writing";
 import { ContactProvider } from "@/components/ContactProvider";
@@ -23,6 +24,7 @@ export default function NetworkJourneyPage() {
   return (
     <ContactProvider>
       <Navbar />
+      <ReadProgress />
       <main className="site-main sd-page">
         <div className="wrap nj-page__wrap">
           <NetworkJourneyArticle />

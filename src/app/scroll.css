@@ -714,3 +714,123 @@
   height: 26px;
   background: color-mix(in srgb, var(--ct-kind) 50%, var(--c-border));
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   Shared scroll effects for long pages (case studies, articles).
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Reading progress: a hairline under the nav ── */
+
+.read-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 70;
+  height: 2px;
+  background: var(--read-color, var(--c-primary));
+  transform: scaleX(var(--read, 0));
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+
+/* ── Stagger: `[data-reveal][data-stagger]` reveals its children one after another ── */
+
+html.js [data-reveal][data-stagger] {
+  opacity: 1;
+  transform: none;
+}
+
+html.js [data-reveal][data-stagger]:not(.is-in) > * {
+  opacity: 0;
+}
+
+/* `backwards` fill: holds the start frame during the delay, then lets go so hover transforms still work. */
+html.js [data-reveal][data-stagger].is-in > * {
+  animation: stagger-in 0.75s var(--ease-out) backwards;
+  animation-delay: calc(var(--si, 0) * 90ms);
+}
+
+[data-stagger] > :nth-child(2) { --si: 1; }
+[data-stagger] > :nth-child(3) { --si: 2; }
+[data-stagger] > :nth-child(4) { --si: 3; }
+[data-stagger] > :nth-child(5) { --si: 4; }
+[data-stagger] > :nth-child(6) { --si: 5; }
+[data-stagger] > :nth-child(n + 7) { --si: 6; }
+
+@keyframes stagger-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+/* ── Text fill: words light up in reading order as the block scrolls to the middle ──
+   An inline background sliced across line boxes grows left to right, line after line. */
+
+.fill-text {
+  --f: clamp(0, (var(--p, 1) - 0.2) / 0.72, 1);
+  background:
+    linear-gradient(currentColor, currentColor) 0 0 / calc(var(--f) * 100%) 100% no-repeat,
+    linear-gradient(color-mix(in srgb, currentColor 26%, transparent), color-mix(in srgb, currentColor 26%, transparent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-box-decoration-break: slice;
+  box-decoration-break: slice;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Zoom: the next-project frame grows into place as it arrives ── */
+
+.cs-next[data-progress] .cs-next__media {
+  scale: calc(0.86 + 0.14 * var(--p, 1));
+  transform-origin: 50% 80%;
+}
+
+/* ── Parallax: the case study hero comes apart at different speeds as it leaves ──
+   Uses `translate` / `scale` so it never fights the entrance animations on `transform`. */
+
+.fx-ready .cs-hero {
+  --o: var(--out, 0);
+}
+
+.fx-ready .cs-hero__glow {
+  translate: 0 calc(var(--o) * 34vh);
+}
+
+.fx-ready .cs-hero__title {
+  translate: 0 calc(var(--o) * -40px);
+}
+
+.fx-ready .cs-cover .glyph {
+  translate: 0 calc(var(--o) * -120px);
+}
+
+.fx-ready .cs-cover .bframe {
+  scale: calc(1 + var(--o) * 0.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .read-progress {
+    display: none;
+  }
+
+  html.js [data-reveal][data-stagger]:not(.is-in) > * {
+    opacity: 1;
+  }
+
+  html.js [data-reveal][data-stagger].is-in > * {
+    animation: none;
+  }
+
+  .fill-text {
+    --f: 1;
+  }
+
+  .cs-next[data-progress] .cs-next__media,
+  .fx-ready .cs-hero__glow,
+  .fx-ready .cs-hero__title,
+  .fx-ready .cs-cover .glyph,
+  .fx-ready .cs-cover .bframe {
+    translate: none;
+    scale: none;
+  }
+}
