@@ -21,6 +21,9 @@ function linksFor(project: Project) {
   if ("liveHref" in project && project.liveHref) {
     links.push({ label: "Live site", href: project.liveHref });
   }
+  if ("appStoreHref" in project && project.appStoreHref) {
+    links.push({ label: "App Store", href: project.appStoreHref });
+  }
   if ("href" in project && project.href) {
     links.push({
       label: project.id === "jobhuntos" ? "Chrome Web Store" : "GitHub",

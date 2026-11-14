@@ -130,20 +130,20 @@ export const IMPACT_PROJECTS = [
   {
     id: "algochronicle",
     title: "AlgoChronicle",
-    tag: "DSA · Learning Platform · Live",
-    role: "Solo engineer · full-stack product, Firebase, native Android & iOS apps, and the automation pipeline",
+    tag: "DSA · Learning Platform · Live on the App Store",
+    role: "Founder & developer · full-stack product, Firebase, the iOS and Android apps, and the automation pipeline",
     previewImage: "/project-previews/algochronicle.jpg",
     lanes: ["Backend", "Full-Stack"],
     journey: "A free DSA course that grew from my own coding journal",
     problem:
       "DSA prep is scattered across platforms, hard to sustain without a plan, and progress doesn't carry over — so people start strong and quit by week two.",
     solution:
-      "A free roadmap of 198 hand-picked problems across 16 levels, each with a concept lesson, an animated visualizer, and an in-browser code editor for Python, Java, and C++. Interview tags cover 419 companies, and a study plan turns your target companies, interview date, and daily time into a day-by-day schedule. Connect LeetCode and solved problems tick themselves, and spaced-repetition reviews — plus a personal memory curve — keep what you learn from fading.",
+      "A free roadmap of 199 hand-picked problems across 16 levels, each with a concept lesson, an animated visualizer, and an in-browser code editor for Python, Java, and C++. Interview tags cover 419 companies, and a study plan turns your target companies, interview date, and daily time into a day-by-day schedule. Connect LeetCode and solved problems tick themselves, and spaced-repetition reviews — plus a personal memory curve — keep what you learn from fading.",
     learned:
       "Designing one product for very different users — first-timers, casual practicers, and people with interviews in three weeks — so the homepage, plans, and reminders adapt to each. Also real production engineering: the site was paused for exceeding Vercel's free-tier CPU limit, which forced a rebuild around page caching, idempotent background jobs, and a single-document leaderboard — repeat page loads went from ~290ms of server work to ~2ms.",
-    result: "Live at algochronicle.com",
+    result: "Live on the web and the App Store",
     resultDetail:
-      "198 problems in 16 levels, 379 tested optimal solutions, interview tags for 419 companies, and native Android & iOS apps in testing.",
+      "199 problems in 16 levels, 379 tested optimal solutions, interview tags for 419 companies, and an iPhone app on the App Store, with Android in testing.",
     stack: [
       "Next.js",
       "TypeScript",
@@ -157,6 +157,7 @@ export const IMPACT_PROJECTS = [
     color: "#22c55e",
     href: "https://github.com/srujanchidarla/algochronicle",
     liveHref: "https://www.algochronicle.com/",
+    appStoreHref: "https://apps.apple.com/app/id6822800371",
     dsaRepoHref: "https://github.com/srujanchidarla/dsa-problems",
   },
   {
@@ -198,7 +199,7 @@ export const CURATED_PROJECTS = [...IMPACT_PROJECTS].sort(
 /** Headline numbers for the pinned project showcase on the home page. */
 export const SHOWCASE_METRICS: Record<string, { value: string; label: string }[]> = {
   algochronicle: [
-    { value: "198", label: "problems in 16 levels" },
+    { value: "199", label: "problems in 16 levels" },
     { value: "~2 ms", label: "server time, from ~290 ms" },
     { value: "419", label: "companies tagged" },
   ],

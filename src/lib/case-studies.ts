@@ -39,11 +39,11 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     summary:
       "A free DSA path that remembers what you solved and builds a plan around the interview you actually have.",
     product:
-      "AlgoChronicle is for people who start strong and quit by week two. One product adapts to three different learners — a complete beginner, someone practicing casually, and someone interviewing in three weeks — changing the homepage, the plan, and the reminders depending on who's looking at it. It runs in the browser with no setup, with native Android and iPhone apps in testing.",
+      "AlgoChronicle is for people who start strong and quit by week two. One product adapts to three different learners — a complete beginner, someone practicing casually, and someone interviewing in three weeks — changing the homepage, the plan, and the reminders depending on who's looking at it. It runs in the browser with no setup, and on iPhone through the App Store, with Android in testing.",
     aspects: [
       {
         title: "The path",
-        text: "A 16-level roadmap of 198 hand-picked problems, after a basics track for complete beginners, with all 31 patterns taught in order and a visualizer that plays beside the solution code.",
+        text: "A 16-level roadmap of 199 hand-picked problems, after a basics track for complete beginners, with all 31 patterns taught in order and a visualizer that plays beside the solution code.",
       },
       {
         title: "The practice",
@@ -57,7 +57,7 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     workflow: [
       "Started as a personal DSA journal — a GitHub webhook pushed every problem I solved into Firestore and onto the site.",
       "Turned it into a course: a 16-level roadmap, concept lessons, optimal solutions, and an animated visualizer for every pattern.",
-      "Added accounts with synced progress, push reminders, a company-and-date study planner, and Android and iOS apps (now in closed testing and TestFlight).",
+      "Added accounts with synced progress, push reminders, a company-and-date study planner, and native apps: the iPhone app is on the App Store, Android is in closed testing.",
       "Layered in the learning science — spaced-repetition reviews, a personal memory curve, concept drills before problems — then rebuilt the backend for scale after a production incident forced the issue.",
     ],
     challenges: [
@@ -75,7 +75,7 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       },
     ],
     stats: [
-      { value: "198", label: "Problems across 16 levels" },
+      { value: "199", label: "Problems across 16 levels" },
       { value: "419", label: "Companies' interview question lists" },
       { value: "17", label: "Visualizer pattern families" },
       { value: "21", label: "API routes" },
@@ -83,7 +83,7 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       { value: "74k+", label: "Lines of TypeScript" },
     ],
     layers: [
-      { name: "Clients", parts: ["Next.js web", "Android (TWA)", "iOS (Capacitor)"], note: "One product on the web, Android, and iPhone." },
+      { name: "Clients", parts: ["Next.js web", "Android (TWA)", "iOS (Capacitor)"], note: "One product on the web, the App Store, and Android." },
       { name: "Practice engine", parts: ["Code editor", "Pyodide (WASM)", "17 visualizer families"], note: "Code runs against real test cases in the browser." },
       { name: "Edge & API", parts: ["Time-based page caching", "21 API routes", "LeetCode proxy"], note: "Repeat page views served from the edge in ~2ms." },
       { name: "Data & jobs", parts: ["Firebase", "Firestore", "GitHub Actions"], note: "A webhook pushes every solve in; background jobs are idempotent." },

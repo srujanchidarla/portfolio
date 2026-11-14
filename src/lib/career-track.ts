@@ -79,6 +79,14 @@ export const CAREER_MILESTONES: CareerMilestone[] = [
     stat: { value: "4.0", label: "GPA" },
   },
   {
+    year: "2026",
+    when: "Nov",
+    title: "AlgoChronicle on the App Store",
+    detail: "Founded and built it; the iPhone app is now live on the App Store, free and ad-free.",
+    kind: "ship",
+    stat: { value: "iOS", label: "App Store" },
+  },
+  {
     year: "Now",
     title: "Next lap: your team",
     detail: "1,000+ GitHub contributions and a 50-day LeetCode badge. Looking for an entry-level SWE role.",

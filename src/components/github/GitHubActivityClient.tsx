@@ -4,6 +4,7 @@ import { useState, type CSSProperties } from "react";
 import { ExternalLink, Star, GitFork, HelpCircle, Lock, Award, BarChart3 } from "lucide-react";
 import type { ContributionDay, GitHubActivityData } from "@/lib/github";
 import LapHeader from "@/components/fx/LapHeader";
+import LocalTime from "@/components/fx/LocalTime";
 import WeeklyRhythm from "@/components/github/WeeklyRhythm";
 
 const LEVEL_COLORS = [
@@ -420,12 +421,7 @@ export default function GitHubActivityClient({ data }: { data: GitHubActivityDat
             <>Live from GitHub GraphQL API · public data only · </>
           )}
           {data.dataSource === "fallback" && <>GitHub REST API (limited) · </>}
-          Updated {new Date(data.fetchedAt).toLocaleString("en-US", {
-            month: "short",
-            day: "numeric",
-            hour: "numeric",
-            minute: "2-digit",
-          })}
+          Updated <LocalTime iso={data.fetchedAt} />
           {!data.hasPrivateAccess && (
             <> · Add <code>GITHUB_TOKEN</code> for private stats</>
           )}

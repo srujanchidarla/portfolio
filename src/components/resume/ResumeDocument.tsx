@@ -149,11 +149,11 @@ export default function ResumeDocument() {
         <div className="resume-doc__job">
           <div className="resume-doc__job-top">
             <h3>AlgoChronicle — Full-Stack DSA Learning Platform</h3>
-            <span>Live · Next.js · Firebase · GitHub Actions</span>
+            <span>Founder &amp; developer · Web + App Store · Next.js · Firebase</span>
           </div>
           <ul>
             <li>
-              Free DSA platform: 198-problem roadmap, interview prep for 419 companies, adaptive
+              Free DSA platform: 199-problem roadmap, interview prep for 419 companies, adaptive
               study plans, and spaced reviews
             </li>
             <li>

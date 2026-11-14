@@ -75,6 +75,12 @@ function Slide({ project, index, total }: { project: Project; index: number; tot
               <ArrowUpRight size={14} aria-hidden="true" />
             </a>
           ) : null}
+          {"appStoreHref" in project && project.appStoreHref ? (
+            <a href={project.appStoreHref} target="_blank" rel="noopener noreferrer" className="wk-link">
+              App Store
+              <ArrowUpRight size={14} aria-hidden="true" />
+            </a>
+          ) : null}
         </div>
       </div>
 

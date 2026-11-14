@@ -94,7 +94,7 @@ export const ROLE_STRATEGY = [
     subtitle: "Startup-Focused",
     focus: "Ship complete products end-to-end — concept to production",
     advantage:
-      "7 shipped applications including Wildmate (live), JobHuntOS (Chrome Store), and AlgoChronicle (live)",
+      "7 shipped applications including Wildmate (live), JobHuntOS (Chrome Store), and AlgoChronicle (web + App Store)",
     stack: ["React 19", "Next.js", "Node.js", "MongoDB", "Realtime"],
     companyTypes: ["Series A/B startups", "0→1 product teams", "Founding engineer roles"],
     demand: "Stable volume",
@@ -184,7 +184,7 @@ export const ROLE_FIT = [
     title: "Full-Stack Engineer",
     heading: "Why I'm your fit",
     experience: "7 featured applications from concept toward production",
-    proof: "Wildmate (live), JobHuntOS (Chrome Store), AlgoChronicle (live), AgriWise (live), StudyGlobal (beta)",
+    proof: "Wildmate (live), JobHuntOS (Chrome Store), AlgoChronicle (App Store), AgriWise (live), StudyGlobal (beta)",
     know: "Rapid prototyping, database design, real-time systems, deployment automation",
     example:
       "I built Wildmate end-to-end: React 19 frontend, Node.js backend, Socket.io real-time, deployed on Vercel.",

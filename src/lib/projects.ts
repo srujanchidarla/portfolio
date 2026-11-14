@@ -142,6 +142,10 @@ export const PROJECTS: Project[] = [
     tags: ["Next.js", "Firebase", "GitHub Actions", "CI/CD", "DSA"],
     links: [
       {
+        label: "App Store",
+        href: "https://apps.apple.com/app/id6822800371",
+      },
+      {
         label: "DSA Repo",
         href: "https://github.com/srujanchidarla/dsa-problems",
       },
