@@ -1,10 +1,11 @@
-import type { CSSProperties } from "react";
+import { Fragment, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import BrowserFrame from "@/components/work/BrowserFrame";
 import CaseToc from "@/components/work/CaseToc";
 import ProjectGlyph from "@/components/work/ProjectGlyph";
+import AppStoreBadge from "@/components/work/AppStoreBadge";
 import Teardown from "@/components/work/Teardown";
 import CountValue from "@/components/fx/CountValue";
 import ReadProgress from "@/components/fx/ReadProgress";
@@ -20,9 +21,6 @@ function linksFor(project: Project) {
   const links: { label: string; href: string }[] = [];
   if ("liveHref" in project && project.liveHref) {
     links.push({ label: "Live site", href: project.liveHref });
-  }
-  if ("appStoreHref" in project && project.appStoreHref) {
-    links.push({ label: "App Store", href: project.appStoreHref });
   }
   if ("href" in project && project.href) {
     links.push({
@@ -66,6 +64,7 @@ export default function CaseStudy({
   total: number;
 }) {
   const links = linksFor(project);
+  const appStore = "appStoreHref" in project ? project.appStoreHref : undefined;
   const pages = explorePages(project.id);
   const status = statusOf(project);
   const period = PROJECTS.find((item) => item.id === project.id)?.period;
@@ -140,16 +139,18 @@ export default function CaseStudy({
           {links.length ? (
             <div className="cs-links hx-in" style={{ animationDelay: "0.32s" }}>
               {links.map((link, i) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={i === 0 ? "btn-primary" : "btn-secondary"}
-                >
-                  {link.label}
-                  <ArrowUpRight size={15} aria-hidden="true" />
-                </a>
+                <Fragment key={link.href}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={i === 0 ? "btn-primary" : "btn-secondary"}
+                  >
+                    {link.label}
+                    <ArrowUpRight size={15} aria-hidden="true" />
+                  </a>
+                  {i === 0 && appStore ? <AppStoreBadge href={appStore} height={48} /> : null}
+                </Fragment>
               ))}
             </div>
           ) : null}

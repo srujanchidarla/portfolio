@@ -5,6 +5,7 @@ import { coverLabel, getCaseStudy } from "@/lib/case-studies";
 import { CURATED_PROJECTS, IMPACT_PROJECTS, SHOWCASE_METRICS } from "@/lib/recruiter-home";
 import BrowserFrame from "@/components/work/BrowserFrame";
 import ProjectGlyph from "@/components/work/ProjectGlyph";
+import AppStoreBadge from "@/components/work/AppStoreBadge";
 import ProjectShowcase from "@/components/work/ProjectShowcase";
 import CountValue from "@/components/fx/CountValue";
 import LapHeader from "@/components/fx/LapHeader";
@@ -75,12 +76,7 @@ function Slide({ project, index, total }: { project: Project; index: number; tot
               <ArrowUpRight size={14} aria-hidden="true" />
             </a>
           ) : null}
-          {"appStoreHref" in project && project.appStoreHref ? (
-            <a href={project.appStoreHref} target="_blank" rel="noopener noreferrer" className="wk-link">
-              App Store
-              <ArrowUpRight size={14} aria-hidden="true" />
-            </a>
-          ) : null}
+          {"appStoreHref" in project && project.appStoreHref ? <AppStoreBadge href={project.appStoreHref} /> : null}
         </div>
       </div>
 

@@ -834,3 +834,25 @@ html.js [data-reveal][data-stagger].is-in > * {
     scale: none;
   }
 }
+
+/* ── App Store badge (Apple's artwork, unaltered) ── */
+
+.appstore-badge {
+  display: inline-flex;
+  flex: none;
+  border-radius: 9px;
+  transition: transform 0.25s var(--ease-out), opacity 0.25s;
+}
+
+.appstore-badge img {
+  display: block;
+}
+
+.appstore-badge:hover {
+  transform: translateY(-2px);
+}
+
+.appstore-badge:focus-visible {
+  outline: 2px solid var(--c-primary);
+  outline-offset: 3px;
+}
