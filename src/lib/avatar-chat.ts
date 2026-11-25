@@ -1,4 +1,8 @@
-import { SITE } from "./site";
+/**
+ * Client-safe pieces of the avatar chat (types, suggestions, greeting).
+ * The prompt, knowledge base and offline answers live in `avatar-chat-server.ts`,
+ * so they never ship in the browser bundle.
+ */
 
 export type VisitorType = "recruiter" | "visitor";
 
@@ -10,7 +14,7 @@ export interface ChatMessage {
 
 export const RECRUITER_SUGGESTIONS = [
   "What's your background?",
-  "Tell me about your experience",
+  "Tell me about AlgoChronicle",
   "What's your tech stack?",
   "How do I reach you?",
 ] as const;
@@ -18,8 +22,8 @@ export const RECRUITER_SUGGESTIONS = [
 export const VISITOR_SUGGESTIONS = [
   "Show me your best projects",
   "What's your story?",
-  "What are you building?",
-  "Can we connect?",
+  "What are you building now?",
+  "What do you do off the keyboard?",
 ] as const;
 
 export function getSuggestions(visitorType: VisitorType): readonly string[] {
@@ -27,203 +31,14 @@ export function getSuggestions(visitorType: VisitorType): readonly string[] {
 }
 
 export const WELCOME_MESSAGES: Record<VisitorType, string> = {
-  recruiter: `Hi — I'm **Code Avatar Srujan**, Srujan's AI representative. Srujan is a **software engineer** (MS CS, Aug 2026, 4.0 GPA) with full-stack, system design, and networking depth — plus production experience at **2M+ req/day**.
+  recruiter: `Hi, I'm **Code Avatar Srujan**, Srujan's AI guide. He's a **software engineer** (MS CS, Aug 2026, **4.0 GPA**) with three years at Cognizant on systems handling **2M+ requests a day**, and the founder of **AlgoChronicle**, now on the App Store.
 
-Ask about projects, experience, skills, or how to connect.`,
-  visitor: `Hey! I'm **Code Avatar Srujan** — here to help you explore Srujan's portfolio.
+Ask about his projects, experience, skills, or how to reach him.`,
+  visitor: `Hey! I'm **Code Avatar Srujan**, here to show you around Srujan's work.
 
-Ask about projects, his background, tech stack, or how to collaborate. Where should we start?`,
+Ask about his projects, his story, his stack, or what he does off the keyboard.`,
 };
-
-export const AVATAR_CHAT_MODEL =
-  process.env.ANTHROPIC_MODEL ?? "claude-sonnet-4-20250514";
-
-export function buildSystemPrompt(visitorType: VisitorType): string {
-  const audience =
-    visitorType === "recruiter"
-      ? "The visitor is likely a recruiter or hiring manager. Lead with the work, metrics, and how to reach him — do not pitch job-search status unless they ask."
-      : "The visitor is exploring the portfolio. Be welcoming and guide them to interesting work.";
-
-  return `You are Code Avatar Srujan - an AI representative for Srujan Chidarla's portfolio.
-Your job: Represent Srujan as an engineer, athlete, and builder. Showcase shipped work and production experience. Do NOT lead with job hunting, "seeking a role", "open to work", or "hire me" language unless the visitor explicitly asks about availability.
-
-${audience}
-
-Key facts:
-- Software engineer completing MS CS Aug 2026 (4.0 GPA) — not senior or mid-level
-- Full-stack development: React/Next.js, Node.js, Java/Spring Boot, Python/FastAPI
-- System design: contributed to 2M+ req/day production systems, P99 latency optimization, microservices
-- Networking: MS coursework in TCP/IP, BGP/OSPF; connects to how services communicate and fail
-- Prior full-time production role at Cognizant (India) before grad school
-- Recent production internship at WalletGyde (35% engagement increase, 40% faster transactions)
-- Shipped Wildmate (live), JobHuntOS (Chrome Web Store), AlgoChronicle (automated pipeline)
-- Multi-sport athlete — discipline, teamwork, performing under pressure
-- Google Local Guide Level 9: 11k contributions, 54k points (53,605 of 100,000), 76M views. Master badges: Reviewer, Photographer, Trailblazer, Fact Finder. 7,268 photos, 497 videos, 421 reviews, 2,005 answers, 161 places added.
-- LeetCode 50 Days Badge 2026 — solved problems 50+ days in 2026 (consistency badge on profile)
-- Authorized to work in the U.S. via STEM OPT (36 months); open to relocating anywhere in the US
-- Values: shipping, training, learning in public
-- Email: ${SITE.email}
-- LinkedIn: ${SITE.linkedin}
-- GitHub: ${SITE.github} — 41 repositories (public + private), Pull Shark achievement
-- LeetCode: ${SITE.leetcode}
-- Resume: ${SITE.resumeUrl}
-
-Portfolio sections (link with markdown when helpful):
-- #experience — WalletGyde + Cognizant work; #education for degrees
-- #projects — Neocortex, Wildmate (live), JobHuntOS, AgriWise (live), AlgoChronicle (live), Study Chapter (live)
-- #skills — honest skill levels (Strong vs Comfortable)
-- #certifications — featured verified credentials
-- #github — live GitHub activity
-- #daily-dsa — live DSA feed + LeetCode 50 Days Badge 2026
-- #local-guide — Google Maps Local Guide Level 9
-- #story — athletics, learning mindset
-- #contact — reach out directly
-
-Education:
-- Master's in Computer Science, University of Fairfax, GPA 4.0/4.0 (graduated Aug 2026)
-- Bachelor's in Information Technology, VNR VJIET, GPA 3.8/4.0, Graduated with Honors
-
-NEVER mention Teaching Assistant, TA, teaching students, or mentoring juniors — these are NOT part of Srujan's background.
-
-When asked about work or background:
-- Comfortable across APIs, product UI, and LLM features because that's how he ships
-- United States work authorization (STEM OPT); open to remote or on-site nationwide
-- Proof: Cognizant 2M+ req/day, JobHuntOS Chrome extension, Wildmate live
-
-Common questions:
-- "Are you a new grad?" → Graduated MS CS Aug 2026 with 4.0 GPA. Prior Cognizant full-time + shipped Wildmate and JobHuntOS.
-- "Tell me about your experience" → Master's (4.0 GPA), WalletGyde internship (35% engagement), Cognizant (2M+ req/day contribution).
-- "What are you looking for?" → Point to the work on this site and [Contact](#contact) — share values (real products, mentorship, ship-and-learn) only if asked directly.
-- "Salary?" → Happy to talk in conversation if they ask.
-
-Response style:
-- Humble, enthusiastic, about the work — not about being hired
-- Concise: 2-4 short paragraphs max
-- Use **bold** for metrics and key terms
-- Never make up employers, dates, or metrics not listed above
-- If unsure, suggest #contact or ${SITE.email}`;
-}
 
 export function createMessageId(): string {
   return `msg-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-}
-
-/** Offline fallback when ANTHROPIC_API_KEY is not configured */
-export function getFallbackResponse(
-  userMessage: string,
-  visitorType: VisitorType
-): string {
-  const q = userMessage.toLowerCase();
-
-  if (q.includes("new grad") || q.includes("graduate") || q.includes("entry")) {
-    return `Srujan just finished his **MS in Computer Science (4.0 GPA, graduated Aug 2026)**.
-
-He already had a **full-time production role at Cognizant**, shipped **Wildmate** live and **JobHuntOS** on the Chrome Store.
-
-See [Experience](#experience) or [Projects](#projects).`;
-  }
-
-  if (q.includes("experience") || q.includes("background")) {
-    return `**Experience highlights:**
-
-1. **University of Fairfax** — MS CS, **4.0 GPA**, graduated **Aug 2026**, shipped projects while earning it
-2. **WalletGyde** (internship) — Next.js + Supabase; **35% engagement ↑**, **40% faster transactions**
-3. **Cognizant** (pre-Master's) — contributed to Spring Boot microservices at **2M+ req/day**, **99.9% uptime**
-
-See [Experience](#experience).`;
-  }
-
-  if (q.includes("tech stack") || q.includes("technologies") || q.includes("skills")) {
-    return `**Strong foundation:** Java/Spring Boot, React/Next.js, TypeScript, Node.js, PostgreSQL.
-
-**Comfortable & learning:** Python/FastAPI, AWS/Docker, AI/ML workflows, networking (TCP/IP, BGP).
-
-Honest skill levels in [Skills](#skills).`;
-  }
-
-  if (q.includes("project") || q.includes("best work") || q.includes("portfolio")) {
-    return `**Top picks:**
-
-- **Neocortex** — my ongoing Jarvis Life OS with 15 AI agents ([GitHub](https://github.com/srujanchidarla/neocortex))
-- **CampfireChai (Wildmate)** — live community app for outdoor adventurers ([Live](https://wildmate.app/) · [GitHub](https://github.com/srujanchidarla/CampfireChai))
-- **AgriWise** — digital agriculture platform for Indian farmers, 8 modules ([Live](https://agriwise-mauve.vercel.app/))
-- **Study Chapter** — live study-destination product ([Live](https://studyglobalscholar.netlify.app/))
-- **JobHuntOS** — AI Chrome extension on the Web Store
-
-Which one should I break down?`;
-  }
-
-  if (q.includes("available") || q.includes("interview") || q.includes("hiring")) {
-    return `Best path: [Contact](#contact) or email **${SITE.email}**. LinkedIn and GitHub are on this site too.
-
-He responds quickly.`;
-  }
-
-  if (
-    q.includes("reach") ||
-    q.includes("connect") ||
-    q.includes("call") ||
-    q.includes("hire") ||
-    q.includes("contact")
-  ) {
-    return `**Ways to connect:**
-
-- 📧 [${SITE.email}](mailto:${SITE.email})
-- 💼 [LinkedIn](${SITE.linkedin})
-- 🔗 [GitHub](${SITE.github})
-- 🧩 [LeetCode](${SITE.leetcode})
-- 📄 [Resume](${SITE.resumeUrl})
-- 💬 [Contact section](#contact) on this site
-
-He responds quickly.`;
-  }
-
-  if (q.includes("story") || q.includes("who")) {
-    return `Srujan is an engineer, athlete, and builder. Village roots in India taught him resourcefulness; athletics taught discipline; Cognizant and side projects taught him how to ship.
-
-Explore [Story](#story) or [Projects](#projects).`;
-  }
-
-  if (q.includes("certif")) {
-    return `Srujan holds **18+ verified certifications** including:
-
-- **AWS Cloud Practitioner** (May 2026)
-- **Google UX Design** Professional Certificate
-- **Databricks Generative AI** · **Prompt Engineering**
-- **Next.js**, **React Native**, **Postman**, **Angular**, **Modern Java**, **React.js**
-
-See all with certificate links in [Certifications](#certifications).`;
-  }
-
-  if (q.includes("campfire") || q.includes("outdoor") || q.includes("desi")) {
-    return `**CampfireChai (Wildmate)** is my live full-stack community platform for outdoor adventurers — trips, meetups, permits, crew matching, Magic Paste AI trip drafting, and real-time chat.
-
-[Live app](https://wildmate.app/) · [GitHub](https://github.com/srujanchidarla/CampfireChai)`;
-  }
-
-  if (q.includes("agriwise") || q.includes("agri") || q.includes("farmer") || q.includes("farming")) {
-    return `**AgriWise** is a full digital agriculture platform I built for Indian farmers — 8 modules covering AI-powered soil and crop recommendations, real-time pricing and 30-day forecasts across 2,500+ mandis, a cultivation calendar, a supply-chain marketplace, and loan/scheme navigation, in 22 Indian languages.
-
-[Live app](https://agriwise-mauve.vercel.app/)`;
-  }
-
-  if (q.includes("neocortex") || q.includes("jarvis") || q.includes("life os")) {
-    return `**Neocortex** is my ongoing local-first Jarvis Life OS — 15 specialized AI agents coordinating fitness, career, learning, content, and daily planning.
-
-Stack: FastAPI, Next.js, Expo, SQLite, n8n, 6-provider LLM failover. [GitHub repo](https://github.com/srujanchidarla/neocortex)`;
-  }
-
-  if (q.includes("relocat") || q.includes("location")) {
-    return `Authorized to work in the **United States** (STEM OPT). **Open to relocating** anywhere in the US for the right role.`;
-  }
-
-  if (visitorType === "recruiter") {
-    return `I'm Code Avatar Srujan — happy to help! Try asking about **experience**, **tech stack**, **best projects**, or **scheduling a call**.
-
-Or jump to [Experience](#experience), [Projects](#projects), or [Contact](#contact).`;
-  }
-
-  return `Welcome! I can walk you through **projects**, **experience**, **skills**, or how to **connect**.
-
-What interests you most?`;
 }

@@ -108,7 +108,8 @@ export default function AvatarChatWidget() {
     setInput("");
     setIsLoading(true);
 
-    if (/how do i reach|schedule|contact|call|connect|hire you/i.test(trimmed)) {
+    // Only an explicit request to book time opens the contact sheet; questions just get answered.
+    if (/\b(schedule|book|set up)\b.{0,20}\b(call|meeting|chat|time)\b/i.test(trimmed)) {
       setTimeout(() => openContact(), 800);
     }
 
@@ -242,7 +243,16 @@ export default function AvatarChatWidget() {
               </div>
             )}
 
-            <div className="avatar-chat__messages">
+            <div
+              className="avatar-chat__messages"
+              onClick={(e) => {
+                // Following a link to a page or section closes the chat so the page is visible.
+                const link = (e.target as Element).closest("a.avatar-chat__link");
+                if (link && !link.getAttribute("target") && !link.getAttribute("href")?.startsWith("mailto:")) {
+                  setIsOpen(false);
+                }
+              }}
+            >
               {messages.map((msg) => (
                 <ChatMessage key={msg.id} role={msg.role} content={msg.content} />
               ))}
@@ -277,19 +287,15 @@ export default function AvatarChatWidget() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder={
-                  visitorType
-                    ? "Ask about experience, projects, skills..."
-                    : "Select a mode above to start"
-                }
-                disabled={!visitorType || isLoading}
+                placeholder="Ask anything about Srujan…"
+                disabled={isLoading}
                 maxLength={2000}
                 rows={1}
                 aria-label="Chat message"
               />
               <button
                 type="submit"
-                disabled={!visitorType || !input.trim() || isLoading}
+                disabled={!input.trim() || isLoading}
                 aria-label="Send message"
               >
                 <Send size={18} />

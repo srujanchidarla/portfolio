@@ -4607,8 +4607,27 @@ body.boot-loading {
   line-height: 1.55;
 }
 
-.avatar-chat__msg p + p {
+.avatar-chat__msg > * + * {
   margin-top: 8px;
+}
+
+.avatar-chat__msg ul,
+.avatar-chat__msg ol {
+  display: grid;
+  gap: 4px;
+  padding-left: 18px;
+}
+
+.avatar-chat__msg ul {
+  list-style: disc;
+}
+
+.avatar-chat__msg ol {
+  list-style: decimal;
+}
+
+.avatar-chat__msg li::marker {
+  color: var(--c-primary);
 }
 
 .avatar-chat__msg--assistant {
