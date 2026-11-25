@@ -1,8 +1,8 @@
 import Anthropic from "@anthropic-ai/sdk";
 
 /**
- * The avatar tries providers in order: free tiers first (Gemini, Groq), then a small paid
- * Claude model. A provider is skipped when its key is missing, and benched for a minute after
+ * The avatar tries providers in order: free tiers first (Gemini, Groq, OpenRouter, Cohere,
+ * Together), then a small paid Claude model. A provider is skipped when its key is missing, and benched for a minute after
  * it reports a rate or quota limit, so visitors don't wait on a provider that is out of tokens.
  */
 
@@ -22,6 +22,7 @@ interface Provider {
 class LimitError extends Error {}
 
 const BENCH_MS = 60_000;
+const FREE_BUDGET_MS = 25_000;
 const benchedUntil = new Map<string, number>();
 
 /** Gemini and Groq both speak the OpenAI chat-completions format. */
@@ -54,33 +55,54 @@ const anthropic = process.env.ANTHROPIC_API_KEY
   ? new Anthropic({ timeout: 12_000, maxRetries: 0 })
   : null;
 
-const PROVIDERS: Provider[] = [
+/** Free (or free-tier) OpenAI-compatible providers, tried in this order. Models are overridable by env. */
+const OPENAI_COMPATIBLE: { name: string; url: string; keyEnv: string; modelEnv: string; model: string }[] = [
   {
     name: "gemini",
-    enabled: () => Boolean(process.env.GEMINI_API_KEY),
-    call: (system, messages) =>
-      openAICompatible(
-        "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
-        process.env.GEMINI_API_KEY!,
-        process.env.GEMINI_MODEL || "gemini-2.5-flash",
-        system,
-        messages,
-        10_000
-      ),
+    url: "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+    keyEnv: "GEMINI_API_KEY",
+    modelEnv: "GEMINI_MODEL",
+    model: "gemini-2.5-flash",
   },
   {
     name: "groq",
-    enabled: () => Boolean(process.env.GROQ_API_KEY),
-    call: (system, messages) =>
-      openAICompatible(
-        "https://api.groq.com/openai/v1/chat/completions",
-        process.env.GROQ_API_KEY!,
-        process.env.GROQ_MODEL || "llama-3.3-70b-versatile",
-        system,
-        messages,
-        8_000
-      ),
+    url: "https://api.groq.com/openai/v1/chat/completions",
+    keyEnv: "GROQ_API_KEY",
+    modelEnv: "GROQ_MODEL",
+    model: "llama-3.3-70b-versatile",
   },
+  {
+    name: "openrouter",
+    url: "https://openrouter.ai/api/v1/chat/completions",
+    keyEnv: "OPENROUTER_API_KEY",
+    modelEnv: "OPENROUTER_MODEL",
+    model: "meta-llama/llama-3.3-70b-instruct:free",
+  },
+  {
+    name: "cohere",
+    url: "https://api.cohere.ai/compatibility/v1/chat/completions",
+    keyEnv: "COHERE_API_KEY",
+    modelEnv: "COHERE_MODEL",
+    model: "command-a-03-2025",
+  },
+  {
+    name: "together",
+    url: "https://api.together.xyz/v1/chat/completions",
+    keyEnv: "TOGETHER_API_KEY",
+    modelEnv: "TOGETHER_MODEL",
+    model: "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
+  },
+];
+
+const PROVIDERS: Provider[] = [
+  ...OPENAI_COMPATIBLE.map(
+    (p): Provider => ({
+      name: p.name,
+      enabled: () => Boolean(process.env[p.keyEnv]),
+      call: (system, messages) =>
+        openAICompatible(p.url, process.env[p.keyEnv]!, process.env[p.modelEnv] || p.model, system, messages, 9_000),
+    })
+  ),
   {
     name: "anthropic",
     enabled: () => anthropic !== null,
@@ -111,8 +133,11 @@ const PROVIDERS: Provider[] = [
 
 /** Returns the first non-empty answer, or null when every provider is unavailable. */
 export async function askProviders(system: string[], messages: ChatTurn[]): Promise<ProviderResult | null> {
+  const started = Date.now();
   for (const provider of PROVIDERS) {
     if (!provider.enabled()) continue;
+    // After 25s of free-tier failures, go straight to Claude so the request still finishes in time.
+    if (provider.name !== "anthropic" && Date.now() - started > FREE_BUDGET_MS) continue;
     if ((benchedUntil.get(provider.name) ?? 0) > Date.now()) continue;
     try {
       const text = await provider.call(system, messages);

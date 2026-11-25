@@ -3,7 +3,7 @@ import type { VisitorType } from "@/lib/avatar-chat";
 import { SYSTEM_PROMPT, audienceNote, getFallbackResponse } from "@/lib/avatar-chat-server";
 import { askProviders } from "@/lib/avatar-providers";
 
-export const maxDuration = 40;
+export const maxDuration = 45;
 
 interface ChatRequestBody {
   messages: { role: "user" | "assistant"; content: string }[];
